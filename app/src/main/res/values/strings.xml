@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">Quora2.0</string>
+
+    <string name="openNav">OpenNavigation</string>
+    <string name="closeNav">CloseNavigation</string>
+    <string-array name="category_paths">
+        <item>Sports</item>
+        <item>Technology</item>
+        <item>Lifestyle</item>
+        <item>Food</item>
+        <item>Movies</item>
+    </string-array>
 </resources>
