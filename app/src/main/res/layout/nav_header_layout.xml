@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:background="@color/colorPrimary">
 
     <TextView
         android:id="@+id/userName"
@@ -21,15 +22,17 @@
 
     <ImageView
         android:id="@+id/userImage"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="80dp"
+        android:layout_height="74dp"
 
         android:layout_marginStart="32dp"
-        android:layout_marginTop="56dp"
-        android:background="#009688"
+        android:layout_marginTop="40dp"
+        android:background="#008577"
+        android:backgroundTint="#00000000"
+        android:scaleType="fitXY"
+        android:src="@drawable/ic_tag_faces_black_24dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:srcCompat="@drawable/ic_launcher_foreground" />
+        app:layout_constraintTop_toTopOf="parent" />/>
 
     <TextView
         android:id="@+id/userEmail"
