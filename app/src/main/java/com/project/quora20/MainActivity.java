@@ -70,8 +70,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         newPostToolbar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Intent newPostIntent=new Intent(getApplicationContext(), NewPost.class);
-//                startActivity(newPostIntent);
+                Intent newPostIntent=new Intent(getApplicationContext(), NewPost.class);
+                startActivity(newPostIntent);
             }
         });
 
