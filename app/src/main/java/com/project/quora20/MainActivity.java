@@ -7,16 +7,15 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.media.Image;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.google.android.material.navigation.NavigationView;
+
 import com.project.quora20.adapter.HomeAdapter;
 import com.project.quora20.entity.Question;
 import com.squareup.picasso.Picasso;
@@ -112,9 +111,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 //        Toast.makeText(this, "this menu item clicked", Toast.LENGTH_SHORT).show();
         switch(item.getItemId()) {
             case R.id.sports_nav_menu:
-//                Intent catIntent1 = new Intent(this, CategoryProducts.class);
-//                catIntent1.putExtra("categoryId",2);
-//                this.startActivity(catIntent1);
+                Intent catIntent1 = new Intent(this, QuestionAnswer.class);
+                catIntent1.putExtra("categoryId",2);
+                this.startActivity(catIntent1);
                 break;
             case R.id.technology_nav_menu:
 //                Intent catIntent2= new Intent(this,CategoryProducts.class);
@@ -153,6 +152,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 break;
             case R.id.details_nav_menu:
                 sharedPreferences=getSharedPreferences("LoginData",MODE_PRIVATE);
+                Intent intent=new Intent(this,MyProfile.class);
+                startActivity(intent);
 //                String logincheck=sharedPreferences.getString("LoginCheck","false");
 //                if(logincheck.equals("true")) {
 //                    Intent userDetails = new Intent(MainActivity.this, UserDetails.class);
