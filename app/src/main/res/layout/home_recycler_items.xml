@@ -2,50 +2,162 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/constraintlayout"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/questionName"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        android:fontFamily="sans-serif-black"
-        android:padding="10dp"
-        android:text="TextView"
-        android:textSize="12sp"
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="382dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="14dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="15dp"
+        android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
 
-<!--    <Button-->
-<!--        android:layout_width="0dp"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_margin="8dp"-->
-<!--        android:fontFamily="sans-serif-condensed-medium"-->
-<!--        android:padding="10dp"-->
-<!--        android:text="AddToCart"-->
-<!--        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--        app:layout_constraintEnd_toEndOf="parent">-->
-<!--        -->
-<!--    </Button>-->
+        <ImageButton
+            android:id="@+id/userImage"
+            android:layout_width="84dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
 
-<!--    <TextView-->
-<!--        android:id="@+id/productPrice"-->
-<!--        android:layout_width="0dp"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_margin="8dp"-->
-<!--        android:fontFamily="sans-serif-black"-->
-<!--        android:padding="10dp"-->
-<!--        android:textAlignment="textEnd"-->
-<!--        android:textSize="18sp"-->
-<!--        android:textStyle="bold"-->
-<!--        app:layout_constraintBottom_toTopOf="@+id/productImage"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toTopOf="parent" />-->
+        <TextView
+            android:id="@+id/userName"
+            android:layout_width="137dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="User Name"
+            android:textAlignment="center" />
+
+        <TextView
+            android:id="@+id/questionTimeStamp"
+            android:layout_width="138dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="Time Stamp"
+            android:textAlignment="center" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/userQuestionText"
+        android:layout_width="381dp"
+        android:layout_height="49dp"
+        android:layout_marginStart="13dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:text="Questions by Other Users"
+        android:textAlignment="viewStart"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="371dp"
+        android:layout_height="39dp"
+        android:layout_marginStart="13dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="15dp"
+        android:gravity="right"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@+id/viewMoreAnswersButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.636"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView2">
+
+        <TextView
+            android:id="@+id/likesCount"
+            android:layout_width="wrap_content"
+            android:layout_height="42dp"
+            android:layout_weight="1"
+            android:gravity="right|end"
+            android:text="Likes" />
+
+        <ImageButton
+            android:id="@+id/likeButton"
+            android:layout_width="34dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:backgroundTint="#00FAF8F8"
+            app:srcCompat="@drawable/ic_thumb_up_black_24dp" />
+
+        <TextView
+            android:id="@+id/dislikesCount"
+            android:layout_width="wrap_content"
+            android:layout_height="31dp"
+            android:layout_weight="1"
+            android:text="Dislikes"
+            android:textAlignment="textEnd" />
+
+        <ImageButton
+            android:id="@+id/dislikeButton"
+            android:layout_width="34dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:backgroundTint="#00FAF7F7"
+            app:srcCompat="@drawable/ic_thumb_down_black_24dp" />
+
+        <ImageButton
+            android:id="@+id/approveButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:backgroundTint="#00F5F2F2"
+            android:tint="#4CAF50"
+            app:srcCompat="@drawable/ic_check_black_24dp" />
+
+        <ImageButton
+            android:id="@+id/disapproveButton"
+            android:layout_width="wrap_content"
+            android:layout_height="41dp"
+            android:layout_weight="1"
+            android:backgroundTint="#00F8F7F7"
+            android:tint="#00F3EFEF"
+            app:srcCompat="@android:drawable/ic_delete" />
 
 
+    </LinearLayout>
+
+    <View
+        android:id="@+id/questionDivider"
+        android:layout_width="409dp"
+        android:layout_height="3dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="1dp"
+        android:background="?android:attr/listDivider"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/viewMoreAnswersButton" />
+
+    <Button
+        android:id="@+id/viewMoreAnswersButton"
+        android:layout_width="309dp"
+        android:layout_height="53dp"
+        android:layout_marginStart="132dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="132dp"
+        android:text="View More Answers"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="373dp"
+        android:layout_height="46dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="19dp"
+        android:text="Answer"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/userQuestionText" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -27,6 +27,7 @@ public class NewPost extends AppCompatActivity implements AdapterView.OnItemSele
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
         spinner.setOnItemSelectedListener(this);
+//        String io=spinner.getSelectedItem().toString();
 
     }
 
