@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:title="Profile">
+        <menu>
+            <item android:title="My Details"
+                android:id="@+id/details_nav_menu"/>
+            <item android:title="My Questions"
+                android:id="@+id/questions_nav_menu"/>
+
+        </menu>
+    </item>
+
+    <item android:title="Categories">
+        <menu>
+            <item android:title="Sports"
+                android:id="@+id/sports_nav_menu"/>
+            <item android:title="Technology"
+                android:id="@+id/technology_nav_menu"/>
+            <item android:title="Lifestyle"
+                android:id="@+id/lifestyle_nav_menu"/>
+            <item android:title="Food"
+                android:id="@+id/food_nav_menu"/>
+            <item android:title="Movies"
+                android:id="@+id/movies_nav_menu"/>
+        </menu>
+    </item>
+    <item android:title="Account">
+        <menu>
+            <item android:title="My Logins"
+                android:id="@+id/logins_nav_menu"/>
+            <item android:title="Logout"
+                android:id="@+id/logout"/>
+        </menu>
+    </item>
+</menu>
