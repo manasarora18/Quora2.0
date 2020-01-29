@@ -6,12 +6,14 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
 public class NewPost extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
     private EditText questionBody;
+    private Button postButton;
     private EditText taggedPeople;
     private Spinner spinner;
     private static final String[] paths = {"Sports", "Technology", "Lifestyle","Food","Movies"};
@@ -27,6 +29,18 @@ public class NewPost extends AppCompatActivity implements AdapterView.OnItemSele
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
         spinner.setOnItemSelectedListener(this);
+        postButton=findViewById(R.id.postButton);
+        postButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                questionBody=findViewById(R.id.questionBody);
+                taggedPeople=findViewById(R.id.taggedpeople);
+                categoryChoice=spinner.getSelectedItem().toString();
+
+
+            }
+        });
+
 //        String io=spinner.getSelectedItem().toString();
 
     }
