@@ -17,9 +17,11 @@ import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.google.android.material.navigation.NavigationView;
+import com.project.quora20.adapter.HomeAdapter;
+import com.project.quora20.entity.Question;
 import com.squareup.picasso.Picasso;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, HomeAdapter.QuestionCommunication {
     private Toolbar toolbar;
     private SharedPreferences sharedPreferences;
     private SearchView searchView;
@@ -92,6 +94,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         });
 
 
+    }
+    @Override
+    public void onClick(Question question) {
+//        Intent productIntent=new Intent( MainActivity.this, ProductDetails.class);
+//        productIntent.putExtra("Image", product.getImageUrl());
+//        productIntent.putExtra("ProductName",product.getName());
+//        productIntent.putExtra(("ProductDescription"),product.getDescription());
+//        productIntent.putExtra(("ColorAttribute"),product.getProductAttributes().getColor());
+//        productIntent.putExtra(("SizeAttribute"),product.getProductAttributes().getSize());
+//        productIntent.putExtra(("MaterialAttribute"),product.getProductAttributes().getMaterial());
+//        productIntent.putExtra(("PID"),product.getProductId());
+//        startActivity(productIntent);
     }
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
