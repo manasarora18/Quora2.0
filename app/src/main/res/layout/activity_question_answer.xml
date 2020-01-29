@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".NestedComments">
+    tools:context=".QuestionAnswer">
 
     <LinearLayout
         android:id="@+id/questionLayout"
@@ -20,7 +20,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageButton
-            android:id="@+id/userProfile"
+            android:id="@+id/userProfileImage"
             android:layout_width="91dp"
             android:layout_height="92dp" />
 
@@ -36,44 +36,49 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/answerListRecycler"
-        android:layout_width="343dp"
-        android:layout_height="349dp"
+        android:layout_width="342dp"
+        android:layout_height="287dp"
         android:layout_marginStart="42dp"
-        android:layout_marginTop="17dp"
+        android:layout_marginTop="95dp"
         android:layout_marginEnd="39dp"
         android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.666"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/questionLayout" />
 
     <LinearLayout
-        android:layout_width="334dp"
-        android:layout_height="93dp"
+        android:id="@+id/linearLayout4"
+        android:layout_width="349dp"
+        android:layout_height="89dp"
         android:layout_marginStart="42dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="28dp"
         android:layout_marginEnd="39dp"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.578"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/answerListRecycler">
 
         <EditText
             android:id="@+id/answerText"
-            android:layout_width="193dp"
-            android:layout_height="78dp"
-            android:layout_weight="1"
+            android:layout_width="294dp"
+            android:layout_height="66dp"
+            android:layout_weight="10"
             android:ems="10"
             android:gravity="start|top"
             android:inputType="textMultiLine"
             tools:text="Add Your Answer" />
 
         <ImageButton
-            android:id="@+id/imageButton2"
+            android:id="@+id/imageButton"
             android:layout_width="wrap_content"
-            android:layout_height="78dp"
+            android:layout_height="66dp"
             android:layout_weight="1"
-            android:backgroundTint="#00F8F7F7"
-            app:srcCompat="@android:drawable/ic_menu_send" />
+            android:backgroundTint="#00FDFAFA"
+            android:tint="#00BCD4"
+            app:srcCompat="@drawable/ic_send_blue_35dp" />
+
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
