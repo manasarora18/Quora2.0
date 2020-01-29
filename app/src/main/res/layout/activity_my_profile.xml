@@ -6,28 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".MyProfile">
 
-    <TextView
-        android:id="@+id/followingCount"
-        android:layout_width="131dp"
-        android:layout_height="34dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="36dp"
-        android:text="FollowingCount"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/followersText" />
-
-    <TextView
-        android:id="@+id/followingText"
-        android:layout_width="85dp"
-        android:layout_height="19dp"
-        android:layout_marginTop="3dp"
-        android:layout_marginEnd="61dp"
-        android:text="Following"
-        android:textAlignment="center"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/followingCount" />
 
     <LinearLayout
         android:id="@+id/linearLayout3"
@@ -68,39 +46,75 @@
         android:orientation="vertical"
         app:layout_constraintGuide_begin="205dp" />
 
-    <TextView
-        android:id="@+id/userEmail"
-        android:layout_width="120dp"
-        android:layout_height="30dp"
-        android:layout_marginStart="3dp"
-        android:layout_marginTop="12dp"
-        android:layout_marginEnd="40dp"
-        android:gravity="center"
-        android:text="Email"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toStartOf="@+id/followersCount"
-        app:layout_constraintStart_toEndOf="@+id/imageButton2"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout3" />
 
-    <TextView
-        android:id="@+id/userPhone"
-        android:layout_width="120dp"
-        android:layout_height="25dp"
-        android:layout_marginStart="6dp"
-        android:layout_marginTop="17dp"
-        android:layout_marginBottom="28dp"
-        android:gravity="center"
-        android:text="Phone"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/userFavCategories"
-        app:layout_constraintStart_toEndOf="@+id/imageButton3"
-        app:layout_constraintTop_toBottomOf="@+id/userEmail" />
+    <LinearLayout
+        android:id="@+id/linearLayout5"
+        android:layout_width="178dp"
+        android:layout_height="43dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="19dp"
+        android:orientation="horizontal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout3">
+
+        <ImageButton
+            android:id="@+id/emailButton"
+            android:layout_width="50dp"
+            android:layout_height="27dp"
+            android:backgroundTint="#00FCFAFA"
+            android:src="@drawable/ic_email_black_30dp"
+            tools:layout_editor_absoluteX="28dp"
+            tools:layout_editor_absoluteY="112dp" />
+
+        <TextView
+            android:id="@+id/userEmail"
+            android:layout_width="120dp"
+            android:layout_height="30dp"
+            android:gravity="center"
+            android:text="Email"
+            android:textStyle="bold"
+            tools:layout_editor_absoluteX="81dp"
+            tools:layout_editor_absoluteY="108dp" />
+
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="179dp"
+        android:layout_height="41dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="14dp"
+        android:orientation="horizontal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout5">
+
+        <ImageButton
+            android:id="@+id/phoneButton"
+            android:layout_width="51dp"
+            android:layout_height="25dp"
+            android:backgroundTint="#00F8F6F6"
+            android:src="@drawable/ic_phone_black_30dp"
+            tools:layout_editor_absoluteX="28dp"
+            tools:layout_editor_absoluteY="155dp" />
+
+        <TextView
+            android:id="@+id/userPhone"
+            android:layout_width="120dp"
+            android:layout_height="25dp"
+            android:gravity="center"
+            android:text="Phone"
+            android:textStyle="bold"
+            tools:layout_editor_absoluteX="85dp"
+            tools:layout_editor_absoluteY="155dp" />
+
+    </LinearLayout>
 
     <TextView
         android:id="@+id/userFavCategories"
-        android:layout_width="170dp"
-        android:layout_height="59dp"
-        android:layout_marginStart="32dp"
+        android:layout_width="178dp"
+        android:layout_height="75dp"
+        android:layout_marginStart="28dp"
         android:layout_marginBottom="16dp"
         android:gravity="center"
         android:text="Categories"
@@ -108,60 +122,76 @@
         app:layout_constraintBottom_toTopOf="@+id/questionListRecycler"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <ImageButton
-        android:id="@+id/imageButton2"
-        android:layout_width="50dp"
-        android:layout_height="27dp"
-        android:layout_marginStart="28dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="16dp"
-        android:backgroundTint="#00FCFAFA"
-        android:src="@drawable/ic_email_black_30dp"
-        app:layout_constraintBottom_toTopOf="@+id/imageButton3"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout3" />
 
-    <ImageButton
-        android:id="@+id/imageButton3"
-        android:layout_width="51dp"
-        android:layout_height="25dp"
-        android:layout_marginStart="28dp"
-        android:layout_marginBottom="28dp"
-        android:backgroundTint="#00F8F6F6"
-        android:src="@drawable/ic_phone_black_30dp"
-        app:layout_constraintBottom_toTopOf="@+id/userFavCategories"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <TextView
-        android:id="@+id/followersCount"
-        android:layout_width="134dp"
-        android:layout_height="32dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="36dp"
-        android:text="FollowersCount"
-        android:textSize="20sp"
-        android:textStyle="bold"
+    <LinearLayout
+        android:layout_width="169dp"
+        android:layout_height="182dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="18dp"
+        android:layout_marginBottom="32dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/questionListRecycler"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout3" />
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout3">
 
-    <TextView
-        android:id="@+id/followersText"
-        android:layout_width="85dp"
-        android:layout_height="19dp"
-        android:layout_marginTop="3dp"
-        android:layout_marginEnd="61dp"
-        android:text="Followers"
-        android:textAlignment="center"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/followersCount" />
+        <TextView
+            android:id="@+id/followersCount"
+            android:layout_width="161dp"
+            android:layout_height="44dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="36dp"
+            android:gravity="center"
+            android:text="FollowersCount"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout3" />
+
+        <TextView
+            android:id="@+id/followersText"
+            android:layout_width="159dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="3dp"
+            android:layout_marginEnd="61dp"
+            android:text="Followers"
+            android:textAlignment="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/followersCount" />
+
+        <TextView
+            android:id="@+id/followingCount"
+            android:layout_width="159dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="36dp"
+            android:gravity="center"
+            android:text="FollowingCount"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/followersText" />
+
+        <TextView
+            android:id="@+id/followingText"
+            android:layout_width="158dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="3dp"
+            android:layout_marginEnd="61dp"
+            android:text="Following"
+            android:textAlignment="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/followingCount" />
+
+
+    </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/questionListRecycler"
-        android:layout_width="363dp"
-        android:layout_height="432dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
+        android:layout_width="360dp"
+        android:layout_height="381dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="27dp"
+        android:layout_marginBottom="28dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
