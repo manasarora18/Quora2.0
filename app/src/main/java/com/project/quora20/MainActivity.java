@@ -18,14 +18,14 @@ import com.google.android.material.navigation.NavigationView;
 
 import com.project.quora20.adapter.HomeAdapter;
 import com.project.quora20.entity.Question;
-import com.squareup.picasso.Picasso;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, HomeAdapter.QuestionCommunication {
     private Toolbar toolbar;
     private SharedPreferences sharedPreferences;
     private SearchView searchView;
-    private TextView username;
-    private TextView useremail;
+    private TextView userName;
+    private TextView userEmail;
+    private TextView userLevel;
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
     private Button newPostToolbar;
@@ -37,21 +37,23 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         toolbar=findViewById(R.id.main_toolbar);
         setSupportActionBar(toolbar);
-        sharedPreferences=getSharedPreferences("LoginData",MODE_PRIVATE);
-        String UserId=sharedPreferences.getString("UserId","");
-
         drawerLayout=findViewById(R.id.drawer_layout);
         navigationView=findViewById(R.id.nav_view);
+
         sharedPreferences=getSharedPreferences("LoginData",MODE_PRIVATE);
         String userSP=sharedPreferences.getString("User","");
         String emailSP=sharedPreferences.getString("Email","");
+        String levelSP=sharedPreferences.getString("Level","");
         View headerView = navigationView.getHeaderView(0);
         String userId=sharedPreferences.getString("UserId","");
         System.out.println(userId+"MAIN ACTIVITY GUEST USERID");
-        username = (TextView) headerView.findViewById(R.id.userName);
-        username.setText(userSP);
-        useremail=(TextView)headerView.findViewById(R.id.userEmail);
-        useremail.setText(emailSP);
+        userName = (TextView) headerView.findViewById(R.id.userName);
+        userName.setText(userSP);
+        userEmail=(TextView)headerView.findViewById(R.id.userEmail);
+        userEmail.setText(emailSP);
+        userLevel=(TextView)headerView.findViewById(R.id.level);
+        userLevel.setText(levelSP);
+
 
         ActionBarDrawerToggle actionBarDrawerToggle=new ActionBarDrawerToggle(
                 this,
@@ -91,7 +93,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 return false;
             }
         });
-
 
     }
     @Override
