@@ -161,8 +161,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 startActivity(quesIntent);
                 break;
             case R.id.answers_nav_menu:
-//                Intent ansIntent=new Intent(MainActivity.this,MyAnswers.class);
-//                startActivity(ansIntent);
+                Intent ansIntent=new Intent(MainActivity.this,MyAnswers.class);
+                startActivity(ansIntent);
                 break;
             case R.id.logout:
 //                sharedPreferences=getSharedPreferences("LoginData",MODE_PRIVATE);
