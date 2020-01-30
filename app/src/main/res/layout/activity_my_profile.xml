@@ -10,7 +10,7 @@
     <LinearLayout
         android:id="@+id/linearLayout3"
         android:layout_width="352dp"
-        android:layout_height="54dp"
+        android:layout_height="71dp"
         android:layout_marginStart="35dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="37dp"
@@ -52,7 +52,7 @@
         android:layout_width="178dp"
         android:layout_height="43dp"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="19dp"
+        android:layout_marginTop="36dp"
         android:orientation="horizontal"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout3">
@@ -79,12 +79,12 @@
 
     </LinearLayout>
 
-
     <LinearLayout
+        android:id="@+id/linearLayout7"
         android:layout_width="179dp"
         android:layout_height="41dp"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="14dp"
+        android:layout_marginTop="20dp"
         android:orientation="horizontal"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout5">
@@ -112,23 +112,23 @@
 
     <TextView
         android:id="@+id/userFavCategories"
-        android:layout_width="176dp"
-        android:layout_height="103dp"
-        android:layout_marginStart="28dp"
-        android:layout_marginBottom="16dp"
+        android:layout_width="178dp"
+        android:layout_height="153dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="84dp"
         android:gravity="center"
         android:text="Categories"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/questionListRecycler"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout7" />
 
 
     <LinearLayout
         android:id="@+id/linearLayout6"
         android:layout_width="161dp"
         android:layout_height="153dp"
-        android:layout_marginTop="4dp"
-        android:layout_marginEnd="32dp"
+        android:layout_marginTop="36dp"
+        android:layout_marginEnd="28dp"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout3">
@@ -184,15 +184,14 @@
 
     </LinearLayout>
 
-
     <LinearLayout
-        android:layout_width="157dp"
-        android:layout_height="80dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginEnd="32dp"
+        android:layout_width="175dp"
+        android:layout_height="94dp"
+        android:layout_marginTop="56dp"
+        android:layout_marginEnd="16dp"
         android:layout_marginBottom="1dp"
         android:orientation="vertical"
-        app:layout_constraintBottom_toTopOf="@+id/questionListRecycler"
+        app:layout_constraintBottom_toTopOf="@+id/myQuestionRecycler"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout6">
 
@@ -209,7 +208,7 @@
         <TextView
             android:id="@+id/userLevel"
             android:layout_width="match_parent"
-            android:layout_height="39dp"
+            android:layout_height="44dp"
             android:gravity="center"
             android:text="Level"
             android:textAlignment="center"

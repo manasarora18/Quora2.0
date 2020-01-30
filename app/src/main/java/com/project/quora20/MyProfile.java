@@ -19,7 +19,7 @@ public class MyProfile extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_profile);
-        recyclerView=findViewById(R.id.questionListRecycler);
+        recyclerView=findViewById(R.id.myQuestionRecycler);
         questionLayoutManager=new LinearLayoutManager(this);
         viewQuestions();
     }

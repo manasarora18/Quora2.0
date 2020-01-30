@@ -6,36 +6,36 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 
-import com.project.quora20.adapter.MyQuestionAdapter;
+import com.project.quora20.adapter.MyAnswerAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class MyQuestions extends AppCompatActivity {
+public class MyAnswers extends AppCompatActivity {
 
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
-    private RecyclerView.LayoutManager myQuestionLayoutManager;
+    private RecyclerView.LayoutManager myAnswerLayoutManager;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_my_questions);
+        setContentView(R.layout.activity_my_answers);
 
-        recyclerView = findViewById(R.id.myQuestionRecycler);
-        myQuestionLayoutManager = new LinearLayoutManager(this);
-        viewQuestions();
+        recyclerView = findViewById(R.id.myAnswersRecycler);
+        myAnswerLayoutManager = new LinearLayoutManager(this);
+        viewAnswers();
 
     }
-    void viewQuestions() {
+    void viewAnswers() {
         List<Integer> list = new ArrayList<>();
         for (int i = 0; i < 10; i++)
             list.add(i);
 
-        recyclerView.setLayoutManager(myQuestionLayoutManager);
+        recyclerView.setLayoutManager(myAnswerLayoutManager);
         recyclerView.setHasFixedSize(true);
-        adapter = new MyQuestionAdapter(list);
+        adapter = new MyAnswerAdapter(list);
         recyclerView.setAdapter(adapter);
 
 
