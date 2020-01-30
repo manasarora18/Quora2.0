@@ -9,11 +9,12 @@ import android.view.View;
 import android.widget.LinearLayout;
 
 import com.project.quora20.adapter.QuestionAnswerAdapter;
+import com.project.quora20.entity.Answer;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class QuestionAnswer extends AppCompatActivity {
+public class QuestionAnswer extends AppCompatActivity implements QuestionAnswerAdapter.AnswerCommunication {
 
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
@@ -36,6 +37,11 @@ public class QuestionAnswer extends AppCompatActivity {
         viewAnswers();
     }
 
+    @Override
+    public void onClick(Answer answer) {
+
+    }
+
     void viewAnswers() {
         List<Integer> list = new ArrayList<>();
         for (int i = 0; i < 10; i++)
@@ -43,7 +49,7 @@ public class QuestionAnswer extends AppCompatActivity {
 
         recyclerView.setLayoutManager(qa_answerLayoutManager);
         recyclerView.setHasFixedSize(true);
-        adapter = new QuestionAnswerAdapter(list);
+//        adapter = new QuestionAnswerAdapter(list);
         recyclerView.setAdapter(adapter);
 
 

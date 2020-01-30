@@ -31,7 +31,7 @@ public class MyProfileAdapter extends RecyclerView.Adapter<MyProfileAdapter.MyPr
     @NonNull
     @Override
     public MyProfileViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.question_layout,parent,false);
+        View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.question_recycler_items,parent,false);
         MyProfileViewHolder myProfileViewHolder=new MyProfileViewHolder(view);
         return myProfileViewHolder;
     }

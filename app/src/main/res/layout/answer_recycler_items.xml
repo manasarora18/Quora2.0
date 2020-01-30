@@ -76,7 +76,7 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="Likes"
-            android:textAlignment="textEnd" />
+            />
 
         <ImageButton
             android:id="@+id/ans_likeButton"
