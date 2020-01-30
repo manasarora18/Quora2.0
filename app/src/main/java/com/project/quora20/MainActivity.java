@@ -36,7 +36,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
     private Button newPostToolbar;
-
     private RecyclerView homerecyclerView;
     private RecyclerView.Adapter homeadapter;
     private RecyclerView.LayoutManager homeLayoutManager;
@@ -108,7 +107,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
         });
 
-
         userId="5e3140bb4c951a1723dc3f01";
         QuoraRetrofitService quoraRetrofitService= RetrofitClientInstance.getRetrofitInstance().create(QuoraRetrofitService.class);
         Call<List<Question>> call=quoraRetrofitService.getAllQuestions(userId);
@@ -126,6 +124,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
         });
     }
+
     private void generateDataList(List<Question>list){
         homerecyclerView=findViewById(R.id.homeRecyclerView);
         //if list not null
@@ -134,6 +133,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         homerecyclerView.setLayoutManager(gridLayoutManager);
         homerecyclerView.setAdapter(homeadapter);
     }
+
     @Override
     public void onClick(Question question) {
         Intent qaIntent=new Intent( MainActivity.this, QuestionAnswer.class);
