@@ -18,13 +18,13 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageButton
-            android:id="@+id/userImage"
-            android:layout_width="84dp"
+            android:id="@+id/home_quesUserImage"
+            android:layout_width="82dp"
             android:layout_height="match_parent"
             android:layout_weight="1" />
 
         <TextView
-            android:id="@+id/questionTimeStamp"
+            android:id="@+id/home_questionTimeStamp"
             android:layout_width="138dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -33,7 +33,7 @@
     </LinearLayout>
 
     <TextView
-        android:id="@+id/userQuestionText"
+        android:id="@+id/home_userQuestionText"
         android:layout_width="375dp"
         android:layout_height="51dp"
         android:layout_marginStart="13dp"
@@ -50,13 +50,19 @@
         android:id="@+id/linearLayout2"
         android:layout_width="374dp"
         android:layout_height="47dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="8dp"
         android:gravity="right"
         android:orientation="horizontal"
-        tools:layout_editor_absoluteX="22dp"
-        tools:layout_editor_absoluteY="146dp">
+        app:layout_constraintBottom_toTopOf="@+id/home_viewMoreAnswersButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/home_userQuestionText">
 
         <TextView
-            android:id="@+id/likesCount"
+            android:id="@+id/home_queslikesCount"
             android:layout_width="wrap_content"
             android:layout_height="42dp"
             android:layout_weight="1"
@@ -64,7 +70,7 @@
             android:text="Likes" />
 
         <ImageButton
-            android:id="@+id/likeButton"
+            android:id="@+id/home_queslikeButton"
             android:layout_width="34dp"
             android:layout_height="wrap_content"
             android:layout_weight="2"
@@ -72,7 +78,7 @@
             app:srcCompat="@drawable/ic_thumb_up_black_24dp" />
 
         <TextView
-            android:id="@+id/dislikesCount"
+            android:id="@+id/home_quesdislikesCount"
             android:layout_width="wrap_content"
             android:layout_height="31dp"
             android:layout_weight="1"
@@ -80,7 +86,7 @@
             android:textAlignment="textEnd" />
 
         <ImageButton
-            android:id="@+id/dislikeButton"
+            android:id="@+id/home_quesdislikeButton"
             android:layout_width="34dp"
             android:layout_height="wrap_content"
             android:layout_weight="2"
@@ -88,16 +94,17 @@
             app:srcCompat="@drawable/ic_thumb_down_black_24dp" />
 
         <ImageButton
-            android:id="@+id/approveButton"
+            android:id="@+id/home_quesapproveButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:backgroundTint="#00F5F2F2"
             android:tint="#4CAF50"
+            android:visibility="invisible"
             app:srcCompat="@drawable/ic_check_black_24dp" />
 
         <ImageButton
-            android:id="@+id/reportAnswerButton"
+            android:id="@+id/home_quesReportButton"
             android:layout_width="wrap_content"
             android:layout_height="41dp"
             android:layout_weight="1"
@@ -119,10 +126,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/viewMoreAnswersButton" />
+        app:layout_constraintTop_toBottomOf="@+id/home_viewMoreAnswersButton" />
 
     <Button
-        android:id="@+id/viewMoreAnswersButton"
+        android:id="@+id/home_viewMoreAnswersButton"
         android:layout_width="309dp"
         android:layout_height="53dp"
         android:layout_marginStart="132dp"

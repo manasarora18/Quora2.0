@@ -3,6 +3,8 @@ package com.project.quora20.adapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -23,12 +25,22 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder
         TextView questionBody;
         TextView questionLike;
         TextView questionDislike;
+        ImageView questionUserImage;
+        TextView questionTimeStamp;
+        Button questionLikeButton;
+        Button questionDislikeButton;
+
 
         public HomeViewHolder(View view){
             super(view);
-            this.questionBody =view.findViewById(R.id.userQuestionText);
-            this.questionDislike=view.findViewById(R.id.dislikesCount);
-            this.questionLike=view.findViewById(R.id.likesCount);
+            this.questionBody =view.findViewById(R.id.home_userQuestionText);
+            this.questionDislike=view.findViewById(R.id.home_quesdislikesCount);
+            this.questionLike=view.findViewById(R.id.home_quesdislikesCount);
+            this.questionUserImage=view.findViewById(R.id.home_quesUserImage);
+            this.questionTimeStamp=view.findViewById(R.id.home_questionTimeStamp);
+            this.questionTimeStamp=view.findViewById(R.id.home_questionTimeStamp);
+            this.questionLikeButton=view.findViewById(R.id.home_queslikeButton);
+            this.questionDislikeButton=view.findViewById(R.id.home_quesdislikeButton);
         }
     }
 
