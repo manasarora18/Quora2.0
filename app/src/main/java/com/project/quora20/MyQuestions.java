@@ -23,7 +23,7 @@ public class MyQuestions extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_questions);
 
-        recyclerView = findViewById(R.id.que_myQuestionRecycler);
+        recyclerView = findViewById(R.id.que_QuestionRecycler);
         myQuestionLayoutManager = new LinearLayoutManager(this);
         viewQuestions();
 

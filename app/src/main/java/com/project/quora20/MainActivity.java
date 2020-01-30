@@ -6,7 +6,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -22,7 +21,7 @@ import com.project.quora20.adapter.HomeAdapter;
 import com.project.quora20.entity.Question;
 import com.project.quora20.retrofit.QuoraRetrofitService;
 import com.project.quora20.retrofit.RetrofitClientInstance;
-import java.util.ArrayList;
+
 import java.util.List;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -110,6 +109,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
         });
 
+
+        userId="5e3140bb4c951a1723dc3f01";
         QuoraRetrofitService quoraRetrofitService= RetrofitClientInstance.getRetrofitInstance().create(QuoraRetrofitService.class);
         Call<List<Question>> call=quoraRetrofitService.getAllQuestions(userId);
         call.enqueue(new Callback<List<Question>>() {

@@ -3,22 +3,25 @@ package com.project.quora20.adapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.project.quora20.R;
 import com.project.quora20.entity.Question;
+
 import java.util.List;
 
 public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder> {
     private List<Question> questionList;
     private QuestionCommunication questionCommunication;
 
+
     public HomeAdapter(List<Question>questionList,QuestionCommunication questionCommunication){
         this.questionList=questionList;
         this.questionCommunication=questionCommunication;
+
     }
 
     public class HomeViewHolder extends RecyclerView.ViewHolder{
@@ -27,15 +30,15 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder
         TextView questionDislike;
         ImageView questionUserImage;
         TextView questionTimeStamp;
-        Button questionLikeButton;
-        Button questionDislikeButton;
+        ImageButton questionLikeButton;
+        ImageButton questionDislikeButton;
 
 
         public HomeViewHolder(View view){
             super(view);
             this.questionBody =view.findViewById(R.id.home_userQuestionText);
             this.questionDislike=view.findViewById(R.id.home_quesdislikesCount);
-            this.questionLike=view.findViewById(R.id.home_quesdislikesCount);
+            this.questionLike=view.findViewById(R.id.home_queslikesCount);
             this.questionUserImage=view.findViewById(R.id.home_quesUserImage);
             this.questionTimeStamp=view.findViewById(R.id.home_questionTimeStamp);
             this.questionTimeStamp=view.findViewById(R.id.home_questionTimeStamp);
@@ -61,13 +64,15 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder
             }
         });
         holder.questionBody.setText(questionList.get(position).getQuestionBody());
-        holder.questionLike.setText(questionList.get(position).getLikeCount());
-        holder.questionDislike.setText(questionList.get(position).getDisLikeCount());
+//        holder.questionLike.setText(questionList.get(position).getLikeCount());
+//        holder.questionDislike.setText(questionList.get(position).getDislikeCount());
+
     }
 
     @Override
     public int getItemCount() {
         if(questionList!=null){
+            System.out.println("NULL EMPTY LIST");
             return questionList.size();
         }
         return 0;
