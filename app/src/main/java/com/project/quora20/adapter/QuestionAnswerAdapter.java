@@ -26,7 +26,6 @@ public class QuestionAnswerAdapter extends RecyclerView.Adapter<QuestionAnswerAd
         this.answerCommunication=answerCommunication;
     }
 
-
     public static class QuestionAnswerViewHolder extends RecyclerView.ViewHolder {
         public TextView answerBody;
         TextView answerLike;
@@ -37,7 +36,6 @@ public class QuestionAnswerAdapter extends RecyclerView.Adapter<QuestionAnswerAd
         ImageButton answerDislikeButton;
         ImageButton answerReport;
         ImageButton viewCommentsButton;
-
 
         public QuestionAnswerViewHolder(View view) {
             super(view);
@@ -52,7 +50,6 @@ public class QuestionAnswerAdapter extends RecyclerView.Adapter<QuestionAnswerAd
             this.viewCommentsButton=view.findViewById(R.id.ans_viewCommentsButton);
         }
     }
-
 
     @NonNull
     @Override
@@ -97,8 +94,6 @@ public class QuestionAnswerAdapter extends RecyclerView.Adapter<QuestionAnswerAd
             }
         });
 //        holder.answerTimeStamp.setText(answerList.get(position).getDate());
-
-
     }
 
     @Override
@@ -108,6 +103,7 @@ public class QuestionAnswerAdapter extends RecyclerView.Adapter<QuestionAnswerAd
 
         return 0;
     }
+
     public interface AnswerCommunication{
         void onClick(Answer answer);
     }
