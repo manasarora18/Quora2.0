@@ -20,8 +20,9 @@ public interface QuoraRetrofitService {
     @POST("/auth/signup")
     Call <AccessTokenRegisterResponse> addUser(@Body CoAuthRequestDTO coAuthRequestDTO);
 //
-    @GET("/questions/{userId}")
+    @GET("/question/getLoginFeed/{userId}")
     Call <List<Question>> getAllQuestions(@Path("userId")String userId);
 //    @POST("/login-service/login")
 //    Call<AccessTokenDTO> loginUser(@Body RegisterUser registerUser);
 }
+//5e3140bb4c951a1723dc3f01

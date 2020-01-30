@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MyQuestions">
+    tools:context=".CategoryActivity">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/que_QuestionRecycler"
+        android:id="@+id/cat_QuestionRecycler"
         android:layout_width="356dp"
         android:layout_height="600dp"
         android:layout_marginStart="24dp"
@@ -20,14 +20,14 @@
         app:layout_constraintTop_toBottomOf="@+id/que_myQuestionText" />
 
     <TextView
-        android:id="@+id/que_QuestionText"
+        android:id="@+id/que_myQuestionText"
         android:layout_width="340dp"
         android:layout_height="48dp"
         android:layout_marginStart="34dp"
         android:layout_marginTop="33dp"
         android:layout_marginEnd="37dp"
         android:gravity="center"
-        android:text="My Questions"
+        android:text="Category"
         android:textAlignment="center"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
