@@ -3,11 +3,8 @@ package com.project.quora20;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import android.os.Bundle;
-
 import com.project.quora20.adapter.MyProfileAdapter;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,8 +22,8 @@ public class MyProfile extends AppCompatActivity {
         recyclerView=findViewById(R.id.questionListRecycler);
         questionLayoutManager=new LinearLayoutManager(this);
         viewQuestions();
-
     }
+
     void viewQuestions()
     {
         List<Integer> list=new ArrayList<>();
@@ -37,7 +34,5 @@ public class MyProfile extends AppCompatActivity {
         recyclerView.setHasFixedSize(true);
         adapter=new MyProfileAdapter(list);
         recyclerView.setAdapter(adapter);
-
-
     }
 }
