@@ -7,7 +7,6 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -20,7 +19,6 @@ import android.widget.Toast;
 import com.google.android.material.navigation.NavigationView;
 import com.project.quora20.adapter.HomeAdapter;
 import com.project.quora20.entity.Question;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -157,6 +155,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 //                Intent catIntent5= new Intent(this,CategoryProducts.class);
 //                catIntent5.putExtra("categoryId",1);
 //                this.startActivity(catIntent5);
+                break;
+            case R.id.questions_nav_menu:
+                Intent quesIntent= new Intent(MainActivity.this,MyQuestions.class);
+                startActivity(quesIntent);
+                break;
+            case R.id.answers_nav_menu:
+//                Intent ansIntent=new Intent(MainActivity.this,MyAnswers.class);
+//                startActivity(ansIntent);
                 break;
             case R.id.logout:
 //                sharedPreferences=getSharedPreferences("LoginData",MODE_PRIVATE);
