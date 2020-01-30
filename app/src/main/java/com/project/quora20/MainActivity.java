@@ -209,7 +209,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 //                    Toast.makeText(getApplicationContext(),"LoginFirst",Toast.LENGTH_SHORT).show();
 //                }
                 break;
-
             default:
                 return super.onOptionsItemSelected(item);
         }
