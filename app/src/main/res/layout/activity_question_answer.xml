@@ -8,8 +8,8 @@
 
     <LinearLayout
         android:id="@+id/questionLayout"
-        android:layout_width="329dp"
-        android:layout_height="161dp"
+        android:layout_width="332dp"
+        android:layout_height="154dp"
         android:layout_marginStart="77dp"
         android:layout_marginTop="40dp"
         android:layout_marginEnd="42dp"
@@ -36,27 +36,27 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/answerListRecycler"
-        android:layout_width="342dp"
-        android:layout_height="287dp"
+        android:layout_width="351dp"
+        android:layout_height="326dp"
         android:layout_marginStart="42dp"
-        android:layout_marginTop="95dp"
+        android:layout_marginTop="128dp"
         android:layout_marginEnd="39dp"
         android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.666"
+        app:layout_constraintHorizontal_bias="0.571"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/questionLayout" />
 
     <LinearLayout
-        android:id="@+id/linearLayout4"
-        android:layout_width="349dp"
-        android:layout_height="89dp"
+        android:id="@+id/addAnswerLayout"
+        android:layout_width="367dp"
+        android:layout_height="60dp"
         android:layout_marginStart="42dp"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="18dp"
         android:layout_marginEnd="39dp"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.578"
+        app:layout_constraintHorizontal_bias="0.562"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/answerListRecycler">
 

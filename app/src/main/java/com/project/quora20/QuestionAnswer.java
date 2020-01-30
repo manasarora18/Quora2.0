@@ -5,6 +5,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.LinearLayout;
 
 import com.project.quora20.adapter.QuestionAnswerAdapter;
 
@@ -23,6 +25,14 @@ public class QuestionAnswer extends AppCompatActivity {
         setContentView(R.layout.activity_question_answer);
         recyclerView=findViewById(R.id.answerListRecycler);
         answerLayoutManager=new LinearLayoutManager(this);
+        final LinearLayout addAnswer=findViewById(R.id.addAnswerLayout);
+        //addAnswer.onFoc
+        /*addAnswer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                addAnswer.setOnFocusChangeListener();
+            }
+        });*/
         viewAnswers();
     }
     void viewAnswers()

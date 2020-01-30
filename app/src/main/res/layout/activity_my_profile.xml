@@ -99,7 +99,7 @@
             tools:layout_editor_absoluteY="155dp" />
 
         <TextView
-            android:id="@+id/organizationPhone"
+            android:id="@+id/userPhone"
             android:layout_width="120dp"
             android:layout_height="25dp"
             android:gravity="center"
@@ -184,16 +184,6 @@
 
     </LinearLayout>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/questionListRecycler"
-        android:layout_width="360dp"
-        android:layout_height="381dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginEnd="27dp"
-        android:layout_marginBottom="28dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
 
     <LinearLayout
         android:layout_width="157dp"
