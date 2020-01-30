@@ -1,6 +1,5 @@
 package com.project.quora20.adapter;
 
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,9 +9,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.project.quora20.MyAnswers;
 import com.project.quora20.R;
-import com.project.quora20.ViewComments;
 
 import java.util.List;
 
@@ -39,7 +36,7 @@ public class MyAnswerAdapter extends RecyclerView.Adapter<MyAnswerAdapter.MyAnsw
     @NonNull
     @Override
     public MyAnswerViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.answer_layout, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.answer_recycler_items, parent, false);
         MyAnswerViewHolder myAnswerViewHolder = new MyAnswerViewHolder(view);
         return myAnswerViewHolder;
     }

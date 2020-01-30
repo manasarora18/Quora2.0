@@ -3,6 +3,7 @@ package com.project.quora20.adapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -10,7 +11,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.project.quora20.R;
 import com.project.quora20.entity.Question;
-
 import java.util.List;
 
 public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder> {
@@ -18,13 +18,13 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder
     private QuestionCommunication questionCommunication;
 
 
-    public HomeAdapter(List<Question>questionList,QuestionCommunication questionCommunication){
-        this.questionList=questionList;
-        this.questionCommunication=questionCommunication;
+    public HomeAdapter(List<Question> questionList, QuestionCommunication questionCommunication) {
+        this.questionList = questionList;
+        this.questionCommunication = questionCommunication;
 
     }
 
-    public class HomeViewHolder extends RecyclerView.ViewHolder{
+    public class HomeViewHolder extends RecyclerView.ViewHolder {
         TextView questionBody;
         TextView questionLike;
         TextView questionDislike;
@@ -32,18 +32,19 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder
         TextView questionTimeStamp;
         ImageButton questionLikeButton;
         ImageButton questionDislikeButton;
+        Button viewMoreAnswers;
 
 
-        public HomeViewHolder(View view){
+        public HomeViewHolder(View view) {
             super(view);
-            this.questionBody =view.findViewById(R.id.home_userQuestionText);
-            this.questionDislike=view.findViewById(R.id.home_quesdislikesCount);
-            this.questionLike=view.findViewById(R.id.home_queslikesCount);
-            this.questionUserImage=view.findViewById(R.id.home_quesUserImage);
-            this.questionTimeStamp=view.findViewById(R.id.home_questionTimeStamp);
-            this.questionTimeStamp=view.findViewById(R.id.home_questionTimeStamp);
-            this.questionLikeButton=view.findViewById(R.id.home_queslikeButton);
-            this.questionDislikeButton=view.findViewById(R.id.home_quesdislikeButton);
+            this.questionBody = view.findViewById(R.id.home_userQuestionText);
+            this.questionDislike = view.findViewById(R.id.home_quesdislikesCount);
+            this.questionLike = view.findViewById(R.id.home_queslikesCount);
+            this.questionUserImage = view.findViewById(R.id.home_quesUserImage);
+            this.questionTimeStamp = view.findViewById(R.id.home_questionTimeStamp);
+            this.questionLikeButton = view.findViewById(R.id.home_queslikeButton);
+            this.questionDislikeButton = view.findViewById(R.id.home_quesdislikeButton);
+            this.viewMoreAnswers = view.findViewById(R.id.home_viewMoreAnswersButton);
         }
     }
 
@@ -56,29 +57,50 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder
     }
 
     @Override
-    public void onBindViewHolder(@NonNull HomeViewHolder holder,final int position){
-        holder.questionBody.getRootView().setOnClickListener(new View.OnClickListener() {
+    public void onBindViewHolder(@NonNull final HomeViewHolder holder, final int position) {
+        holder.viewMoreAnswers.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 questionCommunication.onClick(questionList.get(position));
             }
         });
         holder.questionBody.setText(questionList.get(position).getQuestionBody());
-//        holder.questionLike.setText(questionList.get(position).getLikeCount());
-//        holder.questionDislike.setText(questionList.get(position).getDislikeCount());
-
+        holder.questionLike.setText(String.valueOf(questionList.get(position).getLikeCount()));
+        holder.questionDislike.setText(String.valueOf(questionList.get(position).getDislikeCount()));
+        holder.questionLikeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                holder.questionLikeButton.setClickable(false);
+                holder.questionDislikeButton.setClickable(false);
+                String likeCount = (String) holder.questionLike.getText();
+                Integer likeNo = Integer.parseInt(likeCount);
+                likeNo++;
+                holder.questionLike.setText(String.valueOf(likeNo));
+            }
+        });
+        holder.questionDislikeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                holder.questionLikeButton.setClickable(false);
+                holder.questionDislikeButton.setClickable(false);
+                String dislikeCount = (String) holder.questionDislike.getText();
+                Integer dislikeNo = Integer.parseInt(dislikeCount);
+                dislikeNo++;
+                holder.questionDislike.setText(String.valueOf(dislikeNo));
+            }
+        });
+        holder.questionTimeStamp.setText(questionList.get(position).getDate());
     }
 
     @Override
     public int getItemCount() {
-        if(questionList!=null){
-            System.out.println("NULL EMPTY LIST");
+        if (questionList != null) {
             return questionList.size();
         }
         return 0;
     }
 
-    public interface QuestionCommunication{
+    public interface QuestionCommunication {
         void onClick(Question question);
     }
 }
