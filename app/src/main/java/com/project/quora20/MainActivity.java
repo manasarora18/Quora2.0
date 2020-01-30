@@ -158,6 +158,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 //                catIntent5.putExtra("categoryId",1);
 //                this.startActivity(catIntent5);
                 break;
+            case R.id.questions_nav_menu:
+                Intent quesIntent= new Intent(MainActivity.this,MyQuestions.class);
+                startActivity(quesIntent);
+                break;
+            case R.id.answers_nav_menu:
+//                Intent ansIntent=new Intent(MainActivity.this,MyAnswers.class);
+//                startActivity(ansIntent);
+                break;
             case R.id.logout:
 //                sharedPreferences=getSharedPreferences("LoginData",MODE_PRIVATE);
 //                String logincheckLogout=sharedPreferences.getString("LoginCheck","false");
