@@ -11,15 +11,25 @@ import android.widget.Button;
 import android.widget.ImageButton;
 
 import com.project.quora20.adapter.MyAnswerAdapter;
+import com.project.quora20.entity.Answer;
+import com.project.quora20.retrofit.QuoraRetrofitService;
+import com.project.quora20.retrofit.RetrofitClientInstance;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class MyAnswers extends AppCompatActivity {
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
+public class MyAnswers extends AppCompatActivity implements MyAnswerAdapter.IAnswerCommunicator {
 
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager myAnswerLayoutManager;
+    List<Answer> answerList;
+
+    QuoraRetrofitService quoraRetrofitService;
 
 
     @Override
@@ -29,20 +39,57 @@ public class MyAnswers extends AppCompatActivity {
 
         recyclerView = findViewById(R.id.ans_myAnswersRecycler);
         myAnswerLayoutManager = new LinearLayoutManager(this);
-        viewAnswers();
 
     }
-    void viewAnswers() {
-        List<Integer> list = new ArrayList<>();
-        for (int i = 0; i < 10; i++)
-            list.add(i);
+    @Override
+    public String updateLikes(String answerId) {
 
         recyclerView.setLayoutManager(myAnswerLayoutManager);
         recyclerView.setHasFixedSize(true);
-        adapter = new MyAnswerAdapter(list);
-        recyclerView.setAdapter(adapter);
+        quoraRetrofitService= RetrofitClientInstance.getRetrofitInstance().create(QuoraRetrofitService.class);
 
+        Call<String> callAnswer=quoraRetrofitService.likeAnswer("123");
+        callAnswer.enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+                adapter = new MyAnswerAdapter(answerList,MyAnswers.this);
+                recyclerView.setAdapter(adapter);
+                System.out.println("Inside OnResponse Answer");
 
+            }
+
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+
+                System.out.println("Inside OnFailure Answer");
+
+            }
+        });
+        return "123";
+    }
+
+    @Override
+    public String updateDislikes(String answerId)
+    {
+       /* Call<String> callAnswer=quoraRetrofitService.dislikeAnswer("123");
+        callAnswer.enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+                adapter = new MyAnswerAdapter(answerList,MyAnswers.this);
+                recyclerView.setAdapter(adapter);
+                System.out.println("Inside OnResponse Answer");
+
+            }
+
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+
+                System.out.println("Inside OnFailure Answer");
+
+            }
+        });*/
+
+        return "123";
     }
 
 }

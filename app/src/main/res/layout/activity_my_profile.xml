@@ -196,21 +196,21 @@
         app:layout_constraintTop_toBottomOf="@+id/linearLayout6">
 
         <TextView
-            android:id="@+id/userScore"
+            android:id="@+id/profile_userScore"
             android:layout_width="match_parent"
             android:layout_height="39dp"
             android:gravity="center"
-            android:text="profile_Score"
+            android:text="Score"
             android:textAlignment="center"
             android:textSize="18sp"
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/userLevel"
+            android:id="@+id/profile_userLevel"
             android:layout_width="match_parent"
             android:layout_height="44dp"
             android:gravity="center"
-            android:text="profile_Level"
+            android:text="Level"
             android:textAlignment="center"
             android:textSize="18sp"
             android:textStyle="bold" />

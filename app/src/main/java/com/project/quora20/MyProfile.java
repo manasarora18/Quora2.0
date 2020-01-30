@@ -5,25 +5,28 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import android.os.Bundle;
 import com.project.quora20.adapter.MyProfileAdapter;
+import com.project.quora20.entity.User;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class MyProfile extends AppCompatActivity {
 
-    private RecyclerView recyclerView;
+    List<User> list;
     private RecyclerView.Adapter adapter;
-    private RecyclerView.LayoutManager questionLayoutManager;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_profile);
-//        recyclerView=findViewById(R.id.questionListRecycler);
-//        questionLayoutManager=new LinearLayoutManager(this);
-//        viewQuestions();
+        viewProfile();
     }
 
+    void viewProfile()
+    {
+        adapter=new MyProfileAdapter(list);
+    }
 //    void viewQuestions()
 //    {
 //        List<Integer> list=new ArrayList<>();

@@ -10,6 +10,7 @@ import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.http.Path;
 
 public interface QuoraRetrofitService {
@@ -24,4 +25,11 @@ public interface QuoraRetrofitService {
     Call <List<Question>> getAllQuestions(@Path("userId")String userId);
 //    @POST("/login-service/login")
 //    Call<AccessTokenDTO> loginUser(@Body RegisterUser registerUser);
+
+    @PUT("/answer/likeanswer/{answerId}")
+    Call<String> likeAnswer(@Path("answerId") String answerId);
+
+
+//    @PUT("/answer/dislikeanswer/{answerId}")
+//    Call<String> dislikeAnswer(@Path("answerId") String answerId);
 }
