@@ -19,7 +19,7 @@ public class MyProfileAdapter extends RecyclerView.Adapter<MyProfileAdapter.MyPr
         public MyProfileViewHolder(View view)
         {
             super(view);
-            textView=view.findViewById(R.id.userQuestionText);
+           // textView=view.findViewById(R.id.userQuestionText);
         }
     }
 

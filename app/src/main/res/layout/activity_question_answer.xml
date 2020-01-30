@@ -7,7 +7,7 @@
     tools:context=".QuestionAnswer">
 
     <LinearLayout
-        android:id="@+id/questionLayout"
+        android:id="@+id/qa_questionLayout"
         android:layout_width="332dp"
         android:layout_height="154dp"
         android:layout_marginStart="77dp"
@@ -20,12 +20,12 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageButton
-            android:id="@+id/userProfileImage"
+            android:id="@+id/qa_userProfileImage"
             android:layout_width="91dp"
             android:layout_height="92dp" />
 
         <TextView
-            android:id="@+id/questionText"
+            android:id="@+id/qa_questionText"
             android:layout_width="match_parent"
             android:layout_height="41dp"
             android:lineSpacingExtra="8sp"
@@ -35,7 +35,7 @@
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/answerListRecycler"
+        android:id="@+id/qa_answerListRecycler"
         android:layout_width="351dp"
         android:layout_height="326dp"
         android:layout_marginStart="42dp"
@@ -45,10 +45,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.571"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/questionLayout" />
+        app:layout_constraintTop_toBottomOf="@+id/qa_questionLayout" />
 
     <LinearLayout
-        android:id="@+id/addAnswerLayout"
+        android:id="@+id/qa_addAnswerLayout"
         android:layout_width="367dp"
         android:layout_height="60dp"
         android:layout_marginStart="42dp"
@@ -58,10 +58,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.562"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/answerListRecycler">
+        app:layout_constraintTop_toBottomOf="@+id/qa_answerListRecycler">
 
         <EditText
-            android:id="@+id/answerText"
+            android:id="@+id/qa_answerText"
             android:layout_width="294dp"
             android:layout_height="66dp"
             android:layout_weight="10"
@@ -71,7 +71,7 @@
             tools:text="Add Your Answer" />
 
         <ImageButton
-            android:id="@+id/imageButton"
+            android:id="@+id/qa_sendAnswerButton"
             android:layout_width="wrap_content"
             android:layout_height="66dp"
             android:layout_weight="1"

@@ -21,7 +21,7 @@ public class QuestionAnswerAdapter extends RecyclerView.Adapter<QuestionAnswerAd
 
         public QuestionAnswerViewHolder(View view) {
             super(view);
-            textView = view.findViewById(R.id.userAnswerText);
+            textView = view.findViewById(R.id.qa_answerText);
         }
     }
 

@@ -17,14 +17,14 @@ public class QuestionAnswer extends AppCompatActivity {
 
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
-    private RecyclerView.LayoutManager answerLayoutManager;
+    private RecyclerView.LayoutManager qa_answerLayoutManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_question_answer);
-        recyclerView = findViewById(R.id.answerListRecycler);
-        answerLayoutManager = new LinearLayoutManager(this);
+        recyclerView = findViewById(R.id.qa_answerListRecycler);
+        qa_answerLayoutManager = new LinearLayoutManager(this);
         //final LinearLayout addAnswer = findViewById(R.id.addAnswerLayout);
         //addAnswer.onFoc
         /*addAnswer.setOnClickListener(new View.OnClickListener() {
@@ -41,7 +41,7 @@ public class QuestionAnswer extends AppCompatActivity {
         for (int i = 0; i < 10; i++)
             list.add(i);
 
-        recyclerView.setLayoutManager(answerLayoutManager);
+        recyclerView.setLayoutManager(qa_answerLayoutManager);
         recyclerView.setHasFixedSize(true);
         adapter = new QuestionAnswerAdapter(list);
         recyclerView.setAdapter(adapter);

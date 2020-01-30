@@ -6,39 +6,39 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 
-import com.project.quora20.adapter.MyQuestionAdapter;
+import com.project.quora20.adapter.CommentsAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class MyQuestions extends AppCompatActivity {
-
+public class ViewComments extends AppCompatActivity {
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
-    private RecyclerView.LayoutManager myQuestionLayoutManager;
+    private RecyclerView.LayoutManager commentsLayoutManager;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_my_questions);
-
-        recyclerView = findViewById(R.id.que_myQuestionRecycler);
-        myQuestionLayoutManager = new LinearLayoutManager(this);
-        viewQuestions();
+        setContentView(R.layout.activity_view_comments);
+        recyclerView = findViewById(R.id.commentsRecycler);
+        commentsLayoutManager = new LinearLayoutManager(this);
+        viewComments();
 
     }
-    void viewQuestions() {
+
+    void viewComments() {
         List<Integer> list = new ArrayList<>();
         for (int i = 0; i < 10; i++)
             list.add(i);
 
-        recyclerView.setLayoutManager(myQuestionLayoutManager);
+        recyclerView.setLayoutManager(commentsLayoutManager);
         recyclerView.setHasFixedSize(true);
-        adapter = new MyQuestionAdapter(list);
+        adapter = new CommentsAdapter(list);
         recyclerView.setAdapter(adapter);
 
 
     }
 
 }
+

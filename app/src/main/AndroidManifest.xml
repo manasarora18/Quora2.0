@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MyAnswers"></activity>
+        <activity android:name=".ViewComments"></activity>
+        <activity android:name=".MyAnswers" />
         <activity android:name=".MyQuestions" />
         <activity android:name=".Register" />
         <activity android:name=".LoginMain">
