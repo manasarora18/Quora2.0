@@ -6,7 +6,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -22,7 +21,6 @@ import com.project.quora20.adapter.HomeAdapter;
 import com.project.quora20.entity.Question;
 import com.project.quora20.retrofit.QuoraRetrofitService;
 import com.project.quora20.retrofit.RetrofitClientInstance;
-import java.util.ArrayList;
 import java.util.List;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -110,6 +108,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
         });
 
+
+        userId="5e3140bb4c951a1723dc3f01";
         QuoraRetrofitService quoraRetrofitService= RetrofitClientInstance.getRetrofitInstance().create(QuoraRetrofitService.class);
         Call<List<Question>> call=quoraRetrofitService.getAllQuestions(userId);
         call.enqueue(new Callback<List<Question>>() {
@@ -128,7 +128,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
     private void generateDataList(List<Question>list){
         homerecyclerView=findViewById(R.id.homeRecyclerView);
-        //iflistnot null
+        //if list not null
         homeadapter=new HomeAdapter(list,MainActivity.this);
         GridLayoutManager gridLayoutManager=new GridLayoutManager(getApplicationContext(),1);
         homerecyclerView.setLayoutManager(gridLayoutManager);
@@ -136,15 +136,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
     @Override
     public void onClick(Question question) {
-//        Intent productIntent=new Intent( MainActivity.this, ProductDetails.class);
-//        productIntent.putExtra("Image", product.getImageUrl());
-//        productIntent.putExtra("ProductName",product.getName());
-//        productIntent.putExtra(("ProductDescription"),product.getDescription());
-//        productIntent.putExtra(("ColorAttribute"),product.getProductAttributes().getColor());
-//        productIntent.putExtra(("SizeAttribute"),product.getProductAttributes().getSize());
-//        productIntent.putExtra(("MaterialAttribute"),product.getProductAttributes().getMaterial());
-//        productIntent.putExtra(("PID"),product.getProductId());
-//        startActivity(productIntent);
+        Intent qaIntent=new Intent( MainActivity.this, QuestionAnswer.class);
+        qaIntent.putExtra("QID",question.getQuestionId());
+        qaIntent.putExtra("OrgId",question.getOrgId());
+        qaIntent.putExtra("QuesBody",question.getQuestionBody());
+        qaIntent.putExtra("BestAns",question.getBestAnswerId());
+        qaIntent.putExtra("CategoryId",question.getCategoryId());
+        startActivity(qaIntent);
     }
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {

@@ -21,9 +21,13 @@ public interface QuoraRetrofitService {
 //
     @POST("/auth/signup")
     Call <AccessTokenRegisterResponse> addUser(@Body CoAuthRequestDTO coAuthRequestDTO);
-//
-    @GET("/questions/{userId}")
+
+    @GET("/question/getLoginFeed/{userId}")
     Call <List<Question>> getAllQuestions(@Path("userId")String userId);
+
+    @GET("/question/getCategoryFeed/{catId}")
+    Call <List<Question>> getCategoryQuestions(@Path("catId")String catId);
+
 //    @POST("/login-service/login")
 //    Call<AccessTokenDTO> loginUser(@Body RegisterUser registerUser);
 
@@ -37,3 +41,4 @@ public interface QuoraRetrofitService {
 //    @PUT("/answer/dislikeanswer/{answerId}")
 //    Call<String> dislikeAnswer(@Path("answerId") String answerId);
 }
+//5e3140bb4c951a1723dc3f01

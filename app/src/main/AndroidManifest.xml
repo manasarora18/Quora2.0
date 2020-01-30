@@ -14,6 +14,9 @@
         android:usesCleartextTraffic="true">
         <activity android:name=".ViewComments"></activity>
         <activity android:name=".MyAnswers"></activity>
+        <activity android:name=".CategoryActivity"></activity>
+        <activity android:name=".ViewComments" />
+        <activity android:name=".MyAnswers" />
         <activity android:name=".MyQuestions" />
         <activity android:name=".Register" />
         <activity android:name=".LoginMain">

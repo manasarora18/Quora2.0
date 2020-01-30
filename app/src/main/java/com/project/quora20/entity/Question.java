@@ -13,6 +13,12 @@ public class Question{
 	@SerializedName("questionId")
 	private String questionId;
 
+	@SerializedName("answersList")
+	private String answersList;
+
+	@SerializedName("dislikeCount")
+	private int dislikeCount;
+
 	@SerializedName("likeCount")
 	private int likeCount;
 
@@ -25,14 +31,11 @@ public class Question{
 	@SerializedName("questionBody")
 	private String questionBody;
 
-	@SerializedName("disLikeCount")
-	private int disLikeCount;
-
 	@SerializedName("categoryId")
 	private String categoryId;
 
-	@SerializedName("orgid")
-	private String orgid;
+	@SerializedName("orgId")
+	private String orgId;
 
 	public void setDate(String date){
 		this.date = date;
@@ -56,6 +59,22 @@ public class Question{
 
 	public String getQuestionId(){
 		return questionId;
+	}
+
+	public void setAnswersList(String answersList){
+		this.answersList = answersList;
+	}
+
+	public String getAnswersList(){
+		return answersList;
+	}
+
+	public void setDislikeCount(int dislikeCount){
+		this.dislikeCount = dislikeCount;
+	}
+
+	public int getDislikeCount(){
+		return dislikeCount;
 	}
 
 	public void setLikeCount(int likeCount){
@@ -90,14 +109,6 @@ public class Question{
 		return questionBody;
 	}
 
-	public void setDisLikeCount(int disLikeCount){
-		this.disLikeCount = disLikeCount;
-	}
-
-	public int getDisLikeCount(){
-		return disLikeCount;
-	}
-
 	public void setCategoryId(String categoryId){
 		this.categoryId = categoryId;
 	}
@@ -106,12 +117,12 @@ public class Question{
 		return categoryId;
 	}
 
-	public void setOrgid(String orgid){
-		this.orgid = orgid;
+	public void setOrgId(String orgId){
+		this.orgId = orgId;
 	}
 
-	public String getOrgid(){
-		return orgid;
+	public String getOrgId(){
+		return orgId;
 	}
 
 	@Override
@@ -121,13 +132,14 @@ public class Question{
 			"date = '" + date + '\'' + 
 			",bestAnswerId = '" + bestAnswerId + '\'' + 
 			",questionId = '" + questionId + '\'' + 
+			",answersList = '" + answersList + '\'' + 
+			",dislikeCount = '" + dislikeCount + '\'' + 
 			",likeCount = '" + likeCount + '\'' + 
 			",approvalFlag = '" + approvalFlag + '\'' + 
 			",userId = '" + userId + '\'' + 
 			",questionBody = '" + questionBody + '\'' + 
-			",disLikeCount = '" + disLikeCount + '\'' + 
 			",categoryId = '" + categoryId + '\'' + 
-			",orgid = '" + orgid + '\'' + 
+			",orgId = '" + orgId + '\'' + 
 			"}";
 		}
 }

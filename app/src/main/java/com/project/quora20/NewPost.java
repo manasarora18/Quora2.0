@@ -1,7 +1,6 @@
 package com.project.quora20;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -36,13 +35,9 @@ public class NewPost extends AppCompatActivity implements AdapterView.OnItemSele
                 questionBody=findViewById(R.id.questionBody);
                 taggedPeople=findViewById(R.id.taggedpeople);
                 categoryChoice=spinner.getSelectedItem().toString();
-
-
             }
         });
-
 //        String io=spinner.getSelectedItem().toString();
-
     }
 
     @Override
