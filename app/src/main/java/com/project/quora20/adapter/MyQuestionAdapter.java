@@ -12,34 +12,34 @@ import com.project.quora20.R;
 
 import java.util.List;
 
-public class QuestionAnswerAdapter extends RecyclerView.Adapter<QuestionAnswerAdapter.QuestionAnswerViewHolder> {
+public class MyQuestionAdapter extends RecyclerView.Adapter<MyQuestionAdapter.MyQuestionViewHolder> {
 
     private List<Integer> demoList;
 
-    public static class QuestionAnswerViewHolder extends RecyclerView.ViewHolder {
+    public static class MyQuestionViewHolder extends RecyclerView.ViewHolder {
         public TextView textView;
 
-        public QuestionAnswerViewHolder(View view) {
+        public MyQuestionViewHolder(View view) {
             super(view);
             textView = view.findViewById(R.id.userAnswerText);
         }
     }
 
-    public QuestionAnswerAdapter(List<Integer> myList) {
+    public MyQuestionAdapter(List<Integer> myList) {
         demoList = myList;
     }
 
 
     @NonNull
     @Override
-    public QuestionAnswerViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.answer_layout, parent, false);
-        QuestionAnswerViewHolder questionAnswerViewHolder = new QuestionAnswerViewHolder(view);
-        return questionAnswerViewHolder;
+    public MyQuestionViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.question_layout, parent, false);
+        MyQuestionViewHolder myQuestionViewHolder = new MyQuestionViewHolder(view);
+        return myQuestionViewHolder;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull QuestionAnswerViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull MyQuestionViewHolder holder, int position) {
         int index = demoList.get(position);
         holder.textView.setText(String.valueOf(index));
     }
@@ -52,5 +52,5 @@ public class QuestionAnswerAdapter extends RecyclerView.Adapter<QuestionAnswerAd
         return 0;
     }
 
-
 }
+
