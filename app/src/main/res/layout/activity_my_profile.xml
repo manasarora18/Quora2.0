@@ -21,14 +21,14 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
-            android:id="@+id/userProfileImage"
+            android:id="@+id/profile_userProfileImage"
             android:layout_width="88dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:src="@color/design_default_color_secondary" />
 
         <TextView
-            android:id="@+id/userName"
+            android:id="@+id/profile_userName"
             android:layout_width="221dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -58,7 +58,7 @@
         app:layout_constraintTop_toBottomOf="@+id/linearLayout3">
 
         <ImageButton
-            android:id="@+id/emailButton"
+            android:id="@+id/profile_emailButton"
             android:layout_width="50dp"
             android:layout_height="27dp"
             android:backgroundTint="#00FCFAFA"
@@ -67,7 +67,7 @@
             tools:layout_editor_absoluteY="112dp" />
 
         <TextView
-            android:id="@+id/userEmail"
+            android:id="@+id/profile_userEmail"
             android:layout_width="120dp"
             android:layout_height="30dp"
             android:gravity="center"
@@ -90,7 +90,7 @@
         app:layout_constraintTop_toBottomOf="@+id/linearLayout5">
 
         <ImageButton
-            android:id="@+id/phoneButton"
+            android:id="@+id/profile_phoneButton"
             android:layout_width="51dp"
             android:layout_height="25dp"
             android:backgroundTint="#00F8F6F6"
@@ -99,7 +99,7 @@
             tools:layout_editor_absoluteY="155dp" />
 
         <TextView
-            android:id="@+id/userPhone"
+            android:id="@+id/profile_userPhone"
             android:layout_width="120dp"
             android:layout_height="25dp"
             android:gravity="center"
@@ -111,7 +111,7 @@
     </LinearLayout>
 
     <TextView
-        android:id="@+id/userFavCategories"
+        android:id="@+id/profile_userFavCategories"
         android:layout_width="178dp"
         android:layout_height="153dp"
         android:layout_marginStart="24dp"
@@ -134,7 +134,7 @@
         app:layout_constraintTop_toBottomOf="@+id/linearLayout3">
 
         <TextView
-            android:id="@+id/followersCount"
+            android:id="@+id/profile_followersCount"
             android:layout_width="159dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
@@ -147,7 +147,7 @@
             app:layout_constraintTop_toBottomOf="@+id/linearLayout3" />
 
         <TextView
-            android:id="@+id/followersText"
+            android:id="@+id/profile_followersText"
             android:layout_width="159dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="3dp"
@@ -158,7 +158,7 @@
             app:layout_constraintTop_toBottomOf="@+id/followersCount" />
 
         <TextView
-            android:id="@+id/followingCount"
+            android:id="@+id/profile_followingCount"
             android:layout_width="159dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
@@ -171,7 +171,7 @@
             app:layout_constraintTop_toBottomOf="@+id/followersText" />
 
         <TextView
-            android:id="@+id/followingText"
+            android:id="@+id/profile_followingText"
             android:layout_width="158dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="3dp"
@@ -200,7 +200,7 @@
             android:layout_width="match_parent"
             android:layout_height="39dp"
             android:gravity="center"
-            android:text="Score"
+            android:text="profile_Score"
             android:textAlignment="center"
             android:textSize="18sp"
             android:textStyle="bold" />
@@ -210,7 +210,7 @@
             android:layout_width="match_parent"
             android:layout_height="44dp"
             android:gravity="center"
-            android:text="Level"
+            android:text="profile_Level"
             android:textAlignment="center"
             android:textSize="18sp"
             android:textStyle="bold" />

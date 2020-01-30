@@ -4,7 +4,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ImageButton;
 
 import com.project.quora20.adapter.MyAnswerAdapter;
 
@@ -23,7 +27,7 @@ public class MyAnswers extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_answers);
 
-        recyclerView = findViewById(R.id.myAnswersRecycler);
+        recyclerView = findViewById(R.id.ans_myAnswersRecycler);
         myAnswerLayoutManager = new LinearLayoutManager(this);
         viewAnswers();
 
