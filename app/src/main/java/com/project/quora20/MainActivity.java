@@ -7,7 +7,6 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -20,7 +19,6 @@ import android.widget.Toast;
 import com.google.android.material.navigation.NavigationView;
 import com.project.quora20.adapter.HomeAdapter;
 import com.project.quora20.entity.Question;
-
 import java.util.ArrayList;
 import java.util.List;
 
