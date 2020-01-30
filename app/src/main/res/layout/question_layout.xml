@@ -109,7 +109,7 @@
             app:srcCompat="@drawable/ic_check_black_24dp" />
 
         <ImageButton
-            android:id="@+id/disapproveButton"
+            android:id="@+id/reportAnswerButton"
             android:layout_width="wrap_content"
             android:layout_height="41dp"
             android:layout_weight="1"

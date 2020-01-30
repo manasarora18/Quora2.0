@@ -5,6 +5,9 @@ import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -19,6 +22,9 @@ import com.google.android.material.navigation.NavigationView;
 import com.project.quora20.adapter.HomeAdapter;
 import com.project.quora20.entity.Question;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, HomeAdapter.QuestionCommunication {
     private Toolbar toolbar;
     private SharedPreferences sharedPreferences;
@@ -30,10 +36,27 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private NavigationView navigationView;
     private Button newPostToolbar;
 
+    private RecyclerView recyclerView;
+    private RecyclerView.Adapter adapter;
+    private RecyclerView.LayoutManager homeLayoutManager;
+    HomeAdapter.QuestionCommunication questionCommunication;
+    List<Question> questionList;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
+        recyclerView=findViewById(R.id.homeRecyclerView);
+        homeLayoutManager=new LinearLayoutManager(this);
+
+        recyclerView.setLayoutManager(homeLayoutManager);
+        recyclerView.setHasFixedSize(true);
+        adapter=new HomeAdapter(questionList,questionCommunication);//to be modified...
+        recyclerView.setAdapter(adapter);
+
 
         toolbar=findViewById(R.id.main_toolbar);
         setSupportActionBar(toolbar);
