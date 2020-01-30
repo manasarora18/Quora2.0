@@ -18,6 +18,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder
         this.questionList=questionList;
         this.questionCommunication=questionCommunication;
     }
+
     public class HomeViewHolder extends RecyclerView.ViewHolder{
         TextView questionBody;
         TextView questionLike;
@@ -28,7 +29,6 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder
             this.questionBody =view.findViewById(R.id.userQuestionText);
             this.questionDislike=view.findViewById(R.id.dislikesCount);
             this.questionLike=view.findViewById(R.id.likesCount);
-
         }
     }
 
@@ -60,10 +60,8 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder
         }
         return 0;
     }
+
     public interface QuestionCommunication{
         void onClick(Question question);
     }
 }
-
-
-
