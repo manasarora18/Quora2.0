@@ -7,6 +7,8 @@
                 android:id="@+id/details_nav_menu"/>
             <item android:title="My Questions"
                 android:id="@+id/questions_nav_menu"/>
+            <item android:title="My Answers"
+                android:id="@+id/answers_nav_menu"/>
 
         </menu>
     </item>
@@ -27,8 +29,6 @@
     </item>
     <item android:title="Account">
         <menu>
-            <item android:title="My Logins"
-                android:id="@+id/logins_nav_menu"/>
             <item android:title="Logout"
                 android:id="@+id/logout"/>
         </menu>

@@ -18,7 +18,6 @@ import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.google.android.material.navigation.NavigationView;
-
 import com.project.quora20.adapter.HomeAdapter;
 import com.project.quora20.entity.Question;
 

@@ -10,6 +10,14 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".MyQuestions"></activity>
+        <activity android:name=".Register"></activity>
+        <activity android:name=".LoginMain">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity android:name=".ViewOrganisation" />
         <activity android:name=".SearchResults" />
         <activity android:name=".NewPost" />
@@ -17,13 +25,12 @@
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
             android:name=".QuestionAnswer"
             android:windowSoftInputMode="stateVisible|adjustPan" />
+        <activity android:name=".QuestionAnswer" />
     </application>
 
 </manifest>
