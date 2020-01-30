@@ -57,14 +57,14 @@ public class MyProfileAdapter extends RecyclerView.Adapter<MyProfileAdapter.MyPr
 
     @Override
     public void onBindViewHolder(@NonNull MyProfileViewHolder holder, int position) {
-        User user=userList.get(position);
+        /*User user=userList.get(position);
         holder.userName.setText(user.getUserName());
         //userIamge with picasso
         holder.userEmail.setText(user.getUserEmail());
         //holder.userPhone.setText();
         holder.followers.setText(String.valueOf(user.getUserFollower().size()));
         holder.following.setText(String.valueOf(user.getUserFollowing().size()));
-        holder.userScore.setText(String.valueOf(user.getUserScore()));
+        holder.userScore.setText(String.valueOf(user.getUserScore()));*/
 
 
     }
@@ -75,4 +75,6 @@ public class MyProfileAdapter extends RecyclerView.Adapter<MyProfileAdapter.MyPr
             return userList.size();
         return 0;
     }
+
+
 }

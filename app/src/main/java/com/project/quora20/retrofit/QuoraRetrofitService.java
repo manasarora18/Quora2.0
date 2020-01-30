@@ -3,6 +3,7 @@ package com.project.quora20.retrofit;
 import com.project.quora20.entity.AccessTokenRegisterResponse;
 import com.project.quora20.entity.CoAuthRequestDTO;
 import com.project.quora20.entity.Question;
+import com.project.quora20.entity.User;
 
 import java.util.List;
 
@@ -28,6 +29,9 @@ public interface QuoraRetrofitService {
 
     @PUT("/answer/likeanswer/{answerId}")
     Call<String> likeAnswer(@Path("answerId") String answerId);
+
+    @GET("/user/viewUser/{userId}")
+    Call<User> viewUser(@Path("userId")String userId);
 
 
 //    @PUT("/answer/dislikeanswer/{answerId}")

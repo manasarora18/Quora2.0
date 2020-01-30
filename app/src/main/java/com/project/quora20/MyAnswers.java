@@ -39,13 +39,14 @@ public class MyAnswers extends AppCompatActivity implements MyAnswerAdapter.IAns
 
         recyclerView = findViewById(R.id.ans_myAnswersRecycler);
         myAnswerLayoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(myAnswerLayoutManager);
+        recyclerView.setHasFixedSize(true);
+
 
     }
     @Override
     public String updateLikes(String answerId) {
 
-        recyclerView.setLayoutManager(myAnswerLayoutManager);
-        recyclerView.setHasFixedSize(true);
         quoraRetrofitService= RetrofitClientInstance.getRetrofitInstance().create(QuoraRetrofitService.class);
 
         Call<String> callAnswer=quoraRetrofitService.likeAnswer("123");
