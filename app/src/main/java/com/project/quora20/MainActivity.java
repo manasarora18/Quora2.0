@@ -5,6 +5,7 @@ import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
@@ -19,8 +20,13 @@ import android.widget.Toast;
 import com.google.android.material.navigation.NavigationView;
 import com.project.quora20.adapter.HomeAdapter;
 import com.project.quora20.entity.Question;
+import com.project.quora20.retrofit.QuoraRetrofitService;
+import com.project.quora20.retrofit.RetrofitClientInstance;
 import java.util.ArrayList;
 import java.util.List;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, HomeAdapter.QuestionCommunication {
     private Toolbar toolbar;
@@ -33,8 +39,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private NavigationView navigationView;
     private Button newPostToolbar;
 
-    private RecyclerView recyclerView;
-    private RecyclerView.Adapter adapter;
+    private RecyclerView homerecyclerView;
+    private RecyclerView.Adapter homeadapter;
     private RecyclerView.LayoutManager homeLayoutManager;
     HomeAdapter.QuestionCommunication questionCommunication;
     List<Question> questionList;
@@ -44,16 +50,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-
-        recyclerView=findViewById(R.id.homeRecyclerView);
-        homeLayoutManager=new LinearLayoutManager(this);
-
-        recyclerView.setLayoutManager(homeLayoutManager);
-        recyclerView.setHasFixedSize(true);
-        adapter=new HomeAdapter(questionList,questionCommunication);//to be modified...
-        recyclerView.setAdapter(adapter);
-
 
         toolbar=findViewById(R.id.main_toolbar);
         setSupportActionBar(toolbar);
@@ -114,6 +110,29 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
         });
 
+        QuoraRetrofitService quoraRetrofitService= RetrofitClientInstance.getRetrofitInstance().create(QuoraRetrofitService.class);
+        Call<List<Question>> call=quoraRetrofitService.getAllQuestions(userId);
+        call.enqueue(new Callback<List<Question>>() {
+            @Override
+            public void onResponse(Call<List<Question>> call, Response<List<Question>> response) {
+                generateDataList(response.body());
+                System.out.println("On Response Home getAllQuestions");
+            }
+
+            @Override
+            public void onFailure(Call<List<Question>> call, Throwable t) {
+                Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_LONG).show();
+                System.out.println("OnFailure getAllQuestions"+t.getMessage());
+            }
+        });
+    }
+    private void generateDataList(List<Question>list){
+        homerecyclerView=findViewById(R.id.homeRecyclerView);
+        //iflistnot null
+        homeadapter=new HomeAdapter(list,MainActivity.this);
+        GridLayoutManager gridLayoutManager=new GridLayoutManager(getApplicationContext(),1);
+        homerecyclerView.setLayoutManager(gridLayoutManager);
+        homerecyclerView.setAdapter(homeadapter);
     }
     @Override
     public void onClick(Question question) {

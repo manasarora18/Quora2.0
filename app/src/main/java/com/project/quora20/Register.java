@@ -12,6 +12,9 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.android.material.snackbar.Snackbar;
+import com.project.quora20.entity.AccessTokenRegisterResponse;
+import com.project.quora20.entity.CoAuthRequestDTO;
+import com.project.quora20.retrofit.QuoraRetrofitService;
 import com.project.quora20.retrofit.RetrofitClientInstance;
 
 import retrofit2.Call;
@@ -25,6 +28,7 @@ public class Register extends AppCompatActivity {
     private EditText registerPassword;
     private EditText registerConfirmPassword;
     private EditText registerPhone;
+    private CoAuthRequestDTO coAuthRequestDTO=new CoAuthRequestDTO();
     String message;
 
     @Override
@@ -67,10 +71,9 @@ public class Register extends AppCompatActivity {
                     nullFlag = false;
                     if (confirmPassword.equals(password)) {
                         passwordCheckFail = false;
-//                        registerUser.setEmail(email);
-//                        registerUser.setPassword(password);
-//                        registerUser.setPhoneNo(phone);
-//                        registerUser.setUserName(userName);
+                        coAuthRequestDTO.setEmail(email);
+                        coAuthRequestDTO.setPassword(password);
+                        coAuthRequestDTO.setName(userName);
                         message = "Registered";
                     } else {
                         passwordCheckFail=true;
@@ -82,37 +85,39 @@ public class Register extends AppCompatActivity {
                     message = "Enter all fields appropriately!";
                 }
 
-               /* if(nullFlag==false && passwordCheckFail==false){
-                    GetProductsService getProductsService = RetrofitClientInstance.getRetrofitInstance().create(GetProductsService.class);
-                    Call<AccessTokenDTO> call= getProductsService.addUser(registerUser);
-                    call.enqueue(new Callback<AccessTokenDTO>() {
+               if(nullFlag==false && passwordCheckFail==false){
+                    QuoraRetrofitService quoraRetrofitService = RetrofitClientInstance.getRetrofitInstance().create(QuoraRetrofitService.class);
+                    Call<AccessTokenRegisterResponse> call= quoraRetrofitService.addUser(coAuthRequestDTO);
+                    call.enqueue(new Callback<AccessTokenRegisterResponse>() {
                         @Override
-                        public void onResponse(Call<AccessTokenDTO> call, Response<AccessTokenDTO> response) {
-                            if (response.body().getCheck() == false) {
+                        public void onResponse(Call<AccessTokenRegisterResponse> call, Response<AccessTokenRegisterResponse> response) {
+                            if (response.code()==400) {
+                                System.out.println("InRESPONSE:");
                                 Toast.makeText(getApplicationContext(), "Already Registered, Please Login!", Toast.LENGTH_SHORT).show();
                                 System.out.println("ALREADY REGISTERED");
                                 message="ALREADY REGISTERED";
-                                Intent loginNow= new Intent(Register.this,Login.class);
+                                Intent loginNow= new Intent(Register.this,LoginMain.class);
                                 startActivity(loginNow);
                                 finish();
                             }
                             else {
+                                System.out.println("CODE:"+response.code());
 //                            registerUser.setUserId("userId");
                                 System.out.println("REGISTERED");
                                 Toast.makeText(getApplicationContext(), "Registered!", Toast.LENGTH_SHORT).show();
                                 message="Registered Successfully!";
-                                Intent loginNow= new Intent(Register.this,Login.class);
+                                Intent loginNow= new Intent(Register.this,LoginMain.class);
                                 startActivity(loginNow);
                                 finish();
                             }
                         }
 
                         @Override
-                        public void onFailure(Call<AccessTokenDTO> call, Throwable t) {
+                        public void onFailure(Call<AccessTokenRegisterResponse> call, Throwable t) {
                             System.out.println("Invalid Backend Response"+t.getMessage());
                         }
                     });
-                }*/
+                }
 
                 Snackbar snackbar = Snackbar.make(findViewById(R.id.register_layout),
                         message, Snackbar.LENGTH_SHORT);
