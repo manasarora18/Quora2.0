@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -32,7 +33,7 @@ public class QuestionAnswer extends AppCompatActivity implements QuestionAnswerA
     private RecyclerView.LayoutManager qa_answerLayoutManager;
     QuoraRetrofitService quoraRetrofitService;
     private SharedPreferences sharedPreferences;
-    List<Answer> answerList;
+    Answer answerList;
     TextView qa_questionText;
     TextView qa_answerText;
     ImageButton sendAnswerButton;
@@ -81,6 +82,12 @@ public class QuestionAnswer extends AppCompatActivity implements QuestionAnswerA
                 Toast toast = Toast.makeText(getApplicationContext(), "Answer posted ", Toast.LENGTH_SHORT);
                 toast.show();
 
+                //reload the activity
+                finish();
+                overridePendingTransition(0, 0);
+                startActivity(getIntent());
+                overridePendingTransition(0, 0);
+
             }
         });
 
@@ -124,33 +131,32 @@ public class QuestionAnswer extends AppCompatActivity implements QuestionAnswerA
             @Override
             public void onFailure(Call<IdResponse> call, Throwable t) {
                 System.out.println("OnFailure Add Answer"+t.getMessage());
-                //message = "failure";
+
 
             }
         });
 
-        //return message;
+
 
     }
 
     void viewAnswers(String questionId) {
         quoraRetrofitService = RetrofitClientInstance.getRetrofitInstance().create(QuoraRetrofitService.class);
 
-        Call<List<Answer>> callAnswerList = quoraRetrofitService.getAnswersByQuestionId(questionId);
-        callAnswerList.enqueue(new Callback<List<Answer>>() {
+        Call<Answer> callAnswerList = quoraRetrofitService.getAnswersByQuestionId(questionId);
+        callAnswerList.enqueue(new Callback<Answer>() {
             @Override
-            public void onResponse(Call<List<Answer>> call, Response<List<Answer>> response) {
+            public void onResponse(Call<Answer> call, Response<Answer> response) {
                 answerList = response.body();
                 System.out.println("Answer List: "+answerList);
                 adapter = new QuestionAnswerAdapter(answerList, QuestionAnswer.this);
                 recyclerView.setAdapter(adapter);
 
-
                 System.out.println("OnResponse View Answer By Qid");
             }
 
             @Override
-            public void onFailure(Call<List<Answer>> call, Throwable t) {
+            public void onFailure(Call<Answer> call, Throwable t) {
                 System.out.println("OnFailure View Answer By Qid"+t.getMessage());
             }
         });
