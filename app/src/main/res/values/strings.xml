@@ -4,10 +4,28 @@
     <string name="openNav">OpenNavigation</string>
     <string name="closeNav">CloseNavigation</string>
     <string-array name="category_paths">
-        <item>Sports</item>
-        <item>Technology</item>
-        <item>Lifestyle</item>
-        <item>Food</item>
-        <item>Movies</item>
+        <item> Fiction Literature </item>
+        <item> Non-Fiction Literature </item>
+        <item>Poetry Literature</item>
+        <item>Short-stories Literature</item>
+        <item>Clothing Lifestyle</item>
+        <item>Footwear Lifestyle</item>
+        <item>Watches Lifestyle</item>
+        <item>Accessories Lifestyle</item>
+        <item>Coding</item>
+        <item>Android</item>
+        <item>iOS</item>
+        <item>Bollywood Movies</item>
+        <item>Hollywood Movies</item>
+        <item>Tollywood Movies</item>
+        <item>Punjabi Movies</item>
+        <item>NorthIndian Food</item>
+        <item>SouthIndian Food</item>
+        <item>Italian Food</item>
+        <item>Chinese</item>
+        <item>Football</item>
+        <item>Cricket</item>
+        <item>Badminton</item>
+        <item>Tennis</item>
     </string-array>
 </resources>

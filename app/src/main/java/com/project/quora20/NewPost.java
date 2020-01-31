@@ -31,9 +31,9 @@ public class NewPost extends AppCompatActivity implements AdapterView.OnItemSele
     private Button postButton;
     private EditText taggedPeople;
     private Spinner spinner;
-    private static final String[] paths = {"Sports", "Technology", "Lifestyle","Food","Movies"};
     private String categoryChoice;
     private String categoryId;
+    private String category;
     private SharedPreferences sharedPreferences;
 
     @Override
@@ -63,10 +63,10 @@ public class NewPost extends AppCompatActivity implements AdapterView.OnItemSele
                 tagPeopleList.add(questionTags);
 
                 spinner = (Spinner)findViewById(R.id.category_spinner);
-                categoryChoice=spinner.getSelectedItem().toString();
+                category=spinner.getSelectedItem().toString();
                 newPostRequestDTO.setQuestionBody(question);
                 newPostRequestDTO.setUserId(userId);
-                newPostRequestDTO.setCategoryId(categoryId);
+                newPostRequestDTO.setCategoryId(categoryChoice);
                 newPostRequestDTO.setPersonsTag(tagPeopleList);
 
                 if(!orgId.equals("")) {
@@ -78,12 +78,10 @@ public class NewPost extends AppCompatActivity implements AdapterView.OnItemSele
                 call.enqueue(new Callback<IdResponse>() {
                     @Override
                     public void onResponse(Call<IdResponse> call, Response<IdResponse> response) {
-//                        if(response.code()==200){
                             Toast.makeText(getApplicationContext(),"New Post Created",Toast.LENGTH_SHORT).show();
                             Intent backToHome=new Intent(NewPost.this,MainActivity.class);
                             startActivity(backToHome);
-                            System.out.println("OnResponse NewPost");
-//                        }
+                            finish();
                     }
                     @Override
                     public void onFailure(Call<IdResponse> call, Throwable t) {
@@ -100,32 +98,96 @@ public class NewPost extends AppCompatActivity implements AdapterView.OnItemSele
 
         switch (position) {
             case 0:
-                categoryChoice="Sports";
+                categoryChoice="Fiction";
                 categoryId="1";
-//                Toast.makeText(getApplicationContext(),"Sports Selected",Toast.LENGTH_SHORT).show();
-                // Whatever you want to happen when the first item gets selected
                 break;
             case 1:
-                categoryChoice="Technology";
+                categoryChoice="Non-Fiction";
                 categoryId="2";
-//                Toast.makeText(getApplicationContext(),"Technology Selected",Toast.LENGTH_SHORT).show();
-                // Whatever you want to happen when the second item gets selected
                 break;
             case 2:
-                categoryChoice="Lifestyle";
+                categoryChoice="Poetry";
                 categoryId="3";
-//                Toast.makeText(getApplicationContext(),"Lifestyle Selected",Toast.LENGTH_SHORT).show();
-                // Whatever you want to happen when the thrid item gets selected
                 break;
             case 3:
-                categoryChoice="Food";
+                categoryChoice="Short-stories";
                 categoryId="4";
-//                Toast.makeText(getApplicationContext(),"Food Selected",Toast.LENGTH_SHORT).show();
                 break;
             case 4:
-                categoryChoice="Movies";
+                categoryChoice="Clothing";
                 categoryId="5";
-//                Toast.makeText(getApplicationContext(),"Movies Selected",Toast.LENGTH_SHORT).show();
+                break;
+            case 5:
+                categoryChoice="Footwear";
+                categoryId="6";
+                break;
+            case 6:
+                categoryChoice="Watches";
+                categoryId="7";
+                break;
+            case 7:
+                categoryChoice="Accessories";
+                categoryId="8";
+                break;
+            case 8:
+                categoryChoice="Coding";
+                categoryId="9";
+                break;
+            case 9:
+                categoryChoice="Android";
+                categoryId="10";
+                break;
+            case 10:
+                categoryChoice="iOS";
+                categoryId="11";
+                break;
+            case 11:
+                categoryChoice="Bollywood";
+                categoryId="12";
+                break;
+            case 12:
+                categoryChoice="Hollywood";
+                categoryId="13";
+                break;
+            case 13:
+                categoryChoice="Tollywood";
+                categoryId="14";
+                break;
+            case 14:
+                categoryChoice="Punjabi";
+                categoryId="15";
+                break;
+            case 15:
+                categoryChoice="NorthIndian";
+                categoryId="16";
+                break;
+            case 16:
+                categoryChoice="SouthIndian";
+                categoryId="17";
+                break;
+            case 17:
+                categoryChoice="Italian";
+                categoryId="18";
+                break;
+            case 18:
+                categoryChoice="Chinese";
+                categoryId="19";
+                break;
+            case 19:
+                categoryChoice="Football";
+                categoryId="20";
+                break;
+            case 20:
+                categoryChoice="Cricket";
+                categoryId="21";
+                break;
+            case 21:
+                categoryChoice="Badminton";
+                categoryId="22";
+                break;
+            case 22:
+                categoryChoice="Tennis";
+                categoryId="23";
                 break;
         }
     }

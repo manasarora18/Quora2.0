@@ -92,6 +92,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             public void onClick(View v) {
                 Intent newPostIntent=new Intent(getApplicationContext(), NewPost.class);
                 startActivity(newPostIntent);
+                finish();
             }
         });
 
