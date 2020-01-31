@@ -102,7 +102,7 @@ public class NewPost extends AppCompatActivity implements AdapterView.OnItemSele
             case 0:
                 categoryChoice="Sports";
                 categoryId="1";
-                Toast.makeText(getApplicationContext(),"Sports Selected",Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getApplicationContext(),"Sports Selected",Toast.LENGTH_SHORT).show();
                 // Whatever you want to happen when the first item gets selected
                 break;
             case 1:
@@ -125,7 +125,7 @@ public class NewPost extends AppCompatActivity implements AdapterView.OnItemSele
             case 4:
                 categoryChoice="Movies";
                 categoryId="5";
-                Toast.makeText(getApplicationContext(),"Movies Selected",Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getApplicationContext(),"Movies Selected",Toast.LENGTH_SHORT).show();
                 break;
         }
     }
