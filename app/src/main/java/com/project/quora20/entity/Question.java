@@ -6,7 +6,7 @@ import com.google.gson.annotations.SerializedName;
 public class Question{
 
 	@SerializedName("dislikeUserList")
-	private List<String> dislikeUserList;
+	private Object dislikeUserList;
 
 	@SerializedName("date")
 	private String date;
@@ -21,10 +21,13 @@ public class Question{
 	private List<String> answersList;
 
 	@SerializedName("dislikeCount")
-	private int dislikeCount;
+	private Object dislikeCount;
 
 	@SerializedName("likeCount")
 	private int likeCount;
+
+	@SerializedName("userName")
+	private Object userName;
 
 	@SerializedName("userId")
 	private String userId;
@@ -33,7 +36,7 @@ public class Question{
 	private String orgId;
 
 	@SerializedName("bestAnswerId")
-	private String bestAnswerId;
+	private Object bestAnswerId;
 
 	@SerializedName("approvalFlag")
 	private boolean approvalFlag;
@@ -44,11 +47,11 @@ public class Question{
 	@SerializedName("categoryId")
 	private String categoryId;
 
-	public void setDislikeUserList(List<String> dislikeUserList){
+	public void setDislikeUserList(Object dislikeUserList){
 		this.dislikeUserList = dislikeUserList;
 	}
 
-	public List<String> getDislikeUserList(){
+	public Object getDislikeUserList(){
 		return dislikeUserList;
 	}
 
@@ -68,12 +71,12 @@ public class Question{
 		return questionId;
 	}
 
-	public List<String> getLikeUserList() {
-		return likeUserList;
+	public void setLikeUserList(List<String> likeUserList){
+		this.likeUserList = likeUserList;
 	}
 
-	public void setLikeUserList(List<String> likeUserList) {
-		this.likeUserList = likeUserList;
+	public List<String> getLikeUserList(){
+		return likeUserList;
 	}
 
 	public void setAnswersList(List<String> answersList){
@@ -84,11 +87,11 @@ public class Question{
 		return answersList;
 	}
 
-	public void setDislikeCount(int dislikeCount){
+	public void setDislikeCount(Object dislikeCount){
 		this.dislikeCount = dislikeCount;
 	}
 
-	public int getDislikeCount(){
+	public Object getDislikeCount(){
 		return dislikeCount;
 	}
 
@@ -98,6 +101,14 @@ public class Question{
 
 	public int getLikeCount(){
 		return likeCount;
+	}
+
+	public void setUserName(Object userName){
+		this.userName = userName;
+	}
+
+	public Object getUserName(){
+		return userName;
 	}
 
 	public void setUserId(String userId){
@@ -116,11 +127,11 @@ public class Question{
 		return orgId;
 	}
 
-	public void setBestAnswerId(String bestAnswerId){
+	public void setBestAnswerId(Object bestAnswerId){
 		this.bestAnswerId = bestAnswerId;
 	}
 
-	public String getBestAnswerId(){
+	public Object getBestAnswerId(){
 		return bestAnswerId;
 	}
 
@@ -159,6 +170,7 @@ public class Question{
 			",answersList = '" + answersList + '\'' + 
 			",dislikeCount = '" + dislikeCount + '\'' + 
 			",likeCount = '" + likeCount + '\'' + 
+			",userName = '" + userName + '\'' + 
 			",userId = '" + userId + '\'' + 
 			",orgId = '" + orgId + '\'' + 
 			",bestAnswerId = '" + bestAnswerId + '\'' + 
