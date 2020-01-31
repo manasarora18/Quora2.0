@@ -5,20 +5,36 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.project.quora20.R;
+import com.project.quora20.ViewComments;
+import com.project.quora20.dto.IdResponse;
 import com.project.quora20.entity.Answer;
+import com.project.quora20.retrofit.QuoraRetrofitService;
+import com.project.quora20.retrofit.RetrofitClientInstance;
 
 import java.util.List;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class MyAnswerAdapter extends RecyclerView.Adapter<MyAnswerAdapter.MyAnswerViewHolder> {
 
-    private List<Answer> demoList;
+    private List<Answer> answerList;
     public IAnswerCommunicator iAnswerCommunicator;
+    String userId;
+
+    public MyAnswerAdapter(List<Answer> answerList, IAnswerCommunicator iAnswerCommunicator,String userId) {
+        this.answerList = answerList;
+        this.iAnswerCommunicator=iAnswerCommunicator;
+        this.userId=userId;
+    }
 
     public static class MyAnswerViewHolder extends RecyclerView.ViewHolder {
         private TextView answerBody;
@@ -42,12 +58,6 @@ public class MyAnswerAdapter extends RecyclerView.Adapter<MyAnswerAdapter.MyAnsw
             organisationImage=view.findViewById(R.id.ans_organisationImage);
         }
     }
-
-    public MyAnswerAdapter(List<Answer> myList, IAnswerCommunicator iAnswerCommunicator) {
-        demoList = myList;
-        this.iAnswerCommunicator=iAnswerCommunicator;
-    }
-
 
     @NonNull
     @Override
@@ -81,7 +91,6 @@ public class MyAnswerAdapter extends RecyclerView.Adapter<MyAnswerAdapter.MyAnsw
 
     @SuppressLint("ResourceAsColor")
     @Override
-
     public void onBindViewHolder(@NonNull final MyAnswerViewHolder holder, final int position) {
         holder.answerViewComments.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -90,25 +99,19 @@ public class MyAnswerAdapter extends RecyclerView.Adapter<MyAnswerAdapter.MyAnsw
             }
         });
 
-        holder.answerBody.setText(answerList.get(position).getAnswerBody());
-        holder.answerLikeCount.setText(String.valueOf(answerList.get(position).getLikeCount()));
-        holder.answerDislikeCount.setText(String.valueOf(answerList.get(position).getDislikeCount()));
-        holder.answerTimestamp.setText(answerList.get(position).getDate());
+        holder.answerBody.setText(answerList.get(position).getAnswerList().get(position).getAnswerBody());
+        holder.answerLikeCount.setText(String.valueOf(answerList.get(position).getAnswerList().get(position).getLikeCount()));
+        holder.answerDislikeCount.setText(String.valueOf(answerList.get(position).getAnswerList().get(position).getDislikeCount()));
+        holder.answerTimestamp.setText(answerList.get(position).getAnswerList().get(position).getDate());
         holder.organisationImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                holder.likeButton.setClickable(false);
-                holder.dislikeButton.setClickable(false);
-                int dislikes=answer.getDislikeCount();
-                dislikes++;
-                holder.dislikeCount.setText(String.valueOf(dislikes));
-                answer.setDislikeCount(dislikes);
-                iAnswerCommunicator.updateDislikes(answer.getAnswerId());
+                iAnswerCommunicator.viewOrganization();
             }
         });
 
-        List<String>likedList=answerList.get(position).getLikeUserList();
-        List<String>dislikedList=answerList.get(position).getDislikeUserList();
+        List<String>likedList=answerList.get(position).getAnswerList().get(position).getLikeUserList();
+        List<String>dislikedList=answerList.get(position).getAnswerList().get(position).getDislikeUserList();
 
         if(LikeCheck(likedList)){
             holder.answerLikeButton.setBackgroundColor(R.color.blue);
@@ -126,7 +129,7 @@ public class MyAnswerAdapter extends RecyclerView.Adapter<MyAnswerAdapter.MyAnsw
                 @Override
                 public void onClick(View v) {
                     QuoraRetrofitService quoraRetrofitService = RetrofitClientInstance.getRetrofitInstance().create(QuoraRetrofitService.class);
-                    Call<IdResponse> call = quoraRetrofitService.doLikeQues(answerList.get(position).getQuestionId(), userId);
+                    Call<IdResponse> call = quoraRetrofitService.doLikeQues(answerList.get(position).getAnswerList().get(position).getQuestionId(), userId);
                     call.enqueue(new Callback<IdResponse>() {
                         @Override
                         public void onResponse(Call<IdResponse> call, Response<IdResponse> response) {
@@ -151,7 +154,7 @@ public class MyAnswerAdapter extends RecyclerView.Adapter<MyAnswerAdapter.MyAnsw
                 @Override
                 public void onClick(View v) {
                     QuoraRetrofitService quoraRetrofitService = RetrofitClientInstance.getRetrofitInstance().create(QuoraRetrofitService.class);
-                    Call<IdResponse> call = quoraRetrofitService.doDislikeQues(answerList.get(position).getQuestionId(), userId);
+                    Call<IdResponse> call = quoraRetrofitService.doDislikeQues(answerList.get(position).getAnswerList().get(position).getQuestionId(), userId);
                     call.enqueue(new Callback<IdResponse>() {
                         @Override
                         public void onResponse(Call<IdResponse> call, Response<IdResponse> response) {
@@ -177,15 +180,15 @@ public class MyAnswerAdapter extends RecyclerView.Adapter<MyAnswerAdapter.MyAnsw
 
     @Override
     public int getItemCount() {
-        if (demoList != null)
-            return demoList.size();
+        if (answerList != null)
+            return answerList.size();
 
         return 0;
     }
 
     public interface IAnswerCommunicator {
-        String updateLikes(String answerId);
-        String updateDislikes(String answerId);
+        void onClick(Answer answer);
+        void viewOrganization();
     }
 
 }

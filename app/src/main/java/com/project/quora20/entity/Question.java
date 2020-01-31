@@ -6,7 +6,7 @@ import com.google.gson.annotations.SerializedName;
 public class Question{
 
 	@SerializedName("dislikeUserList")
-	private Object dislikeUserList;
+	private List<String> dislikeUserList;
 
 	@SerializedName("date")
 	private String date;
@@ -21,13 +21,10 @@ public class Question{
 	private List<String> answersList;
 
 	@SerializedName("dislikeCount")
-	private Object dislikeCount;
+	private int dislikeCount;
 
 	@SerializedName("likeCount")
 	private int likeCount;
-
-	@SerializedName("userName")
-	private Object userName;
 
 	@SerializedName("userId")
 	private String userId;
@@ -36,7 +33,7 @@ public class Question{
 	private String orgId;
 
 	@SerializedName("bestAnswerId")
-	private Object bestAnswerId;
+	private String bestAnswerId;
 
 	@SerializedName("approvalFlag")
 	private boolean approvalFlag;
@@ -47,11 +44,11 @@ public class Question{
 	@SerializedName("categoryId")
 	private String categoryId;
 
-	public void setDislikeUserList(Object dislikeUserList){
+	public void setDislikeUserList(List<String> dislikeUserList){
 		this.dislikeUserList = dislikeUserList;
 	}
 
-	public Object getDislikeUserList(){
+	public List<String> getDislikeUserList(){
 		return dislikeUserList;
 	}
 
@@ -71,12 +68,12 @@ public class Question{
 		return questionId;
 	}
 
-	public void setLikeUserList(List<String> likeUserList){
-		this.likeUserList = likeUserList;
+	public List<String> getLikeUserList() {
+		return likeUserList;
 	}
 
-	public List<String> getLikeUserList(){
-		return likeUserList;
+	public void setLikeUserList(List<String> likeUserList) {
+		this.likeUserList = likeUserList;
 	}
 
 	public void setAnswersList(List<String> answersList){
@@ -87,11 +84,11 @@ public class Question{
 		return answersList;
 	}
 
-	public void setDislikeCount(Object dislikeCount){
+	public void setDislikeCount(int dislikeCount){
 		this.dislikeCount = dislikeCount;
 	}
 
-	public Object getDislikeCount(){
+	public int getDislikeCount(){
 		return dislikeCount;
 	}
 
@@ -101,14 +98,6 @@ public class Question{
 
 	public int getLikeCount(){
 		return likeCount;
-	}
-
-	public void setUserName(Object userName){
-		this.userName = userName;
-	}
-
-	public Object getUserName(){
-		return userName;
 	}
 
 	public void setUserId(String userId){
@@ -127,11 +116,11 @@ public class Question{
 		return orgId;
 	}
 
-	public void setBestAnswerId(Object bestAnswerId){
+	public void setBestAnswerId(String bestAnswerId){
 		this.bestAnswerId = bestAnswerId;
 	}
 
-	public Object getBestAnswerId(){
+	public String getBestAnswerId(){
 		return bestAnswerId;
 	}
 
@@ -160,23 +149,22 @@ public class Question{
 	}
 
 	@Override
- 	public String toString(){
-		return 
-			"Question{" + 
-			"dislikeUserList = '" + dislikeUserList + '\'' + 
-			",date = '" + date + '\'' + 
-			",questionId = '" + questionId + '\'' + 
-			",likeUserList = '" + likeUserList + '\'' + 
-			",answersList = '" + answersList + '\'' + 
-			",dislikeCount = '" + dislikeCount + '\'' + 
-			",likeCount = '" + likeCount + '\'' + 
-			",userName = '" + userName + '\'' + 
-			",userId = '" + userId + '\'' + 
-			",orgId = '" + orgId + '\'' + 
-			",bestAnswerId = '" + bestAnswerId + '\'' + 
-			",approvalFlag = '" + approvalFlag + '\'' + 
-			",questionBody = '" + questionBody + '\'' + 
-			",categoryId = '" + categoryId + '\'' + 
-			"}";
-		}
+	public String toString(){
+		return
+				"Question{" +
+						"dislikeUserList = '" + dislikeUserList + '\'' +
+						",date = '" + date + '\'' +
+						",questionId = '" + questionId + '\'' +
+						",likeUserList = '" + likeUserList + '\'' +
+						",answersList = '" + answersList + '\'' +
+						",dislikeCount = '" + dislikeCount + '\'' +
+						",likeCount = '" + likeCount + '\'' +
+						",userId = '" + userId + '\'' +
+						",orgId = '" + orgId + '\'' +
+						",bestAnswerId = '" + bestAnswerId + '\'' +
+						",approvalFlag = '" + approvalFlag + '\'' +
+						",questionBody = '" + questionBody + '\'' +
+						",categoryId = '" + categoryId + '\'' +
+						"}";
+	}
 }
