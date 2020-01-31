@@ -21,7 +21,7 @@ public class LoginMain extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_main);
 
-        Button register = findViewById(R.id.register);
+        Button register = findViewById(R.id.login_register);
         register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -31,7 +31,7 @@ public class LoginMain extends AppCompatActivity {
 
         });
 
-        Button loginButton = findViewById(R.id.login);
+        Button loginButton = findViewById(R.id.login_loginButton);
         sp = getSharedPreferences("LoginData", MODE_PRIVATE);
         String check = sp.getString("LoginCheck", "false");
         if (check.equals("false")) {
@@ -44,8 +44,8 @@ public class LoginMain extends AppCompatActivity {
 
                         inputManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(),
                                 InputMethodManager.HIDE_NOT_ALWAYS);
-                        EditText user = findViewById(R.id.userName);
-                        EditText pass = findViewById(R.id.password);
+                        EditText user = findViewById(R.id.login_userName);
+                        EditText pass = findViewById(R.id.login_password);
                         final String user1 = String.valueOf(user.getText());
                         final String pw = String.valueOf(pass.getText());
                         if (user1.length() == 0 || pw.length() == 0) {

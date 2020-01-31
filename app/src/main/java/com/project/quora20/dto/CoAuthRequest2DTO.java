@@ -1,4 +1,4 @@
-package com.project.quora20.entity;
+package com.project.quora20.dto;
 
 import com.google.gson.annotations.SerializedName;
 

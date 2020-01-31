@@ -5,9 +5,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.project.quora20.entity.Question;
 
 import java.util.List;
-
+//
 //public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.CategoryViewHolder> {
-
+//
 //    private List<Question> questionList;
-//    public interface Question Commuinvation
 //}

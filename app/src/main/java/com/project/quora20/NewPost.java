@@ -1,6 +1,9 @@
 package com.project.quora20;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -10,43 +13,85 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.project.quora20.dto.NewPostRequestDTO;
+import com.project.quora20.retrofit.QuoraRetrofitService;
+import com.project.quora20.retrofit.RetrofitClientInstance;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class NewPost extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
     private EditText questionBody;
+    private NewPostRequestDTO newPostRequestDTO=new NewPostRequestDTO();
     private Button postButton;
     private EditText taggedPeople;
     private Spinner spinner;
     private static final String[] paths = {"Sports", "Technology", "Lifestyle","Food","Movies"};
     private String categoryChoice;
     private String categoryId;
+    private SharedPreferences sharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_post);
+        sharedPreferences=getSharedPreferences("LoginData",MODE_PRIVATE);
+        final String userId=sharedPreferences.getString("UserId","");
+        final String orgId="";
 
         spinner = (Spinner)findViewById(R.id.category_spinner);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,R.array.category_paths,android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
         spinner.setOnItemSelectedListener(this);
-        postButton=findViewById(R.id.postButton);
+        postButton=findViewById(R.id.new_postButton);
+
         postButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                questionBody=findViewById(R.id.questionBody);
-                taggedPeople=findViewById(R.id.taggedpeople);
+                questionBody=findViewById(R.id.new_questionBody);
+                String question= String.valueOf(questionBody.getText());
+
+                taggedPeople=findViewById(R.id.new_taggedpeople);
+                String questionTags=String.valueOf(taggedPeople.getText());
+                List<String>tagPeopleList=new ArrayList<>();
+                tagPeopleList.add(questionTags);
+
+                spinner = (Spinner)findViewById(R.id.category_spinner);
                 categoryChoice=spinner.getSelectedItem().toString();
+                newPostRequestDTO.setQuestionBody(question);
+                newPostRequestDTO.setUserId(userId);
+                newPostRequestDTO.setCategoryId(categoryId);
+//                newPostRequestDTO.setPersonsTag(tagPeopleList);
+//                if(!orgId.equals("")) {
+//                    newPostRequestDTO.setOrgId(orgId);
+//                }
 
+                QuoraRetrofitService quoraRetrofitService= RetrofitClientInstance.getRetrofitInstance().create(QuoraRetrofitService.class);
+                Call<String> call=quoraRetrofitService.createNewPost(newPostRequestDTO);
+                call.enqueue(new Callback<String>() {
+                    @Override
+                    public void onResponse(Call<String> call, Response<String> response) {
+//                        if(response.code()==200){
+                            Toast.makeText(getApplicationContext(),"New Post Created",Toast.LENGTH_SHORT).show();
+                            Intent backToHome=new Intent(NewPost.this,MainActivity.class);
+                            startActivity(backToHome);
+                            System.out.println("OnResponse NewPost");
+//                        }
+                    }
+                    @Override
+                    public void onFailure(Call<String> call, Throwable t) {
+                        Toast.makeText(getApplicationContext(),t.getMessage(),Toast.LENGTH_SHORT).show();
+                        System.out.println("OnFailure NewPost:"+t.getMessage());
 
-
+                    }
+                });
             }
         });
-//        String io=spinner.getSelectedItem().toString();String userId;
-//    String categoryId;
-//    String questionBody;
-////    String tag;
-//    List<String> personsTag;
-//    String orgId;
     }
 
     @Override
@@ -86,7 +131,6 @@ public class NewPost extends AppCompatActivity implements AdapterView.OnItemSele
 
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
-        // TODO Auto-generated method stub
     }
 
 }

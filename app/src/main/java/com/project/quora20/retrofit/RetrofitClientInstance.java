@@ -12,6 +12,7 @@ public class RetrofitClientInstance {
                     .baseUrl("http://172.16.20.46:8086")
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();
+
         }
         return retrofit;
     }
