@@ -9,7 +9,7 @@
 
 
     <EditText
-        android:id="@+id/register_username"
+        android:id="@+id/quora_register_username"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
@@ -25,7 +25,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/register_email"
+        android:id="@+id/quora_register_email"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
@@ -42,7 +42,7 @@
 
 
     <EditText
-        android:id="@+id/register_password"
+        android:id="@+id/quora_register_password"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
@@ -62,7 +62,7 @@
 
 
     <EditText
-        android:id="@+id/register_confirmpassword"
+        android:id="@+id/quora_register_confirmpassword"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
@@ -72,7 +72,6 @@
         android:hint="Confirm Password"
         android:importantForAutofill="no"
         android:inputType="textPassword"
-
         android:padding="10dp"
         android:selectAllOnFocus="true"
         app:layout_constraintEnd_toEndOf="parent"
@@ -81,24 +80,22 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/register_button"
+        android:id="@+id/quora_register_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="start"
         android:layout_marginTop="32dp"
-
         android:enabled="true"
         android:fontFamily="sans-serif-medium"
         android:text="Sign Up"
         app:layout_constraintEnd_toEndOf="parent"
-
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/register_confirmpassword" />
+        app:layout_constraintTop_toBottomOf="@+id/quora_register_confirmpassword" />
 
 
     <ProgressBar
-        android:id="@+id/loading"
+        android:id="@+id/quora_loading"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -109,12 +106,12 @@
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/register_password"
-        app:layout_constraintStart_toStartOf="@+id/register_password"
+        app:layout_constraintStart_toStartOf="@+id/quora_register_password"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.3" />
 
     <TextView
-        android:id="@+id/appLabel"
+        android:id="@+id/quora_appLabel"
         android:layout_width="194dp"
         android:layout_height="54dp"
         android:layout_marginStart="160dp"
@@ -129,14 +126,14 @@
         android:textSize="36sp"
         android:textStyle="bold"
         android:typeface="serif"
-        app:layout_constraintBottom_toTopOf="@+id/register_username"
+        app:layout_constraintBottom_toTopOf="@+id/quora_register_username"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="Quora 2.0" />
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/quora_reg_adsView"
         android:layout_width="357dp"
         android:layout_height="88dp"
         android:layout_marginStart="24dp"
@@ -146,7 +143,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/register_button"
+        app:layout_constraintTop_toBottomOf="@+id/quora_register_button"
         tools:srcCompat="@tools:sample/avatars[5]" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
