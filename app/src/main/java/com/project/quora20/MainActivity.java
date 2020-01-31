@@ -161,6 +161,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         Intent organizationIntent=new Intent(this,ViewOrganisation.class);
         startActivity(organizationIntent);
     }
+
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 //        Toast.makeText(this, "this menu item clicked", Toast.LENGTH_SHORT).show();

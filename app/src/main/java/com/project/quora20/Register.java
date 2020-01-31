@@ -22,7 +22,6 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class Register extends AppCompatActivity {
-//    private RegisterUser registerUser=new RegisterUser();
     private EditText registerUsername;
     private EditText registerEmail;
     private EditText registerPassword;
@@ -35,7 +34,7 @@ public class Register extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
-        Button signUp=findViewById(R.id.register);
+        Button signUp=findViewById(R.id.register_button);
         signUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -45,29 +44,23 @@ public class Register extends AppCompatActivity {
                 inputManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(),
                         InputMethodManager.HIDE_NOT_ALWAYS);
 
-                registerUsername = findViewById(R.id.registerusername);
+                registerUsername = findViewById(R.id.register_username);
                 String userName = registerUsername.getText().toString();
 
-                registerEmail = findViewById(R.id.registeremail);
+                registerEmail = findViewById(R.id.register_email);
                 String email = registerEmail.getText().toString();
 
-                registerPassword = findViewById(R.id.registerpassword);
+                registerPassword = findViewById(R.id.register_password);
                 String password = registerPassword.getText().toString();
 
-                registerConfirmPassword = findViewById(R.id.registerconfirmpassword);
+                registerConfirmPassword = findViewById(R.id.register_confirmpassword);
                 String confirmPassword = registerConfirmPassword.getText().toString();
 
-                registerPhone = findViewById(R.id.registerphone);
-                long phone = Long.parseLong(String.valueOf(registerPhone.getText()));
-
-//                System.out.println(userName+email+password+confirmPassword+phone);
-
-                Boolean nullFlag = true;
+                boolean nullFlag = true;
                 Boolean passwordCheckFail = true;
-                long largestNo=9999999999L;
                 String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
 
-                if (userName != null && email != null && password != null && confirmPassword != null && phone != 0 && phone>=1000000000L && phone<=largestNo && email.matches(emailPattern)) {
+                if (userName != null && email != null && password != null && confirmPassword != null && email.matches(emailPattern)) {
                     nullFlag = false;
                     if (confirmPassword.equals(password)) {
                         passwordCheckFail = false;
@@ -85,7 +78,7 @@ public class Register extends AppCompatActivity {
                     message = "Enter all fields appropriately!";
                 }
 
-               if(nullFlag==false && passwordCheckFail==false){
+               if(!nullFlag && !passwordCheckFail){
                     QuoraRetrofitService quoraRetrofitService = RetrofitClientInstance.getRetrofitInstance().create(QuoraRetrofitService.class);
                     Call<AccessTokenRegisterResponse> call= quoraRetrofitService.addUser(coAuthRequestDTO);
                     call.enqueue(new Callback<AccessTokenRegisterResponse>() {
