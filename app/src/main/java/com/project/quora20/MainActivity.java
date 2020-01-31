@@ -40,9 +40,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private RecyclerView.LayoutManager homeLayoutManager;
     private SharedPreferences sharedPreferences;
 
-    HomeAdapter.QuestionCommunication questionCommunication;
-    List<Question> questionList;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -143,6 +140,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         homeRecyclerView.setAdapter(homeAdapter);
     }
 
+    //View Answers to questions
     @Override
     public void onClick(Question question) {
         Intent qaIntent=new Intent( MainActivity.this, QuestionAnswer.class);

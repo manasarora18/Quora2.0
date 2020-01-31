@@ -19,8 +19,6 @@ public class MyAnswers extends AppCompatActivity implements MyAnswerAdapter.IAns
     private RecyclerView.LayoutManager myAnswerLayoutManager;
     List<Answer> answerList;
 
-    QuoraRetrofitService quoraRetrofitService;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
