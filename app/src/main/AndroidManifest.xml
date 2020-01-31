@@ -33,12 +33,6 @@
                 <action android:name="android.intent.action.MAIN" />
             </intent-filter>
         </activity>
-        <activity android:name=".ViewOrganisation"></activity>
-        <activity android:name=".SearchResults" />
-        <activity android:name=".NewPost" />
-        <activity android:name=".MyProfile" />
-        <activity android:name=".MainActivity">
-            </activity>
         <activity
             android:name=".QuestionAnswer"
             android:windowSoftInputMode="stateVisible|adjustPan" />
