@@ -52,7 +52,7 @@
         android:layout_marginStart="96dp"
         android:layout_marginTop="37dp"
         android:layout_marginEnd="96dp"
-        android:text="taggedpeople"
+        android:hint="Tag a person!"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/new_questionBody" />
@@ -67,6 +67,7 @@
         android:layout_marginBottom="36dp"
         android:maxLength="260"
         android:ems="10"
+        android:hint="Ask a Question!"
         android:gravity="start|top"
         android:inputType="textMultiLine"
         app:layout_constraintBottom_toTopOf="@+id/new_taggedpeople"
