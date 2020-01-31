@@ -41,56 +41,15 @@ public class MyAnswers extends AppCompatActivity implements MyAnswerAdapter.IAns
         myAnswerLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(myAnswerLayoutManager);
         recyclerView.setHasFixedSize(true);
-
-
-    }
-    @Override
-    public String updateLikes(String answerId) {
-
-        quoraRetrofitService= RetrofitClientInstance.getRetrofitInstance().create(QuoraRetrofitService.class);
-
-        Call<String> callAnswer=quoraRetrofitService.likeAnswer("123");
-        callAnswer.enqueue(new Callback<String>() {
-            @Override
-            public void onResponse(Call<String> call, Response<String> response) {
-                adapter = new MyAnswerAdapter(answerList,MyAnswers.this);
-                recyclerView.setAdapter(adapter);
-                System.out.println("Inside OnResponse Answer");
-
-            }
-
-            @Override
-            public void onFailure(Call<String> call, Throwable t) {
-
-                System.out.println("Inside OnFailure Answer");
-
-            }
-        });
-        return "123";
     }
 
     @Override
-    public String updateDislikes(String answerId)
-    {
-       /* Call<String> callAnswer=quoraRetrofitService.dislikeAnswer("123");
-        callAnswer.enqueue(new Callback<String>() {
-            @Override
-            public void onResponse(Call<String> call, Response<String> response) {
-                adapter = new MyAnswerAdapter(answerList,MyAnswers.this);
-                recyclerView.setAdapter(adapter);
-                System.out.println("Inside OnResponse Answer");
+    public void onClick(Answer answer) {
 
-            }
-
-            @Override
-            public void onFailure(Call<String> call, Throwable t) {
-
-                System.out.println("Inside OnFailure Answer");
-
-            }
-        });*/
-
-        return "123";
     }
 
+    @Override
+    public void viewOrganization() {
+
+    }
 }

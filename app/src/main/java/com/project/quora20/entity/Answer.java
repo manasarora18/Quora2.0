@@ -33,6 +33,16 @@ public class Answer{
 	public List<String> getLikeUserList() {
 		return likeUserList;
 	}
+	@SerializedName("date")
+	private String date;
+
+	public String getDate() {
+		return date;
+	}
+
+	public void setDate(String date) {
+		this.date = date;
+	}
 
 	public void setLikeUserList(List<String> likeUserList) {
 		this.likeUserList = likeUserList;
