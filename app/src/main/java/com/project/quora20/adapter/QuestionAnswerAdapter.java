@@ -12,15 +12,16 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.project.quora20.R;
 import com.project.quora20.entity.Answer;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
 public class QuestionAnswerAdapter extends RecyclerView.Adapter<QuestionAnswerAdapter.QuestionAnswerViewHolder> {
 
-    private List<Answer>answerList;
+    private Answer answerList;
     AnswerCommunication answerCommunication;
 
-    public QuestionAnswerAdapter(List<Answer> answerList, AnswerCommunication answerCommunication) {
+    public QuestionAnswerAdapter(Answer answerList, AnswerCommunication answerCommunication) {
         this.answerList = answerList;
         this.answerCommunication=answerCommunication;
     }
@@ -30,6 +31,7 @@ public class QuestionAnswerAdapter extends RecyclerView.Adapter<QuestionAnswerAd
         TextView answerLike;
         TextView answerDislike;
         ImageView answerUserImage;
+        ImageButton answerOrganizationImage;
         TextView answerTimeStamp;
         ImageButton answerLikeButton;
         ImageButton answerDislikeButton;
@@ -42,6 +44,7 @@ public class QuestionAnswerAdapter extends RecyclerView.Adapter<QuestionAnswerAd
             this.answerDislike = view.findViewById(R.id.ans_dislikesCount);
             this.answerLike = view.findViewById(R.id.ans_likesCount);
             this.answerUserImage = view.findViewById(R.id.ans_userImage);
+            this.answerOrganizationImage=view.findViewById(R.id.ans_organisationImage);
             this.answerTimeStamp = view.findViewById(R.id.ans_answerTimeStamp);
             this.answerLikeButton = view.findViewById(R.id.ans_likeButton);
             this.answerDislikeButton = view.findViewById(R.id.ans_dislikeButton);
@@ -63,13 +66,14 @@ public class QuestionAnswerAdapter extends RecyclerView.Adapter<QuestionAnswerAd
         holder.viewCommentsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                answerCommunication.onClick(answerList.get(position));
+                answerCommunication.onClick(answerList);
             }
         });
-
-        holder.answerBody.setText(answerList.get(position).getAnswerList().get(position).getAnswerBody());
-        holder.answerLike.setText(String.valueOf(answerList.get(position).getAnswerList().get(position).getLikeCount()));
-        holder.answerDislike.setText(String.valueOf(answerList.get(position).getAnswerList().get(position).getDislikeCount()));
+        //Picasso.with(holder.answerUserImage.getContext()).load()
+        //holder.answerUserImage.setImageResource(R.id.@dra);
+        holder.answerBody.setText(answerList.getAnswerList().get(position).getAnswerBody());
+        holder.answerLike.setText(String.valueOf(answerList.getAnswerList().get(position).getLikeCount()));
+        holder.answerDislike.setText(String.valueOf(answerList.getAnswerList().get(position).getDislikeCount()));
         holder.answerLikeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -98,7 +102,7 @@ public class QuestionAnswerAdapter extends RecyclerView.Adapter<QuestionAnswerAd
     @Override
     public int getItemCount() {
         if (answerList != null)
-            return answerList.size();
+            return answerList.getAnswerList().size();
 
         return 0;
     }

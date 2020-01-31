@@ -40,7 +40,7 @@ public interface QuoraRetrofitService {
     Call<IdResponse> addAnswer(@Body AnswerDTO answerDTO);
 
     @GET("/answer/getAnswersByQuestionId/{questionId}")
-    Call<List<Answer>> getAnswersByQuestionId(@Path("questionId")String questionId);
+    Call<Answer> getAnswersByQuestionId(@Path("questionId")String questionId);
 
     @GET("/user/viewUser/{userId}")
     Call<User> viewUser(@Path("userId")String userId);
