@@ -10,7 +10,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.project.quora20.R;
-import com.project.quora20.ViewComments;
 import com.project.quora20.entity.Answer;
 
 import java.util.List;

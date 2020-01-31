@@ -1,109 +1,38 @@
 package com.project.quora20.entity;
 
-import com.google.gson.annotations.SerializedName;
-
 import java.util.List;
+import com.google.gson.annotations.SerializedName;
 
 public class Answer{
 
-	@SerializedName("answerId")
-	private String answerId;
+	@SerializedName("answerList")
+	private List<AnswerListItem> answerList;
 
-	@SerializedName("questionId")
-	private String questionId;
+	@SerializedName("question")
+	private Question question;
 
-	@SerializedName("answerBody")
-	private String answerBody;
-
-	@SerializedName("dislikeCount")
-	private int dislikeCount;
-
-	@SerializedName("likeCount")
-	private int likeCount;
-
-	@SerializedName("approvalFlag")
-	private boolean approvalFlag;
-
-	@SerializedName("likeUserList")
-	private List<String> likeUserList;
-
-	@SerializedName("dislikeUserList")
-	private List<String> dislikeUserList;
-
-	public List<String> getLikeUserList() {
-		return likeUserList;
+	public void setAnswerList(List<AnswerListItem> answerList){
+		this.answerList = answerList;
 	}
 
-	public void setLikeUserList(List<String> likeUserList) {
-		this.likeUserList = likeUserList;
+	public List<AnswerListItem> getAnswerList(){
+		return answerList;
 	}
 
-	public List<String> getDislikeUserList() {
-		return dislikeUserList;
+	public void setQuestion(Question question){
+		this.question = question;
 	}
 
-	public void setDislikeUserList(List<String> dislikeUserList) {
-		this.dislikeUserList = dislikeUserList;
-	}
-
-	public void setAnswerId(String answerId){
-		this.answerId = answerId;
-	}
-
-	public String getAnswerId(){
-		return answerId;
-	}
-
-	public void setQuestionId(String questionId){
-		this.questionId = questionId;
-	}
-
-	public String getQuestionId(){
-		return questionId;
-	}
-
-	public void setAnswerBody(String answerBody){
-		this.answerBody = answerBody;
-	}
-
-	public String getAnswerBody(){
-		return answerBody;
-	}
-
-	public void setDislikeCount(int dislikeCount){
-		this.dislikeCount = dislikeCount;
-	}
-
-	public int getDislikeCount(){
-		return dislikeCount;
-	}
-
-	public void setLikeCount(int likeCount){
-		this.likeCount = likeCount;
-	}
-
-	public int getLikeCount(){
-		return likeCount;
-	}
-
-	public void setApprovalFlag(boolean approvalFlag){
-		this.approvalFlag = approvalFlag;
-	}
-
-	public boolean isApprovalFlag(){
-		return approvalFlag;
+	public Question getQuestion(){
+		return question;
 	}
 
 	@Override
  	public String toString(){
 		return 
 			"Answer{" + 
-			"answerId = '" + answerId + '\'' + 
-			",questionId = '" + questionId + '\'' + 
-			",answerBody = '" + answerBody + '\'' + 
-			",dislikeCount = '" + dislikeCount + '\'' + 
-			",likeCount = '" + likeCount + '\'' + 
-			",approvalFlag = '" + approvalFlag + '\'' + 
+			"answerList = '" + answerList + '\'' + 
+			",question = '" + question + '\'' + 
 			"}";
 		}
 }

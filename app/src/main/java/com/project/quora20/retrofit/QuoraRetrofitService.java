@@ -37,7 +37,7 @@ public interface QuoraRetrofitService {
     Call<String> likeAnswer(@Path("answerId") String answerId);
 
     @POST("/answer/add")
-    Call<String> addAnswer(@Body AnswerDTO answerDTO);
+    Call<IdResponse> addAnswer(@Body AnswerDTO answerDTO);
 
     @GET("/answer/getAnswersByQuestionId/{questionId}")
     Call<List<Answer>> getAnswersByQuestionId(@Path("questionId")String questionId);
