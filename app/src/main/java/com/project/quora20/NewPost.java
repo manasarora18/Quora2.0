@@ -63,7 +63,6 @@ public class NewPost extends AppCompatActivity implements AdapterView.OnItemSele
 
                 spinner = (Spinner)findViewById(R.id.category_spinner);
                 categoryChoice=spinner.getSelectedItem().toString();
-
                 newPostRequestDTO.setQuestionBody(question);
                 newPostRequestDTO.setUserId(userId);
                 newPostRequestDTO.setCategoryId(categoryId);
