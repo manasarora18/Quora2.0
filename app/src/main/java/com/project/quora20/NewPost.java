@@ -38,6 +38,7 @@ public class NewPost extends AppCompatActivity implements AdapterView.OnItemSele
                 categoryChoice=spinner.getSelectedItem().toString();
 
 
+
             }
         });
 //        String io=spinner.getSelectedItem().toString();String userId;
