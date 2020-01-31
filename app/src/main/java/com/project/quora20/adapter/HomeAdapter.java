@@ -33,6 +33,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder
         ImageButton questionLikeButton;
         ImageButton questionDislikeButton;
         Button viewMoreAnswers;
+        ImageButton organizationImage;
 
 
         public HomeViewHolder(View view) {
@@ -45,6 +46,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder
             this.questionLikeButton = view.findViewById(R.id.home_queslikeButton);
             this.questionDislikeButton = view.findViewById(R.id.home_quesdislikeButton);
             this.viewMoreAnswers = view.findViewById(R.id.home_viewMoreAnswersButton);
+            this.organizationImage=view.findViewById(R.id.home_organizationImage);
         }
     }
 
@@ -90,6 +92,13 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder
             }
         });
         holder.questionTimeStamp.setText(questionList.get(position).getDate());
+
+        holder.organizationImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                questionCommunication.viewOrganization();
+            }
+        });
     }
 
     @Override
@@ -102,5 +111,6 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder
 
     public interface QuestionCommunication {
         void onClick(Question question);
+        void viewOrganization();
     }
 }

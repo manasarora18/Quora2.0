@@ -150,6 +150,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         qaIntent.putExtra("CategoryId",question.getCategoryId());
         startActivity(qaIntent);
     }
+
+    //ViewOrganization Intent
+    @Override
+    public void viewOrganization()
+    {
+        Intent organizationIntent=new Intent(this,ViewOrganisation.class);
+        startActivity(organizationIntent);
+    }
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 //        Toast.makeText(this, "this menu item clicked", Toast.LENGTH_SHORT).show();

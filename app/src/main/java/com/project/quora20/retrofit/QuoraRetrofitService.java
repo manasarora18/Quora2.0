@@ -1,7 +1,8 @@
 package com.project.quora20.retrofit;
 
-import com.project.quora20.dto.AccessTokenRegisterResponse;
-import com.project.quora20.dto.CoAuthRequestDTO;
+import com.project.quora20.entity.AccessTokenRegisterResponse;
+import com.project.quora20.entity.CoAuthRequestDTO;
+import com.project.quora20.entity.Organization;
 import com.project.quora20.dto.NewPostRequestDTO;
 import com.project.quora20.entity.Question;
 import com.project.quora20.entity.User;
@@ -38,6 +39,9 @@ public interface QuoraRetrofitService {
     @GET("/user/viewUser/{userId}")
     Call<User> viewUser(@Path("userId")String userId);
 
+    @GET("organiaztion/viewOrganization/{organizationId}")
+    Call<Organization> viewOrganization(@Path("organizationId") String organizationId);
+  
     @POST("/question/add")
     Call<String> createNewPost(@Body NewPostRequestDTO newPostRequestDTO);
 
@@ -47,8 +51,9 @@ public interface QuoraRetrofitService {
     @PUT("/question/dislikequestion/{qid}")
     Call<String> doDislikeQues(@Path("qid")String qid);
 
-
 //    @PUT("/answer/dislikeanswer/{answerId}")
 //    Call<String> dislikeAnswer(@Path("answerId") String answerId);
 }
 //5e3140bb4c951a1723dc3f01
+
+//OrgId: 5e3149d91edbf851280ccf51

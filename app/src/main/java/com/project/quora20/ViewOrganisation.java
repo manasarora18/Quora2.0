@@ -3,12 +3,72 @@ package com.project.quora20;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import com.project.quora20.entity.Organization;
+import com.project.quora20.retrofit.QuoraRetrofitService;
+import com.project.quora20.retrofit.RetrofitClientInstance;
+import com.squareup.picasso.Picasso;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class ViewOrganisation extends AppCompatActivity {
+
+    QuoraRetrofitService quoraRetrofitService;
+    //Organization organization;
+    ImageView orgImage;
+    TextView orgName;
+    TextView orgEmail;
+    TextView orgFollowers;
+    TextView orgFollowing;
+    TextView orgMembers;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_organisation);
+
+        viewOrganization();
+    }
+
+    void viewOrganization()
+    {
+        quoraRetrofitService= RetrofitClientInstance.getRetrofitInstance().create(QuoraRetrofitService.class);
+        orgName=findViewById(R.id.org_Name);
+        orgEmail=findViewById(R.id.org_Email);
+        orgFollowers=findViewById(R.id.org_followersCount);
+        orgFollowing=findViewById(R.id.org_followingCount);
+        orgMembers=findViewById(R.id.org_Members);
+
+        String organizationId="5e3149d91edbf851280ccf51";
+        Call<Organization> callOrganization=quoraRetrofitService.viewOrganization(organizationId);
+        callOrganization.enqueue(new Callback<Organization>() {
+            @Override
+            public void onResponse(Call<Organization> call, Response<Organization> response) {
+                Organization organization=response.body();
+                System.out.println("Inside OnResponse ViewOrganization");
+                //orgImage.setImageResource();
+                System.out.println("Object: "+organization);
+                //Picasso.with(getApplicationContext()).load(organization.getOranizationImage()).centerCrop().into(orgImage);
+                //Glide.
+                orgName.setText(organization.getOrganizationName());
+                orgEmail.setText(organization.getOrganizationEmail());
+                orgFollowers.setText(String.valueOf(organization.getOrganizationFollowers().size()));
+                orgMembers.setText(String.valueOf(organization.getOrganizationMembers()));
+
+
+            }
+
+            @Override
+            public void onFailure(Call<Organization> call, Throwable t) {
+                System.out.println("Inside OnFailure ViewOrganization:"+t.getMessage());
+
+            }
+        });
+
     }
 }
