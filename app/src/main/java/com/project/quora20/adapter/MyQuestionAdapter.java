@@ -13,12 +13,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.project.quora20.R;
 import com.project.quora20.ViewOrganisation;
 import com.project.quora20.entity.Organization;
+import com.project.quora20.entity.Question;
 
 import java.util.List;
 
 public class MyQuestionAdapter extends RecyclerView.Adapter<MyQuestionAdapter.MyQuestionViewHolder> {
 
-    private List<Integer> demoList;
+    private List<Question> userQuestionList;
 
 
     public static class MyQuestionViewHolder extends RecyclerView.ViewHolder {
@@ -30,8 +31,8 @@ public class MyQuestionAdapter extends RecyclerView.Adapter<MyQuestionAdapter.My
         }
     }
 
-    public MyQuestionAdapter(List<Integer> myList) {
-        demoList = myList;
+    public MyQuestionAdapter(List<Question> userQuestionList) {
+        this.userQuestionList = userQuestionList;
     }
 
 
@@ -45,15 +46,15 @@ public class MyQuestionAdapter extends RecyclerView.Adapter<MyQuestionAdapter.My
 
     @Override
     public void onBindViewHolder(@NonNull MyQuestionViewHolder holder, int position) {
-        int index = demoList.get(position);
-        holder.textView.setText(String.valueOf(index));
+//        int index = userQuestionList.get(position);
+//        holder.textView.setText(String.valueOf(index));
 
     }
 
     @Override
     public int getItemCount() {
-        if (demoList != null)
-            return demoList.size();
+        if (userQuestionList != null)
+            return userQuestionList.size();
 
         return 0;
     }

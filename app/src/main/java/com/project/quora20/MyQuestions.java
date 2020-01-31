@@ -7,15 +7,16 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.os.Bundle;
 
 import com.project.quora20.adapter.MyQuestionAdapter;
+import com.project.quora20.entity.Question;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class MyQuestions extends AppCompatActivity {
 
-    private RecyclerView recyclerView;
-    private RecyclerView.Adapter adapter;
-    private RecyclerView.LayoutManager myQuestionLayoutManager;
+    private RecyclerView userRecyclerView;
+    private RecyclerView.Adapter userAdapter;
+    private RecyclerView.LayoutManager userQuestionLayoutManager;
 
 
     @Override
@@ -23,20 +24,18 @@ public class MyQuestions extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_questions);
 
-        recyclerView = findViewById(R.id.que_QuestionRecycler);
-        myQuestionLayoutManager = new LinearLayoutManager(this);
+        userRecyclerView = findViewById(R.id.que_QuestionRecycler);
+        userQuestionLayoutManager = new LinearLayoutManager(this);
         viewQuestions();
 
     }
     void viewQuestions() {
-        List<Integer> list = new ArrayList<>();
-        for (int i = 0; i < 10; i++)
-            list.add(i);
+        List<Question> list = new ArrayList<>();
 
-        recyclerView.setLayoutManager(myQuestionLayoutManager);
-        recyclerView.setHasFixedSize(true);
-        adapter = new MyQuestionAdapter(list);
-        recyclerView.setAdapter(adapter);
+        userRecyclerView.setLayoutManager(userQuestionLayoutManager);
+        userRecyclerView.setHasFixedSize(true);
+        userAdapter = new MyQuestionAdapter(list);
+        userRecyclerView.setAdapter(userAdapter);
 
 
     }

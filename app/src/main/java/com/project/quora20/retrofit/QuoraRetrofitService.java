@@ -57,6 +57,12 @@ public interface QuoraRetrofitService {
     @PUT("/question/dislikequestion/{questionId}/{userId}")
     Call<IdResponse> doDislikeQues(@Path("questionId")String qid,@Path("userId")String userId);
 
+    @PUT("/answer/likeanswer/{answerId}/{userId}")
+    Call<IdResponse> doLikeAns(@Path("answerId")String answerId,@Path("userId")String userId);
+
+    @PUT("/answer/dislikeanswer/{answerId}/{userId}")
+    Call<IdResponse> doDislikeAns(@Path("answerId")String answerId,@Path("userId")String userId);
+
 //    @PUT("/answer/dislikeanswer/{answerId}")
 //    Call<String> dislikeAnswer(@Path("answerId") String answerId);
 

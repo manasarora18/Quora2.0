@@ -15,16 +15,16 @@
 
     <item android:title="Categories">
         <menu>
-            <item android:title="Sports"
-                android:id="@+id/sports_nav_menu"/>
-            <item android:title="Technology"
-                android:id="@+id/technology_nav_menu"/>
+            <item android:title="Literature"
+                android:id="@+id/literature_nav_menu"/>
             <item android:title="Lifestyle"
                 android:id="@+id/lifestyle_nav_menu"/>
-            <item android:title="Food"
-                android:id="@+id/food_nav_menu"/>
+            <item android:title="Technology"
+                android:id="@+id/technology_nav_menu"/>
             <item android:title="Movies"
                 android:id="@+id/movies_nav_menu"/>
+            <item android:title="Food"
+                android:id="@+id/food_nav_menu"/>
         </menu>
     </item>
     <item android:title="Account">
