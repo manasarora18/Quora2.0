@@ -111,6 +111,15 @@
             app:srcCompat="@drawable/ic_chat_bubble_outline_black_24dp" />
 
         <ImageButton
+            android:id="@+id/ans_BestAnswerButton"
+            android:layout_width="42dp"
+            android:layout_height="43dp"
+            android:layout_weight="1"
+            android:backgroundTint="#00F8F7F7"
+            android:tint="#4CAF50"
+            app:srcCompat="@drawable/ic_check_green_45dp" />
+
+        <ImageButton
             android:id="@+id/ans_answerReportFlag"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

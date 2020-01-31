@@ -33,7 +33,7 @@ public class MyProfileAdapter extends RecyclerView.Adapter<MyProfileAdapter.MyPr
             userName=view.findViewById(R.id.profile_userName);
             userImageView=view.findViewById(R.id.profile_userProfileImage);
             userEmail=view.findViewById(R.id.profile_userEmail);
-            userPhone=view.findViewById(R.id.profile_userPhone);
+            //userPhone=view.findViewById(R.id.profile_userPhone);
             followers=view.findViewById(R.id.profile_followersCount);
             following=view.findViewById(R.id.profile_followingCount);
             userScore=view.findViewById(R.id.profile_userScore);

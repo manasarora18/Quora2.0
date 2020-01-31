@@ -59,8 +59,8 @@
 
         <ImageButton
             android:id="@+id/emailButton"
-            android:layout_width="50dp"
-            android:layout_height="27dp"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
             android:backgroundTint="#00FCFAFA"
             android:src="@drawable/ic_email_black_30dp"
             tools:layout_editor_absoluteX="28dp"
@@ -69,7 +69,7 @@
         <TextView
             android:id="@+id/userEmail"
             android:layout_width="120dp"
-            android:layout_height="30dp"
+            android:layout_height="match_parent"
             android:gravity="center"
             android:text="Email"
             android:textStyle="bold"
@@ -79,33 +79,6 @@
 
     </LinearLayout>
 
-
-    <LinearLayout
-        android:layout_width="179dp"
-        android:layout_height="41dp"
-        android:layout_marginStart="28dp"
-        android:orientation="horizontal"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout5">
-
-        <ImageButton
-            android:id="@+id/phoneButton"
-            android:layout_width="51dp"
-            android:layout_height="25dp"
-            android:backgroundTint="#00F8F6F6"
-            android:src="@drawable/ic_phone_black_30dp"
-            tools:layout_editor_absoluteX="28dp"
-            tools:layout_editor_absoluteY="155dp" />
-
-        <TextView
-            android:id="@+id/organizationPhone"
-            android:layout_width="120dp"
-            android:layout_height="25dp"
-            android:gravity="center"
-            android:text="Phone"
-            android:textStyle="bold" />
-
-    </LinearLayout>
 
     <LinearLayout
         android:id="@+id/linearLayout6"
