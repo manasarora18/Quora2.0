@@ -58,13 +58,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         String emailSP=sharedPreferences.getString("Email","");
         String levelSP=sharedPreferences.getString("Level","");
         View headerView = navigationView.getHeaderView(0);
+
+        SharedPreferences.Editor editor=sharedPreferences.edit();
+        editor.putString("UserId","5e314d5e83f84b7add06ec38").apply();
+        editor.putString("OrgId","").apply();
+        editor.commit();
+
         String userId=sharedPreferences.getString("UserId","");
         System.out.println(userId+"MAIN ACTIVITY GUEST USERID");
-        userName = (TextView) headerView.findViewById(R.id.userName);
+        userName = (TextView) headerView.findViewById(R.id.nav_userName);
         userName.setText(userSP);
-        userEmail=(TextView)headerView.findViewById(R.id.userEmail);
+        userEmail=(TextView)headerView.findViewById(R.id.nav_userEmail);
         userEmail.setText(emailSP);
-        userLevel=(TextView)headerView.findViewById(R.id.level);
+        userLevel=(TextView)headerView.findViewById(R.id.nav_level);
         userLevel.setText(levelSP);
 
 
@@ -149,41 +155,48 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 //        Toast.makeText(this, "this menu item clicked", Toast.LENGTH_SHORT).show();
         switch(item.getItemId()) {
             case R.id.sports_nav_menu:
-                Intent catIntent1 = new Intent(this, QuestionAnswer.class);
-                catIntent1.putExtra("categoryId",2);
-                this.startActivity(catIntent1);
+//                Intent catIntent1 = new Intent(this, CategoryActivity.class);
+//                catIntent1.putExtra("categoryId",2);
+//                this.startActivity(catIntent1);
                 break;
             case R.id.technology_nav_menu:
-//                Intent catIntent2= new Intent(this,CategoryProducts.class);
+//                Intent catIntent2= new Intent(this,CategoryActivity.class);
 //                catIntent2.putExtra("categoryId",3);
 //                this.startActivity(catIntent2);
                 break;
             case R.id.lifestyle_nav_menu:
-//                Intent catIntent3= new Intent(this,CategoryProducts.class);
+//                Intent catIntent3= new Intent(this,CategoryActivity.class);
 //                catIntent3.putExtra("categoryId",4);
 //                this.startActivity(catIntent3);
                 break;
             case R.id.food_nav_menu:
-//                Intent catIntent4= new Intent(this,CategoryProducts.class);
+//                Intent catIntent4= new Intent(this,CategoryActivity.class);
 //                catIntent4.putExtra("categoryId",5);
 //                this.startActivity(catIntent4);
                 break;
             case R.id.movies_nav_menu:
-//                Intent catIntent5= new Intent(this,CategoryProducts.class);
+//                Intent catIntent5= new Intent(this,CategoryActivity.class);
 //                catIntent5.putExtra("categoryId",1);
 //                this.startActivity(catIntent5);
                 break;
             case R.id.questions_nav_menu:
+                sharedPreferences=getSharedPreferences("LoginData",MODE_PRIVATE);
+                String loginCheckQues=sharedPreferences.getString("LoginCheck","false");
+
                 Intent quesIntent= new Intent(MainActivity.this,MyQuestions.class);
                 startActivity(quesIntent);
                 break;
             case R.id.answers_nav_menu:
+                sharedPreferences=getSharedPreferences("LoginData",MODE_PRIVATE);
+                String loginCheckAns=sharedPreferences.getString("LoginCheck","false");
+
                 Intent ansIntent=new Intent(MainActivity.this,MyAnswers.class);
                 startActivity(ansIntent);
                 break;
             case R.id.logout:
-//                sharedPreferences=getSharedPreferences("LoginData",MODE_PRIVATE);
-//                String logincheckLogout=sharedPreferences.getString("LoginCheck","false");
+                sharedPreferences=getSharedPreferences("LoginData",MODE_PRIVATE);
+                String loginCheckLogout=sharedPreferences.getString("LoginCheck","false");
+
 //                if(logincheckLogout.equals("true")) {
 //                    SharedPreferences preferences = getSharedPreferences("LoginData", MODE_PRIVATE);
 //                    SharedPreferences.Editor editor = preferences.edit();
@@ -198,9 +211,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 break;
             case R.id.details_nav_menu:
                 sharedPreferences=getSharedPreferences("LoginData",MODE_PRIVATE);
+                String loginCheck=sharedPreferences.getString("LoginCheck","false");
+
                 Intent intent=new Intent(this,MyProfile.class);
                 startActivity(intent);
-//                String logincheck=sharedPreferences.getString("LoginCheck","false");
+
 //                if(logincheck.equals("true")) {
 //                    Intent userDetails = new Intent(MainActivity.this, UserDetails.class);
 //                    startActivity(userDetails);

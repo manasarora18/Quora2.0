@@ -7,7 +7,7 @@
     android:background="@color/colorPrimary">
 
     <TextView
-        android:id="@+id/userName"
+        android:id="@+id/nav_userName"
         android:layout_width="242dp"
         android:layout_height="28dp"
         android:layout_marginStart="32dp"
@@ -16,12 +16,12 @@
         android:fontFamily="sans-serif-smallcaps"
         android:text="User Name"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/userEmail"
+        app:layout_constraintBottom_toTopOf="@+id/nav_userEmail"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/userImage" />
+        app:layout_constraintTop_toBottomOf="@+id/nav_userImage" />
 
     <ImageView
-        android:id="@+id/userImage"
+        android:id="@+id/nav_userImage"
         android:layout_width="64dp"
         android:layout_height="61dp"
 
@@ -35,7 +35,7 @@
         app:layout_constraintTop_toTopOf="parent" />/>
 
     <TextView
-        android:id="@+id/userEmail"
+        android:id="@+id/nav_userEmail"
         android:layout_width="246dp"
         android:layout_height="26dp"
         android:layout_marginStart="32dp"
@@ -45,15 +45,15 @@
         android:text="Email"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/userName" />
+        app:layout_constraintTop_toBottomOf="@+id/nav_userName" />
 
     <TextView
-        android:id="@+id/level"
+        android:id="@+id/nav_level"
         android:layout_width="102dp"
         android:layout_height="25dp"
         android:layout_marginStart="24dp"
         android:layout_marginTop="88dp"
         android:text="Level"
-        app:layout_constraintStart_toEndOf="@+id/userImage"
+        app:layout_constraintStart_toEndOf="@+id/nav_userImage"
         app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

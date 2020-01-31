@@ -28,7 +28,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.SearchView
 
         public SearchViewHolder(View view){
             super(view);
-            this.questionBody=view.findViewById(R.id.questionBody);
+//            this.questionBody=view.findViewById(R.id.seaquestionBody);
         }
     }
 
