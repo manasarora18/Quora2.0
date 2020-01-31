@@ -31,9 +31,9 @@ public class NewPost extends AppCompatActivity implements AdapterView.OnItemSele
     private Button postButton;
     private EditText taggedPeople;
     private Spinner spinner;
-    private static final String[] paths = {"Fiction Literature", "Non-Fiction Literature", "Poetry Literature","Short-stories Literature","Clothing Lifestyle","Footwear Lifestyle","Watches Lifestyle","Accessories Lifestyle","Coding","Android","iOS","Bollywood Movies","Hollywood Movies","Tollywood Movies","Punjabi Movies","NorthIndian Food","SouthIndian Food","Italian Food","Chinese","Football","Cricket","Badminton","Tennis"};
     private String categoryChoice;
     private String categoryId;
+    private String category;
     private SharedPreferences sharedPreferences;
 
     @Override
@@ -63,7 +63,7 @@ public class NewPost extends AppCompatActivity implements AdapterView.OnItemSele
                 tagPeopleList.add(questionTags);
 
                 spinner = (Spinner)findViewById(R.id.category_spinner);
-                categoryChoice=spinner.getSelectedItem().toString();
+                category=spinner.getSelectedItem().toString();
                 newPostRequestDTO.setQuestionBody(question);
                 newPostRequestDTO.setUserId(userId);
                 newPostRequestDTO.setCategoryId(categoryChoice);
@@ -78,13 +78,10 @@ public class NewPost extends AppCompatActivity implements AdapterView.OnItemSele
                 call.enqueue(new Callback<IdResponse>() {
                     @Override
                     public void onResponse(Call<IdResponse> call, Response<IdResponse> response) {
-//                        if(response.code()==200){
                             Toast.makeText(getApplicationContext(),"New Post Created",Toast.LENGTH_SHORT).show();
                             Intent backToHome=new Intent(NewPost.this,MainActivity.class);
                             startActivity(backToHome);
                             finish();
-
-//                        }
                     }
                     @Override
                     public void onFailure(Call<IdResponse> call, Throwable t) {
@@ -103,30 +100,22 @@ public class NewPost extends AppCompatActivity implements AdapterView.OnItemSele
             case 0:
                 categoryChoice="Fiction";
                 categoryId="1";
-//                Toast.makeText(getApplicationContext(),"Sports Selected",Toast.LENGTH_SHORT).show();
-                // Whatever you want to happen when the first item gets selected
                 break;
             case 1:
                 categoryChoice="Non-Fiction";
                 categoryId="2";
-//                Toast.makeText(getApplicationContext(),"Technology Selected",Toast.LENGTH_SHORT).show();
-                // Whatever you want to happen when the second item gets selected
                 break;
             case 2:
                 categoryChoice="Poetry";
                 categoryId="3";
-//                Toast.makeText(getApplicationContext(),"Lifestyle Selected",Toast.LENGTH_SHORT).show();
-                // Whatever you want to happen when the thrid item gets selected
                 break;
             case 3:
                 categoryChoice="Short-stories";
                 categoryId="4";
-//                Toast.makeText(getApplicationContext(),"Food Selected",Toast.LENGTH_SHORT).show();
                 break;
             case 4:
                 categoryChoice="Clothing";
                 categoryId="5";
-//                Toast.makeText(getApplicationContext(),"Movies Selected",Toast.LENGTH_SHORT).show();
                 break;
             case 5:
                 categoryChoice="Footwear";
@@ -135,12 +124,10 @@ public class NewPost extends AppCompatActivity implements AdapterView.OnItemSele
             case 6:
                 categoryChoice="Watches";
                 categoryId="7";
-//                Toast.makeText(getApplicationContext(),"Food Selected",Toast.LENGTH_SHORT).show();
                 break;
             case 7:
                 categoryChoice="Accessories";
                 categoryId="8";
-//                Toast.makeText(getApplicationContext(),"Movies Selected",Toast.LENGTH_SHORT).show();
                 break;
             case 8:
                 categoryChoice="Coding";
@@ -149,12 +136,10 @@ public class NewPost extends AppCompatActivity implements AdapterView.OnItemSele
             case 9:
                 categoryChoice="Android";
                 categoryId="10";
-//                Toast.makeText(getApplicationContext(),"Food Selected",Toast.LENGTH_SHORT).show();
                 break;
             case 10:
                 categoryChoice="iOS";
                 categoryId="11";
-//                Toast.makeText(getApplicationContext(),"Movies Selected",Toast.LENGTH_SHORT).show();
                 break;
             case 11:
                 categoryChoice="Bollywood";
@@ -163,12 +148,10 @@ public class NewPost extends AppCompatActivity implements AdapterView.OnItemSele
             case 12:
                 categoryChoice="Hollywood";
                 categoryId="13";
-//                Toast.makeText(getApplicationContext(),"Food Selected",Toast.LENGTH_SHORT).show();
                 break;
             case 13:
                 categoryChoice="Tollywood";
                 categoryId="14";
-//                Toast.makeText(getApplicationContext(),"Movies Selected",Toast.LENGTH_SHORT).show();
                 break;
             case 14:
                 categoryChoice="Punjabi";
@@ -177,12 +160,10 @@ public class NewPost extends AppCompatActivity implements AdapterView.OnItemSele
             case 15:
                 categoryChoice="NorthIndian";
                 categoryId="16";
-//                Toast.makeText(getApplicationContext(),"Food Selected",Toast.LENGTH_SHORT).show();
                 break;
             case 16:
                 categoryChoice="SouthIndian";
                 categoryId="17";
-//                Toast.makeText(getApplicationContext(),"Movies Selected",Toast.LENGTH_SHORT).show();
                 break;
             case 17:
                 categoryChoice="Italian";
@@ -191,12 +172,10 @@ public class NewPost extends AppCompatActivity implements AdapterView.OnItemSele
             case 18:
                 categoryChoice="Chinese";
                 categoryId="19";
-//                Toast.makeText(getApplicationContext(),"Food Selected",Toast.LENGTH_SHORT).show();
                 break;
             case 19:
                 categoryChoice="Football";
                 categoryId="20";
-//                Toast.makeText(getApplicationContext(),"Movies Selected",Toast.LENGTH_SHORT).show();
                 break;
             case 20:
                 categoryChoice="Cricket";
@@ -205,12 +184,10 @@ public class NewPost extends AppCompatActivity implements AdapterView.OnItemSele
             case 21:
                 categoryChoice="Badminton";
                 categoryId="22";
-//                Toast.makeText(getApplicationContext(),"Food Selected",Toast.LENGTH_SHORT).show();
                 break;
             case 22:
                 categoryChoice="Tennis";
                 categoryId="23";
-//                Toast.makeText(getApplicationContext(),"Movies Selected",Toast.LENGTH_SHORT).show();
                 break;
         }
     }
