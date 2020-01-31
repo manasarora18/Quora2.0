@@ -10,12 +10,8 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-import com.google.android.material.snackbar.Snackbar;
-import com.project.quora20.retrofit.RetrofitClientInstance;
+
 import java.util.Random;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class LoginMain extends AppCompatActivity {
     private SharedPreferences sp;

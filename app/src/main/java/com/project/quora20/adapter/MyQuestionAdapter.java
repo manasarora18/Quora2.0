@@ -1,20 +1,25 @@
 package com.project.quora20.adapter;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.project.quora20.R;
+import com.project.quora20.ViewOrganisation;
+import com.project.quora20.entity.Organization;
 
 import java.util.List;
 
 public class MyQuestionAdapter extends RecyclerView.Adapter<MyQuestionAdapter.MyQuestionViewHolder> {
 
     private List<Integer> demoList;
+
 
     public static class MyQuestionViewHolder extends RecyclerView.ViewHolder {
         public TextView textView;
@@ -42,6 +47,7 @@ public class MyQuestionAdapter extends RecyclerView.Adapter<MyQuestionAdapter.My
     public void onBindViewHolder(@NonNull MyQuestionViewHolder holder, int position) {
         int index = demoList.get(position);
         holder.textView.setText(String.valueOf(index));
+
     }
 
     @Override

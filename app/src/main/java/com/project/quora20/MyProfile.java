@@ -65,8 +65,6 @@ public class MyProfile extends AppCompatActivity {
                 following.setText(String.valueOf(user.getFollowingCount()));
                 //userScore.setText("Score: "+String.valueOf(user.get()));
 
-
-
                 System.out.println("Inside ViewProfile OnResponse");
             }
 

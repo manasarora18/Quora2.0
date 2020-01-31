@@ -60,11 +60,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         View headerView = navigationView.getHeaderView(0);
         String userId=sharedPreferences.getString("UserId","");
         System.out.println(userId+"MAIN ACTIVITY GUEST USERID");
-        userName = (TextView) headerView.findViewById(R.id.userName);
+        userName = (TextView) headerView.findViewById(R.id.nav_userName);
         userName.setText(userSP);
-        userEmail=(TextView)headerView.findViewById(R.id.userEmail);
+        userEmail=(TextView)headerView.findViewById(R.id.nav_userEmail);
         userEmail.setText(emailSP);
-        userLevel=(TextView)headerView.findViewById(R.id.level);
+        userLevel=(TextView)headerView.findViewById(R.id.nav_level);
         userLevel.setText(levelSP);
 
 
@@ -143,6 +143,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         qaIntent.putExtra("BestAns",question.getBestAnswerId());
         qaIntent.putExtra("CategoryId",question.getCategoryId());
         startActivity(qaIntent);
+    }
+
+    //ViewOrganization Intent
+    @Override
+    public void viewOrganization()
+    {
+        Intent organizationIntent=new Intent(this,ViewOrganisation.class);
+        startActivity(organizationIntent);
     }
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
