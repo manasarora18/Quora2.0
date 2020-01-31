@@ -4,6 +4,7 @@ import com.project.quora20.dto.AccessTokenRegisterResponse;
 import com.project.quora20.dto.AnswerDTO;
 import com.project.quora20.dto.CoAuthRequestDTO;
 import com.project.quora20.dto.IdResponse;
+import com.project.quora20.entity.Answer;
 import com.project.quora20.entity.Organization;
 import com.project.quora20.dto.NewPostRequestDTO;
 import com.project.quora20.entity.Question;

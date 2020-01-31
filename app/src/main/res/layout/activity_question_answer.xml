@@ -27,7 +27,7 @@
         <TextView
             android:id="@+id/qa_questionText"
             android:layout_width="match_parent"
-            android:layout_height="41dp"
+            android:layout_height="58dp"
             android:lineSpacingExtra="8sp"
             android:text="Question???"
             android:textSize="16sp"

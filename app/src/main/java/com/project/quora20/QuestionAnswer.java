@@ -5,9 +5,13 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.project.quora20.adapter.QuestionAnswerAdapter;
 import com.project.quora20.dto.AnswerDTO;
@@ -28,7 +32,12 @@ public class QuestionAnswer extends AppCompatActivity implements QuestionAnswerA
     private RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager qa_answerLayoutManager;
     QuoraRetrofitService quoraRetrofitService;
+    private SharedPreferences sharedPreferences;
     List<Answer> answerList;
+    TextView qa_questionText;
+    TextView qa_answerText;
+    ImageButton sendAnswerButton;
+    final AnswerDTO answerdto=new AnswerDTO();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,12 +59,30 @@ public class QuestionAnswer extends AppCompatActivity implements QuestionAnswerA
 //        String QuesBody=intent.getStringExtra("QuesBody");
 //        String BestAns=intent.getStringExtra("BestAns");
 //        String CategoryId=intent.getStringExtra("CategoryId");
-        AnswerDTO answerdto = new AnswerDTO();
+        recyclerView.setLayoutManager(qa_answerLayoutManager);
+        recyclerView.setHasFixedSize(true);
+
+        //answerdto = new AnswerDTO();
+
         answerdto.setQuestionId(intent.getStringExtra("QID"));
         answerdto.setOrgId(intent.getStringExtra("OrgId"));
+        qa_questionText = findViewById(R.id.qa_questionText);
+        qa_questionText.setText(intent.getStringExtra("QuesBody"));
 
 
-        viewAnswers(answerdto);
+        sendAnswerButton = findViewById(R.id.qa_sendAnswerButton);
+        sendAnswerButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                addAnswers(answerdto);
+                viewAnswers();
+                Toast toast = Toast.makeText(getApplicationContext(), "Answers posted ", Toast.LENGTH_SHORT);
+                toast.show();
+
+            }
+        });
+
+
     }
 
     @Override
@@ -64,16 +91,41 @@ public class QuestionAnswer extends AppCompatActivity implements QuestionAnswerA
     }
 
     //view All answers by a particular QuestionId
-    void viewAnswers(AnswerDTO answerDTO) {
-        recyclerView.setLayoutManager(qa_answerLayoutManager);
-        recyclerView.setHasFixedSize(true);
+    void addAnswers(AnswerDTO answerDTO) {
+        sharedPreferences = getSharedPreferences("LoginData", MODE_PRIVATE);
+        String userId = sharedPreferences.getString("UserId", "");
+        answerDTO.setUserId(userId);
+
+
+        qa_answerText = findViewById(R.id.qa_answerText);
+        answerDTO.setAnswerBody(qa_answerText.getText().toString());
+
         quoraRetrofitService = RetrofitClientInstance.getRetrofitInstance().create(QuoraRetrofitService.class);
-        Call<List<Answer>> callAnswerList = quoraRetrofitService.getAnswersByQuestionId(answerDTO.getQuestionId());
+        Call<String> callAddAnswer = quoraRetrofitService.addAnswer(answerDTO);
+        callAddAnswer.enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+                System.out.println("OnResponse Add Answer");
+            }
+
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+                System.out.println("OnFailure Add Answer");
+
+            }
+        });
+
+
+    }
+
+    void viewAnswers()
+    {
+        Call<List<Answer>> callAnswerList = quoraRetrofitService.getAnswersByQuestionId(answerdto.getQuestionId());
         callAnswerList.enqueue(new Callback<List<Answer>>() {
             @Override
             public void onResponse(Call<List<Answer>> call, Response<List<Answer>> response) {
-                answerList=response.body();
-                adapter=new QuestionAnswerAdapter(answerList,QuestionAnswer.this);
+                answerList = response.body();
+                adapter = new QuestionAnswerAdapter(answerList, QuestionAnswer.this);
                 recyclerView.setAdapter(adapter);
 
 
@@ -85,8 +137,6 @@ public class QuestionAnswer extends AppCompatActivity implements QuestionAnswerA
                 System.out.println("OnFailure View Answer By Qid");
             }
         });
-
-        
 
     }
 }
