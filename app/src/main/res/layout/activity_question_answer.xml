@@ -36,23 +36,22 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/qa_answerListRecycler"
-        android:layout_width="351dp"
-        android:layout_height="326dp"
-        android:layout_marginStart="42dp"
-        android:layout_marginTop="128dp"
-        android:layout_marginEnd="39dp"
+        android:layout_width="354dp"
+        android:layout_height="360dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="40dp"
         android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.571"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/qa_questionLayout" />
+        app:layout_constraintTop_toBottomOf="@+id/qa_adImage" />
 
     <LinearLayout
         android:id="@+id/qa_addAnswerLayout"
         android:layout_width="367dp"
         android:layout_height="60dp"
         android:layout_marginStart="42dp"
-        android:layout_marginTop="18dp"
         android:layout_marginEnd="39dp"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
@@ -62,8 +61,8 @@
 
         <EditText
             android:id="@+id/qa_answerText"
-            android:layout_width="294dp"
-            android:layout_height="66dp"
+            android:layout_width="304dp"
+            android:layout_height="match_parent"
             android:layout_weight="10"
             android:ems="10"
             android:gravity="start|top"
@@ -73,12 +72,26 @@
         <ImageButton
             android:id="@+id/qa_sendAnswerButton"
             android:layout_width="wrap_content"
-            android:layout_height="66dp"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             android:backgroundTint="#00FDFAFA"
             android:tint="#00BCD4"
             app:srcCompat="@drawable/ic_send_blue_35dp" />
 
     </LinearLayout>
+
+    <ImageView
+        android:id="@+id/qa_adImage"
+        android:layout_width="339dp"
+        android:layout_height="64dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/qa_answerListRecycler"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/qa_questionLayout"
+        tools:srcCompat="@tools:sample/avatars[8]" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
