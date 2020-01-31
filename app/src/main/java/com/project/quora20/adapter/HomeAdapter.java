@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Adapter;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -19,7 +20,9 @@ import com.project.quora20.entity.Question;
 import com.project.quora20.retrofit.QuoraRetrofitService;
 import com.project.quora20.retrofit.RetrofitClientInstance;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -29,6 +32,8 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder
     private List<Question> questionList;
     private QuestionCommunication questionCommunication;
     private String userId;
+    List<String> likedList=new ArrayList<>();
+    List<String> dislikedList=new ArrayList<>();
 
     public HomeAdapter(List<Question> questionList, QuestionCommunication questionCommunication, String userId) {
         this.questionList = questionList;
@@ -74,11 +79,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder
 
         boolean likedFlag = false;
         if (likedList!=null) {
-            for (String x : likedList) {
-                if (x.equals(userId)) {
-                    likedFlag = true;
-                }
-            }
+            likedFlag = likedList.contains(userId);
         }
         return likedFlag;
     }
@@ -88,18 +89,15 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder
 
         boolean dislikedFlag = false;
         if (dislikedList!=null) {
-            for (String x : dislikedList) {
-                if (x.equals(userId)) {
-                    dislikedFlag = true;
-                }
-            }
+           dislikedFlag=dislikedList.contains(userId);
         }
         return dislikedFlag;
     }
 
-    @SuppressLint("ResourceAsColor")
     @Override
     public void onBindViewHolder(@NonNull final HomeViewHolder holder, final int position) {
+        holder.questionLikeButton.setColorFilter(Color.parseColor("#000000"));
+        holder.questionDislikeButton.setColorFilter(Color.parseColor("#000000"));
 
         holder.viewMoreAnswers.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -112,7 +110,6 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder
         holder.questionLike.setText(String.valueOf(questionList.get(position).getLikeCount()));
         holder.questionDislike.setText(String.valueOf(questionList.get(position).getDislikeCount()));
         holder.questionTimeStamp.setText(questionList.get(position).getDate());
-
         holder.organizationImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -120,8 +117,8 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder
             }
         });
 
-        List<String> likedList = questionList.get(position).getLikeUserList();
-        List<String> dislikedList = questionList.get(position).getDislikeUserList();
+        likedList = questionList.get(position).getLikeUserList();
+        dislikedList = questionList.get(position).getDislikeUserList();
 
 
         if (LikeCheck(likedList)) {
@@ -150,6 +147,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder
                             likeNo++;
                             holder.questionLike.setText(String.valueOf(likeNo));
                             holder.questionLikeButton.setColorFilter(Color.parseColor("#0000FF"));
+//                            likedList.add(userId);
                         }
 
                         @Override
@@ -176,6 +174,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder
                             dislikeNo++;
                             holder.questionDislike.setText(String.valueOf(dislikeNo));
                             holder.questionDislikeButton.setColorFilter(Color.parseColor("#FF0000"));
+//                            dislikedList.add(userId);
                         }
 
                         @Override
