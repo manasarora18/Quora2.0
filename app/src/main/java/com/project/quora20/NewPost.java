@@ -17,6 +17,7 @@ public class NewPost extends AppCompatActivity implements AdapterView.OnItemSele
     private Spinner spinner;
     private static final String[] paths = {"Sports", "Technology", "Lifestyle","Food","Movies"};
     private String categoryChoice;
+    private String categoryId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,9 +36,17 @@ public class NewPost extends AppCompatActivity implements AdapterView.OnItemSele
                 questionBody=findViewById(R.id.questionBody);
                 taggedPeople=findViewById(R.id.taggedpeople);
                 categoryChoice=spinner.getSelectedItem().toString();
+
+
+
             }
         });
-//        String io=spinner.getSelectedItem().toString();
+//        String io=spinner.getSelectedItem().toString();String userId;
+//    String categoryId;
+//    String questionBody;
+////    String tag;
+//    List<String> personsTag;
+//    String orgId;
     }
 
     @Override
@@ -46,25 +55,30 @@ public class NewPost extends AppCompatActivity implements AdapterView.OnItemSele
         switch (position) {
             case 0:
                 categoryChoice="Sports";
+                categoryId="1";
                 Toast.makeText(getApplicationContext(),"Sports Selected",Toast.LENGTH_SHORT).show();
                 // Whatever you want to happen when the first item gets selected
                 break;
             case 1:
                 categoryChoice="Technology";
+                categoryId="2";
                 Toast.makeText(getApplicationContext(),"Technology Selected",Toast.LENGTH_SHORT).show();
                 // Whatever you want to happen when the second item gets selected
                 break;
             case 2:
                 categoryChoice="Lifestyle";
+                categoryId="3";
                 Toast.makeText(getApplicationContext(),"Lifestyle Selected",Toast.LENGTH_SHORT).show();
                 // Whatever you want to happen when the thrid item gets selected
                 break;
             case 3:
                 categoryChoice="Food";
+                categoryId="4";
                 Toast.makeText(getApplicationContext(),"Food Selected",Toast.LENGTH_SHORT).show();
                 break;
             case 4:
                 categoryChoice="Movies";
+                categoryId="5";
                 Toast.makeText(getApplicationContext(),"Movies Selected",Toast.LENGTH_SHORT).show();
                 break;
         }
