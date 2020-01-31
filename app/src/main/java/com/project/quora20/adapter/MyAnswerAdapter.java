@@ -54,7 +54,7 @@ public class MyAnswerAdapter extends RecyclerView.Adapter<MyAnswerAdapter.MyAnsw
             answerLikeCount=view.findViewById(R.id.ans_likesCount);
             answerDislikeCount=view.findViewById(R.id.ans_dislikesCount);
             answerTimestamp = view.findViewById(R.id.ans_answerTimeStamp);
-
+            organisationImage=view.findViewById(R.id.ans_organisationImage);
         }
     }
 

@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private NavigationView navigationView;
     private Button newPostToolbar;
     private RecyclerView homeRecyclerView;
-    private RecyclerView.Adapter homeadapter;
+    private RecyclerView.Adapter homeAdapter;
     private RecyclerView.LayoutManager homeLayoutManager;
     private SharedPreferences sharedPreferences;
 
@@ -137,10 +137,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         //if list not null
         sharedPreferences=getSharedPreferences("LoginData",MODE_PRIVATE);
         String userId=sharedPreferences.getString("UserId","");
-        homeadapter=new HomeAdapter(list,MainActivity.this,userId);
+        homeAdapter =new HomeAdapter(list,MainActivity.this,userId);
         GridLayoutManager gridLayoutManager=new GridLayoutManager(getApplicationContext(),1);
         homeRecyclerView.setLayoutManager(gridLayoutManager);
-        homeRecyclerView.setAdapter(homeadapter);
+        homeRecyclerView.setAdapter(homeAdapter);
     }
 
     @Override
@@ -241,6 +241,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
         return true;
     }
+
     @Override
     public void onPointerCaptureChanged(boolean hasCapture) {
     }
