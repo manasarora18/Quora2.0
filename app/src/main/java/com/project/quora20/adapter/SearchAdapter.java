@@ -5,13 +5,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
-import com.project.quora20.R;
 import com.project.quora20.entity.Question;
-
 import java.util.List;
 
 public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.SearchViewHolder> {
@@ -54,7 +50,6 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.SearchView
             }
         });
         holder.questionBody.setText(questionSearchList.get(position).getQuestionBody());
-
     }
 
     @Override

@@ -10,17 +10,28 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.project.quora20.R;
+import com.project.quora20.dto.IdResponse;
 import com.project.quora20.entity.Question;
+import com.project.quora20.retrofit.QuoraRetrofitService;
+import com.project.quora20.retrofit.RetrofitClientInstance;
+
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder> {
     private List<Question> questionList;
     private QuestionCommunication questionCommunication;
+    private String userId;
 
 
-    public HomeAdapter(List<Question> questionList, QuestionCommunication questionCommunication) {
+
+    public HomeAdapter(List<Question> questionList, QuestionCommunication questionCommunication,String userId) {
         this.questionList = questionList;
         this.questionCommunication = questionCommunication;
+        this.userId=userId;
 
     }
 
@@ -60,35 +71,66 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull final HomeViewHolder holder, final int position) {
+
+
         holder.viewMoreAnswers.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 questionCommunication.onClick(questionList.get(position));
             }
         });
+
         holder.questionBody.setText(questionList.get(position).getQuestionBody());
         holder.questionLike.setText(String.valueOf(questionList.get(position).getLikeCount()));
         holder.questionDislike.setText(String.valueOf(questionList.get(position).getDislikeCount()));
+
         holder.questionLikeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                holder.questionLikeButton.setClickable(false);
-                holder.questionDislikeButton.setClickable(false);
-                String likeCount = (String) holder.questionLike.getText();
-                Integer likeNo = Integer.parseInt(likeCount);
-                likeNo++;
-                holder.questionLike.setText(String.valueOf(likeNo));
+                QuoraRetrofitService quoraRetrofitService= RetrofitClientInstance.getRetrofitInstance().create(QuoraRetrofitService.class);
+                Call<IdResponse>call=quoraRetrofitService.doLikeQues(questionList.get(position).getQuestionId(),userId);
+                call.enqueue(new Callback<IdResponse>() {
+                    @Override
+                    public void onResponse(Call<IdResponse> call, Response<IdResponse> response) {
+                        System.out.println("OnResponse LikeQues");
+                        holder.questionLikeButton.setClickable(false);
+                        holder.questionDislikeButton.setClickable(false);
+                        String likeCount = (String) holder.questionLike.getText();
+                        Integer likeNo = Integer.parseInt(likeCount);
+                        likeNo++;
+                        holder.questionLike.setText(String.valueOf(likeNo));
+                    }
+
+                    @Override
+                    public void onFailure(Call<IdResponse> call, Throwable t) {
+                        System.out.println("OnFailure LikeQues"+t.getMessage());
+                    }
+                });
             }
         });
+
         holder.questionDislikeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                holder.questionLikeButton.setClickable(false);
-                holder.questionDislikeButton.setClickable(false);
-                String dislikeCount = (String) holder.questionDislike.getText();
-                Integer dislikeNo = Integer.parseInt(dislikeCount);
-                dislikeNo++;
-                holder.questionDislike.setText(String.valueOf(dislikeNo));
+                QuoraRetrofitService quoraRetrofitService= RetrofitClientInstance.getRetrofitInstance().create(QuoraRetrofitService.class);
+                Call<IdResponse>call=quoraRetrofitService.doDislikeQues(questionList.get(position).getQuestionId(),userId);
+                call.enqueue(new Callback<IdResponse>() {
+                    @Override
+                    public void onResponse(Call<IdResponse> call, Response<IdResponse> response) {
+                        System.out.println("OnResponse DislikeQues");
+                        holder.questionLikeButton.setClickable(false);
+                        holder.questionDislikeButton.setClickable(false);
+                        String dislikeCount = (String) holder.questionDislike.getText();
+                        Integer dislikeNo = Integer.parseInt(dislikeCount);
+                        dislikeNo++;
+                        holder.questionDislike.setText(String.valueOf(dislikeNo));
+                    }
+
+                    @Override
+                    public void onFailure(Call<IdResponse> call, Throwable t) {
+                        System.out.println("OnFailure DislikeQues"+t.getMessage());
+                    }
+                });
             }
         });
         holder.questionTimeStamp.setText(questionList.get(position).getDate());
