@@ -8,24 +8,27 @@
 
     <TextView
         android:id="@+id/comment_commentTextView"
-        android:layout_width="278dp"
-        android:layout_height="91dp"
+        android:layout_width="282dp"
+        android:layout_height="59dp"
         android:layout_marginStart="33dp"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="20dp"
         android:layout_marginEnd="15dp"
         android:gravity="clip_horizontal|clip_vertical"
         android:text="Comments by users"
         app:layout_constraintEnd_toStartOf="@+id/comment_childCommentsButton"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
         android:id="@+id/comment_childCommentsButton"
-        android:layout_width="66dp"
-        android:layout_height="83dp"
-        android:layout_marginTop="28dp"
-        android:layout_marginEnd="19dp"
+        android:layout_width="60dp"
+        android:layout_height="47dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="23dp"
         android:backgroundTint="#00FAF8F8"
+        app:layout_constraintBottom_toTopOf="@+id/comment_commentsDivider"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_chat_bubble_outline_black_24dp" />

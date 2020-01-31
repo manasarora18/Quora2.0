@@ -50,7 +50,7 @@ public class MyProfile extends AppCompatActivity {
                 userName=findViewById(R.id.profile_userName);
                 userImageView=findViewById(R.id.profile_userProfileImage);
                 userEmail=findViewById(R.id.profile_userEmail);
-                userPhone=findViewById(R.id.profile_userPhone);
+                //userPhone=findViewById(R.id.profile_userPhone);
                 followers=findViewById(R.id.profile_followersCount);
                 following=findViewById(R.id.profile_followingCount);
                 userScore=findViewById(R.id.profile_userScore);

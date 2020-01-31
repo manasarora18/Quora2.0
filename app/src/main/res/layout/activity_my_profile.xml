@@ -49,11 +49,13 @@
 
     <LinearLayout
         android:id="@+id/linearLayout5"
-        android:layout_width="185dp"
-        android:layout_height="51dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="36dp"
+        android:layout_width="348dp"
+        android:layout_height="47dp"
+        android:layout_marginStart="35dp"
+        android:layout_marginTop="28dp"
+        android:layout_marginEnd="28dp"
         android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout3">
 
@@ -68,7 +70,7 @@
 
         <TextView
             android:id="@+id/profile_userEmail"
-            android:layout_width="120dp"
+            android:layout_width="292dp"
             android:layout_height="match_parent"
             android:gravity="center"
             android:text="Email"
@@ -79,60 +81,29 @@
 
     </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/linearLayout7"
-        android:layout_width="179dp"
-        android:layout_height="41dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="20dp"
-        android:orientation="horizontal"
-        android:visibility="invisible"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout5">
-
-        <ImageButton
-            android:id="@+id/profile_phoneButton"
-            android:layout_width="51dp"
-            android:layout_height="25dp"
-            android:backgroundTint="#00F8F6F6"
-            android:src="@drawable/ic_phone_black_30dp"
-            tools:layout_editor_absoluteX="28dp"
-            tools:layout_editor_absoluteY="155dp" />
-
-        <TextView
-            android:id="@+id/profile_userPhone"
-            android:layout_width="120dp"
-            android:layout_height="25dp"
-            android:gravity="center"
-            android:text="Phone"
-            android:textStyle="bold"
-            tools:layout_editor_absoluteX="85dp"
-            tools:layout_editor_absoluteY="155dp" />
-
-    </LinearLayout>
-
     <TextView
         android:id="@+id/profile_userFavCategories"
-        android:layout_width="178dp"
-        android:layout_height="153dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="84dp"
+        android:layout_width="221dp"
+        android:layout_height="149dp"
+        android:layout_marginStart="90dp"
+        android:layout_marginEnd="90dp"
+        android:layout_marginBottom="60dp"
         android:gravity="center"
         android:text="Categories"
         android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout7" />
-
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <LinearLayout
         android:id="@+id/linearLayout6"
-        android:layout_width="146dp"
-        android:layout_height="154dp"
-        android:layout_marginTop="36dp"
-        android:layout_marginEnd="28dp"
+        android:layout_width="162dp"
+        android:layout_height="161dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="40dp"
         android:orientation="vertical"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout3">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout5">
 
         <TextView
             android:id="@+id/profile_followersCount"
@@ -187,14 +158,12 @@
 
     <LinearLayout
         android:layout_width="175dp"
-        android:layout_height="94dp"
-        android:layout_marginTop="56dp"
+        android:layout_height="89dp"
+        android:layout_marginTop="62dp"
         android:layout_marginEnd="16dp"
-        android:layout_marginBottom="1dp"
         android:orientation="vertical"
-        app:layout_constraintBottom_toTopOf="@+id/myQuestionRecycler"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout6">
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout5">
 
         <TextView
             android:id="@+id/profile_userScore"
