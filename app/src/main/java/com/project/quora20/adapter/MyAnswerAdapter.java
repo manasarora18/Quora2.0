@@ -1,5 +1,6 @@
 package com.project.quora20.adapter;
 
+import android.annotation.SuppressLint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,22 +21,25 @@ public class MyAnswerAdapter extends RecyclerView.Adapter<MyAnswerAdapter.MyAnsw
     public IAnswerCommunicator iAnswerCommunicator;
 
     public static class MyAnswerViewHolder extends RecyclerView.ViewHolder {
-        public TextView textView;
-        public ImageButton viewComments;
-        public ImageButton likeButton;
-        public ImageButton dislikeButton;
-        public TextView likeCount;
-        public TextView dislikeCount;
+        private TextView answerBody;
+        private ImageButton answerViewComments;
+        private ImageButton answerLikeButton;
+        private ImageButton answerDislikeButton;
+        private TextView answerLikeCount;
+        private TextView answerDislikeCount;
+        private TextView answerTimestamp;
+        private ImageView organisationImage;
 
         public MyAnswerViewHolder(View view) {
             super(view);
-            textView = view.findViewById(R.id.ans_userAnswerText);
-            viewComments = view.findViewById(R.id.ans_viewCommentsButton);
-            likeButton=view.findViewById(R.id.ans_likeButton);
-            dislikeButton=view.findViewById(R.id.ans_dislikeButton);
-            likeCount=view.findViewById(R.id.ans_likesCount);
-            dislikeCount=view.findViewById(R.id.que_dislikesCount);
-
+            answerBody = view.findViewById(R.id.ans_userAnswerText);
+            answerViewComments = view.findViewById(R.id.ans_viewCommentsButton);
+            answerLikeButton=view.findViewById(R.id.ans_likeButton);
+            answerDislikeButton=view.findViewById(R.id.ans_dislikeButton);
+            answerLikeCount=view.findViewById(R.id.ans_likesCount);
+            answerDislikeCount=view.findViewById(R.id.ans_dislikesCount);
+            answerTimestamp = view.findViewById(R.id.ans_answerTimeStamp);
+            organisationImage=view.findViewById(R.id.ans_organisationImage);
         }
     }
 
@@ -53,24 +57,44 @@ public class MyAnswerAdapter extends RecyclerView.Adapter<MyAnswerAdapter.MyAnsw
         return myAnswerViewHolder;
     }
 
-    @Override
-    public void onBindViewHolder(@NonNull final MyAnswerViewHolder holder, int position) {
+    //LIKE CHECK
+    private boolean LikeCheck(List<String>likedList){
+        boolean likedFlag=false;
+        for(String x:likedList){
+            if(x.equals(userId)){
+                likedFlag=true;
+            }
+        }
+        return (likedFlag);
+    }
 
-        final Answer answer=demoList.get(position);
-        holder.likeButton.setOnClickListener(new View.OnClickListener() {
+    //DISLIKE CHECK
+    private boolean DislikeCheck(List<String>dislikedList){
+        boolean dislikedFlag=false;
+        for(String x:dislikedList){
+            if(x.equals(userId)){
+                dislikedFlag=true;
+            }
+        }
+        return dislikedFlag;
+    }
+
+    @SuppressLint("ResourceAsColor")
+    @Override
+
+    public void onBindViewHolder(@NonNull final MyAnswerViewHolder holder, final int position) {
+        holder.answerViewComments.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                holder.likeButton.setClickable(false);
-                holder.dislikeButton.setClickable(false);
-                int likes=answer.getLikeCount();
-                likes++;
-                holder.likeCount.setText(String.valueOf(likes));
-                answer.setLikeCount(likes);
-                iAnswerCommunicator.updateLikes(answer.getAnswerId());
+                iAnswerCommunicator.onClick(answerList.get(position));
             }
         });
 
-        holder.dislikeButton.setOnClickListener(new View.OnClickListener() {
+        holder.answerBody.setText(answerList.get(position).getAnswerBody());
+        holder.answerLikeCount.setText(String.valueOf(answerList.get(position).getLikeCount()));
+        holder.answerDislikeCount.setText(String.valueOf(answerList.get(position).getDislikeCount()));
+        holder.answerTimestamp.setText(answerList.get(position).getDate());
+        holder.organisationImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 holder.likeButton.setClickable(false);
@@ -83,6 +107,71 @@ public class MyAnswerAdapter extends RecyclerView.Adapter<MyAnswerAdapter.MyAnsw
             }
         });
 
+        List<String>likedList=answerList.get(position).getLikeUserList();
+        List<String>dislikedList=answerList.get(position).getDislikeUserList();
+
+        if(LikeCheck(likedList)){
+            holder.answerLikeButton.setBackgroundColor(R.color.blue);
+            holder.answerDislikeButton.setClickable(false);
+            holder.answerLikeButton.setClickable(false);
+
+        }
+        else if(DislikeCheck(dislikedList)){
+            holder.answerDislikeButton.setBackgroundColor(R.color.red);
+            holder.answerDislikeButton.setClickable(false);
+            holder.answerLikeButton.setClickable(false);
+        }
+        else {
+            holder.answerLikeButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    QuoraRetrofitService quoraRetrofitService = RetrofitClientInstance.getRetrofitInstance().create(QuoraRetrofitService.class);
+                    Call<IdResponse> call = quoraRetrofitService.doLikeQues(answerList.get(position).getQuestionId(), userId);
+                    call.enqueue(new Callback<IdResponse>() {
+                        @Override
+                        public void onResponse(Call<IdResponse> call, Response<IdResponse> response) {
+                            System.out.println("OnResponse LikeAns");
+                            holder.answerLikeButton.setClickable(false);
+                            holder.answerDislikeButton.setClickable(false);
+                            String likeCount = (String) holder.answerLikeCount.getText();
+                            Integer likeNo = Integer.parseInt(likeCount);
+                            likeNo++;
+                            holder.answerLikeCount.setText(String.valueOf(likeNo));
+                            holder.answerLikeButton.setBackgroundColor(R.color.blue);
+                        }
+
+                        @Override
+                        public void onFailure(Call<IdResponse> call, Throwable t) {
+                            System.out.println("OnFailure LikeAns" + t.getMessage());
+                        }
+                    });
+                }
+            });
+            holder.answerDislikeButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    QuoraRetrofitService quoraRetrofitService = RetrofitClientInstance.getRetrofitInstance().create(QuoraRetrofitService.class);
+                    Call<IdResponse> call = quoraRetrofitService.doDislikeQues(answerList.get(position).getQuestionId(), userId);
+                    call.enqueue(new Callback<IdResponse>() {
+                        @Override
+                        public void onResponse(Call<IdResponse> call, Response<IdResponse> response) {
+                            System.out.println("OnResponse DislikeAns");
+                            holder.answerLikeButton.setClickable(false);
+                            holder.answerDislikeButton.setClickable(false);
+                            String dislikeCount = (String) holder.answerDislikeCount.getText();
+                            Integer dislikeNo = Integer.parseInt(dislikeCount);
+                            dislikeNo++;
+                            holder.answerDislikeCount.setText(String.valueOf(dislikeNo));
+                        }
+
+                        @Override
+                        public void onFailure(Call<IdResponse> call, Throwable t) {
+                            System.out.println("OnFailure DislikeAns" + t.getMessage());
+                        }
+                    });
+                }
+            });
+        }
     }
 
 
