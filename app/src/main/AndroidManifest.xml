@@ -12,18 +12,20 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ViewComments"></activity>
-        <activity android:name=".MyAnswers"></activity>
-        <activity android:name=".CategoryActivity"></activity>
+        <activity android:name=".QuoraRegister"></activity>
+        <activity android:name=".ViewComments" />
+        <activity android:name=".MyAnswers" />
+        <activity android:name=".CategoryActivity" />
         <activity android:name=".MyQuestions" />
         <activity android:name=".Register" />
         <activity android:name=".LoginMain">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ViewOrganisation"></activity>
+        <activity android:name=".ViewOrganisation" />
         <activity android:name=".SearchResults" />
         <activity android:name=".NewPost" />
         <activity android:name=".MyProfile" />
@@ -31,7 +33,7 @@
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
             </intent-filter>
-        </activity>   
+        </activity>
         <activity
             android:name=".QuestionAnswer"
             android:windowSoftInputMode="stateVisible|adjustPan" />

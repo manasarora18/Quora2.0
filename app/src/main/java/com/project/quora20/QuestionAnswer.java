@@ -27,18 +27,16 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class QuestionAnswer extends AppCompatActivity implements QuestionAnswerAdapter.AnswerCommunication {
-
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager qa_answerLayoutManager;
-    QuoraRetrofitService quoraRetrofitService;
+    private QuoraRetrofitService quoraRetrofitService;
     private SharedPreferences sharedPreferences;
-    Answer answerList;
-    TextView qa_questionText;
-    TextView qa_answerText;
-    ImageButton sendAnswerButton;
-    AnswerDTO answerdto = new AnswerDTO();
-    //String message = "";
+    private Answer answerList;
+    private TextView qa_questionText;
+    private TextView qa_answerText;
+    private ImageButton sendAnswerButton;
+    private AnswerDTO answerdto = new AnswerDTO();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,10 +88,6 @@ public class QuestionAnswer extends AppCompatActivity implements QuestionAnswerA
 
             }
         });
-
-
-
-
     }
 
     @Override
@@ -108,7 +102,6 @@ public class QuestionAnswer extends AppCompatActivity implements QuestionAnswerA
         sharedPreferences = getSharedPreferences("LoginData", MODE_PRIVATE);
         String userId = sharedPreferences.getString("UserId", "");
         answerDTO.setUserId(userId);
-
 
         qa_answerText = findViewById(R.id.qa_answerText);
         answerDTO.setAnswerBody(qa_answerText.getText().toString());
@@ -131,8 +124,6 @@ public class QuestionAnswer extends AppCompatActivity implements QuestionAnswerA
             @Override
             public void onFailure(Call<IdResponse> call, Throwable t) {
                 System.out.println("OnFailure Add Answer"+t.getMessage());
-
-
             }
         });
 
@@ -143,13 +134,16 @@ public class QuestionAnswer extends AppCompatActivity implements QuestionAnswerA
     void viewAnswers(String questionId) {
         quoraRetrofitService = RetrofitClientInstance.getRetrofitInstance().create(QuoraRetrofitService.class);
 
+
         Call<Answer> callAnswerList = quoraRetrofitService.getAnswersByQuestionId(questionId);
         callAnswerList.enqueue(new Callback<Answer>() {
             @Override
             public void onResponse(Call<Answer> call, Response<Answer> response) {
                 answerList = response.body();
+                sharedPreferences = getSharedPreferences("LoginData", MODE_PRIVATE);
+                String userId = sharedPreferences.getString("UserId", "");
                 System.out.println("Answer List: "+answerList);
-                adapter = new QuestionAnswerAdapter(answerList, QuestionAnswer.this);
+                adapter = new QuestionAnswerAdapter(answerList, QuestionAnswer.this,userId);
                 recyclerView.setAdapter(adapter);
 
                 System.out.println("OnResponse View Answer By Qid");
