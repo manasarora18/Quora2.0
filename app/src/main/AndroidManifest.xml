@@ -20,7 +20,17 @@
         <activity android:name=".LoginMain">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".ViewOrganisation"></activity>
+        <activity android:name=".SearchResults" />
+        <activity android:name=".NewPost" />
+        <activity android:name=".MyProfile" />
+        <activity android:name=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
             </intent-filter>
         </activity>
         <activity android:name=".ViewOrganisation"></activity>

@@ -1,158 +1,170 @@
 package com.project.quora20.entity;
 
 import java.util.List;
-
 import com.google.gson.annotations.SerializedName;
 
-public class Question {
-    @SerializedName("dislikeUserList")
-    private List<String> dislikeUserList;
-    @SerializedName("date")
-    private String date;
-    @SerializedName("questionId")
-    private String questionId;
-    @SerializedName("likeUserList")
-    private List<String> likeUserList;
-    @SerializedName("answersList")
-    private List<String> answersList;
-    @SerializedName("dislikeCount")
-    private int dislikeCount;
-    @SerializedName("likeCount")
-    private int likeCount;
-    @SerializedName("userId")
-    private String userId;
-    @SerializedName("orgId")
-    private String orgId;
-    @SerializedName("bestAnswerId")
-    private String bestAnswerId;
-    @SerializedName("approvalFlag")
-    private boolean approvalFlag;
-    @SerializedName("questionBody")
-    private String questionBody;
-    @SerializedName("categoryId")
-    private String categoryId;
+public class Question{
 
-    public void setDislikeUserList(List<String> dislikeUserList) {
-        this.dislikeUserList = dislikeUserList;
-    }
+	@SerializedName("dislikeUserList")
+	private List<String> dislikeUserList;
 
-    public List<String> getDislikeUserList() {
-        return dislikeUserList;
-    }
+	@SerializedName("date")
+	private String date;
 
-    public void setDate(String date) {
-        this.date = date;
-    }
+	@SerializedName("questionId")
+	private String questionId;
 
-    public String getDate() {
-        return date;
-    }
+	@SerializedName("likeUserList")
+	private List<String> likeUserList;
 
-    public void setQuestionId(String questionId) {
-        this.questionId = questionId;
-    }
+	@SerializedName("answersList")
+	private List<String> answersList;
 
-    public String getQuestionId() {
-        return questionId;
-    }
+	@SerializedName("dislikeCount")
+	private int dislikeCount;
 
-    public void setLikeUserList(List<String> likeUserList) {
-        this.likeUserList = likeUserList;
-    }
+	@SerializedName("likeCount")
+	private int likeCount;
 
-    public List<String> getLikeUserList() {
-        return likeUserList;
-    }
+	@SerializedName("userId")
+	private String userId;
 
-    public void setAnswersList(List<String> answersList) {
-        this.answersList = answersList;
-    }
+	@SerializedName("orgId")
+	private String orgId;
 
-    public List<String> getAnswersList() {
-        return answersList;
-    }
+	@SerializedName("bestAnswerId")
+	private String bestAnswerId;
 
-    public void setDislikeCount(int dislikeCount) {
-        this.dislikeCount = dislikeCount;
-    }
+	@SerializedName("approvalFlag")
+	private boolean approvalFlag;
 
-    public int getDislikeCount() {
-        return dislikeCount;
-    }
+	@SerializedName("questionBody")
+	private String questionBody;
 
-    public void setLikeCount(int likeCount) {
-        this.likeCount = likeCount;
-    }
+	@SerializedName("categoryId")
+	private String categoryId;
 
-    public int getLikeCount() {
-        return likeCount;
-    }
+	public void setDislikeUserList(List<String> dislikeUserList){
+		this.dislikeUserList = dislikeUserList;
+	}
 
-    public void setUserId(String userId) {
-        this.userId = userId;
-    }
+	public List<String> getDislikeUserList(){
+		return dislikeUserList;
+	}
 
-    public String getUserId() {
-        return userId;
-    }
+	public void setDate(String date){
+		this.date = date;
+	}
 
-    public void setOrgId(String orgId) {
-        this.orgId = orgId;
-    }
+	public String getDate(){
+		return date;
+	}
 
-    public String getOrgId() {
-        return orgId;
-    }
+	public void setQuestionId(String questionId){
+		this.questionId = questionId;
+	}
 
-    public void setBestAnswerId(String bestAnswerId) {
-        this.bestAnswerId = bestAnswerId;
-    }
+	public String getQuestionId(){
+		return questionId;
+	}
 
-    public String getBestAnswerId() {
-        return bestAnswerId;
-    }
+	public List<String> getLikeUserList() {
+		return likeUserList;
+	}
 
-    public void setApprovalFlag(boolean approvalFlag) {
-        this.approvalFlag = approvalFlag;
-    }
+	public void setLikeUserList(List<String> likeUserList) {
+		this.likeUserList = likeUserList;
+	}
 
-    public boolean isApprovalFlag() {
-        return approvalFlag;
-    }
+	public void setAnswersList(List<String> answersList){
+		this.answersList = answersList;
+	}
 
-    public void setQuestionBody(String questionBody) {
-        this.questionBody = questionBody;
-    }
+	public List<String> getAnswersList(){
+		return answersList;
+	}
 
-    public String getQuestionBody() {
-        return questionBody;
-    }
+	public void setDislikeCount(int dislikeCount){
+		this.dislikeCount = dislikeCount;
+	}
 
-    public void setCategoryId(String categoryId) {
-        this.categoryId = categoryId;
-    }
+	public int getDislikeCount(){
+		return dislikeCount;
+	}
 
-    public String getCategoryId() {
-        return categoryId;
-    }
+	public void setLikeCount(int likeCount){
+		this.likeCount = likeCount;
+	}
 
-    @Override
-    public String toString() {
-        return
-                "Question{" +
-                        "dislikeUserList = '" + dislikeUserList + '\'' +
-                        ",date = '" + date + '\'' +
-                        ",questionId = '" + questionId + '\'' +
-                        ",likeUserList = '" + likeUserList + '\'' +
-                        ",answersList = '" + answersList + '\'' +
-                        ",dislikeCount = '" + dislikeCount + '\'' +
-                        ",likeCount = '" + likeCount + '\'' +
-                        ",userId = '" + userId + '\'' +
-                        ",orgId = '" + orgId + '\'' +
-                        ",bestAnswerId = '" + bestAnswerId + '\'' +
-                        ",approvalFlag = '" + approvalFlag + '\'' +
-                        ",questionBody = '" + questionBody + '\'' +
-                        ",categoryId = '" + categoryId + '\'' +
-                        "}";
-    }
+	public int getLikeCount(){
+		return likeCount;
+	}
+
+	public void setUserId(String userId){
+		this.userId = userId;
+	}
+
+	public String getUserId(){
+		return userId;
+	}
+
+	public void setOrgId(String orgId){
+		this.orgId = orgId;
+	}
+
+	public String getOrgId(){
+		return orgId;
+	}
+
+	public void setBestAnswerId(String bestAnswerId){
+		this.bestAnswerId = bestAnswerId;
+	}
+
+	public String getBestAnswerId(){
+		return bestAnswerId;
+	}
+
+	public void setApprovalFlag(boolean approvalFlag){
+		this.approvalFlag = approvalFlag;
+	}
+
+	public boolean isApprovalFlag(){
+		return approvalFlag;
+	}
+
+	public void setQuestionBody(String questionBody){
+		this.questionBody = questionBody;
+	}
+
+	public String getQuestionBody(){
+		return questionBody;
+	}
+
+	public void setCategoryId(String categoryId){
+		this.categoryId = categoryId;
+	}
+
+	public String getCategoryId(){
+		return categoryId;
+	}
+
+	@Override
+ 	public String toString(){
+		return 
+			"Question{" + 
+			"dislikeUserList = '" + dislikeUserList + '\'' + 
+			",date = '" + date + '\'' + 
+			",questionId = '" + questionId + '\'' + 
+			",likeUserList = '" + likeUserList + '\'' + 
+			",answersList = '" + answersList + '\'' + 
+			",dislikeCount = '" + dislikeCount + '\'' + 
+			",likeCount = '" + likeCount + '\'' + 
+			",userId = '" + userId + '\'' + 
+			",orgId = '" + orgId + '\'' + 
+			",bestAnswerId = '" + bestAnswerId + '\'' + 
+			",approvalFlag = '" + approvalFlag + '\'' + 
+			",questionBody = '" + questionBody + '\'' + 
+			",categoryId = '" + categoryId + '\'' + 
+			"}";
+		}
 }

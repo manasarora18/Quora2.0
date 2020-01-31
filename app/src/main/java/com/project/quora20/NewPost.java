@@ -14,6 +14,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.project.quora20.dto.NewPostRequestDTO;
+import com.project.quora20.dto.IdResponse;
 import com.project.quora20.retrofit.QuoraRetrofitService;
 import com.project.quora20.retrofit.RetrofitClientInstance;
 
@@ -66,16 +67,17 @@ public class NewPost extends AppCompatActivity implements AdapterView.OnItemSele
                 newPostRequestDTO.setQuestionBody(question);
                 newPostRequestDTO.setUserId(userId);
                 newPostRequestDTO.setCategoryId(categoryId);
-//                newPostRequestDTO.setPersonsTag(tagPeopleList);
-//                if(!orgId.equals("")) {
-//                    newPostRequestDTO.setOrgId(orgId);
-//                }
+                newPostRequestDTO.setPersonsTag(tagPeopleList);
+
+                if(!orgId.equals("")) {
+                    newPostRequestDTO.setOrgId(orgId);
+                }
 
                 QuoraRetrofitService quoraRetrofitService= RetrofitClientInstance.getRetrofitInstance().create(QuoraRetrofitService.class);
-                Call<String> call=quoraRetrofitService.createNewPost(newPostRequestDTO);
-                call.enqueue(new Callback<String>() {
+                Call<IdResponse> call=quoraRetrofitService.createNewPost(newPostRequestDTO);
+                call.enqueue(new Callback<IdResponse>() {
                     @Override
-                    public void onResponse(Call<String> call, Response<String> response) {
+                    public void onResponse(Call<IdResponse> call, Response<IdResponse> response) {
 //                        if(response.code()==200){
                             Toast.makeText(getApplicationContext(),"New Post Created",Toast.LENGTH_SHORT).show();
                             Intent backToHome=new Intent(NewPost.this,MainActivity.class);
@@ -84,10 +86,9 @@ public class NewPost extends AppCompatActivity implements AdapterView.OnItemSele
 //                        }
                     }
                     @Override
-                    public void onFailure(Call<String> call, Throwable t) {
+                    public void onFailure(Call<IdResponse> call, Throwable t) {
                         Toast.makeText(getApplicationContext(),t.getMessage(),Toast.LENGTH_SHORT).show();
                         System.out.println("OnFailure NewPost:"+t.getMessage());
-
                     }
                 });
             }
@@ -101,30 +102,30 @@ public class NewPost extends AppCompatActivity implements AdapterView.OnItemSele
             case 0:
                 categoryChoice="Sports";
                 categoryId="1";
-                Toast.makeText(getApplicationContext(),"Sports Selected",Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getApplicationContext(),"Sports Selected",Toast.LENGTH_SHORT).show();
                 // Whatever you want to happen when the first item gets selected
                 break;
             case 1:
                 categoryChoice="Technology";
                 categoryId="2";
-                Toast.makeText(getApplicationContext(),"Technology Selected",Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getApplicationContext(),"Technology Selected",Toast.LENGTH_SHORT).show();
                 // Whatever you want to happen when the second item gets selected
                 break;
             case 2:
                 categoryChoice="Lifestyle";
                 categoryId="3";
-                Toast.makeText(getApplicationContext(),"Lifestyle Selected",Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getApplicationContext(),"Lifestyle Selected",Toast.LENGTH_SHORT).show();
                 // Whatever you want to happen when the thrid item gets selected
                 break;
             case 3:
                 categoryChoice="Food";
                 categoryId="4";
-                Toast.makeText(getApplicationContext(),"Food Selected",Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getApplicationContext(),"Food Selected",Toast.LENGTH_SHORT).show();
                 break;
             case 4:
                 categoryChoice="Movies";
                 categoryId="5";
-                Toast.makeText(getApplicationContext(),"Movies Selected",Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getApplicationContext(),"Movies Selected",Toast.LENGTH_SHORT).show();
                 break;
         }
     }
