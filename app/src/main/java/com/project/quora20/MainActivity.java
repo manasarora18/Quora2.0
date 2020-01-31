@@ -28,7 +28,6 @@ import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, HomeAdapter.QuestionCommunication {
     private Toolbar toolbar;
-    private SharedPreferences sharedPreferences;
     private SearchView searchView;
     private TextView userName;
     private TextView userEmail;
@@ -36,9 +35,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
     private Button newPostToolbar;
-    private RecyclerView homerecyclerView;
+    private RecyclerView homeRecyclerView;
     private RecyclerView.Adapter homeadapter;
     private RecyclerView.LayoutManager homeLayoutManager;
+    private SharedPreferences sharedPreferences;
+
     HomeAdapter.QuestionCommunication questionCommunication;
     List<Question> questionList;
 
@@ -132,12 +133,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     private void generateDataList(List<Question>list){
-        homerecyclerView=findViewById(R.id.homeRecyclerView);
+        homeRecyclerView =findViewById(R.id.homeRecyclerView);
         //if list not null
-        homeadapter=new HomeAdapter(list,MainActivity.this);
+        sharedPreferences=getSharedPreferences("LoginData",MODE_PRIVATE);
+        String userId=sharedPreferences.getString("UserId","");
+        homeadapter=new HomeAdapter(list,MainActivity.this,userId);
         GridLayoutManager gridLayoutManager=new GridLayoutManager(getApplicationContext(),1);
-        homerecyclerView.setLayoutManager(gridLayoutManager);
-        homerecyclerView.setAdapter(homeadapter);
+        homeRecyclerView.setLayoutManager(gridLayoutManager);
+        homeRecyclerView.setAdapter(homeadapter);
     }
 
     @Override

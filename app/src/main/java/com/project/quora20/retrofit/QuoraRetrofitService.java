@@ -2,6 +2,7 @@ package com.project.quora20.retrofit;
 
 import com.project.quora20.dto.AccessTokenRegisterResponse;
 import com.project.quora20.dto.CoAuthRequestDTO;
+import com.project.quora20.dto.IdResponse;
 import com.project.quora20.entity.Organization;
 import com.project.quora20.dto.NewPostRequestDTO;
 import com.project.quora20.entity.Question;
@@ -20,7 +21,7 @@ public interface QuoraRetrofitService {
 
 //    @GET("/login-service/profile/{userId}")
 //    Call<UserDTO> getUserProfile(@Path("userId") String userId);
-//
+
     @POST("/auth/signup")
     Call <AccessTokenRegisterResponse> addUser(@Body CoAuthRequestDTO coAuthRequestDTO);
 
@@ -29,9 +30,6 @@ public interface QuoraRetrofitService {
 
     @GET("/question/getCategoryFeed/{catId}")
     Call <List<Question>> getCategoryQuestions(@Path("catId")String catId);
-
-//    @POST("/login-service/login")
-//    Call<AccessTokenDTO> loginUser(@Body RegisterUser registerUser);
 
     @PUT("/answer/likeanswer/{answerId}")
     Call<String> likeAnswer(@Path("answerId") String answerId);
@@ -43,17 +41,17 @@ public interface QuoraRetrofitService {
     Call<Organization> viewOrganization(@Path("organizationId") String organizationId);
   
     @POST("/question/add")
-    Call<String> createNewPost(@Body NewPostRequestDTO newPostRequestDTO);
+    Call <IdResponse> createNewPost(@Body NewPostRequestDTO newPostRequestDTO);
 
-    @PUT("/question/likequestion/{qid}")
-    Call<String> doLikeQues(@Path("qid")String qid);
+    @PUT("/question/likequestion/{questionId}/{userId}")
+    Call<IdResponse> doLikeQues(@Path("questionId")String qid,@Path("userId")String userId);
 
-    @PUT("/question/dislikequestion/{qid}")
-    Call<String> doDislikeQues(@Path("qid")String qid);
+    @PUT("/question/dislikequestion/{questionId}/{userId}")
+    Call<IdResponse> doDislikeQues(@Path("questionId")String qid,@Path("userId")String userId);
 
 //    @PUT("/answer/dislikeanswer/{answerId}")
 //    Call<String> dislikeAnswer(@Path("answerId") String answerId);
+
 }
 //5e3140bb4c951a1723dc3f01
-
 //OrgId: 5e3149d91edbf851280ccf51

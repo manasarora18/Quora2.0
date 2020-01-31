@@ -1,20 +1,24 @@
 package com.project.quora20.entity;
 
+import java.util.List;
 import com.google.gson.annotations.SerializedName;
 
 public class Question{
 
+	@SerializedName("dislikeUserList")
+	private List<String> dislikeUserList;
+
 	@SerializedName("date")
 	private String date;
-
-	@SerializedName("bestAnswerId")
-	private String bestAnswerId;
 
 	@SerializedName("questionId")
 	private String questionId;
 
+	@SerializedName("likeUserList")
+	private List<String> likeUserList;
+
 	@SerializedName("answersList")
-	private String answersList;
+	private List<String> answersList;
 
 	@SerializedName("dislikeCount")
 	private int dislikeCount;
@@ -22,11 +26,17 @@ public class Question{
 	@SerializedName("likeCount")
 	private int likeCount;
 
-	@SerializedName("approvalFlag")
-	private boolean approvalFlag;
-
 	@SerializedName("userId")
 	private String userId;
+
+	@SerializedName("orgId")
+	private String orgId;
+
+	@SerializedName("bestAnswerId")
+	private String bestAnswerId;
+
+	@SerializedName("approvalFlag")
+	private boolean approvalFlag;
 
 	@SerializedName("questionBody")
 	private String questionBody;
@@ -34,8 +44,13 @@ public class Question{
 	@SerializedName("categoryId")
 	private String categoryId;
 
-	@SerializedName("orgId")
-	private String orgId;
+	public void setDislikeUserList(List<String> dislikeUserList){
+		this.dislikeUserList = dislikeUserList;
+	}
+
+	public List<String> getDislikeUserList(){
+		return dislikeUserList;
+	}
 
 	public void setDate(String date){
 		this.date = date;
@@ -43,14 +58,6 @@ public class Question{
 
 	public String getDate(){
 		return date;
-	}
-
-	public void setBestAnswerId(String bestAnswerId){
-		this.bestAnswerId = bestAnswerId;
-	}
-
-	public String getBestAnswerId(){
-		return bestAnswerId;
 	}
 
 	public void setQuestionId(String questionId){
@@ -61,11 +68,19 @@ public class Question{
 		return questionId;
 	}
 
-	public void setAnswersList(String answersList){
+	public List<String> getLikeUserList() {
+		return likeUserList;
+	}
+
+	public void setLikeUserList(List<String> likeUserList) {
+		this.likeUserList = likeUserList;
+	}
+
+	public void setAnswersList(List<String> answersList){
 		this.answersList = answersList;
 	}
 
-	public String getAnswersList(){
+	public List<String> getAnswersList(){
 		return answersList;
 	}
 
@@ -85,20 +100,36 @@ public class Question{
 		return likeCount;
 	}
 
-	public void setApprovalFlag(boolean approvalFlag){
-		this.approvalFlag = approvalFlag;
-	}
-
-	public boolean isApprovalFlag(){
-		return approvalFlag;
-	}
-
 	public void setUserId(String userId){
 		this.userId = userId;
 	}
 
 	public String getUserId(){
 		return userId;
+	}
+
+	public void setOrgId(String orgId){
+		this.orgId = orgId;
+	}
+
+	public String getOrgId(){
+		return orgId;
+	}
+
+	public void setBestAnswerId(String bestAnswerId){
+		this.bestAnswerId = bestAnswerId;
+	}
+
+	public String getBestAnswerId(){
+		return bestAnswerId;
+	}
+
+	public void setApprovalFlag(boolean approvalFlag){
+		this.approvalFlag = approvalFlag;
+	}
+
+	public boolean isApprovalFlag(){
+		return approvalFlag;
 	}
 
 	public void setQuestionBody(String questionBody){
@@ -117,29 +148,23 @@ public class Question{
 		return categoryId;
 	}
 
-	public void setOrgId(String orgId){
-		this.orgId = orgId;
-	}
-
-	public String getOrgId(){
-		return orgId;
-	}
-
 	@Override
  	public String toString(){
 		return 
 			"Question{" + 
-			"date = '" + date + '\'' + 
-			",bestAnswerId = '" + bestAnswerId + '\'' + 
+			"dislikeUserList = '" + dislikeUserList + '\'' + 
+			",date = '" + date + '\'' + 
 			",questionId = '" + questionId + '\'' + 
+			",likeUserList = '" + likeUserList + '\'' + 
 			",answersList = '" + answersList + '\'' + 
 			",dislikeCount = '" + dislikeCount + '\'' + 
 			",likeCount = '" + likeCount + '\'' + 
-			",approvalFlag = '" + approvalFlag + '\'' + 
 			",userId = '" + userId + '\'' + 
+			",orgId = '" + orgId + '\'' + 
+			",bestAnswerId = '" + bestAnswerId + '\'' + 
+			",approvalFlag = '" + approvalFlag + '\'' + 
 			",questionBody = '" + questionBody + '\'' + 
 			",categoryId = '" + categoryId + '\'' + 
-			",orgId = '" + orgId + '\'' + 
 			"}";
 		}
 }

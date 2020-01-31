@@ -2,6 +2,8 @@ package com.project.quora20.entity;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.util.List;
+
 public class Answer{
 
 	@SerializedName("answerId")
@@ -21,6 +23,28 @@ public class Answer{
 
 	@SerializedName("approvalFlag")
 	private boolean approvalFlag;
+
+	@SerializedName("likeUserList")
+	private List<String> likeUserList;
+
+	@SerializedName("dislikeUserList")
+	private List<String> dislikeUserList;
+
+	public List<String> getLikeUserList() {
+		return likeUserList;
+	}
+
+	public void setLikeUserList(List<String> likeUserList) {
+		this.likeUserList = likeUserList;
+	}
+
+	public List<String> getDislikeUserList() {
+		return dislikeUserList;
+	}
+
+	public void setDislikeUserList(List<String> dislikeUserList) {
+		this.dislikeUserList = dislikeUserList;
+	}
 
 	public void setAnswerId(String answerId){
 		this.answerId = answerId;
