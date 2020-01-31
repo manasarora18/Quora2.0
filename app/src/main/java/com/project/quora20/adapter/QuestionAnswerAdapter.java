@@ -67,9 +67,9 @@ public class QuestionAnswerAdapter extends RecyclerView.Adapter<QuestionAnswerAd
             }
         });
 
-        holder.answerBody.setText(answerList.get(position).getAnswerBody());
-        holder.answerLike.setText(String.valueOf(answerList.get(position).getLikeCount()));
-        holder.answerDislike.setText(String.valueOf(answerList.get(position).getDislikeCount()));
+        holder.answerBody.setText(answerList.get(position).getAnswerList().get(position).getAnswerBody());
+        holder.answerLike.setText(String.valueOf(answerList.get(position).getAnswerList().get(position).getLikeCount()));
+        holder.answerDislike.setText(String.valueOf(answerList.get(position).getAnswerList().get(position).getDislikeCount()));
         holder.answerLikeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
