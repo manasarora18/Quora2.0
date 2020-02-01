@@ -58,7 +58,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         View headerView = navigationView.getHeaderView(0);
 
         SharedPreferences.Editor editor=sharedPreferences.edit();
-        editor.putString("UserId","5e314d5e83f84b7add06ec38").apply();
+//        editor.putString("UserId","5e314d5e83f84b7add06ec38").apply();
         editor.putString("OrgId","").apply();
         editor.commit();
 
@@ -165,32 +165,32 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 //        Toast.makeText(this, "this menu item clicked", Toast.LENGTH_SHORT).show();
         switch(item.getItemId()) {
-            case R.id.sports_nav_menu:
+            case R.id.literature_nav_menu:
 //                Intent catIntent1 = new Intent(this, CategoryActivity.class);
 //                catIntent1.putExtra("categoryId",2);
 //                this.startActivity(catIntent1);
                 break;
-            case R.id.technology_nav_menu:
+            case R.id.lifestyle_nav_menu:
 //                Intent catIntent2= new Intent(this,CategoryActivity.class);
 //                catIntent2.putExtra("categoryId",3);
 //                this.startActivity(catIntent2);
                 break;
-            case R.id.lifestyle_nav_menu:
+            case R.id.technology_nav_menu:
 //                Intent catIntent3= new Intent(this,CategoryActivity.class);
 //                catIntent3.putExtra("categoryId",4);
 //                this.startActivity(catIntent3);
                 break;
-            case R.id.food_nav_menu:
+            case R.id.movies_nav_menu:
 //                Intent catIntent4= new Intent(this,CategoryActivity.class);
 //                catIntent4.putExtra("categoryId",5);
 //                this.startActivity(catIntent4);
                 break;
-            case R.id.movies_nav_menu:
+            case R.id.food_nav_menu:
 //                Intent catIntent5= new Intent(this,CategoryActivity.class);
 //                catIntent5.putExtra("categoryId",1);
 //                this.startActivity(catIntent5);
                 break;
-            case R.id.questions_nav_menu:
+            case R.id.sports_nav_menu:
                 sharedPreferences=getSharedPreferences("LoginData",MODE_PRIVATE);
                 String loginCheckQues=sharedPreferences.getString("LoginCheck","false");
 

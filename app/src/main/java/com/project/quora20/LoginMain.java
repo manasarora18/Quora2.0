@@ -10,11 +10,33 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-
+import com.google.android.material.snackbar.Snackbar;
+import com.project.quora20.dto.AccessTokenLoginResponse;
+import com.project.quora20.dto.CoAuthLoginRequest;
+import com.project.quora20.dto.JWTGetDetailsRequest;
+import com.project.quora20.dto.JWTGetDetailsResponse;
+import com.project.quora20.dto.UserDTO;
+import com.project.quora20.entity.User;
+import com.project.quora20.retrofit.QuoraRetrofitService;
+import com.project.quora20.retrofit.RetrofitClientInstance;
+import com.project.quora20.retrofit.RetrofitLoginService;
+import com.project.quora20.retrofit.RetrofitUsersInstance;
 import java.util.Random;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class LoginMain extends AppCompatActivity {
     private SharedPreferences sp;
+    private CoAuthLoginRequest coAuthLoginRequest=new CoAuthLoginRequest();
+    private AccessTokenLoginResponse accessTokenLoginResponse=new AccessTokenLoginResponse();
+    private JWTGetDetailsRequest jwtGetDetailsRequest=new JWTGetDetailsRequest();
+    private JWTGetDetailsResponse jwtGetDetailsResponse=new JWTGetDetailsResponse();
+    private UserDTO userDTO=new UserDTO();
+    private User user=new User();
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,14 +50,13 @@ public class LoginMain extends AppCompatActivity {
                 Intent registerIntent = new Intent(LoginMain.this, Register.class);
                 startActivity(registerIntent);
             }
-
         });
 
         Button loginButton = findViewById(R.id.login_loginButton);
         sp = getSharedPreferences("LoginData", MODE_PRIVATE);
         String check = sp.getString("LoginCheck", "false");
-        if (check.equals("false")) {
-            if (!sp.getBoolean("LogInData", false)) {
+//        if (check.equals("false")) {
+//            if (!sp.getBoolean("LogInData", false)) {
                 loginButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -50,63 +71,52 @@ public class LoginMain extends AppCompatActivity {
                         final String pw = String.valueOf(pass.getText());
                         if (user1.length() == 0 || pw.length() == 0) {
                             Toast.makeText(getApplicationContext(), "Enter Login Details", Toast.LENGTH_SHORT).show();
-                        } /*else {
-                            registerUser.setEmail(user1);
-                            registerUser.setPassword(pw);
-                            GetProductsService getProductsService = RetrofitClientInstance.getRetrofitInstance().create(GetProductsService.class);
-                            Call<AccessTokenDTO> call = getProductsService.loginUser(registerUser);
-                            call.enqueue(new Callback<AccessTokenDTO>() {
+                        } else {
+                            coAuthLoginRequest.setEmail(user1);
+                            coAuthLoginRequest.setPassword(pw);
+                            QuoraRetrofitService quoraRetrofitService = RetrofitLoginService.getRetrofitInstance().create(QuoraRetrofitService.class);
+                            Call<AccessTokenLoginResponse> call = quoraRetrofitService.loginUser(coAuthLoginRequest);
+                            call.enqueue(new Callback<AccessTokenLoginResponse>() {
                                 @Override
-                                public void onResponse(Call<AccessTokenDTO> call, Response<AccessTokenDTO> response) {
-                                    accessTokenDTO = response.body();
-                                    sp = getSharedPreferences("LoginData", MODE_PRIVATE);
-                                    if(accessTokenDTO!=null) {
-                                        if (accessTokenDTO.getCheck()) {
-                                            System.out.println(accessTokenDTO.getCheck() + "CHECK");
-                                            System.out.println("LOGIN DONE");
-                                            String userId = accessTokenDTO.getUserId();
-                                            SharedPreferences.Editor editor = sp.edit();
-                                            editor.putString("UserId", userId).apply();
-                                            String email = registerUser.getEmail();
-                                            editor.putString("Email", email).apply();
-                                            editor.putString("LoginCheck", "true").apply();
+                                public void onResponse(Call<AccessTokenLoginResponse> call, Response<AccessTokenLoginResponse> response) {
+                                    if(response.code()==200){
+                                        accessTokenLoginResponse = response.body();
+                                        if (accessTokenLoginResponse != null) {
+                                            sp=getSharedPreferences("LoginData",MODE_PRIVATE);
+                                            SharedPreferences.Editor editor=sp.edit();
+                                            editor.putString("AccessToken",accessTokenLoginResponse.getAccessToken()).apply();
+                                            editor.putString("TokenType",accessTokenLoginResponse.getTokenType()).apply();
                                             editor.commit();
-                                            Intent loginIntent = new Intent(LoginMain.this, MainActivity.class);
-                                            loginIntent.putExtra("GuestUserId", cartValue);
-                                            System.out.println("OnFailure CUSTOM LOGIN Success");
-                                            startActivity(loginIntent);
-                                            finish();
-                                        } else {
-                                            Snackbar snackbar = Snackbar.make(findViewById(R.id.login_layout), "Invalid Login Details", Snackbar.LENGTH_LONG);
-                                            snackbar.show();
-                                            System.out.println("OnResponse CUSTOM LOGIN PW MISMATCH" + accessTokenDTO.getCheck());
+                                            System.out.println("ACCESS TOKEN:"+accessTokenLoginResponse.getAccessToken());
+                                            String accessToken="Bearer "+accessTokenLoginResponse.getAccessToken();
+                                            GetCoAuthUserDetailsCall(accessToken);
                                         }
                                     }
-                                    else{
-                                        Toast.makeText(getApplicationContext(),"No AccessToken Received from Backend!",Toast.LENGTH_LONG).show();
+                                    else {
+                                        Snackbar snackbar = Snackbar.make(findViewById(R.id.login_layout), "Invalid Login Details", Snackbar.LENGTH_LONG);
+                                        snackbar.show();
+                                        System.out.println("OnResponse CUSTOM LOGIN PW MISMATCH");
                                     }
                                 }
 
                                 @Override
-                                public void onFailure(Call<AccessTokenDTO> call, Throwable t) {
-                                    Snackbar snackbar = Snackbar.make(findViewById(R.id.login_layout),
-                                            t.getMessage(), Snackbar.LENGTH_LONG);
-                                    snackbar.show();
-                                    System.out.println("OnFailure CUSTOM LOGIN" + t.getMessage());
+                                public void onFailure(Call<AccessTokenLoginResponse> call, Throwable t) {
+                                    System.out.println("OnFailure Login"+t.getMessage());
                                 }
                             });
-                        }*/
+                        }
                     }
                 });
-            } else {
-                Intent SignIntent = new Intent(LoginMain.this, MainActivity.class);
-                startActivity(SignIntent);
-                finish();
-            }
-        } else {
-            Intent LoggedIn = new Intent(LoginMain.this, MainActivity.class);
-            startActivity(LoggedIn);
-        }
+//            } else {
+//                Intent SignIntent = new Intent(LoginMain.this, MainActivity.class);
+//                startActivity(SignIntent);
+//                finish();
+
+//        } else {
+//            Intent LoggedIn = new Intent(LoginMain.this, MainActivity.class);
+//            startActivity(LoggedIn);
+//        }
+
         //SKIP LOGIN
         Button skipSignIn = findViewById(R.id.skip);
         skipSignIn.setOnClickListener(new View.OnClickListener() {
@@ -128,7 +138,67 @@ public class LoginMain extends AppCompatActivity {
                 startActivity(skipSignInIntent);
             }
         });
+    }
 
+    private void GetCoAuthUserDetailsCall(String accessToken) {
+        jwtGetDetailsRequest.setProvider(2);
 
+        final QuoraRetrofitService quoraRetrofitService=RetrofitLoginService.getRetrofitInstance().create(QuoraRetrofitService.class);
+        Call <JWTGetDetailsResponse> call=quoraRetrofitService.getUserDetails(accessToken,jwtGetDetailsRequest);
+        call.enqueue(new Callback<JWTGetDetailsResponse>() {
+            @Override
+            public void onResponse(Call<JWTGetDetailsResponse> call, Response<JWTGetDetailsResponse> response) {
+                System.out.println("OnResponse JWT GetUserDetails");
+                System.out.println(response.code()+"CODE");
+                if (response.body() != null) {
+                    jwtGetDetailsResponse = response.body();
+                    sp = getSharedPreferences("LoginData", MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sp.edit();
+                    editor.putString("UserId", String.valueOf(jwtGetDetailsResponse.getId())).apply();
+                    editor.putString("Name", jwtGetDetailsResponse.getName()).apply();
+                    editor.putString("Email", jwtGetDetailsResponse.getEmail()).apply();
+                    editor.commit();
+                    System.out.println(jwtGetDetailsResponse.getId() + "ROLE ID");
+                    userDTO.setUserId(String.valueOf(jwtGetDetailsResponse.getId()));
+                    System.out.println(jwtGetDetailsResponse.getEmail() + "ROLE EMAIL");
+                    userDTO.setUserEmail(jwtGetDetailsResponse.getEmail());
+                    System.out.println(jwtGetDetailsResponse.getName() + "ROLE NAME");
+                    userDTO.setUserName(jwtGetDetailsResponse.getName());
+                    System.out.println(jwtGetDetailsResponse.getRole() + "ROLE");
+
+                    if (jwtGetDetailsResponse.getRole() == null) {
+                        QuoraRetrofitService quoraRetrofitService1 = RetrofitUsersInstance.getRetrofitInstance().create(QuoraRetrofitService.class);
+                        Call<String> call1 = quoraRetrofitService1.registerOnQuora(userDTO);
+                        call1.enqueue(new Callback<String>() {
+                            @Override
+                            public void onResponse(Call<String> call, Response<String> response) {
+                                if (response.body() != null) {
+                                    System.out.println("OnResponse RegisterQuora");
+                                    Intent loginNow = new Intent(LoginMain.this, QuoraRegister.class);
+                                    startActivity(loginNow);
+                                    finish();
+                                }
+                            }
+
+                            @Override
+                            public void onFailure(Call<String> call, Throwable t) {
+                                System.out.println("OnFailure RegisterQuora:" + t.getMessage());
+                            }
+                        });
+                    } else {
+                        Intent registerQuora = new Intent(LoginMain.this, MainActivity.class);
+                        startActivity(registerQuora);
+                    }
+                }
+                else{
+                    System.out.println("RECEVING NULL FROM JWT");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<JWTGetDetailsResponse> call, Throwable t) {
+                System.out.println("OnFailure JWT GetUserDetails"+t.getMessage());
+            }
+        });
     }
 }

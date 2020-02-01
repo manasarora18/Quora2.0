@@ -1,9 +1,17 @@
 package com.project.quora20.retrofit;
 
-import com.project.quora20.dto.AccessTokenRegisterResponse;
+import com.project.quora20.dto.AccessTokenLoginResponse;
 import com.project.quora20.dto.AnswerDTO;
-import com.project.quora20.dto.CoAuthRequestDTO;
+import com.project.quora20.dto.CategoryUpdateRequest;
+import com.project.quora20.dto.CoAuthLoginRequest;
+import com.project.quora20.dto.CoAuthRegisterRequest;
 import com.project.quora20.dto.IdResponse;
+import com.project.quora20.dto.JWTGetDetailsRequest;
+import com.project.quora20.dto.JWTGetDetailsResponse;
+import com.project.quora20.dto.RegisterResponse;
+import com.project.quora20.dto.RoleDTO;
+import com.project.quora20.dto.RoleResponseDTO;
+import com.project.quora20.dto.UserDTO;
 import com.project.quora20.entity.Answer;
 import com.project.quora20.entity.Organization;
 import com.project.quora20.dto.NewPostRequestDTO;
@@ -15,17 +23,33 @@ import java.util.List;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
+import retrofit2.http.Header;
+import retrofit2.http.Headers;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Path;
 
 public interface QuoraRetrofitService {
 
-//    @GET("/login-service/profile/{userId}")
-//    Call<UserDTO> getUserProfile(@Path("userId") String userId);
+    @Headers({ "Content-Type: application/json;charset=UTF-8"})
+    @POST("/jwt/getUserDetails")
+    Call <JWTGetDetailsResponse>getUserDetails(@Header("Authorization") String token,@Body JWTGetDetailsRequest jwtGetDetailsRequest);
 
-    @POST("/auth/signup")
-    Call <AccessTokenRegisterResponse> addUser(@Body CoAuthRequestDTO coAuthRequestDTO);
+    @POST("/auth/signup/")
+    Call <RegisterResponse> addUser(@Body CoAuthRegisterRequest coAuthRequestDTO);
+
+    @POST("/auth/signin/")
+    Call<AccessTokenLoginResponse> loginUser(@Body CoAuthLoginRequest coAuthLoginRequest);
+
+    @POST("/user/addUser")
+    Call<String>registerOnQuora(@Body UserDTO userDTO);
+
+    @POST("role/updateRole")
+    Call<RoleResponseDTO>updateRole(@Header("Authorization") String token, @Body RoleDTO roleDTO);
+
+    @POST("user/addCategories/{userId}")
+    Call<Boolean>categoryUpdate(@Path("userId")String userId, @Body CategoryUpdateRequest categoryUpdateRequest);
+
 
     @GET("/question/getLoginFeed/{userId}")
     Call <List<Question>> getAllQuestions(@Path("userId")String userId);
@@ -63,8 +87,6 @@ public interface QuoraRetrofitService {
     @PUT("/answer/dislikeanswer/{answerId}/{userId}")
     Call<IdResponse> doDislikeAns(@Path("answerId")String answerId,@Path("userId")String userId);
 
-//    @PUT("/answer/dislikeanswer/{answerId}")
-//    Call<String> dislikeAnswer(@Path("answerId") String answerId);
 
 }
 

@@ -3,6 +3,31 @@
 
     <string name="openNav">OpenNavigation</string>
     <string name="closeNav">CloseNavigation</string>
+    
+    <string name="Fiction"> Fiction Literature </string>
+    <string name="Non_Fiction"> Non-Fiction Literature </string>
+    <string name="Poetry">Poetry Literature</string>
+    <string name="Short_stories">Short-stories Literature</string>
+    <string name="Clothing">Clothing Lifestyle</string>
+    <string name="Footwear">Footwear Lifestyle</string>
+    <string name="Watches">Watches Lifestyle</string>
+    <string name="Accessories">Accessories Lifestyle</string>
+    <string name="Coding">Coding</string>
+    <string name="Android">Android</string>
+    <string name="iOS">iOS</string>
+    <string name="Bollywood">Bollywood Movies</string>
+    <string name="Hollywood">Hollywood Movies</string>
+    <string name="Tollywood">Tollywood Movies</string>
+    <string name="Punjabi">Punjabi Movies</string>
+    <string name="NorthIndian">NorthIndian Food</string>
+    <string name="SouthIndian">SouthIndian Food</string>
+    <string name="Italian">Italian Food</string>
+    <string name="Chinese">Chinese</string>
+    <string name="Football">Football</string>
+    <string name="Cricket">Cricket</string>
+    <string name="Badminton">Badminton</string>
+    <string name="Tennis">Tennis</string>
+
     <string-array name="category_paths">
         <item> Fiction Literature </item>
         <item> Non-Fiction Literature </item>

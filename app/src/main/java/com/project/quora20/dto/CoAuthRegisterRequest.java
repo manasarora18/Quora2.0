@@ -2,7 +2,7 @@ package com.project.quora20.dto;
 
 import com.google.gson.annotations.SerializedName;
 
-public class CoAuthRequestDTO{
+public class CoAuthRegisterRequest {
 
 	@SerializedName("password")
 	private String password;
