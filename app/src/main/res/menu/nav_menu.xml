@@ -25,6 +25,8 @@
                 android:id="@+id/movies_nav_menu"/>
             <item android:title="Food"
                 android:id="@+id/food_nav_menu"/>
+            <item android:title="Sports"
+                android:id="@+id/sports_nav_menu"/>
         </menu>
     </item>
     <item android:title="Account">

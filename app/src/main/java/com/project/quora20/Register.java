@@ -12,10 +12,10 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.android.material.snackbar.Snackbar;
-import com.project.quora20.dto.AccessTokenRegisterResponse;
-import com.project.quora20.dto.CoAuthRequestDTO;
+import com.project.quora20.dto.CoAuthRegisterRequest;
+import com.project.quora20.dto.RegisterResponse;
 import com.project.quora20.retrofit.QuoraRetrofitService;
-import com.project.quora20.retrofit.RetrofitClientInstance;
+import com.project.quora20.retrofit.RetrofitLoginService;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -27,7 +27,7 @@ public class Register extends AppCompatActivity {
     private EditText registerPassword;
     private EditText registerConfirmPassword;
     private EditText registerPhone;
-    private CoAuthRequestDTO coAuthRequestDTO=new CoAuthRequestDTO();
+    private CoAuthRegisterRequest coAuthRequestDTO=new CoAuthRegisterRequest();
     String message;
 
     @Override
@@ -79,12 +79,12 @@ public class Register extends AppCompatActivity {
                 }
 
                if(!nullFlag && !passwordCheckFail){
-                    QuoraRetrofitService quoraRetrofitService = RetrofitClientInstance.getRetrofitInstance().create(QuoraRetrofitService.class);
-                    Call<AccessTokenRegisterResponse> call= quoraRetrofitService.addUser(coAuthRequestDTO);
-                    call.enqueue(new Callback<AccessTokenRegisterResponse>() {
+                    QuoraRetrofitService quoraRetrofitService = RetrofitLoginService.getRetrofitInstance().create(QuoraRetrofitService.class);
+                    Call<RegisterResponse> call= quoraRetrofitService.addUser(coAuthRequestDTO);
+                    call.enqueue(new Callback<RegisterResponse>() {
                         @Override
-                        public void onResponse(Call<AccessTokenRegisterResponse> call, Response<AccessTokenRegisterResponse> response) {
-                            if (response.code()==400) {
+                        public void onResponse(Call<RegisterResponse> call, Response<RegisterResponse> response) {
+                            if (response.code()==400 || response.body().getMessage().equals("Email address already in use.")) {
                                 System.out.println("InRESPONSE:");
                                 Toast.makeText(getApplicationContext(), "Already Registered, Please Login!", Toast.LENGTH_SHORT).show();
                                 System.out.println("ALREADY REGISTERED");
@@ -95,7 +95,6 @@ public class Register extends AppCompatActivity {
                             }
                             else {
                                 System.out.println("CODE:"+response.code());
-//                            registerUser.setUserId("userId");
                                 System.out.println("REGISTERED");
                                 Toast.makeText(getApplicationContext(), "Registered!", Toast.LENGTH_SHORT).show();
                                 message="Registered Successfully!";
@@ -104,18 +103,15 @@ public class Register extends AppCompatActivity {
                                 finish();
                             }
                         }
-
                         @Override
-                        public void onFailure(Call<AccessTokenRegisterResponse> call, Throwable t) {
+                        public void onFailure(Call<RegisterResponse> call, Throwable t) {
                             System.out.println("Invalid Backend Response"+t.getMessage());
                         }
                     });
                 }
-
                 Snackbar snackbar = Snackbar.make(findViewById(R.id.register_layout),
                         message, Snackbar.LENGTH_SHORT);
                 snackbar.show();
-
             }
         });
     }

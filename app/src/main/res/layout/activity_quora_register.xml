@@ -7,117 +7,13 @@
     android:layout_height="match_parent"
     tools:context=".Register">
 
-
-    <EditText
-        android:id="@+id/quora_register_username"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="100dp"
-        android:layout_marginEnd="24dp"
-        android:autofillHints=""
-        android:fontFamily="sans-serif-black"
-        android:hint="Name"
-        android:inputType="textPersonName"
-        android:selectAllOnFocus="true"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <EditText
-        android:id="@+id/quora_register_email"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="140dp"
-        android:layout_marginEnd="24dp"
-        android:autofillHints=""
-        android:fontFamily="sans-serif-black"
-        android:hint="Email"
-        android:inputType="textEmailAddress"
-        android:selectAllOnFocus="true"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-
-    <EditText
-        android:id="@+id/quora_register_password"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="180dp"
-        android:layout_marginEnd="24dp"
-        android:fontFamily="sans-serif-black"
-        android:hint="Password"
-        android:imeActionLabel="Password"
-        android:imeOptions="actionDone"
-        android:inputType="textPassword"
-        android:padding="10dp"
-        android:selectAllOnFocus="true"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-
-    <EditText
-        android:id="@+id/quora_register_confirmpassword"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="220dp"
-        android:layout_marginEnd="24dp"
-        android:fontFamily="sans-serif-black"
-        android:hint="Confirm Password"
-        android:importantForAutofill="no"
-        android:inputType="textPassword"
-        android:padding="10dp"
-        android:selectAllOnFocus="true"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/quora_register_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="start"
-        android:layout_marginTop="32dp"
-        android:enabled="true"
-        android:fontFamily="sans-serif-medium"
-        android:text="Sign Up"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/quora_register_confirmpassword" />
-
-
-    <ProgressBar
-        android:id="@+id/quora_loading"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="64dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginBottom="64dp"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/register_password"
-        app:layout_constraintStart_toStartOf="@+id/quora_register_password"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.3" />
-
     <TextView
         android:id="@+id/quora_appLabel"
-        android:layout_width="194dp"
-        android:layout_height="54dp"
+        android:layout_width="223dp"
+        android:layout_height="57dp"
         android:layout_marginStart="160dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="160dp"
-        android:layout_marginBottom="40dp"
         android:fontFamily="cursive"
         android:text="Quora 2.0"
         android:textAlignment="textStart"
@@ -126,24 +22,205 @@
         android:textSize="36sp"
         android:textStyle="bold"
         android:typeface="serif"
-        app:layout_constraintBottom_toTopOf="@+id/quora_register_username"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="Quora 2.0" />
 
-    <ImageView
-        android:id="@+id/quora_reg_adsView"
-        android:layout_width="357dp"
-        android:layout_height="88dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="24dp"
-        android:layout_marginBottom="32dp"
+    <ScrollView
+        android:id="@+id/scrollView2"
+        android:layout_width="385dp"
+        android:layout_height="376dp"
+        android:layout_marginStart="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/quora_register_button"
-        tools:srcCompat="@tools:sample/avatars[5]" />
+        app:layout_constraintTop_toBottomOf="@+id/quora_appLabel">
+
+        <LinearLayout
+            android:layout_width="402dp"
+            android:layout_height="548dp"
+            android:orientation="vertical"
+            tools:layout_editor_absoluteX="7dp"
+            tools:layout_editor_absoluteY="103dp">
+
+            <CheckBox
+                android:id="@+id/chkFiction"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/Fiction" />
+
+            <CheckBox
+                android:id="@+id/chkNonFiction"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/Non_Fiction" />
+
+            <CheckBox
+                android:id="@+id/chkPoetry"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/Poetry" />
+
+            <CheckBox
+                android:id="@+id/chkShortStories"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/Short_stories" />
+
+            <CheckBox
+                android:id="@+id/chkClothing"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/Clothing" />
+
+            <CheckBox
+                android:id="@+id/chkFootwear"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/Footwear" />
+
+            <CheckBox
+                android:id="@+id/chkWatches"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/Watches" />
+
+            <CheckBox
+                android:id="@+id/chkAccessories"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/Accessories" />
+
+            <CheckBox
+                android:id="@+id/chkCoding"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/Coding" />
+
+            <CheckBox
+                android:id="@+id/chkAndroid"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/Android" />
+
+            <CheckBox
+                android:id="@+id/chkiOS"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/iOS" />
+
+            <CheckBox
+                android:id="@+id/chkBollywood"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/Bollywood" />
+
+            <CheckBox
+                android:id="@+id/chkHollywood"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/Poetry" />
+
+            <CheckBox
+                android:id="@+id/chkTollywood"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/Tollywood" />
+
+            <CheckBox
+                android:id="@+id/chkPunjabi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/Punjabi" />
+
+            <CheckBox
+                android:id="@+id/chkNorthIndian"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/NorthIndian" />
+
+            <CheckBox
+                android:id="@+id/chkSouthIndian"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/SouthIndian" />
+
+            <CheckBox
+                android:id="@+id/chkItalian"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/Italian" />
+
+            <CheckBox
+                android:id="@+id/chkChinese"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/Chinese" />
+
+            <CheckBox
+                android:id="@+id/chkFootball"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/Football" />
+
+            <CheckBox
+                android:id="@+id/chkCricket"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/Cricket" />
+
+            <CheckBox
+                android:id="@+id/chkBadminton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/Badminton" />
+
+            <CheckBox
+                android:id="@+id/chkTennis"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/Tennis" />
+
+            <ProgressBar
+                android:id="@+id/quora_loading"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="64dp"
+                android:layout_marginEnd="32dp"
+                android:layout_marginBottom="64dp"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/register_password"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.3" />
+
+        </LinearLayout>
+    </ScrollView>
+
+    <Button
+        android:id="@+id/quora_register_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start"
+        android:layout_marginStart="56dp"
+        android:layout_marginTop="16dp"
+        android:enabled="true"
+        android:fontFamily="sans-serif-medium"
+        android:text="Done"
+        app:layout_constraintStart_toEndOf="@+id/quora_appLabel"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/CategoriesLabel"
+        android:layout_width="216dp"
+        android:layout_height="23dp"
+        android:layout_marginStart="8dp"
+        android:fontFamily="sans-serif-black"
+        android:text="Choose Your Interests!"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/quora_appLabel" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -22,6 +22,7 @@
         android:enabled="true"
         android:fontFamily="sans-serif-medium"
         android:text="Skip Sign In"
+        android:visibility="invisible"
         android:textColor="#009688"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
