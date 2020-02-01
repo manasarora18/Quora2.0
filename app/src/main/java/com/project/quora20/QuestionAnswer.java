@@ -45,14 +45,7 @@ public class QuestionAnswer extends AppCompatActivity implements QuestionAnswerA
         setContentView(R.layout.activity_question_answer);
         recyclerView = findViewById(R.id.qa_answerListRecycler);
         qa_answerLayoutManager = new LinearLayoutManager(this);
-        //final LinearLayout addAnswer = findViewById(R.id.addAnswerLayout);
-        //addAnswer.onFoc
-        /*addAnswer.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                addAnswer.setOnFocusChangeListener();
-            }
-        });*/
+
         Intent intent = getIntent();
 //        String QID=intent.getStringExtra("QID");
 //        String OrgId=intent.getStringExtra("OrgId");

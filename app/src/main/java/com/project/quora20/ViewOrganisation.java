@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.project.quora20.entity.Organization;
 import com.project.quora20.retrofit.QuoraRetrofitService;
@@ -58,7 +59,9 @@ public class ViewOrganisation extends AppCompatActivity {
                 //Glide.
                 orgName.setText(organization.getOrganizationName());
                 orgEmail.setText(organization.getOrganizationEmail());
-                orgFollowers.setText(String.valueOf(organization.getOrganizationFollowers().size()));
+                if(organization.getOrganizationFollowers()!=null) {
+                    orgFollowers.setText(String.valueOf(organization.getOrganizationFollowers().size()));
+                }
                 orgMembers.setText(String.valueOf(organization.getOrganizationMembers()));
 
 
@@ -67,6 +70,7 @@ public class ViewOrganisation extends AppCompatActivity {
             @Override
             public void onFailure(Call<Organization> call, Throwable t) {
                 System.out.println("Inside OnFailure ViewOrganization:"+t.getMessage());
+                Toast.makeText(getApplicationContext(),t.getMessage(),Toast.LENGTH_LONG).show();
 
             }
         });

@@ -1,6 +1,8 @@
 package com.project.quora20;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
@@ -127,6 +129,9 @@ public class QuoraRegister extends AppCompatActivity {
                                 @Override
                                 public void onResponse(Call<Boolean> call, Response<Boolean> response) {
                                     System.out.println("OnResponse Category Update");
+                                    Intent intent=new Intent(QuoraRegister.this,MainActivity.class);
+                                    startActivity(intent);
+                                    finish();
                                 }
 
                                 @Override
