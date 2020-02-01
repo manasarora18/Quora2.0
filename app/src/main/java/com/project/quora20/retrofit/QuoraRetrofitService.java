@@ -3,7 +3,7 @@ package com.project.quora20.retrofit;
 import com.project.quora20.dto.AccessTokenLoginResponse;
 import com.project.quora20.dto.AnswerDTO;
 
-import com.project.quora20.dto.CoAuthRequestDTO;
+import com.project.quora20.dto.CoAuthLoginRequest;
 import com.project.quora20.dto.CommentDTO;
 import com.project.quora20.dto.CommentListDto;
 import com.project.quora20.dto.IdResponse;

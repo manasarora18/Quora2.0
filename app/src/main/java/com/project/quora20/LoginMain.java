@@ -174,8 +174,8 @@ public class LoginMain extends AppCompatActivity {
                             public void onResponse(Call<String> call, Response<String> response) {
                                 if (response.body() != null) {
                                     System.out.println("OnResponse RegisterQuora");
-                                    Intent loginNow = new Intent(LoginMain.this, QuoraRegister.class);
-                                    startActivity(loginNow);
+                                    Intent registerQuora = new Intent(LoginMain.this, QuoraRegister.class);
+                                    startActivity(registerQuora);
                                     finish();
                                 }
                             }
@@ -186,8 +186,9 @@ public class LoginMain extends AppCompatActivity {
                             }
                         });
                     } else {
-                        Intent registerQuora = new Intent(LoginMain.this, MainActivity.class);
-                        startActivity(registerQuora);
+                        Intent loginNow = new Intent(LoginMain.this, MainActivity.class);
+                        startActivity(loginNow);
+                        finish();
                     }
                 }
                 else{
