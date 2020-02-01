@@ -1,17 +1,16 @@
 package com.project.quora20.retrofit;
 
+import com.project.quora20.dto.CategoryRequestDTO;
 import com.project.quora20.dto.AccessTokenLoginResponse;
 import com.project.quora20.dto.AnswerDTO;
-
+import com.project.quora20.dto.CategoryResponseDTO;
 import com.project.quora20.dto.CoAuthLoginRequest;
 import com.project.quora20.dto.CommentDTO;
 import com.project.quora20.dto.CommentListDto;
 import com.project.quora20.dto.IdResponse;
 import com.project.quora20.entity.Ad;
 import com.project.quora20.dto.CategoryUpdateRequest;
-import com.project.quora20.dto.CoAuthLoginRequest;
 import com.project.quora20.dto.CoAuthRegisterRequest;
-import com.project.quora20.dto.IdResponse;
 import com.project.quora20.dto.JWTGetDetailsRequest;
 import com.project.quora20.dto.JWTGetDetailsResponse;
 import com.project.quora20.dto.RegisterResponse;
@@ -40,10 +39,10 @@ public interface QuoraRetrofitService {
     @POST("/jwt/getUserDetails")
     Call <JWTGetDetailsResponse>getUserDetails(@Header("Authorization") String token,@Body JWTGetDetailsRequest jwtGetDetailsRequest);
 
-    @POST("/auth/signup/")
+    @POST("/auth/signup")
     Call <RegisterResponse> addUser(@Body CoAuthRegisterRequest coAuthRequestDTO);
 
-    @POST("/auth/signin/")
+    @POST("/auth/signin")
     Call<AccessTokenLoginResponse> loginUser(@Body CoAuthLoginRequest coAuthLoginRequest);
 
     @POST("/user/addUser")
@@ -61,6 +60,9 @@ public interface QuoraRetrofitService {
 
     @GET("/question/getCategoryFeed/{catId}")
     Call <List<Question>> getCategoryQuestions(@Path("catId")String catId);
+
+    @POST("/question/getQuestionsbyCategory")
+    Call<CategoryResponseDTO>getCategoryResult(@Body CategoryRequestDTO categoryRequestDTO);
 
     @PUT("/answer/likeanswer/{answerId}")
     Call<String> likeAnswer(@Path("answerId") String answerId);
@@ -100,9 +102,6 @@ public interface QuoraRetrofitService {
 
     @GET("/comment/getcommentbyparent/{parentId}")
     Call<CommentListDto> viewCommentsByParentId(@Path("parentId")String parentId);
-
-//    @PUT("/answer/dislikeanswer/{answerId}")
-//    Call<String> dislikeAnswer(@Path("answerId") String answerId);
 
     @GET("/ads/getAds/{srcId}")
     Call<List<Ad>> getAds(@Header("Authorization")String accessToken,@Path("srcId")Long srcId);

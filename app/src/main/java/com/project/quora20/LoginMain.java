@@ -35,9 +35,6 @@ public class LoginMain extends AppCompatActivity {
     private UserDTO userDTO=new UserDTO();
     private User user=new User();
 
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,7 +52,7 @@ public class LoginMain extends AppCompatActivity {
         Button loginButton = findViewById(R.id.login_loginButton);
         sp = getSharedPreferences("LoginData", MODE_PRIVATE);
         String check = sp.getString("LoginCheck", "false");
-//        if (check.equals("false")) {
+        if (check.equals("false")) {
 //            if (!sp.getBoolean("LogInData", false)) {
                 loginButton.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -84,6 +81,7 @@ public class LoginMain extends AppCompatActivity {
                                         if (accessTokenLoginResponse != null) {
                                             sp=getSharedPreferences("LoginData",MODE_PRIVATE);
                                             SharedPreferences.Editor editor=sp.edit();
+                                            editor.putString("LoginCheck","true");
                                             editor.putString("AccessToken",accessTokenLoginResponse.getAccessToken()).apply();
                                             editor.putString("TokenType",accessTokenLoginResponse.getTokenType()).apply();
                                             editor.commit();
@@ -102,6 +100,7 @@ public class LoginMain extends AppCompatActivity {
                                 @Override
                                 public void onFailure(Call<AccessTokenLoginResponse> call, Throwable t) {
                                     System.out.println("OnFailure Login"+t.getMessage());
+                                    Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_LONG).show();
                                 }
                             });
                         }
@@ -111,11 +110,12 @@ public class LoginMain extends AppCompatActivity {
 //                Intent SignIntent = new Intent(LoginMain.this, MainActivity.class);
 //                startActivity(SignIntent);
 //                finish();
-
-//        } else {
-//            Intent LoggedIn = new Intent(LoginMain.this, MainActivity.class);
-//            startActivity(LoggedIn);
-//        }
+//            }
+        } else {
+            Intent LoggedIn = new Intent(LoginMain.this, MainActivity.class);
+            startActivity(LoggedIn);
+            finish();
+        }
 
         //SKIP LOGIN
         Button skipSignIn = findViewById(R.id.skip);
@@ -133,7 +133,7 @@ public class LoginMain extends AppCompatActivity {
                 SharedPreferences.Editor editor = sp.edit();
                 editor.putString("UserId", guestUserId).apply();
                 editor.putString("LoginCheck", "false").apply();
-                editor.putString("User", "Guest").apply();
+//                editor.putString("User", "Guest").apply();
                 editor.commit();
                 startActivity(skipSignInIntent);
             }
@@ -183,6 +183,7 @@ public class LoginMain extends AppCompatActivity {
                             @Override
                             public void onFailure(Call<String> call, Throwable t) {
                                 System.out.println("OnFailure RegisterQuora:" + t.getMessage());
+                                Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_LONG).show();
                             }
                         });
                     } else {
@@ -199,6 +200,7 @@ public class LoginMain extends AppCompatActivity {
             @Override
             public void onFailure(Call<JWTGetDetailsResponse> call, Throwable t) {
                 System.out.println("OnFailure JWT GetUserDetails"+t.getMessage());
+                Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
     }

@@ -37,7 +37,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private Button newPostToolbar;
     private RecyclerView homeRecyclerView;
     private RecyclerView.Adapter homeAdapter;
-    private RecyclerView.LayoutManager homeLayoutManager;
     private SharedPreferences sharedPreferences;
 
 
@@ -92,7 +91,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             public void onClick(View v) {
                 Intent newPostIntent=new Intent(getApplicationContext(), NewPost.class);
                 startActivity(newPostIntent);
-                finish();
             }
         });
 
@@ -101,9 +99,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             @Override
             public boolean onQueryTextSubmit(String query) {
                 Toast.makeText(getApplicationContext(),query.toString(),Toast.LENGTH_SHORT).show();
-//                Intent searchIntent=new Intent(MainActivity.this,SearchResults.class);
-//                searchIntent.putExtra("searchKey",query);
-//                startActivity(searchIntent);
+                Intent searchIntent=new Intent(MainActivity.this,SearchResults.class);
+                searchIntent.putExtra("searchKey",query);
+                startActivity(searchIntent);
                 return true;
             }
             @Override
@@ -111,8 +109,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 return false;
             }
         });
-
-        userId="5e3140bb4c951a1723dc3f01";
+        System.out.println("MAIN ACTUserId:"+userId);
+//        userId="5e3140bb4c951a1723dc3f01";
         QuoraRetrofitService quoraRetrofitService= RetrofitClientInstance.getRetrofitInstance().create(QuoraRetrofitService.class);
         Call<List<Question>> call=quoraRetrofitService.getAllQuestions(userId);
         call.enqueue(new Callback<List<Question>>() {
@@ -166,74 +164,81 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 //        Toast.makeText(this, "this menu item clicked", Toast.LENGTH_SHORT).show();
         switch(item.getItemId()) {
             case R.id.literature_nav_menu:
-//                Intent catIntent1 = new Intent(this, CategoryActivity.class);
-//                catIntent1.putExtra("categoryId",2);
-//                this.startActivity(catIntent1);
+                Toast.makeText(getApplicationContext(),"Coming Soon!",Toast.LENGTH_SHORT).show();
+                Intent catIntent1 = new Intent(this, CategoryActivity.class);
+                catIntent1.putExtra("categoryId",1);
+                this.startActivity(catIntent1);
                 break;
             case R.id.lifestyle_nav_menu:
-//                Intent catIntent2= new Intent(this,CategoryActivity.class);
-//                catIntent2.putExtra("categoryId",3);
-//                this.startActivity(catIntent2);
+                Toast.makeText(getApplicationContext(),"Coming Soon!",Toast.LENGTH_SHORT).show();
+                Intent catIntent2= new Intent(this,CategoryActivity.class);
+                catIntent2.putExtra("categoryId",2);
+                this.startActivity(catIntent2);
                 break;
             case R.id.technology_nav_menu:
-//                Intent catIntent3= new Intent(this,CategoryActivity.class);
-//                catIntent3.putExtra("categoryId",4);
-//                this.startActivity(catIntent3);
+                Toast.makeText(getApplicationContext(),"Coming Soon!",Toast.LENGTH_SHORT).show();
+                Intent catIntent3= new Intent(this,CategoryActivity.class);
+                catIntent3.putExtra("categoryId",3);
+                this.startActivity(catIntent3);
                 break;
             case R.id.movies_nav_menu:
-//                Intent catIntent4= new Intent(this,CategoryActivity.class);
-//                catIntent4.putExtra("categoryId",5);
-//                this.startActivity(catIntent4);
+                Toast.makeText(getApplicationContext(),"Coming Soon!",Toast.LENGTH_SHORT).show();
+                Intent catIntent4= new Intent(this,CategoryActivity.class);
+                catIntent4.putExtra("categoryId",4);
+                this.startActivity(catIntent4);
                 break;
             case R.id.food_nav_menu:
-//                Intent catIntent5= new Intent(this,CategoryActivity.class);
-//                catIntent5.putExtra("categoryId",1);
-//                this.startActivity(catIntent5);
+                Toast.makeText(getApplicationContext(),"Coming Soon!",Toast.LENGTH_SHORT).show();
+                Intent catIntent5= new Intent(this,CategoryActivity.class);
+                catIntent5.putExtra("categoryId",5);
+                this.startActivity(catIntent5);
                 break;
             case R.id.sports_nav_menu:
-                sharedPreferences=getSharedPreferences("LoginData",MODE_PRIVATE);
-                String loginCheckQues=sharedPreferences.getString("LoginCheck","false");
-
-//                 Intent quesIntent= new Intent(MainActivity.this,MyQuestions.class);
-//                 startActivity(quesIntent);
+                Toast.makeText(getApplicationContext(),"Coming Soon!",Toast.LENGTH_SHORT).show();
+                 Intent catIntent6= new Intent(MainActivity.this,MyQuestions.class);
+                 catIntent6.putExtra("categoryId",6);
+                 this.startActivity(catIntent6);
                 break;
             case R.id.answers_nav_menu:
+                Toast.makeText(getApplicationContext(),"Work In Progress",Toast.LENGTH_SHORT).show();
                 sharedPreferences=getSharedPreferences("LoginData",MODE_PRIVATE);
                 String loginCheckAns=sharedPreferences.getString("LoginCheck","false");
+                if(loginCheckAns.equals("true")) {
 
                 Intent ansIntent=new Intent(MainActivity.this,MyAnswers.class);
                 startActivity(ansIntent);
+                }
+                else{
+                    Toast.makeText(getApplicationContext(),"Login First!",Toast.LENGTH_SHORT).show();
+                }
                 break;
             case R.id.logout:
                 sharedPreferences=getSharedPreferences("LoginData",MODE_PRIVATE);
                 String loginCheckLogout=sharedPreferences.getString("LoginCheck","false");
 
-//                if(logincheckLogout.equals("true")) {
-//                    SharedPreferences preferences = getSharedPreferences("LoginData", MODE_PRIVATE);
-//                    SharedPreferences.Editor editor = preferences.edit();
-//                    editor.clear();
-//                    editor.commit();
-//                    Intent logoutIntent = new Intent(MainActivity.this, Login.class);
-//                    startActivity(logoutIntent);
-//                }
-//                else{
-//                    Toast.makeText(getApplicationContext(),"LoginFirst",Toast.LENGTH_SHORT).show();
-//                }
+                if(loginCheckLogout.equals("true")) {
+                    SharedPreferences preferences = getSharedPreferences("LoginData", MODE_PRIVATE);
+                    SharedPreferences.Editor editor = preferences.edit();
+                    editor.clear();
+                    editor.commit();
+                    Intent logoutIntent = new Intent(MainActivity.this, LoginMain.class);
+                    startActivity(logoutIntent);
+                }
+                else{
+                    Toast.makeText(getApplicationContext(),"LoginFirst",Toast.LENGTH_SHORT).show();
+                }
                 break;
             case R.id.details_nav_menu:
                 sharedPreferences=getSharedPreferences("LoginData",MODE_PRIVATE);
                 String loginCheck=sharedPreferences.getString("LoginCheck","false");
 
-                Intent intent=new Intent(this,MyProfile.class);
-                startActivity(intent);
-
-//                if(logincheck.equals("true")) {
-//                    Intent userDetails = new Intent(MainActivity.this, UserDetails.class);
-//                    startActivity(userDetails);
-//                }
-//                else {
-//                    Toast.makeText(getApplicationContext(),"LoginFirst",Toast.LENGTH_SHORT).show();
-//                }
+                if(loginCheck.equals("true")) {
+                    Intent userDetails = new Intent(MainActivity.this, MyProfile.class);
+                    startActivity(userDetails);
+                }
+                else {
+                    Toast.makeText(getApplicationContext(),"Login First!",Toast.LENGTH_SHORT).show();
+                }
                 break;
             default:
                 return super.onOptionsItemSelected(item);
@@ -244,5 +249,4 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public void onPointerCaptureChanged(boolean hasCapture) {
     }
-
 }
