@@ -2,7 +2,7 @@ package com.project.quora20.dto;
 
 import com.google.gson.annotations.SerializedName;
 
-public class AccessTokenRegisterResponse{
+public class AccessTokenLoginResponse {
 
 	@SerializedName("accessToken")
 	private String accessToken;
