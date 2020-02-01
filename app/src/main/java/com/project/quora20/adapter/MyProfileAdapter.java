@@ -8,6 +8,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.project.quora20.R;
+import com.project.quora20.entity.Ad;
 import com.project.quora20.entity.User;
 
 import java.util.List;
@@ -15,6 +16,7 @@ import java.util.List;
 public class MyProfileAdapter extends RecyclerView.Adapter<MyProfileAdapter.MyProfileViewHolder> {
 
     List<User> userList;
+    List<Ad> adList;
 
     public static class MyProfileViewHolder extends RecyclerView.ViewHolder{
         public TextView userName;
@@ -25,6 +27,7 @@ public class MyProfileAdapter extends RecyclerView.Adapter<MyProfileAdapter.MyPr
         public TextView following;
         public TextView userScore;
         public TextView userLevel;
+        public ImageView adView;
 
         public MyProfileViewHolder(View view)
         {
@@ -38,13 +41,15 @@ public class MyProfileAdapter extends RecyclerView.Adapter<MyProfileAdapter.MyPr
             following=view.findViewById(R.id.profile_followingCount);
             userScore=view.findViewById(R.id.profile_userScore);
             userLevel=view.findViewById(R.id.profile_userLevel);
+            adView=view.findViewById(R.id.profile_adview);
 
         }
     }
 
-    public MyProfileAdapter(List<User> myList)
+    public MyProfileAdapter(List<Ad> adList)
     {
-        userList=myList;
+        //userList=myList;
+        this.adList=adList;
     }
 
     @NonNull
@@ -65,6 +70,8 @@ public class MyProfileAdapter extends RecyclerView.Adapter<MyProfileAdapter.MyPr
         holder.followers.setText(String.valueOf(user.getUserFollower().size()));
         holder.following.setText(String.valueOf(user.getUserFollowing().size()));
         holder.userScore.setText(String.valueOf(user.getUserScore()));*/
+
+
 
 
     }

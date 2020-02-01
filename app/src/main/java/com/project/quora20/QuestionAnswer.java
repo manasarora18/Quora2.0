@@ -37,6 +37,7 @@ public class QuestionAnswer extends AppCompatActivity implements QuestionAnswerA
     private TextView qa_answerText;
     private ImageButton sendAnswerButton;
     private AnswerDTO answerdto = new AnswerDTO();
+    String answerId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,7 +92,11 @@ public class QuestionAnswer extends AppCompatActivity implements QuestionAnswerA
     }
 
     @Override
-    public void onClick(Answer answer) {
+    public void onClick(Answer answer,String answerId) {
+        Intent commentIntent=new Intent(QuestionAnswer.this,ViewComments.class);
+        commentIntent.putExtra("AnswerId",answerId);
+        //System.out.println("onclick:"+answerId);
+        startActivity(commentIntent);
 
     }
 

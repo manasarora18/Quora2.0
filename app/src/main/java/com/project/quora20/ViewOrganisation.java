@@ -9,6 +9,7 @@ import android.widget.TextView;
 import com.project.quora20.entity.Organization;
 import com.project.quora20.retrofit.QuoraRetrofitService;
 import com.project.quora20.retrofit.RetrofitClientInstance;
+import com.project.quora20.retrofit.RetrofitUsersInstance;
 import com.squareup.picasso.Picasso;
 
 import retrofit2.Call;
@@ -37,7 +38,7 @@ public class ViewOrganisation extends AppCompatActivity {
 
     void viewOrganization()
     {
-        quoraRetrofitService= RetrofitClientInstance.getRetrofitInstance().create(QuoraRetrofitService.class);
+        quoraRetrofitService= RetrofitUsersInstance.getRetrofitInstance().create(QuoraRetrofitService.class);
         orgName=findViewById(R.id.org_Name);
         orgEmail=findViewById(R.id.org_Email);
         orgFollowers=findViewById(R.id.org_followersCount);

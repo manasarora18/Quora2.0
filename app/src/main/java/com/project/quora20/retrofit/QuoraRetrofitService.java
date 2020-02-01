@@ -2,6 +2,12 @@ package com.project.quora20.retrofit;
 
 import com.project.quora20.dto.AccessTokenLoginResponse;
 import com.project.quora20.dto.AnswerDTO;
+
+import com.project.quora20.dto.CoAuthRequestDTO;
+import com.project.quora20.dto.CommentDTO;
+import com.project.quora20.dto.CommentListDto;
+import com.project.quora20.dto.IdResponse;
+import com.project.quora20.entity.Ad;
 import com.project.quora20.dto.CategoryUpdateRequest;
 import com.project.quora20.dto.CoAuthLoginRequest;
 import com.project.quora20.dto.CoAuthRegisterRequest;
@@ -13,13 +19,12 @@ import com.project.quora20.dto.RoleDTO;
 import com.project.quora20.dto.RoleResponseDTO;
 import com.project.quora20.dto.UserDTO;
 import com.project.quora20.entity.Answer;
+import com.project.quora20.entity.OnClickRequest;
 import com.project.quora20.entity.Organization;
 import com.project.quora20.dto.NewPostRequestDTO;
 import com.project.quora20.entity.Question;
 import com.project.quora20.entity.User;
-
 import java.util.List;
-
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
@@ -87,6 +92,23 @@ public interface QuoraRetrofitService {
     @PUT("/answer/dislikeanswer/{answerId}/{userId}")
     Call<IdResponse> doDislikeAns(@Path("answerId")String answerId,@Path("userId")String userId);
 
+    @POST("/comment/addcomment")
+    Call<IdResponse> addComment(@Body CommentDTO commentDTO);
+
+    @GET("/comment/getcommentbyanswer/{answerId}")
+    Call<CommentListDto> viewCommentsByAnswerId(@Path("answerId")String answerId);
+
+    @GET("/comment/getcommentbyparent/{parentId}")
+    Call<CommentListDto> viewCommentsByParentId(@Path("parentId")String parentId);
+
+//    @PUT("/answer/dislikeanswer/{answerId}")
+//    Call<String> dislikeAnswer(@Path("answerId") String answerId);
+
+    @GET("/ads/getAds/{srcId}")
+    Call<List<Ad>> getAds(@Header("Authorization")String accessToken,@Path("srcId")Long srcId);
+
+    @POST("/ads/onclick/{srcId}")
+    Call<String> adOnClick(@Header("Authorization")String accessToken, @Path("srcId")Long srcId, @Body OnClickRequest onClickRequest);
 
 }
 

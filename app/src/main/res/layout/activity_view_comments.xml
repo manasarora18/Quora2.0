@@ -23,11 +23,42 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/commentsRecycler"
         android:layout_width="343dp"
-        android:layout_height="651dp"
-        android:layout_marginStart="31dp"
-        android:layout_marginTop="9dp"
-        android:layout_marginEnd="37dp"
+        android:layout_height="615dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="32dp"
+        android:padding="0dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/commentTitleText" />
+
+    <EditText
+        android:id="@+id/comment_addComment"
+        android:layout_width="310dp"
+        android:layout_height="43dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginBottom="11dp"
+        android:ems="10"
+        android:gravity="start|top"
+        android:inputType="textMultiLine"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/comment_sendCommentButton"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/commentsRecycler" />
+
+    <ImageButton
+        android:id="@+id/comment_sendCommentButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:layout_marginEnd="13dp"
+        android:layout_marginBottom="2dp"
+        android:backgroundTint="#00F5F2F2"
+        android:tint="#03A9F4"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/commentsRecycler"
+        app:srcCompat="@drawable/ic_send_blue_35dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

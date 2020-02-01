@@ -194,8 +194,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 sharedPreferences=getSharedPreferences("LoginData",MODE_PRIVATE);
                 String loginCheckQues=sharedPreferences.getString("LoginCheck","false");
 
-                Intent quesIntent= new Intent(MainActivity.this,MyQuestions.class);
-                startActivity(quesIntent);
+//                 Intent quesIntent= new Intent(MainActivity.this,MyQuestions.class);
+//                 startActivity(quesIntent);
                 break;
             case R.id.answers_nav_menu:
                 sharedPreferences=getSharedPreferences("LoginData",MODE_PRIVATE);

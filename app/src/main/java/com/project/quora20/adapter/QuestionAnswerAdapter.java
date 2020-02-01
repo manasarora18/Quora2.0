@@ -33,6 +33,7 @@ public class QuestionAnswerAdapter extends RecyclerView.Adapter<QuestionAnswerAd
     List<String>likedList=new ArrayList<>();
     List<String>dislikedList=new ArrayList<>();
 
+
     public QuestionAnswerAdapter(Answer answerList, AnswerCommunication answerCommunication,String userId) {
         this.answerList = answerList;
         this.answerCommunication=answerCommunication;
@@ -102,7 +103,8 @@ public class QuestionAnswerAdapter extends RecyclerView.Adapter<QuestionAnswerAd
         holder.viewCommentsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                answerCommunication.onClick(answerList);
+                answerCommunication.onClick(answerList,answerList.getAnswerList().get(position).getAnswerId());
+
             }
         });
 
@@ -174,6 +176,8 @@ public class QuestionAnswerAdapter extends RecyclerView.Adapter<QuestionAnswerAd
                     });
                 }
             });
+
+
         }
     }
 
@@ -186,7 +190,7 @@ public class QuestionAnswerAdapter extends RecyclerView.Adapter<QuestionAnswerAd
     }
 
     public interface AnswerCommunication{
-        void onClick(Answer answer);
+        void onClick(Answer answer,String answerId);
     }
 
 
