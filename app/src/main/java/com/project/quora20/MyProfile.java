@@ -9,6 +9,7 @@ import android.widget.TextView;
 import com.project.quora20.entity.User;
 import com.project.quora20.retrofit.QuoraRetrofitService;
 import com.project.quora20.retrofit.RetrofitClientInstance;
+import com.project.quora20.retrofit.RetrofitUsersInstance;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -27,6 +28,7 @@ public class MyProfile extends AppCompatActivity {
     public TextView following;
     public TextView userScore;
     public TextView userLevel;
+    public ImageView profile_adview;
 
 
     @Override
@@ -40,7 +42,7 @@ public class MyProfile extends AppCompatActivity {
     void viewProfile()
     {
         //final User user;
-        quoraRetrofitService= RetrofitClientInstance.getRetrofitInstance().create(QuoraRetrofitService.class);
+        quoraRetrofitService= RetrofitUsersInstance.getRetrofitInstance().create(QuoraRetrofitService.class);
         Call<User> callMyProfile=quoraRetrofitService.viewUser("5e3140bb4c951a1723dc3f01");
         callMyProfile.enqueue(new Callback<User>() {
             @Override
@@ -55,7 +57,7 @@ public class MyProfile extends AppCompatActivity {
                 following=findViewById(R.id.profile_followingCount);
                 userScore=findViewById(R.id.profile_userScore);
                 userLevel=findViewById(R.id.profile_userLevel);
-
+                profile_adview=findViewById(R.id.profile_adview);
                 userName.setText(user.getName());
                 //userIamge with picasso
                 //Picasso.with(getBaseContext())

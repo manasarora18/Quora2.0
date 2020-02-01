@@ -11,7 +11,7 @@
         android:layout_height="64dp"
         android:layout_marginStart="32dp"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="35dp"
+        android:layout_marginEnd="32dp"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
@@ -20,7 +20,7 @@
 
         <ImageButton
             android:id="@+id/ans_userImage"
-            android:layout_width="27dp"
+            android:layout_width="47dp"
             android:layout_height="match_parent"
             android:layout_gravity="center"
             android:layout_weight="1"
@@ -29,8 +29,8 @@
 
         <TextView
             android:id="@+id/ans_answerTimeStamp"
-            android:layout_width="200dp"
-            android:layout_height="52dp"
+            android:layout_width="175dp"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             android:text="Time Stamp"
             android:textAlignment="center" />
@@ -41,7 +41,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:backgroundTint="#00F8F6F6"
-            android:src="@drawable/orgImage" />
+            android:src="@drawable/org" />
     </LinearLayout>
 
     <TextView

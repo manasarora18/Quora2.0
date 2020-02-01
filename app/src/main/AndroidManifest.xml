@@ -13,7 +13,9 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
         <activity android:name=".QuoraRegister"></activity>
-        <activity android:name=".ViewComments" />
+        <activity
+            android:name=".ViewComments"
+            android:windowSoftInputMode="stateVisible|adjustPan" />
         <activity android:name=".MyAnswers" />
         <activity android:name=".CategoryActivity" />
         <activity android:name=".MyQuestions" />

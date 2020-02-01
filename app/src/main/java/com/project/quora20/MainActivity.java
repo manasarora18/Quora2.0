@@ -165,11 +165,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 //        Toast.makeText(this, "this menu item clicked", Toast.LENGTH_SHORT).show();
         switch(item.getItemId()) {
-            case R.id.sports_nav_menu:
+            //case R.id.sports_nav_menu:
 //                Intent catIntent1 = new Intent(this, CategoryActivity.class);
 //                catIntent1.putExtra("categoryId",2);
 //                this.startActivity(catIntent1);
-                break;
+               // break;
             case R.id.technology_nav_menu:
 //                Intent catIntent2= new Intent(this,CategoryActivity.class);
 //                catIntent2.putExtra("categoryId",3);

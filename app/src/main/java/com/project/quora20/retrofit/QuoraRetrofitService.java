@@ -3,6 +3,8 @@ package com.project.quora20.retrofit;
 import com.project.quora20.dto.AccessTokenRegisterResponse;
 import com.project.quora20.dto.AnswerDTO;
 import com.project.quora20.dto.CoAuthRequestDTO;
+import com.project.quora20.dto.CommentDTO;
+import com.project.quora20.dto.CommentListDto;
 import com.project.quora20.dto.IdResponse;
 import com.project.quora20.entity.Answer;
 import com.project.quora20.entity.Organization;
@@ -62,6 +64,15 @@ public interface QuoraRetrofitService {
 
     @PUT("/answer/dislikeanswer/{answerId}/{userId}")
     Call<IdResponse> doDislikeAns(@Path("answerId")String answerId,@Path("userId")String userId);
+
+    @POST("/comment/addcomment")
+    Call<IdResponse> addComment(@Body CommentDTO commentDTO);
+
+    @GET("/comment/getcommentbyanswer/{answerId}")
+    Call<CommentListDto> viewCommentsByAnswerId(@Path("answerId")String answerId);
+
+    @GET("/comment/getcommentbyparent/{parentId}")
+    Call<CommentListDto> viewCommentsByParentId(@Path("parentId")String parentId);
 
 //    @PUT("/answer/dislikeanswer/{answerId}")
 //    Call<String> dislikeAnswer(@Path("answerId") String answerId);
