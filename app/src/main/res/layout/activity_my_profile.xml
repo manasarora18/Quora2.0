@@ -83,8 +83,8 @@
 
     <TextView
         android:id="@+id/profile_userFavCategories"
-        android:layout_width="221dp"
-        android:layout_height="149dp"
+        android:layout_width="286dp"
+        android:layout_height="103dp"
         android:layout_marginStart="90dp"
         android:layout_marginEnd="90dp"
         android:layout_marginBottom="60dp"
@@ -188,15 +188,30 @@
 
     <ImageView
         android:id="@+id/profile_adview"
-        android:layout_width="298dp"
-        android:layout_height="119dp"
+        android:layout_width="303dp"
+        android:layout_height="66dp"
         android:layout_marginStart="53dp"
+        android:layout_marginTop="35dp"
         android:layout_marginEnd="61dp"
-        android:layout_marginBottom="18dp"
-        app:layout_constraintBottom_toTopOf="@+id/profile_userFavCategories"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout6"
+        tools:srcCompat="@tools:sample/avatars[10]" />
+
+    <TextView
+        android:id="@+id/profile_adDescription"
+        android:layout_width="297dp"
+        android:layout_height="47dp"
+        android:layout_marginStart="57dp"
+        android:layout_marginTop="18dp"
+        android:layout_marginEnd="57dp"
+        android:gravity="center"
+        android:text="Ad Description"
+        android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        tools:srcCompat="@tools:sample/avatars[10]" />
+        app:layout_constraintTop_toBottomOf="@+id/profile_adview" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
