@@ -9,10 +9,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import com.project.quora20.dto.CategoryUpdateRequest;
+import com.project.quora20.dto.DATagsResponse;
 import com.project.quora20.dto.RoleDTO;
 import com.project.quora20.dto.RoleResponseDTO;
+import com.project.quora20.dto.TagsDARequest;
 import com.project.quora20.entity.Category;
 import com.project.quora20.retrofit.QuoraRetrofitService;
+import com.project.quora20.retrofit.RetrofitDAInstance;
 import com.project.quora20.retrofit.RetrofitLoginService;
 import com.project.quora20.retrofit.RetrofitUsersInstance;
 import java.util.ArrayList;
@@ -130,6 +133,7 @@ public class QuoraRegister extends AppCompatActivity {
                                 public void onResponse(Call<Boolean> call, Response<Boolean> response) {
                                     System.out.println("OnResponse Category Update");
                                     Intent intent=new Intent(QuoraRegister.this,MainActivity.class);
+                                    DATagsAPI(checkedList);
                                     startActivity(intent);
                                     finish();
                                 }
@@ -150,5 +154,28 @@ public class QuoraRegister extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void DATagsAPI(List<String>checkedList) {
+        SharedPreferences sharedPreferences=getSharedPreferences("LoginData",MODE_PRIVATE);
+        String userId=sharedPreferences.getString("UserId","");
+        TagsDARequest tagsDARequest=new TagsDARequest();
+        tagsDARequest.setAppId("quora");
+        tagsDARequest.setAction("register");
+        tagsDARequest.setTag(checkedList);
+        tagsDARequest.setUserId(userId);
+        QuoraRetrofitService quoraRetrofitService= RetrofitDAInstance.getRetrofitInstance().create(QuoraRetrofitService.class);
+        Call<DATagsResponse>call=quoraRetrofitService.tagsToDA(tagsDARequest);
+        call.enqueue(new Callback<DATagsResponse>() {
+            @Override
+            public void onResponse(Call<DATagsResponse> call, Response<DATagsResponse> response) {
+                System.out.println("OnResponse RegisterDATagsCategory");
+            }
+
+            @Override
+            public void onFailure(Call<DATagsResponse> call, Throwable t) {
+                System.out.println("OnFailure RegisterDATagsCategory:"+t.getMessage());
+            }
+        });
     }
 }

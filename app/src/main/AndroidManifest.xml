@@ -12,27 +12,53 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
+      
+        <activity android:name=".QuoraRegister"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboardHidden"></activity>
         <activity android:name=".OtherUserProfile"></activity>
         <activity android:name=".QuoraRegister" />
         <activity
             android:name=".ViewComments"
-            android:windowSoftInputMode="stateVisible|adjustPan" />
-        <activity android:name=".MyAnswers" />
-        <activity android:name=".CategoryActivity" />
-        <activity android:name=".MyQuestions" />
-        <activity android:name=".Register" />
+            android:windowSoftInputMode="stateVisible|adjustPan"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboardHidden"/>
+        <activity android:name=".MyAnswers"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboardHidden"/>
+        <activity android:name=".CategoryActivity"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboardHidden"/>
+        <activity android:name=".MyQuestions"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboardHidden"/>
+        <activity android:name=".Register"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboardHidden"/>
         <activity android:name=".LoginMain">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.MAIN"
+                    android:screenOrientation="portrait"
+                    android:configChanges="orientation|keyboardHidden"/>
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ViewOrganisation" />
-        <activity android:name=".SearchResults" />
-        <activity android:name=".NewPost" />
-        <activity android:name=".MyProfile" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".ViewOrganisation"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboardHidden"/>
+        <activity android:name=".SearchResults"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboardHidden"/>
+        <activity android:name=".NewPost"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboardHidden"/>
+        <activity android:name=".MyProfile"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboardHidden"/>
+        <activity android:name=".MainActivity"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboardHidden">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
             </intent-filter>
@@ -59,6 +85,8 @@
         <meta-data
             android:name="firebase_analytics_collection_enabled"
             android:value="false" />
+
+
     </application>
 
 

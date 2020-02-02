@@ -28,6 +28,12 @@ import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.InstanceIdResult;
 import com.google.firebase.messaging.FirebaseMessaging;
 import com.project.quora20.adapter.HomeAdapter;
+import com.project.quora20.dto.FCMTokenRequest;
+import com.project.quora20.dto.FCMTokenResponse;
+import com.project.quora20.entity.Question;
+import com.project.quora20.retrofit.QuoraRetrofitService;
+import com.project.quora20.retrofit.RetrofitClientInstance;
+import com.project.quora20.retrofit.RetrofitLoginService;
 import com.project.quora20.entity.Ad;
 import com.project.quora20.entity.OnClickRequest;
 import com.project.quora20.entity.Question;
@@ -35,7 +41,6 @@ import com.project.quora20.retrofit.QuoraRetrofitService;
 import com.project.quora20.retrofit.RetrofitClientInstance;
 import com.project.quora20.retrofit.RetrofitUsersInstance;
 import com.squareup.picasso.Picasso;
-
 import java.util.List;
 
 import retrofit2.Call;
@@ -54,6 +59,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private RecyclerView homeRecyclerView;
     private RecyclerView.Adapter homeAdapter;
     private SharedPreferences sharedPreferences;
+    private String FCMToken;
+
     List<Ad> adList;
     OnClickRequest onClickRequest = new OnClickRequest();
     QuoraRetrofitService quoraRetrofitService;
@@ -163,22 +170,45 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                                 // Get new Instance ID token
                                 String token = task.getResult().getToken();
+                                FCMToken=token;
 
                                 // Log and toast
                                 String msg = getString(R.string.msg_token_fmt, token);
                                 Log.d("NOTIF", msg);
                                 Toast.makeText(MainActivity.this, msg, Toast.LENGTH_SHORT).show();
+                                FCMApiCall(FCMToken);
                             }
                         });
             }
         });
-    }
 
-    public void runtimeEnableAutoInit() {
-        // [START fcm_runtime_enable_auto_init]
-        FirebaseMessaging.getInstance().setAutoInitEnabled(true);
-        // [END fcm_runtime_enable_auto_init]
+
     }
+    public void FCMApiCall(String Token){
+        FCMTokenRequest fcmTokenRequest=new FCMTokenRequest();
+        System.out.println("TOKEN"+Token);
+        fcmTokenRequest.setFcmtoken(Token);
+
+        String token="Bearer "+sharedPreferences.getString("AccessToken","");
+        System.out.println("JWTTOKEN"+token);
+        QuoraRetrofitService quoraRetrofitService1= RetrofitLoginService.getRetrofitInstance().create(QuoraRetrofitService.class);
+        Call<FCMTokenResponse>fcmTokenResponseCall=quoraRetrofitService1.sendFCM(token,fcmTokenRequest);
+        fcmTokenResponseCall.enqueue(new Callback<FCMTokenResponse>() {
+            @Override
+            public void onResponse(Call<FCMTokenResponse> call, Response<FCMTokenResponse> response) {
+                System.out.println("OnResponse FCMToken");
+            }
+            @Override
+            public void onFailure(Call<FCMTokenResponse> call, Throwable t) {
+                System.out.println("OnFailure FCMToken"+t.getMessage());
+            }
+        });
+    }
+//    public void runtimeEnableAutoInit() {
+//        // [START fcm_runtime_enable_auto_init]
+//        FirebaseMessaging.getInstance().setAutoInitEnabled(true);
+//        // [END fcm_runtime_enable_auto_init]
+//    }
 
     private void generateDataList(List<Question> list) {
         homeRecyclerView = findViewById(R.id.homeRecyclerView);
