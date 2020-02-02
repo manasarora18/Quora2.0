@@ -10,11 +10,13 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ImageButton;
 import android.widget.SearchView;
 import android.widget.TextView;
@@ -26,9 +28,13 @@ import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.InstanceIdResult;
 import com.google.firebase.messaging.FirebaseMessaging;
 import com.project.quora20.adapter.HomeAdapter;
+import com.project.quora20.entity.Ad;
+import com.project.quora20.entity.OnClickRequest;
 import com.project.quora20.entity.Question;
 import com.project.quora20.retrofit.QuoraRetrofitService;
 import com.project.quora20.retrofit.RetrofitClientInstance;
+import com.project.quora20.retrofit.RetrofitUsersInstance;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -48,7 +54,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private RecyclerView homeRecyclerView;
     private RecyclerView.Adapter homeAdapter;
     private SharedPreferences sharedPreferences;
-
+    List<Ad> adList;
+    OnClickRequest onClickRequest = new OnClickRequest();
+    QuoraRetrofitService quoraRetrofitService;
+    ImageView adView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -192,23 +201,97 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         qaIntent.putExtra("BestAns", question.getBestAnswerId());
         qaIntent.putExtra("CategoryId", question.getCategoryId());
         qaIntent.putExtra("QuesUserId", question.getUserId());
+
         startActivity(qaIntent);
     }
 
     //ViewOrganization Intent
     @Override
-    public void viewOrganization() {
+    public void viewOrganization(String organizationId) {
         Intent organizationIntent = new Intent(this, ViewOrganisation.class);
+        organizationIntent.putExtra("organizationId",organizationId);
+        System.out.println("Organization Id: "+organizationId);
         startActivity(organizationIntent);
     }
 
-    //View other user profile intent
     @Override
-    public void viewQuesUser() {
-        Intent viewQuesUser = new Intent(this, OtherUserProfile.class);
+    public void viewAds(final int position) {
+        System.out.println("Position:"+position);
+        adView=findViewById(R.id.home_adView);
+        if(position%5==0 && position!=0){
+            adView.getLayoutParams().width=100;
+            adView.getLayoutParams().height=100;
+            //callAd();
+            quoraRetrofitService= RetrofitUsersInstance.getRetrofitInstance().create(QuoraRetrofitService.class);;
 
-        startActivity(viewQuesUser);
+            SharedPreferences sharedPreferences=getSharedPreferences("LoginData",MODE_PRIVATE);
+            final String AccessToken=sharedPreferences.getString("AccessToken","");
+            Call<List<Ad>> callAdList = quoraRetrofitService.getAds("Bearer " + AccessToken, 2L);
+            callAdList.enqueue(new Callback<List<Ad>>() {
+                @Override
+                public void onResponse(Call<List<Ad>> call, Response<List<Ad>> response) {
+
+                    if (response.body() != null) {
+                        adList = response.body();
+                        System.out.println(adList);
+                        if(adList!=null) {
+                            Picasso.with(adView.getContext()).load(adList.get(position).getImageUrl()).resize(100, 100).centerCrop().into(adView);
+
+                        }
+                        adView.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                SharedPreferences sharedPreferences = getSharedPreferences("LoginData", MODE_PRIVATE);
+                                String userId = sharedPreferences.getString("UserId", "");
+
+                                Intent viewIntent =
+                                        new Intent("android.intent.action.VIEW",
+                                                Uri.parse(adList.get(position).getTargetUrl()));
+                                System.out.println("AD ID:" + adList.get(position).getAdId());
+                                onClickRequest.setAdId(adList.get(position).getAdId());
+                                onClickRequest.setAdvertiserId(adList.get(position).getAdvertiserId());
+                                onClickRequest.setCategoryId(adList.get(position).getCategoryName());
+                                onClickRequest.setDescription(adList.get(position).getDescription());
+                                onClickRequest.setSource("Quora");
+                                onClickRequest.setTag(adList.get(position).getTag());
+                                onClickRequest.setTargetUrl(adList.get(position).getTargetUrl());
+                                onClickRequest.setUserId(userId);
+
+                                Call<String> callAdOnClick = quoraRetrofitService.adOnClick("Bearer " + AccessToken, 2L, onClickRequest);
+                                callAdOnClick.enqueue(new Callback<String>() {
+                                    @Override
+                                    public void onResponse(Call<String> call, Response<String> response) {
+                                        System.out.println("OnResponse Ad on click");
+                                    }
+
+                                    @Override
+                                    public void onFailure(Call<String> call, Throwable t) {
+                                        System.out.println("OnFailure Ad on click" + t.getMessage());
+
+                                    }
+                                });
+                                startActivity(viewIntent);
+                            }
+                        });
+                    }
+                    System.out.println("onResponse Adview" + response.body());
+                }
+
+                @Override
+                public void onFailure(Call<List<Ad>> call, Throwable t) {
+                    System.out.println("onFailure Adview" + t.getMessage());
+                }
+            });
+            //Picasso.with(holder.adView.getContext()).load().resize(100, 100).centerCrop().into(holder.adView);
+        }
     }
+//View other user profile intent
+    /*@Override
+    public void viewQuesUser(String userId) {
+        Intent viewQuesUser = new Intent(this, MyProfile.class);
+        //viewQuesUser.putExtra("OtherUserId",userId);
+        startActivity(viewQuesUser);
+    }*/
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
