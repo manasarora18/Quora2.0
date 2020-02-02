@@ -29,7 +29,7 @@ public class CategoryActivity extends AppCompatActivity implements CategoryAdapt
     private RecyclerView categoryRecyclerView;
     private RecyclerView.Adapter categoryAdapter;
     List<Question>questionList;
-    List<String> categoryList;
+    List<String> categoryList=new ArrayList<>();
     private SharedPreferences sharedPreferences;
 
     @Override
@@ -42,7 +42,7 @@ public class CategoryActivity extends AppCompatActivity implements CategoryAdapt
 
         switch (categoryId){
             case 1:
-                categoryList.clear();
+//                categoryList.clear();
                 categoryList.add("Fiction");
                 categoryList.add("Non-Fiction");
                 categoryList.add("Poetry");
@@ -99,9 +99,15 @@ public class CategoryActivity extends AppCompatActivity implements CategoryAdapt
         call.enqueue(new Callback<CategoryResponseDTO>() {
             @Override
             public void onResponse(Call<CategoryResponseDTO> call, Response<CategoryResponseDTO> response) {
-                questionList=response.body().getQuestionList();
-                generateDataList(questionList);
-                System.out.println("OnResponse CategoryQuestions");
+                System.out.println(response.code());
+                if (response.body()!=null) {
+                    questionList = response.body().getQuestionList();
+                    generateDataList(questionList);
+                    System.out.println("OnResponse CategoryQuestions");
+                }
+                else{
+                    System.out.println("OnResponse CategoryQuestions NULL");
+                }
             }
             @Override
             public void onFailure(Call<CategoryResponseDTO> call, Throwable t) {
