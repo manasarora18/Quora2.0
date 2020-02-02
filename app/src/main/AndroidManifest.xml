@@ -17,7 +17,6 @@
             android:screenOrientation="portrait"
             android:configChanges="orientation|keyboardHidden"></activity>
         <activity android:name=".OtherUserProfile"></activity>
-        <activity android:name=".QuoraRegister" />
         <activity
             android:name=".ViewComments"
             android:windowSoftInputMode="stateVisible|adjustPan"
