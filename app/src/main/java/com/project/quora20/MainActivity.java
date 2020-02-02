@@ -7,7 +7,6 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
@@ -45,7 +44,6 @@ import com.project.quora20.retrofit.RetrofitUsersInstance;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -156,6 +154,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 System.out.println("OnFailure getAllQuestions" + t.getMessage());
             }
         });
+
 
 
         final ImageButton notification = findViewById(R.id.home_notif);
@@ -373,37 +372,37 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 //        Toast.makeText(this, "this menu item clicked", Toast.LENGTH_SHORT).show();
         switch (item.getItemId()) {
             case R.id.literature_nav_menu:
-                Toast.makeText(getApplicationContext(), "Coming Soon!", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getApplicationContext(), "Coming Soon!", Toast.LENGTH_SHORT).show();
                 Intent catIntent1 = new Intent(this, CategoryActivity.class);
                 catIntent1.putExtra("categoryId", 1);
                 this.startActivity(catIntent1);
                 break;
             case R.id.lifestyle_nav_menu:
-                Toast.makeText(getApplicationContext(), "Coming Soon!", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getApplicationContext(), "Coming Soon!", Toast.LENGTH_SHORT).show();
                 Intent catIntent2 = new Intent(this, CategoryActivity.class);
                 catIntent2.putExtra("categoryId", 2);
                 this.startActivity(catIntent2);
                 break;
             case R.id.technology_nav_menu:
-                Toast.makeText(getApplicationContext(), "Coming Soon!", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getApplicationContext(), "Coming Soon!", Toast.LENGTH_SHORT).show();
                 Intent catIntent3 = new Intent(this, CategoryActivity.class);
                 catIntent3.putExtra("categoryId", 3);
                 this.startActivity(catIntent3);
                 break;
             case R.id.movies_nav_menu:
-                Toast.makeText(getApplicationContext(), "Coming Soon!", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getApplicationContext(), "Coming Soon!", Toast.LENGTH_SHORT).show();
                 Intent catIntent4 = new Intent(this, CategoryActivity.class);
                 catIntent4.putExtra("categoryId", 4);
                 this.startActivity(catIntent4);
                 break;
             case R.id.food_nav_menu:
-                Toast.makeText(getApplicationContext(), "Coming Soon!", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getApplicationContext(), "Coming Soon!", Toast.LENGTH_SHORT).show();
                 Intent catIntent5 = new Intent(this, CategoryActivity.class);
                 catIntent5.putExtra("categoryId", 5);
                 this.startActivity(catIntent5);
                 break;
             case R.id.sports_nav_menu:
-                Toast.makeText(getApplicationContext(), "Coming Soon!", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getApplicationContext(), "Coming Soon!", Toast.LENGTH_SHORT).show();
                 Intent catIntent6 = new Intent(MainActivity.this, MyQuestions.class);
                 catIntent6.putExtra("categoryId", 6);
                 this.startActivity(catIntent6);
