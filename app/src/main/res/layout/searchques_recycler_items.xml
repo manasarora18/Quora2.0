@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="382dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="15dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageButton
+            android:id="@+id/searchq_quesUserImage"
+            android:layout_width="82dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
+
+        <TextView
+            android:id="@+id/searchq_questionTimeStamp"
+            android:layout_width="138dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="Time Stamp"
+            android:textAlignment="center" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/searchq_userQuestionText"
+        android:layout_width="375dp"
+        android:layout_height="51dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="16dp"
+        android:text="Questions by Other Users"
+        android:textAlignment="viewStart"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.571"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="374dp"
+        android:layout_height="47dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="19dp"
+        android:gravity="right"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cat_userQuestionText">
+
+        <TextView
+            android:id="@+id/searchq_queslikesCount"
+            android:layout_width="wrap_content"
+            android:layout_height="42dp"
+            android:layout_weight="1"
+            android:gravity="right|end"
+            android:text="Likes" />
+
+        <ImageButton
+            android:id="@+id/searchq_queslikeButton"
+            android:layout_width="34dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:backgroundTint="#00FAF8F8"
+            app:srcCompat="@drawable/ic_thumb_up_black_24dp" />
+
+        <TextView
+            android:id="@+id/searchq_quesdislikesCount"
+            android:layout_width="wrap_content"
+            android:layout_height="31dp"
+            android:layout_weight="1"
+            android:text="Dislikes"
+            android:textAlignment="textEnd" />
+
+        <ImageButton
+            android:id="@+id/searchq_quesdislikeButton"
+            android:layout_width="34dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:backgroundTint="#00FAF7F7"
+            app:srcCompat="@drawable/ic_thumb_down_black_24dp" />
+
+        <ImageButton
+            android:id="@+id/searchq_quesapproveButton"
+            android:layout_width="91dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:backgroundTint="#00F5F2F2"
+            android:tint="#4CAF50"
+            android:visibility="invisible"
+            app:srcCompat="@drawable/ic_check_green_45dp" />
+
+        <ImageButton
+            android:id="@+id/searchq_quesReportButton"
+            android:layout_width="wrap_content"
+            android:layout_height="41dp"
+            android:layout_weight="1"
+            android:backgroundTint="#00F8F7F7"
+            android:tint="@color/design_default_color_error"
+            app:srcCompat="@drawable/ic_report_flag_red_24dp" />
+
+
+    </LinearLayout>
+
+    <View
+        android:id="@+id/questionDivider"
+        android:layout_width="409dp"
+        android:layout_height="3dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="9dp"
+        android:layout_marginEnd="1dp"
+        android:background="?android:attr/listDivider"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cat_viewMoreAnswersButton" />
+
+    <Button
+        android:id="@+id/searchq_viewMoreAnswersButton"
+        android:layout_width="309dp"
+        android:layout_height="53dp"
+        android:layout_marginStart="132dp"
+        android:layout_marginTop="7dp"
+        android:layout_marginEnd="132dp"
+        android:text="View More Answers"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

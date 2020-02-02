@@ -85,6 +85,7 @@ public class MyProfile extends AppCompatActivity {
                 profile_adview = findViewById(R.id.profile_adview);
                 profile_userCategory = findViewById(R.id.profile_userFavCategories);
                 userName.setText(user.getUserName());
+                userScore.setText(String.valueOf(user.getUserScore()));
 
                 userEmail.setText(user.getUserEmail());
                 //holder.userPhone.setText();
@@ -101,7 +102,7 @@ public class MyProfile extends AppCompatActivity {
                 else{
                     following.setText("0");
                 }
-                userScore.setText("Score: " + String.valueOf(user.getUserScore()));
+
 
                 //List<String> categories=user.getUserCategory();
 

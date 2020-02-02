@@ -121,29 +121,34 @@ public class ViewComments extends AppCompatActivity implements CommentsAdapter.I
 
         commentText = findViewById(R.id.comment_addComment);
         System.out.println("Comment Text:" + commentText.getText().toString());
-        commentDTO.setCommentBody(commentText.getText().toString());
+        if (commentText.getText().toString().trim().equals("")) {
+            Toast toast = Toast.makeText(getApplicationContext(), "Please Enter some Text", Toast.LENGTH_SHORT);
+            toast.show();
+        } else {
+            commentDTO.setCommentBody(commentText.getText().toString());
 
-        commentDTO.setUserId(userId);
 
-        Call<IdResponse> callAddComment = quoraRetrofitService.addComment(commentDTO);
-        System.out.println(commentDTO);
-        callAddComment.enqueue(new Callback<IdResponse>() {
-            @Override
-            public void onResponse(Call<IdResponse> call, Response<IdResponse> response) {
-                System.out.println("OnResponse addComments: " + response.body().getId());
-                Toast toast = Toast.makeText(getApplicationContext(), "Comment posted ", Toast.LENGTH_SHORT);
-                toast.show();
+            commentDTO.setUserId(userId);
 
-            }
+            Call<IdResponse> callAddComment = quoraRetrofitService.addComment(commentDTO);
+            System.out.println(commentDTO);
+            callAddComment.enqueue(new Callback<IdResponse>() {
+                @Override
+                public void onResponse(Call<IdResponse> call, Response<IdResponse> response) {
+                    System.out.println("OnResponse addComments: " + response.body().getId());
+                    Toast toast = Toast.makeText(getApplicationContext(), "Comment posted ", Toast.LENGTH_SHORT);
+                    toast.show();
 
-            @Override
-            public void onFailure(Call<IdResponse> call, Throwable t) {
-                System.out.println("OnResponse addComments:" + t.getMessage());
+                }
 
-            }
-        });
+                @Override
+                public void onFailure(Call<IdResponse> call, Throwable t) {
+                    System.out.println("OnResponse addComments:" + t.getMessage());
 
+                }
+            });
+
+        }
     }
-
 }
 

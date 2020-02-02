@@ -71,8 +71,8 @@ public class QuestionAnswer extends AppCompatActivity implements QuestionAnswerA
 
                 addAnswers(answerdto);
                 qa_answerText.setText("");
-                Toast toast = Toast.makeText(getApplicationContext(), "Answer posted ", Toast.LENGTH_SHORT);
-                toast.show();
+//                Toast toast = Toast.makeText(getApplicationContext(), "Answer posted ", Toast.LENGTH_SHORT);
+//                toast.show();
 
                 //reload the activity
                 finish();
@@ -102,30 +102,37 @@ public class QuestionAnswer extends AppCompatActivity implements QuestionAnswerA
         answerDTO.setUserId(userId);
 
         qa_answerText = findViewById(R.id.qa_answerText);
-        answerDTO.setAnswerBody(qa_answerText.getText().toString());
-        System.out.println("answer text:" + qa_answerText.getText().toString());
-        System.out.println("answer body:" + answerDTO.getAnswerBody());
+        if(qa_answerText.getText().toString().trim().equals(""))
+        {
+            Toast toast=Toast.makeText(getApplicationContext(),"Please enter some text",Toast.LENGTH_SHORT);
+            toast.show();
+        }
+        else {
+            answerDTO.setAnswerBody(qa_answerText.getText().toString());
+            System.out.println("answer text:" + qa_answerText.getText().toString());
+            System.out.println("answer body:" + answerDTO.getAnswerBody());
 
-        quoraRetrofitService = RetrofitClientInstance.getRetrofitInstance().create(QuoraRetrofitService.class);
-        System.out.println("Qid addAnswer: " + answerDTO);
+            quoraRetrofitService = RetrofitClientInstance.getRetrofitInstance().create(QuoraRetrofitService.class);
+            System.out.println("Qid addAnswer: " + answerDTO);
 
-        Call<IdResponse> callAddAnswer = quoraRetrofitService.addAnswer(answerDTO);
-        callAddAnswer.enqueue(new Callback<IdResponse>() {
-            @Override
-            public void onResponse(Call<IdResponse> call, Response<IdResponse> response) {
+            Call<IdResponse> callAddAnswer = quoraRetrofitService.addAnswer(answerDTO);
+            callAddAnswer.enqueue(new Callback<IdResponse>() {
+                @Override
+                public void onResponse(Call<IdResponse> call, Response<IdResponse> response) {
+                    if (response.body() != null) {
+                        System.out.println("OnResponse Add Answer");
+                        final String message = response.body().getId();
+                        System.out.println("Message: " + message);
+                    }
+                }
 
-                System.out.println("OnResponse Add Answer");
-                final String message = response.body().getId();
-                System.out.println("Message: "+message);
-            }
+                @Override
+                public void onFailure(Call<IdResponse> call, Throwable t) {
+                    System.out.println("OnFailure Add Answer" + t.getMessage());
+                }
+            });
 
-            @Override
-            public void onFailure(Call<IdResponse> call, Throwable t) {
-                System.out.println("OnFailure Add Answer"+t.getMessage());
-            }
-        });
-
-
+        }
 
     }
 

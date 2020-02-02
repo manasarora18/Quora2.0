@@ -11,7 +11,7 @@ public class UserDTO{
 	@SerializedName("userFollowingOrganization")
 	private List<String> userFollowingOrganization;
 
-	@SerializedName("userFollowing")
+	@SerializedName("following")
 	private List<String> userFollowing;
 
 	@SerializedName("privateFlag")
@@ -26,10 +26,10 @@ public class UserDTO{
 	@SerializedName("userEmail")
 	private String userEmail;
 
-	@SerializedName("userScore")
+	@SerializedName("score")
 	private int userScore;
 
-	@SerializedName("userName")
+	@SerializedName("name")
 	private String userName;
 
 	@SerializedName("userId")
