@@ -47,6 +47,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder
     QuoraRetrofitService quoraRetrofitService;
     SharedPreferences sharedPreferences;
     String AccessToken;
+    int adCounter;
 
 
     public HomeAdapter(List<Question> questionList, QuestionCommunication questionCommunication, String userId, String AccessToken) {
@@ -231,9 +232,12 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder
         holder.adView.getLayoutParams().width = 0;
         holder.adView.getLayoutParams().height = 0;
 //ads
+
         if (position % 5 == 0 && position != 0) {
 
             // callAd();
+
+
             quoraRetrofitService = RetrofitAdInstance.getRetrofitInstance().create(QuoraRetrofitService.class);
 
 
@@ -244,16 +248,21 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder
 
                     if (response.body() != null) {
                         adList = response.body();
+                        adCounter++;
+                        if(adCounter>=adList.size()-1)
+                        {
+                            adCounter=0;
+                        }
                         holder.adView.getLayoutParams().width = 500;
                         holder.adView.getLayoutParams().height = 400;
                         if (adList != null) {
-                            Picasso.with(holder.adView.getContext()).load(adList.get(position).getImageUrl()).resize(500, 400).centerCrop().into(holder.adView);
+                            Picasso.with(holder.adView.getContext()).load(adList.get(adCounter).getImageUrl()).resize(500, 400).centerCrop().into(holder.adView);
 
                         }
                         holder.adView.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                questionCommunication.viewAds(position, adList);
+                                questionCommunication.viewAds(adCounter, adList);
 
                             }
                         });
