@@ -2,6 +2,7 @@ package com.project.quora20;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
+
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
@@ -9,8 +10,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import com.project.quora20.adapter.MyProfileAdapter;
+import com.project.quora20.dto.UserDTO;
 import com.project.quora20.entity.Ad;
+import com.project.quora20.entity.Category;
 import com.project.quora20.entity.OnClickRequest;
 import com.project.quora20.entity.User;
 import com.project.quora20.retrofit.QuoraRetrofitService;
@@ -18,7 +22,9 @@ import com.project.quora20.retrofit.RetrofitAdInstance;
 import com.project.quora20.retrofit.RetrofitClientInstance;
 import com.project.quora20.retrofit.RetrofitUsersInstance;
 import com.squareup.picasso.Picasso;
+
 import java.util.List;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -38,8 +44,9 @@ public class MyProfile extends AppCompatActivity {
     public TextView userLevel;
     public ImageView profile_adview;
     public TextView profile_adDescription;
+    public TextView profile_userCategory;
     List<Ad> adList;
-    OnClickRequest onClickRequest=new OnClickRequest();
+    OnClickRequest onClickRequest = new OnClickRequest();
 
 
     @Override
@@ -54,14 +61,14 @@ public class MyProfile extends AppCompatActivity {
     void viewProfile() {
         //final User user;
         quoraRetrofitService = RetrofitUsersInstance.getRetrofitInstance().create(QuoraRetrofitService.class);
-        SharedPreferences sharedPreferences=getSharedPreferences("LoginData",MODE_PRIVATE);
-        String userId=sharedPreferences.getString("UserId","");
+        SharedPreferences sharedPreferences = getSharedPreferences("LoginData", MODE_PRIVATE);
+        String userId = sharedPreferences.getString("UserId", "");
 //        Call<User> callMyProfile = quoraRetrofitService.viewUser(userId);
-        Call<User> callMyProfile = quoraRetrofitService.viewUser(userId);
-        callMyProfile.enqueue(new Callback<User>() {
+        Call<UserDTO> callMyProfile = quoraRetrofitService.viewUser(userId);
+        callMyProfile.enqueue(new Callback<UserDTO>() {
             @Override
-            public void onResponse(Call<User> call, Response<User> response) {
-                User user = response.body();
+            public void onResponse(Call<UserDTO> call, Response<UserDTO> response) {
+                UserDTO user = response.body();
                 userName = findViewById(R.id.profile_userName);
                 userImageView = findViewById(R.id.profile_userProfileImage);
                 userEmail = findViewById(R.id.profile_userEmail);
@@ -70,20 +77,40 @@ public class MyProfile extends AppCompatActivity {
                 userScore = findViewById(R.id.profile_userScore);
                 userLevel = findViewById(R.id.profile_userLevel);
                 profile_adview = findViewById(R.id.profile_adview);
-                userName.setText(user.getName());
-                //userIamge with picasso
-                //Picasso.with(getBaseContext())
+                profile_userCategory = findViewById(R.id.profile_userFavCategories);
+                userName.setText(user.getUserName());
+
                 userEmail.setText(user.getUserEmail());
                 //holder.userPhone.setText();
-                followers.setText(String.valueOf(user.getFollowersCount()));
-                following.setText(String.valueOf(user.getFollowingCount()));
-                //userScore.setText("Score: "+String.valueOf(user.get()));
+                if(user.getUserFollower()!=null) {
+                    followers.setText(String.valueOf(user.getUserFollower().size()));
+                }
+                else
+                {
+                    followers.setText("0");
+                }
+                if(user.getUserFollowing()!=null) {
+                    following.setText(String.valueOf(user.getUserFollowing().size()));
+                }
+                else{
+                    following.setText("0");
+                }
+                userScore.setText("Score: " + String.valueOf(user.getUserScore()));
 
+                //List<String> categories=user.getUserCategory();
+               // profile_userCategory.setText(String.valueOf(user.getUserCategory()));
+                if(user.getUserCategory()!=null) {
+                    //TextView text=new TextView(" ");
+                    for (int i = 0; i < user.getUserCategory().size(); i++) {
+                        //text.setText(user.getUserCategory().get(i));
+                        profile_userCategory.setText(user.getUserCategory().get(i) + "\n");
+                    }
+                }
                 System.out.println("Inside ViewProfile OnResponse");
             }
 
             @Override
-            public void onFailure(Call<User> call, Throwable t) {
+            public void onFailure(Call<UserDTO> call, Throwable t) {
                 System.out.println("Inside ViewProfile OnFailure");
             }
         });
@@ -93,25 +120,31 @@ public class MyProfile extends AppCompatActivity {
 
     void viewAds() {
         quoraRetrofitService = RetrofitAdInstance.getRetrofitInstance().create(QuoraRetrofitService.class);
-        final String accessToken = "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIyIiwiaWQiOjIsIm5hbWUiOiJCaHVtaSIsImVtYWlsIjoiYmh1bWkucGF0ZWxAY292aWFtLmNvbSIsImlhdCI6MTU4MDQ2MzEzNSwiZXhwIjoxNTgxMzI3MTM1fQ.Vy-da5MWLd6CsGdGjP6EEwi6vvWSiCt3NfWhQX0I3ckwBINpQb2VPJ8xcMsrRYCHdIxxeSFKTgqc6KvPvfcVPQ";
+        SharedPreferences sharedPreferences=getSharedPreferences("LoginData",MODE_PRIVATE);
+        final String AccessToken=sharedPreferences.getString("AccessToken","");
+        //final String accessToken = "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIyIiwiaWQiOjIsIm5hbWUiOiJCaHVtaSIsImVtYWlsIjoiYmh1bWkucGF0ZWxAY292aWFtLmNvbSIsImlhdCI6MTU4MDQ2MzEzNSwiZXhwIjoxNTgxMzI3MTM1fQ.Vy-da5MWLd6CsGdGjP6EEwi6vvWSiCt3NfWhQX0I3ckwBINpQb2VPJ8xcMsrRYCHdIxxeSFKTgqc6KvPvfcVPQ";
 //        SharedPreferences sharedPreferences=getSharedPreferences("LoginData",MODE_PRIVATE);
 //        final String accessToken=sharedPreferences.getString("AccessToken","");
-        Call<List<Ad>> callAdList = quoraRetrofitService.getAds("Bearer " + accessToken, 2L);
+        Call<List<Ad>> callAdList = quoraRetrofitService.getAds("Bearer " + AccessToken, 2L);
         callAdList.enqueue(new Callback<List<Ad>>() {
             @Override
             public void onResponse(Call<List<Ad>> call, Response<List<Ad>> response) {
 
                 profile_adview = findViewById(R.id.profile_adview);
                 profile_adDescription = findViewById(R.id.profile_adDescription);
-                //adapter=new MyProfileAdapter(adList);
-                //profile_adview.setImageResource();
-                if (response.body()!= null) {
+
+                if (response.body() != null) {
                     adList = response.body();
-                    Picasso.with(profile_adview.getContext()).load(adList.get(0).getImageUrl()).resize(100, 100).centerCrop().into(profile_adview);
-                    profile_adDescription.setText(adList.get(0).getDescription());
+                    if(adList!=null) {
+                        Picasso.with(profile_adview.getContext()).load(adList.get(0).getImageUrl()).resize(100, 100).centerCrop().into(profile_adview);
+                        profile_adDescription.setText(adList.get(0).getDescription());
+                    }
                     profile_adview.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
+                            SharedPreferences sharedPreferences = getSharedPreferences("LoginData", MODE_PRIVATE);
+                            String userId = sharedPreferences.getString("UserId", "");
+
                             Intent viewIntent =
                                     new Intent("android.intent.action.VIEW",
                                             Uri.parse(adList.get(0).getTargetUrl()));
@@ -123,9 +156,9 @@ public class MyProfile extends AppCompatActivity {
                             onClickRequest.setSource("Quora");
                             onClickRequest.setTag(adList.get(0).getTag());
                             onClickRequest.setTargetUrl(adList.get(0).getTargetUrl());
-                            onClickRequest.setUserId("2");
+                            onClickRequest.setUserId(userId);
 
-                            Call<String> callAdOnClick = quoraRetrofitService.adOnClick("Bearer " + accessToken, 2L, onClickRequest);
+                            Call<String> callAdOnClick = quoraRetrofitService.adOnClick("Bearer " + AccessToken, 2L, onClickRequest);
                             callAdOnClick.enqueue(new Callback<String>() {
                                 @Override
                                 public void onResponse(Call<String> call, Response<String> response) {
@@ -134,7 +167,7 @@ public class MyProfile extends AppCompatActivity {
 
                                 @Override
                                 public void onFailure(Call<String> call, Throwable t) {
-                                    System.out.println("OnFailure Ad on click"+t.getMessage());
+                                    System.out.println("OnFailure Ad on click" + t.getMessage());
 
                                 }
                             });

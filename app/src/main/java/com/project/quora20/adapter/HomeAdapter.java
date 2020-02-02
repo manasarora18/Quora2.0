@@ -117,6 +117,15 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder
             }
         });
 
+        //view user profile on click
+        holder.questionUserImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                questionCommunication.viewQuesUser();
+
+            }
+        });
+
         likedList = questionList.get(position).getLikeUserList();
         dislikedList = questionList.get(position).getDislikeUserList();
 
@@ -199,5 +208,6 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder
         void onClick(Question question);
 
         void viewOrganization();
+        void viewQuesUser();
     }
 }

@@ -12,7 +12,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".QuoraRegister"></activity>
+        <activity android:name=".OtherUserProfile"></activity>
+        <activity android:name=".QuoraRegister" />
         <activity
             android:name=".ViewComments"
             android:windowSoftInputMode="stateVisible|adjustPan" />

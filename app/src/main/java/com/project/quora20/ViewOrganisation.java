@@ -45,6 +45,7 @@ public class ViewOrganisation extends AppCompatActivity {
         orgFollowers=findViewById(R.id.org_followersCount);
         orgFollowing=findViewById(R.id.org_followingCount);
         orgMembers=findViewById(R.id.org_Members);
+        orgImage=findViewById(R.id.org_ProfileImage);
 
         String organizationId="5e3149d91edbf851280ccf51";
         Call<Organization> callOrganization=quoraRetrofitService.viewOrganization(organizationId);
@@ -57,12 +58,20 @@ public class ViewOrganisation extends AppCompatActivity {
                 System.out.println("Object: "+organization);
                 //Picasso.with(getApplicationContext()).load(organization.getOranizationImage()).centerCrop().into(orgImage);
                 //Glide.
+                //Picasso.with(orgImage.getContext()).load(u).into(orgImage);
                 orgName.setText(organization.getOrganizationName());
                 orgEmail.setText(organization.getOrganizationEmail());
                 if(organization.getOrganizationFollowers()!=null) {
                     orgFollowers.setText(String.valueOf(organization.getOrganizationFollowers().size()));
                 }
+                else
+                {
+                    orgFollowers.setText("0");
+                }
+                if(organization.getOrganizationMembers()!=null)
                 orgMembers.setText(String.valueOf(organization.getOrganizationMembers()));
+                else
+                    orgMembers.setText("0");
 
 
             }

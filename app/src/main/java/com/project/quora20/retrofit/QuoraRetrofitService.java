@@ -74,7 +74,7 @@ public interface QuoraRetrofitService {
     Call<Answer> getAnswersByQuestionId(@Path("questionId")String questionId);
 
     @GET("/user/viewUser/{userId}")
-    Call<User> viewUser(@Path("userId")String userId);
+    Call<UserDTO> viewUser(@Path("userId")String userId);
 
     @GET("organiaztion/viewOrganization/{organizationId}")
     Call<Organization> viewOrganization(@Path("organizationId") String organizationId);
@@ -108,6 +108,13 @@ public interface QuoraRetrofitService {
 
     @POST("/ads/onclick/{srcId}")
     Call<String> adOnClick(@Header("Authorization")String accessToken, @Path("srcId")Long srcId, @Body OnClickRequest onClickRequest);
+
+    @POST("/user/addFollowers/{ownId}/{followersId}")
+    Call<Boolean> addFollowers(@Path("ownId")String ownId,@Path("followersId")String followersId);
+
+    @POST("/user/addFollowersToOrganization/{ownId}/{organizationId}")
+    Call<Boolean> addOrganizationFollowers(@Path("ownId") String ownId, @Path("organizationId") String organizationId);
+
 
 }
 
