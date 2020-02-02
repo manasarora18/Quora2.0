@@ -3,7 +3,7 @@
 
     <string name="openNav">OpenNavigation</string>
     <string name="closeNav">CloseNavigation</string>
-    
+
     <string name="Fiction"> Fiction Literature </string>
     <string name="Non_Fiction"> Non-Fiction Literature </string>
     <string name="Poetry">Poetry Literature</string>
@@ -75,4 +75,4 @@
     </string-array>
 </resources>
 
-<!--    [ "Fiction","Non_Fiction","Poetry","Short_stories","Clothing","Footwear","Watches","Accessories","Coding","Android","iOS","Bollywood","Hollywood","Tollywood","Punjabi","NorthIndian","SouthIndian","Italian","Chinese","Football","Cricket","Badminton","Tennis"]-->
+    <!--    [ "Fiction","Non_Fiction","Poetry","Short_stories","Clothing","Footwear","Watches","Accessories","Coding","Android","iOS","Bollywood","Hollywood","Tollywood","Punjabi","NorthIndian","SouthIndian","Italian","Chinese","Football","Cricket","Badminton","Tennis"]-->
