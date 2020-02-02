@@ -7,7 +7,11 @@ import com.project.quora20.dto.CategoryResponseDTO;
 import com.project.quora20.dto.CoAuthLoginRequest;
 import com.project.quora20.dto.CommentDTO;
 import com.project.quora20.dto.CommentListDto;
+import com.project.quora20.dto.DATagsResponse;
+import com.project.quora20.dto.FCMTokenRequest;
+import com.project.quora20.dto.FCMTokenResponse;
 import com.project.quora20.dto.IdResponse;
+import com.project.quora20.dto.TagsDARequest;
 import com.project.quora20.entity.Ad;
 import com.project.quora20.dto.CategoryUpdateRequest;
 import com.project.quora20.dto.CoAuthRegisterRequest;
@@ -108,6 +112,12 @@ public interface QuoraRetrofitService {
 
     @POST("/ads/onclick/{srcId}")
     Call<String> adOnClick(@Header("Authorization")String accessToken, @Path("srcId")Long srcId, @Body OnClickRequest onClickRequest);
+
+    @POST("/search/register")
+    Call<DATagsResponse>tagsToDA(@Body TagsDARequest tagsDARequest);
+
+    @POST("notification/fcmtoken")
+    Call<FCMTokenResponse>sendFCM(@Header("Authorization")String accessToken,@Body FCMTokenRequest fcmTokenRequest);
 
 }
 
