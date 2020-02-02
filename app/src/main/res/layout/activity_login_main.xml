@@ -149,6 +149,7 @@
         app:layout_constraintStart_toStartOf="@+id/login_password"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.3" />
+
     <TextView
         android:id="@+id/appLabel"
         android:layout_width="wrap_content"
@@ -157,13 +158,14 @@
         android:text="Quora 2.0"
         android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        android:textColor="#74EB0C"
+        android:textColor="#F44336"
         android:textSize="36sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/login_userName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
     <TextView
         android:id="@+id/textView"
         android:layout_width="108dp"
@@ -173,7 +175,7 @@
         android:layout_marginBottom="8dp"
         android:fontFamily="monospace"
         android:text="New User?"
-        android:textColor="#009688"
+        android:textColor="#E61818"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/login_register"

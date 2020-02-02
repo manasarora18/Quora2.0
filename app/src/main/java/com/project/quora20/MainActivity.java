@@ -158,7 +158,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         });
 
 
-        ImageButton notification = findViewById(R.id.home_notif);
+        final ImageButton notification = findViewById(R.id.home_notif);
         notification.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -178,8 +178,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                                 // Log and toast
                                 String msg = getString(R.string.msg_token_fmt, token);
                                 Log.d("NOTIF", msg);
-                                Toast.makeText(MainActivity.this, msg, Toast.LENGTH_SHORT).show();
+                                Toast.makeText(MainActivity.this, "Notifications Enabled", Toast.LENGTH_SHORT).show();
                                 FCMApiCall(FCMToken);
+                                notification.setVisibility(View.GONE);
                             }
                         });
             }
