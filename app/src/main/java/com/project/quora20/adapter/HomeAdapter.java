@@ -23,6 +23,7 @@ import com.project.quora20.entity.Ad;
 import com.project.quora20.entity.OnClickRequest;
 import com.project.quora20.entity.Question;
 import com.project.quora20.retrofit.QuoraRetrofitService;
+import com.project.quora20.retrofit.RetrofitAdInstance;
 import com.project.quora20.retrofit.RetrofitClientInstance;
 import com.project.quora20.retrofit.RetrofitUsersInstance;
 import com.squareup.picasso.Picasso;
@@ -39,16 +40,21 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder
     private List<Question> questionList;
     private QuestionCommunication questionCommunication;
     private String userId;
-    List<String> likedList=new ArrayList<>();
-    List<String> dislikedList=new ArrayList<>();
+    List<String> likedList = new ArrayList<>();
+    List<String> dislikedList = new ArrayList<>();
+    List<Ad> adList;
+    OnClickRequest onClickRequest = new OnClickRequest();
+    QuoraRetrofitService quoraRetrofitService;
+    SharedPreferences sharedPreferences;
+    String AccessToken;
+    int adCounter;
 
 
-
-
-    public HomeAdapter(List<Question> questionList, QuestionCommunication questionCommunication, String userId) {
+    public HomeAdapter(List<Question> questionList, QuestionCommunication questionCommunication, String userId, String AccessToken) {
         this.questionList = questionList;
         this.questionCommunication = questionCommunication;
         this.userId = userId;
+        this.AccessToken = AccessToken;
     }
 
     public class HomeViewHolder extends RecyclerView.ViewHolder {
@@ -74,7 +80,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder
             this.questionDislikeButton = view.findViewById(R.id.home_quesdislikeButton);
             this.viewMoreAnswers = view.findViewById(R.id.home_viewMoreAnswersButton);
             this.organizationImage = view.findViewById(R.id.home_organizationImage);
-            this.adView=view.findViewById(R.id.home_adView);
+            this.adView = view.findViewById(R.id.home_adView);
         }
     }
 
@@ -90,7 +96,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder
     private boolean LikeCheck(List<String> likedList) {
 
         boolean likedFlag = false;
-        if (likedList!=null) {
+        if (likedList != null) {
             likedFlag = likedList.contains(userId);
         }
         return likedFlag;
@@ -100,15 +106,19 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder
     private boolean DislikeCheck(List<String> dislikedList) {
 
         boolean dislikedFlag = false;
-        if (dislikedList!=null) {
-           dislikedFlag=dislikedList.contains(userId);
+        if (dislikedList != null) {
+            dislikedFlag = dislikedList.contains(userId);
         }
         return dislikedFlag;
     }
 
     @Override
     public void onBindViewHolder(@NonNull final HomeViewHolder holder, final int position) {
-        questionCommunication.viewAds(position);
+        /*if(position%5==0) {
+            holder.adView.getLayoutParams().width=100;
+            holder.adView.getLayoutParams().height=100;
+            //questionCommunication.viewAds(position);
+        }*/
         holder.questionLikeButton.setColorFilter(Color.parseColor("#000000"));
         holder.questionDislikeButton.setColorFilter(Color.parseColor("#000000"));
 
@@ -124,8 +134,8 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder
         holder.questionDislike.setText(String.valueOf(questionList.get(position).getDislikeCount()));
         holder.questionTimeStamp.setText(questionList.get(position).getDate());
 
-        System.out.println("OrganizationId:"+questionList.get(position).getOrgId());
-        if(questionList.get(position).getOrgId()!=null) {
+        System.out.println("OrganizationId:" + questionList.get(position).getOrgId());
+        if (questionList.get(position).getOrgId() != null) {
             holder.organizationImage.setVisibility(View.VISIBLE);
 
             holder.organizationImage.setOnClickListener(new View.OnClickListener() {
@@ -133,12 +143,10 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder
                 public void onClick(View v) {
 
                     questionCommunication.viewOrganization(questionList.get(position).getOrgId());
-                    System.out.println("Inside OrganizationId :"+questionList.get(position).getOrgId());
+                    System.out.println("Inside OrganizationId :" + questionList.get(position).getOrgId());
                 }
             });
-        }
-        else
-        {
+        } else {
             holder.organizationImage.setVisibility(View.INVISIBLE);
         }
 
@@ -221,7 +229,54 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder
 
 
         }
+        holder.adView.getLayoutParams().width = 0;
+        holder.adView.getLayoutParams().height = 0;
+//ads
 
+        if (position % 5 == 0 && position != 0) {
+
+            // callAd();
+
+
+            quoraRetrofitService = RetrofitAdInstance.getRetrofitInstance().create(QuoraRetrofitService.class);
+
+
+            Call<List<Ad>> callAdList = quoraRetrofitService.getAds("Bearer " + AccessToken, 2L);
+            callAdList.enqueue(new Callback<List<Ad>>() {
+                @Override
+                public void onResponse(Call<List<Ad>> call, Response<List<Ad>> response) {
+
+                    if (response.body() != null) {
+                        adList = response.body();
+                        adCounter++;
+                        if(adCounter>=adList.size()-1)
+                        {
+                            adCounter=0;
+                        }
+                        holder.adView.getLayoutParams().width = 500;
+                        holder.adView.getLayoutParams().height = 400;
+                        if (adList != null) {
+                            Picasso.with(holder.adView.getContext()).load(adList.get(adCounter).getImageUrl()).resize(500, 400).centerCrop().into(holder.adView);
+
+                        }
+                        holder.adView.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                questionCommunication.viewAds(adCounter, adList);
+
+                            }
+                        });
+                    }
+                    System.out.println("onResponse Adview" + response.body());
+                }
+
+                @Override
+                public void onFailure(Call<List<Ad>> call, Throwable t) {
+                    System.out.println("onFailure Adview" + t.getMessage());
+                }
+            });
+            //Picasso.with(holder.adView.getContext()).load().resize(100, 100).centerCrop().into(holder.adView);
+        }
 
 
     }
@@ -238,8 +293,9 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder
         void onClick(Question question);
 
         void viewOrganization(String organizationId);
-       // void viewQuesUser(String userId);
-        void viewAds(int position);
+
+        // void viewQuesUser(String userId);
+        void viewAds(int position, List<Ad> adList);
     }
 
 

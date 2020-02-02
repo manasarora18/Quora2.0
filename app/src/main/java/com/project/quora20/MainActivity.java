@@ -20,6 +20,7 @@ import android.widget.ImageButton;
 import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.navigation.NavigationView;
@@ -31,6 +32,7 @@ import com.project.quora20.dto.FCMTokenRequest;
 import com.project.quora20.dto.FCMTokenResponse;
 import com.project.quora20.entity.Question;
 import com.project.quora20.retrofit.QuoraRetrofitService;
+import com.project.quora20.retrofit.RetrofitAdInstance;
 import com.project.quora20.retrofit.RetrofitClientInstance;
 import com.project.quora20.retrofit.RetrofitLoginService;
 import com.project.quora20.entity.Ad;
@@ -40,6 +42,7 @@ import com.project.quora20.retrofit.QuoraRetrofitService;
 import com.project.quora20.retrofit.RetrofitClientInstance;
 import com.project.quora20.retrofit.RetrofitUsersInstance;
 import com.squareup.picasso.Picasso;
+
 import java.util.List;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -153,6 +156,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         });
 
 
+
         final ImageButton notification=findViewById(R.id.home_notif);
         notification.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -168,7 +172,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                                 // Get new Instance ID token
                                 String token = task.getResult().getToken();
-                                FCMToken=token;
+                                FCMToken = token;
 
                                 // Log and toast
                                 String msg = getString(R.string.msg_token_fmt, token);
@@ -183,23 +187,25 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
     }
-    public void FCMApiCall(String Token){
-        FCMTokenRequest fcmTokenRequest=new FCMTokenRequest();
-        System.out.println("TOKEN"+Token);
+
+    public void FCMApiCall(String Token) {
+        FCMTokenRequest fcmTokenRequest = new FCMTokenRequest();
+        System.out.println("TOKEN" + Token);
         fcmTokenRequest.setFcmtoken(Token);
 
-        String token="Bearer "+sharedPreferences.getString("AccessToken","");
-        System.out.println("JWTTOKEN"+token);
-        QuoraRetrofitService quoraRetrofitService1= RetrofitLoginService.getRetrofitInstance().create(QuoraRetrofitService.class);
-        Call<FCMTokenResponse>fcmTokenResponseCall=quoraRetrofitService1.sendFCM(token,fcmTokenRequest);
+        String token = "Bearer " + sharedPreferences.getString("AccessToken", "");
+        System.out.println("JWTTOKEN" + token);
+        QuoraRetrofitService quoraRetrofitService1 = RetrofitLoginService.getRetrofitInstance().create(QuoraRetrofitService.class);
+        Call<FCMTokenResponse> fcmTokenResponseCall = quoraRetrofitService1.sendFCM(token, fcmTokenRequest);
         fcmTokenResponseCall.enqueue(new Callback<FCMTokenResponse>() {
             @Override
             public void onResponse(Call<FCMTokenResponse> call, Response<FCMTokenResponse> response) {
                 System.out.println("OnResponse FCMToken");
             }
+
             @Override
             public void onFailure(Call<FCMTokenResponse> call, Throwable t) {
-                System.out.println("OnFailure FCMToken"+t.getMessage());
+                System.out.println("OnFailure FCMToken" + t.getMessage());
             }
         });
     }
@@ -214,7 +220,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         //if list not null
         sharedPreferences = getSharedPreferences("LoginData", MODE_PRIVATE);
         String userId = sharedPreferences.getString("UserId", "");
-        homeAdapter = new HomeAdapter(list, MainActivity.this, userId);
+        sharedPreferences = getSharedPreferences("LoginData", MODE_PRIVATE);
+        final String AccessToken = sharedPreferences.getString("AccessToken", "");
+
+        homeAdapter = new HomeAdapter(list, MainActivity.this, userId, AccessToken);
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getApplicationContext(), 1);
         homeRecyclerView.setLayoutManager(gridLayoutManager);
         homeRecyclerView.setAdapter(homeAdapter);
@@ -238,18 +247,54 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public void viewOrganization(String organizationId) {
         Intent organizationIntent = new Intent(this, ViewOrganisation.class);
-        organizationIntent.putExtra("organizationId",organizationId);
-        System.out.println("Organization Id: "+organizationId);
+        organizationIntent.putExtra("organizationId", organizationId);
+        System.out.println("Organization Id: " + organizationId);
         startActivity(organizationIntent);
     }
 
     @Override
+    public void viewAds(int position, List<Ad> adList) {
+        quoraRetrofitService = RetrofitAdInstance.getRetrofitInstance().create(QuoraRetrofitService.class);
+        sharedPreferences = getSharedPreferences("LoginData", MODE_PRIVATE);
+        String userId = sharedPreferences.getString("UserId", "");
+        SharedPreferences sharedPreferences = getSharedPreferences("LoginData", MODE_PRIVATE);
+        final String AccessToken = sharedPreferences.getString("AccessToken", "");
+
+        Intent viewIntent =
+                new Intent("android.intent.action.VIEW",
+                        Uri.parse(adList.get(position).getTargetUrl()));
+        System.out.println("AD ID:" + adList.get(position).getAdId());
+        onClickRequest.setAdId(adList.get(position).getAdId());
+        onClickRequest.setAdvertiserId(adList.get(position).getAdvertiserId());
+        onClickRequest.setCategoryId(adList.get(position).getCategoryName());
+        onClickRequest.setDescription(adList.get(position).getDescription());
+        onClickRequest.setSource("Quora");
+        onClickRequest.setTag(adList.get(position).getTag());
+        onClickRequest.setTargetUrl(adList.get(position).getTargetUrl());
+        onClickRequest.setUserId(userId);
+
+        Call<String> callAdOnClick = quoraRetrofitService.adOnClick("Bearer " + AccessToken, 2L, onClickRequest);
+        callAdOnClick.enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+                System.out.println("OnResponse Ad on click");
+            }
+
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+                System.out.println("OnFailure Ad on click" + t.getMessage());
+
+            }
+        });
+        startActivity(viewIntent);
+    }
+
+    /*@Override
     public void viewAds(final int position) {
         System.out.println("Position:"+position);
         adView=findViewById(R.id.home_adView);
-        if(position%5==0 && position!=0){
-            adView.getLayoutParams().width=100;
-            adView.getLayoutParams().height=100;
+        //if(position%5==0 && position!=0){
+
             //callAd();
             quoraRetrofitService= RetrofitUsersInstance.getRetrofitInstance().create(QuoraRetrofitService.class);;
 
@@ -312,8 +357,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 }
             });
             //Picasso.with(holder.adView.getContext()).load().resize(100, 100).centerCrop().into(holder.adView);
-        }
-    }
+        }*/
+    // }
 //View other user profile intent
     /*@Override
     public void viewQuesUser(String userId) {
