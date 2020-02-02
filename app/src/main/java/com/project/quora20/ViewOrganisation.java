@@ -2,6 +2,7 @@ package com.project.quora20;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -33,11 +34,12 @@ public class ViewOrganisation extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_organisation);
-
-        viewOrganization();
+        Intent orgIntent=getIntent();
+        String orgId=orgIntent.getStringExtra("organizationId");
+        viewOrganization(orgId);
     }
 
-    void viewOrganization()
+    void viewOrganization(String orgId)
     {
         quoraRetrofitService= RetrofitUsersInstance.getRetrofitInstance().create(QuoraRetrofitService.class);
         orgName=findViewById(R.id.org_Name);
@@ -47,8 +49,8 @@ public class ViewOrganisation extends AppCompatActivity {
         orgMembers=findViewById(R.id.org_Members);
         orgImage=findViewById(R.id.org_ProfileImage);
 
-        String organizationId="5e3149d91edbf851280ccf51";
-        Call<Organization> callOrganization=quoraRetrofitService.viewOrganization(organizationId);
+        //String organizationId="5e3149d91edbf851280ccf51";
+        Call<Organization> callOrganization=quoraRetrofitService.viewOrganization(orgId);
         callOrganization.enqueue(new Callback<Organization>() {
             @Override
             public void onResponse(Call<Organization> call, Response<Organization> response) {
@@ -59,6 +61,7 @@ public class ViewOrganisation extends AppCompatActivity {
                 //Picasso.with(getApplicationContext()).load(organization.getOranizationImage()).centerCrop().into(orgImage);
                 //Glide.
                 //Picasso.with(orgImage.getContext()).load(u).into(orgImage);
+
                 orgName.setText(organization.getOrganizationName());
                 orgEmail.setText(organization.getOrganizationEmail());
                 if(organization.getOrganizationFollowers()!=null) {

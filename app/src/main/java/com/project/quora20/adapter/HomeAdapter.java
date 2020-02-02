@@ -1,7 +1,10 @@
 package com.project.quora20.adapter;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,9 +19,13 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.project.quora20.R;
 import com.project.quora20.dto.IdResponse;
+import com.project.quora20.entity.Ad;
+import com.project.quora20.entity.OnClickRequest;
 import com.project.quora20.entity.Question;
 import com.project.quora20.retrofit.QuoraRetrofitService;
 import com.project.quora20.retrofit.RetrofitClientInstance;
+import com.project.quora20.retrofit.RetrofitUsersInstance;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,6 +41,9 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder
     private String userId;
     List<String> likedList=new ArrayList<>();
     List<String> dislikedList=new ArrayList<>();
+
+
+
 
     public HomeAdapter(List<Question> questionList, QuestionCommunication questionCommunication, String userId) {
         this.questionList = questionList;
@@ -51,6 +61,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder
         ImageButton questionDislikeButton;
         Button viewMoreAnswers;
         ImageButton organizationImage;
+        ImageView adView;
 
         public HomeViewHolder(View view) {
             super(view);
@@ -63,6 +74,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder
             this.questionDislikeButton = view.findViewById(R.id.home_quesdislikeButton);
             this.viewMoreAnswers = view.findViewById(R.id.home_viewMoreAnswersButton);
             this.organizationImage = view.findViewById(R.id.home_organizationImage);
+            this.adView=view.findViewById(R.id.home_adView);
         }
     }
 
@@ -96,6 +108,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull final HomeViewHolder holder, final int position) {
+        questionCommunication.viewAds(position);
         holder.questionLikeButton.setColorFilter(Color.parseColor("#000000"));
         holder.questionDislikeButton.setColorFilter(Color.parseColor("#000000"));
 
@@ -110,18 +123,30 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder
         holder.questionLike.setText(String.valueOf(questionList.get(position).getLikeCount()));
         holder.questionDislike.setText(String.valueOf(questionList.get(position).getDislikeCount()));
         holder.questionTimeStamp.setText(questionList.get(position).getDate());
-        holder.organizationImage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                questionCommunication.viewOrganization();
-            }
-        });
+
+        System.out.println("OrganizationId:"+questionList.get(position).getOrgId());
+        if(questionList.get(position).getOrgId()!=null) {
+            holder.organizationImage.setVisibility(View.VISIBLE);
+
+            holder.organizationImage.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    questionCommunication.viewOrganization(questionList.get(position).getOrgId());
+                    System.out.println("Inside OrganizationId :"+questionList.get(position).getOrgId());
+                }
+            });
+        }
+        else
+        {
+            holder.organizationImage.setVisibility(View.INVISIBLE);
+        }
 
         //view user profile on click
         holder.questionUserImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                questionCommunication.viewQuesUser();
+                //questionCommunication.viewQuesUser(questionList.get(position).getUserId());
 
             }
         });
@@ -193,7 +218,12 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder
                     });
                 }
             });
+
+
         }
+
+
+
     }
 
     @Override
@@ -207,7 +237,10 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder
     public interface QuestionCommunication {
         void onClick(Question question);
 
-        void viewOrganization();
-        void viewQuesUser();
+        void viewOrganization(String organizationId);
+       // void viewQuesUser(String userId);
+        void viewAds(int position);
     }
+
+
 }

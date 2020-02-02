@@ -29,7 +29,7 @@ public class CategoryActivity extends AppCompatActivity implements CategoryAdapt
     private RecyclerView categoryRecyclerView;
     private RecyclerView.Adapter categoryAdapter;
     List<Question>questionList;
-    List<String> categoryList;
+    List<String> categoryList=new ArrayList<>();
     private SharedPreferences sharedPreferences;
 
     @Override
@@ -42,7 +42,7 @@ public class CategoryActivity extends AppCompatActivity implements CategoryAdapt
 
         switch (categoryId){
             case 1:
-                categoryList.clear();
+                //categoryList.clear();
                 categoryList.add("Fiction");
                 categoryList.add("Non-Fiction");
                 categoryList.add("Poetry");

@@ -63,8 +63,14 @@ public class MyProfile extends AppCompatActivity {
         quoraRetrofitService = RetrofitUsersInstance.getRetrofitInstance().create(QuoraRetrofitService.class);
         SharedPreferences sharedPreferences = getSharedPreferences("LoginData", MODE_PRIVATE);
         String userId = sharedPreferences.getString("UserId", "");
-//        Call<User> callMyProfile = quoraRetrofitService.viewUser(userId);
+
+        String otherUserId;
+        Intent otherUser=getIntent();
+        //otherUserId=otherUser.getStringExtra("QuesUserId").toString();
+        //Call<User> callMyProfile = quoraRetrofitService.viewUser(userId);
         Call<UserDTO> callMyProfile = quoraRetrofitService.viewUser(userId);
+
+
         callMyProfile.enqueue(new Callback<UserDTO>() {
             @Override
             public void onResponse(Call<UserDTO> call, Response<UserDTO> response) {
@@ -98,14 +104,13 @@ public class MyProfile extends AppCompatActivity {
                 userScore.setText("Score: " + String.valueOf(user.getUserScore()));
 
                 //List<String> categories=user.getUserCategory();
-               // profile_userCategory.setText(String.valueOf(user.getUserCategory()));
-                if(user.getUserCategory()!=null) {
-                    //TextView text=new TextView(" ");
-                    for (int i = 0; i < user.getUserCategory().size(); i++) {
-                        //text.setText(user.getUserCategory().get(i));
-                        profile_userCategory.setText(user.getUserCategory().get(i) + "\n");
-                    }
-                }
+
+                //System.out.println(user.getUserCategory());
+               /* for(int i=0;i<user.getUserCategory().size();i++)
+                {
+                    String category=categories.get(i)+"\n";
+                    profile_userCategory.setText(category);
+                }*/
                 System.out.println("Inside ViewProfile OnResponse");
             }
 
