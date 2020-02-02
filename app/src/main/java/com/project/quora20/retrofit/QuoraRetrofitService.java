@@ -61,7 +61,7 @@ public interface QuoraRetrofitService {
     @GET("/question/getCategoryFeed/{catId}")
     Call <List<Question>> getCategoryQuestions(@Path("catId")String catId);
 
-    @POST("/question/getQuestionsbyCategory")
+    @POST("/question/getQuestionsByCategory")
     Call<CategoryResponseDTO>getCategoryResult(@Body CategoryRequestDTO categoryRequestDTO);
 
     @PUT("/answer/likeanswer/{answerId}")
