@@ -11,6 +11,10 @@ import com.project.quora20.dto.DATagsResponse;
 import com.project.quora20.dto.FCMTokenRequest;
 import com.project.quora20.dto.FCMTokenResponse;
 import com.project.quora20.dto.IdResponse;
+import com.project.quora20.dto.SearchRequestDTO;
+import com.project.quora20.dto.SearchResponseOrganizationDTO;
+import com.project.quora20.dto.SearchResponseQuestionDTO;
+import com.project.quora20.dto.SearchResponseUserDTO;
 import com.project.quora20.dto.TagsDARequest;
 import com.project.quora20.entity.Ad;
 import com.project.quora20.dto.CategoryUpdateRequest;
@@ -118,6 +122,15 @@ public interface QuoraRetrofitService {
 
     @POST("notification/fcmtoken")
     Call<FCMTokenResponse>sendFCM(@Header("Authorization")String accessToken,@Body FCMTokenRequest fcmTokenRequest);
+
+    @POST("search/searchUser")
+    Call<List<SearchResponseUserDTO>>searchUser(@Body SearchRequestDTO searchRequestDTO);
+
+    @POST("search/searchQuestion")
+    Call<List<SearchResponseQuestionDTO>>searchQuestion(@Body SearchRequestDTO searchRequestDTO);
+
+    @POST("search/searchOrganization")
+    Call<List<SearchResponseOrganizationDTO>>searchOrganization(@Body SearchRequestDTO searchRequestDTO);
 
 }
 
