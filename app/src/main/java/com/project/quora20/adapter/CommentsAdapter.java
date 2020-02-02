@@ -25,7 +25,7 @@ public class CommentsAdapter extends RecyclerView.Adapter<CommentsAdapter.Commen
         public TextView commentText;
         public TextView addCommentText;
         public ImageButton sendCommentButton;
-
+       // public ImageButton childComments;
         public ImageButton viewChildCommentButton;
 
         public CommentsViewHolder(View view) {
@@ -53,13 +53,20 @@ public class CommentsAdapter extends RecyclerView.Adapter<CommentsAdapter.Commen
     }
 
     @Override
-    public void onBindViewHolder(@NonNull CommentsViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull CommentsViewHolder holder, final int position) {
         //int index = commentListDto.get(position);
         //holder.textView.setText(String.valueOf(index));
         System.out.println(commentListDto.getCommentList().get(position).getCommentBody());
         holder.commentText.setText(commentListDto.getCommentList().get(position).getCommentBody());
         //String answerId=commentListDto.getCommentList().get(position).getAnswerId();
         //iCommentCommunication.viewCommentsByAnswerId(answerId);
+
+        holder.viewChildCommentButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //boolean flag=commentListDto.getCommentList().get(position).isExpanded();
+            }
+        });
 
 
 
