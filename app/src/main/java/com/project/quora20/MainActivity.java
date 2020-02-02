@@ -157,7 +157,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
 
-        final ImageButton notification=findViewById(R.id.home_notif);
+        final ImageButton notification = findViewById(R.id.home_notif);
         notification.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -42,7 +42,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder
     private String userId;
     List<String> likedList = new ArrayList<>();
     List<String> dislikedList = new ArrayList<>();
-    List<Ad> adList;
+    List<Ad> adList=new ArrayList<>();
     OnClickRequest onClickRequest = new OnClickRequest();
     QuoraRetrofitService quoraRetrofitService;
     SharedPreferences sharedPreferences;
