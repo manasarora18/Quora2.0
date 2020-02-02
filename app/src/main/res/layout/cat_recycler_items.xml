@@ -94,7 +94,7 @@
 
         <ImageButton
             android:id="@+id/cat_quesapproveButton"
-            android:layout_width="wrap_content"
+            android:layout_width="91dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:backgroundTint="#00F5F2F2"
