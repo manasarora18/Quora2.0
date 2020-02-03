@@ -114,11 +114,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull final HomeViewHolder holder, final int position) {
-        /*if(position%5==0) {
-            holder.adView.getLayoutParams().width=100;
-            holder.adView.getLayoutParams().height=100;
-            //questionCommunication.viewAds(position);
-        }*/
+
         holder.questionLikeButton.setColorFilter(Color.parseColor("#000000"));
         holder.questionDislikeButton.setColorFilter(Color.parseColor("#000000"));
 
@@ -231,12 +227,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder
         }
         holder.adView.getLayoutParams().width = 0;
         holder.adView.getLayoutParams().height = 0;
-//ads
-
         if (position % 5 == 0 && position != 0) {
-
-            // callAd();
-
 
             quoraRetrofitService = RetrofitAdInstance.getRetrofitInstance().create(QuoraRetrofitService.class);
 

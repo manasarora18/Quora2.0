@@ -53,7 +53,6 @@ public class LoginMain extends AppCompatActivity {
         sp = getSharedPreferences("LoginData", MODE_PRIVATE);
         String check = sp.getString("LoginCheck", "false");
         if (check.equals("false")) {
-//            if (!sp.getBoolean("LogInData", false)) {
                 loginButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -106,11 +105,6 @@ public class LoginMain extends AppCompatActivity {
                         }
                     }
                 });
-//            } else {
-//                Intent SignIntent = new Intent(LoginMain.this, MainActivity.class);
-//                startActivity(SignIntent);
-//                finish();
-//            }
         } else {
             Intent LoggedIn = new Intent(LoginMain.this, MainActivity.class);
             startActivity(LoggedIn);
@@ -133,7 +127,6 @@ public class LoginMain extends AppCompatActivity {
                 SharedPreferences.Editor editor = sp.edit();
                 editor.putString("UserId", guestUserId).apply();
                 editor.putString("LoginCheck", "false").apply();
-//                editor.putString("User", "Guest").apply();
                 editor.commit();
                 startActivity(skipSignInIntent);
             }
