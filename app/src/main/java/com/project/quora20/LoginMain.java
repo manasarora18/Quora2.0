@@ -66,11 +66,7 @@ public class LoginMain extends AppCompatActivity {
             loginButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    InputMethodManager inputManager = (InputMethodManager)
-                            getSystemService(Context.INPUT_METHOD_SERVICE);
 
-                    inputManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(),
-                            InputMethodManager.HIDE_NOT_ALWAYS);
                     EditText user = findViewById(R.id.login_userName);
                     EditText pass = findViewById(R.id.login_password);
                     final String user1 = String.valueOf(user.getText());
@@ -78,6 +74,11 @@ public class LoginMain extends AppCompatActivity {
                     if (user1.length() == 0 || pw.length() == 0) {
                         Toast.makeText(getApplicationContext(), "Enter Login Details", Toast.LENGTH_SHORT).show();
                     } else {
+                        InputMethodManager inputManager = (InputMethodManager)
+                                getSystemService(Context.INPUT_METHOD_SERVICE);
+
+                        inputManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(),
+                                InputMethodManager.HIDE_NOT_ALWAYS);
                         coAuthLoginRequest.setEmail(user1);
                         coAuthLoginRequest.setPassword(pw);
                         QuoraRetrofitService quoraRetrofitService = RetrofitLoginService.getRetrofitInstance().create(QuoraRetrofitService.class);
