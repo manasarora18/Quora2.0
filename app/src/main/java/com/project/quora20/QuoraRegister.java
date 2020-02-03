@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.Toast;
+
 import com.project.quora20.dto.CategoryUpdateRequest;
 import com.project.quora20.dto.DATagsResponse;
 import com.project.quora20.dto.RoleDTO;
@@ -25,8 +27,11 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class QuoraRegister extends AppCompatActivity {
+
     List<String>checkedList;
+    private boolean failDA=true,failLogin=true,failQuora=true;
     private CheckBox Fiction,Non_Fiction,Poetry,Short_stories,Clothing,Footwear,Watches,Accessories,Coding,Android,iOS,Bollywood,Hollywood,Tollywood,Punjabi,NorthIndian,SouthIndian,Italian,Chinese,Football,Cricket,Badminton,Tennis;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,6 +60,7 @@ public class QuoraRegister extends AppCompatActivity {
         Cricket= (CheckBox) findViewById(R.id.chkCricket);
         Badminton= (CheckBox) findViewById(R.id.chkBadminton);
         Tennis= (CheckBox) findViewById(R.id.chkTennis);
+
         Button submit=findViewById(R.id.quora_register_button);
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -113,50 +119,68 @@ public class QuoraRegister extends AppCompatActivity {
                 roleDTO.setChannelChannelId(2);
                 SharedPreferences sharedPreferences=getSharedPreferences("LoginData",MODE_PRIVATE);
                 String token=sharedPreferences.getString("AccessToken","");
+                String userId=sharedPreferences.getString("UserId","");
 
                 token="Bearer "+token;
-                final String userId=sharedPreferences.getString("UserId","");
 
-                QuoraRetrofitService quoraRetrofitService= RetrofitLoginService.getRetrofitInstance().create(QuoraRetrofitService.class);
-                Call<RoleResponseDTO> call=quoraRetrofitService.updateRole(token,roleDTO);
-                call.enqueue(new Callback<RoleResponseDTO>() {
-                    @Override
-                    public void onResponse(Call<RoleResponseDTO> call, Response<RoleResponseDTO> response) {
-                        if(response.body()!=null){
-                            CategoryUpdateRequest categoryUpdateRequest=new CategoryUpdateRequest();
-                            categoryUpdateRequest.setCategoryList(checkedList);
-                            QuoraRetrofitService quoraRetrofitService1= RetrofitUsersInstance.getRetrofitInstance().create(QuoraRetrofitService.class);
-                            Call<Boolean>call1=quoraRetrofitService1.categoryUpdate(userId,categoryUpdateRequest);
-                            System.out.println("OnResponse RoleUpdate");
-                            call1.enqueue(new Callback<Boolean>() {
-                                @Override
-                                public void onResponse(Call<Boolean> call, Response<Boolean> response) {
-                                    System.out.println("OnResponse Category Update");
-                                    Intent intent=new Intent(QuoraRegister.this,MainActivity.class);
-                                    DATagsAPI(checkedList);
-                                    startActivity(intent);
-                                    finish();
-                                }
+                roleUpdateAPI(checkedList,token,roleDTO,userId);
+                quoraCategoryUpdate(userId,checkedList);
+                daTagsAPI(checkedList);
 
-                                @Override
-                                public void onFailure(Call<Boolean> call, Throwable t) {
-                                    System.out.println("OnFailure CategoryUpdate"+t.getMessage());
-                                }
-                            });
-                        }
-                    }
-
-                    @Override
-                    public void onFailure(Call<RoleResponseDTO> call, Throwable t) {
-                        System.out.println("OnFailure RoleUpdate"+t.getMessage());
-                    }
-                });
+                if(failDA||failLogin||failQuora){
+                    Toast.makeText(getApplicationContext(),"Could not Connect!, Check with DA,Login,Quora",Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    Intent intent=new Intent(QuoraRegister.this,MainActivity.class);
+                    startActivity(intent);
+                    finish();
+                }
             }
         });
 
     }
 
-    private void DATagsAPI(List<String>checkedList) {
+    //Request to Quora to Update CategoryChoice of User
+    private void quoraCategoryUpdate(String userId,List<String>checkedList) {
+        CategoryUpdateRequest categoryUpdateRequest=new CategoryUpdateRequest();
+        categoryUpdateRequest.setCategoryList(checkedList);
+        QuoraRetrofitService quoraRetrofitService1= RetrofitUsersInstance.getRetrofitInstance().create(QuoraRetrofitService.class);
+        Call<Boolean>call1=quoraRetrofitService1.categoryUpdate(userId,categoryUpdateRequest);
+        System.out.println("OnResponse RoleUpdate");
+        call1.enqueue(new Callback<Boolean>() {
+            @Override
+            public void onResponse(Call<Boolean> call, Response<Boolean> response) {
+                System.out.println("OnResponse Category Update");
+                failQuora=false;
+
+            }
+            @Override
+            public void onFailure(Call<Boolean> call, Throwable t) {
+                System.out.println("OnFailure CategoryUpdate"+t.getMessage());
+            }
+        });
+    }
+
+    //Role Update Request to LoginService
+    private void roleUpdateAPI(final List<String> checkedList,String token,RoleDTO roleDTO,final String userId) {
+        QuoraRetrofitService quoraRetrofitService= RetrofitLoginService.getRetrofitInstance().create(QuoraRetrofitService.class);
+        Call<RoleResponseDTO> call=quoraRetrofitService.updateRole(token,roleDTO);
+        call.enqueue(new Callback<RoleResponseDTO>() {
+            @Override
+            public void onResponse(Call<RoleResponseDTO> call, Response<RoleResponseDTO> response) {
+
+                System.out.println("OnResponse Role Update");
+                failLogin=false;
+            }
+            @Override
+            public void onFailure(Call<RoleResponseDTO> call, Throwable t) {
+                System.out.println("OnFailure RoleUpdate"+t.getMessage());
+            }
+        });
+    }
+
+    //TAGS given to Data Analytics
+    private void daTagsAPI(List<String>checkedList) {
         SharedPreferences sharedPreferences=getSharedPreferences("LoginData",MODE_PRIVATE);
         String userId=sharedPreferences.getString("UserId","");
         TagsDARequest tagsDARequest=new TagsDARequest();
@@ -170,6 +194,7 @@ public class QuoraRegister extends AppCompatActivity {
             @Override
             public void onResponse(Call<DATagsResponse> call, Response<DATagsResponse> response) {
                 System.out.println("OnResponse RegisterDATagsCategory");
+                failDA=false;
             }
 
             @Override

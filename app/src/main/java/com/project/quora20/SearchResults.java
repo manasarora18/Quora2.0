@@ -37,9 +37,9 @@ public class SearchResults extends AppCompatActivity implements SearchAdapter.Qu
         searchUserAPI(searchRequestDTO);
         searchQuestionAPI(searchRequestDTO);
         searchOrganizationAPI(searchRequestDTO);
-
     }
 
+    //Search Organisations
     private void searchOrganizationAPI(SearchRequestDTO searchRequestDTO) {
 
         QuoraRetrofitService quoraRetrofitService2 = RetrofitSearchInstance.getRetrofitInstance().create(QuoraRetrofitService.class);
@@ -57,7 +57,6 @@ public class SearchResults extends AppCompatActivity implements SearchAdapter.Qu
                     System.out.println("NULL ORGANIZATION LIST");
                 }
             }
-
             @Override
             public void onFailure(Call<List<SearchResponseOrganizationDTO>> call, Throwable t) {
                 System.out.println("On Failure SearchOrganization" + t.getMessage());
@@ -65,6 +64,7 @@ public class SearchResults extends AppCompatActivity implements SearchAdapter.Qu
         });
     }
 
+    //Search Questions
     private void searchQuestionAPI(SearchRequestDTO searchRequestDTO) {
 
         QuoraRetrofitService quoraRetrofitService1 = RetrofitSearchInstance.getRetrofitInstance().create(QuoraRetrofitService.class);
@@ -92,6 +92,7 @@ public class SearchResults extends AppCompatActivity implements SearchAdapter.Qu
         });
     }
 
+    //Search Users
     private void searchUserAPI(SearchRequestDTO searchRequestDTO) {
         QuoraRetrofitService quoraRetrofitService = RetrofitSearchInstance.getRetrofitInstance().create(QuoraRetrofitService.class);
         Call<List<SearchResponseUserDTO>> call = quoraRetrofitService.searchUser(searchRequestDTO);
@@ -117,6 +118,7 @@ public class SearchResults extends AppCompatActivity implements SearchAdapter.Qu
         });
     }
 
+    //RecyclerView Setup for SearchQuestionsListing
     private void generateDataList(List<SearchResponseQuestionDTO> questionList) {
         searchQRecyclerView = findViewById(R.id.searchQuestionRecyclerView);
         sharedPreferences = getSharedPreferences("LoginData", MODE_PRIVATE);
