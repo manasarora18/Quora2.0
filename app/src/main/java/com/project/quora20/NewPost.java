@@ -54,41 +54,49 @@ public class NewPost extends AppCompatActivity implements AdapterView.OnItemSele
         postButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                questionBody=findViewById(R.id.new_questionBody);
-                String question= String.valueOf(questionBody.getText());
+                questionBody = findViewById(R.id.new_questionBody);
+                String question = String.valueOf(questionBody.getText());
+                if (question.trim().equals("")) {
+                    Toast.makeText(getApplicationContext(), "Enter Something to post!", Toast.LENGTH_SHORT).show();
+                } else {
 
-                taggedPeople=findViewById(R.id.new_taggedpeople);
-                String questionTags=String.valueOf(taggedPeople.getText());
-                List<String>tagPeopleList=new ArrayList<>();
-                tagPeopleList.add(questionTags);
+                    taggedPeople = findViewById(R.id.new_taggedpeople);
+                    String questionTags = String.valueOf(taggedPeople.getText());
+                    List<String> tagPeopleList = new ArrayList<>();
+                    tagPeopleList.add(questionTags);
 
-                spinner = (Spinner)findViewById(R.id.category_spinner);
-                category=spinner.getSelectedItem().toString();
-                newPostRequestDTO.setQuestionBody(question);
-                newPostRequestDTO.setUserId(userId);
-                newPostRequestDTO.setCategoryId(categoryChoice);
-                newPostRequestDTO.setPersonsTag(tagPeopleList);
+                    spinner = (Spinner) findViewById(R.id.category_spinner);
+                    category = spinner.getSelectedItem().toString();
+                    newPostRequestDTO.setQuestionBody(question);
+                    newPostRequestDTO.setUserId(userId);
+                    newPostRequestDTO.setCategoryId(categoryChoice);
+                    newPostRequestDTO.setPersonsTag(tagPeopleList);
 
-                if(!orgId.equals("")) {
-                    newPostRequestDTO.setOrgId(orgId);
+                    if (!orgId.equals("")) {
+                        newPostRequestDTO.setOrgId(orgId);
+                    }
+
+                    NewPostAPI(newPostRequestDTO);
                 }
+            }
+        });
+    }
 
-                QuoraRetrofitService quoraRetrofitService= RetrofitClientInstance.getRetrofitInstance().create(QuoraRetrofitService.class);
-                Call<IdResponse> call=quoraRetrofitService.createNewPost(newPostRequestDTO);
-                call.enqueue(new Callback<IdResponse>() {
-                    @Override
-                    public void onResponse(Call<IdResponse> call, Response<IdResponse> response) {
-                            Toast.makeText(getApplicationContext(),"New Post Created",Toast.LENGTH_SHORT).show();
-                            Intent backToHome=new Intent(NewPost.this,MainActivity.class);
-                            startActivity(backToHome);
-                            finish();
-                    }
-                    @Override
-                    public void onFailure(Call<IdResponse> call, Throwable t) {
-                        Toast.makeText(getApplicationContext(),t.getMessage(),Toast.LENGTH_SHORT).show();
-                        System.out.println("OnFailure NewPost:"+t.getMessage());
-                    }
-                });
+    private void NewPostAPI(NewPostRequestDTO newPostRequestDTO) {
+        QuoraRetrofitService quoraRetrofitService= RetrofitClientInstance.getRetrofitInstance().create(QuoraRetrofitService.class);
+        Call<IdResponse> call=quoraRetrofitService.createNewPost(newPostRequestDTO);
+        call.enqueue(new Callback<IdResponse>() {
+            @Override
+            public void onResponse(Call<IdResponse> call, Response<IdResponse> response) {
+                Toast.makeText(getApplicationContext(),"New Post Created",Toast.LENGTH_SHORT).show();
+                Intent backToHome=new Intent(NewPost.this,MainActivity.class);
+                startActivity(backToHome);
+                finish();
+            }
+            @Override
+            public void onFailure(Call<IdResponse> call, Throwable t) {
+                Toast.makeText(getApplicationContext(),t.getMessage(),Toast.LENGTH_SHORT).show();
+                System.out.println("OnFailure NewPost:"+t.getMessage());
             }
         });
     }
