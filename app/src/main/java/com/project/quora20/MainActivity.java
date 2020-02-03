@@ -20,28 +20,14 @@ import android.widget.ImageButton;
 import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.android.material.navigation.NavigationView;
-import com.google.firebase.iid.FirebaseInstanceId;
-import com.google.firebase.iid.InstanceIdResult;
-import com.google.firebase.messaging.FirebaseMessaging;
 import com.project.quora20.adapter.HomeAdapter;
-import com.project.quora20.dto.FCMTokenRequest;
-import com.project.quora20.dto.FCMTokenResponse;
 import com.project.quora20.entity.Question;
 import com.project.quora20.retrofit.QuoraRetrofitService;
 import com.project.quora20.retrofit.RetrofitAdInstance;
 import com.project.quora20.retrofit.RetrofitClientInstance;
-import com.project.quora20.retrofit.RetrofitLoginService;
 import com.project.quora20.entity.Ad;
 import com.project.quora20.entity.OnClickRequest;
-import com.project.quora20.entity.Question;
-import com.project.quora20.retrofit.QuoraRetrofitService;
-import com.project.quora20.retrofit.RetrofitClientInstance;
-import com.project.quora20.retrofit.RetrofitUsersInstance;
-import com.squareup.picasso.Picasso;
-
 import java.util.List;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -59,12 +45,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private RecyclerView homeRecyclerView;
     private RecyclerView.Adapter homeAdapter;
     private SharedPreferences sharedPreferences;
-    private String FCMToken;
 
-    //List<Ad> adList;
     OnClickRequest onClickRequest = new OnClickRequest();
     QuoraRetrofitService quoraRetrofitService;
-    //ImageView adView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,7 +78,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         userEmail.setText(emailSP);
         userLevel = (TextView) headerView.findViewById(R.id.nav_level);
         userLevel.setText(levelSP);
-
 
         ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(
                 this,
@@ -130,12 +112,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 startActivity(searchIntent);
                 return true;
             }
-
             @Override
             public boolean onQueryTextChange(String newText) {
                 return false;
             }
         });
+
         System.out.println("MAIN ACTUserId:" + userId);
 //        userId="5e3140bb4c951a1723dc3f01";
         QuoraRetrofitService quoraRetrofitService = RetrofitClientInstance.getRetrofitInstance().create(QuoraRetrofitService.class);
@@ -154,66 +136,20 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
         });
 
-
-
-        final ImageButton notification = findViewById(R.id.home_notif);
-        notification.setOnClickListener(new View.OnClickListener() {
+        ImageButton refresh=findViewById(R.id.home_refresh);
+        refresh.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FirebaseInstanceId.getInstance().getInstanceId()
-                        .addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
-                            @Override
-                            public void onComplete(@NonNull Task<InstanceIdResult> task) {
-                                if (!task.isSuccessful()) {
-                                    Log.w("NOTIF", "getInstanceId failed", task.getException());
-                                    return;
-                                }
-
-                                // Get new Instance ID token
-                                String token = task.getResult().getToken();
-                                FCMToken = token;
-
-                                // Log and toast
-                                String msg = getString(R.string.msg_token_fmt, token);
-                                Log.d("NOTIF", msg);
-                                Toast.makeText(MainActivity.this, "Notifications Enabled", Toast.LENGTH_SHORT).show();
-                                FCMApiCall(FCMToken);
-                                notification.setVisibility(View.GONE);
-                            }
-                        });
+                finish();
+                overridePendingTransition(0, 0);
+                startActivity(getIntent());
+                overridePendingTransition(0, 0);
             }
         });
 
-
     }
 
-    public void FCMApiCall(String Token) {
-        FCMTokenRequest fcmTokenRequest = new FCMTokenRequest();
-        System.out.println("TOKEN" + Token);
-        fcmTokenRequest.setFcmtoken(Token);
-
-        String token = "Bearer " + sharedPreferences.getString("AccessToken", "");
-        System.out.println("JWTTOKEN" + token);
-        QuoraRetrofitService quoraRetrofitService1 = RetrofitLoginService.getRetrofitInstance().create(QuoraRetrofitService.class);
-        Call<FCMTokenResponse> fcmTokenResponseCall = quoraRetrofitService1.sendFCM(token, fcmTokenRequest);
-        fcmTokenResponseCall.enqueue(new Callback<FCMTokenResponse>() {
-            @Override
-            public void onResponse(Call<FCMTokenResponse> call, Response<FCMTokenResponse> response) {
-                System.out.println("OnResponse FCMToken");
-            }
-
-            @Override
-            public void onFailure(Call<FCMTokenResponse> call, Throwable t) {
-                System.out.println("OnFailure FCMToken" + t.getMessage());
-            }
-        });
-    }
-//    public void runtimeEnableAutoInit() {
-//        // [START fcm_runtime_enable_auto_init]
-//        FirebaseMessaging.getInstance().setAutoInitEnabled(true);
-//        // [END fcm_runtime_enable_auto_init]
-//    }
-
+    //Recycler View for QuestionListing on Feed
     private void generateDataList(List<Question> list) {
         homeRecyclerView = findViewById(R.id.homeRecyclerView);
         //if list not null
@@ -294,123 +230,37 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         Intent otherUserIntent=new Intent(this,OtherUserProfile.class);
         otherUserIntent.putExtra("OtherUserId",userId);
         startActivity(otherUserIntent);
-
     }
-
-    /*@Override
-    public void viewAds(final int position) {
-        System.out.println("Position:"+position);
-        adView=findViewById(R.id.home_adView);
-        //if(position%5==0 && position!=0){
-
-            //callAd();
-            quoraRetrofitService= RetrofitUsersInstance.getRetrofitInstance().create(QuoraRetrofitService.class);;
-
-            SharedPreferences sharedPreferences=getSharedPreferences("LoginData",MODE_PRIVATE);
-            final String AccessToken=sharedPreferences.getString("AccessToken","");
-            Call<List<Ad>> callAdList = quoraRetrofitService.getAds("Bearer " + AccessToken, 2L);
-            callAdList.enqueue(new Callback<List<Ad>>() {
-                @Override
-                public void onResponse(Call<List<Ad>> call, Response<List<Ad>> response) {
-
-                    if (response.body() != null) {
-                        adList = response.body();
-                        System.out.println(adList);
-                        if(adList!=null) {
-                            Picasso.with(adView.getContext()).load(adList.get(position).getImageUrl()).resize(100, 100).centerCrop().into(adView);
-
-                        }
-                        adView.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                SharedPreferences sharedPreferences = getSharedPreferences("LoginData", MODE_PRIVATE);
-                                String userId = sharedPreferences.getString("UserId", "");
-
-                                Intent viewIntent =
-                                        new Intent("android.intent.action.VIEW",
-                                                Uri.parse(adList.get(position).getTargetUrl()));
-                                System.out.println("AD ID:" + adList.get(position).getAdId());
-                                onClickRequest.setAdId(adList.get(position).getAdId());
-                                onClickRequest.setAdvertiserId(adList.get(position).getAdvertiserId());
-                                onClickRequest.setCategoryId(adList.get(position).getCategoryName());
-                                onClickRequest.setDescription(adList.get(position).getDescription());
-                                onClickRequest.setSource("Quora");
-                                onClickRequest.setTag(adList.get(position).getTag());
-                                onClickRequest.setTargetUrl(adList.get(position).getTargetUrl());
-                                onClickRequest.setUserId(userId);
-
-                                Call<String> callAdOnClick = quoraRetrofitService.adOnClick("Bearer " + AccessToken, 2L, onClickRequest);
-                                callAdOnClick.enqueue(new Callback<String>() {
-                                    @Override
-                                    public void onResponse(Call<String> call, Response<String> response) {
-                                        System.out.println("OnResponse Ad on click");
-                                    }
-
-                                    @Override
-                                    public void onFailure(Call<String> call, Throwable t) {
-                                        System.out.println("OnFailure Ad on click" + t.getMessage());
-
-                                    }
-                                });
-                                startActivity(viewIntent);
-                            }
-                        });
-                    }
-                    System.out.println("onResponse Adview" + response.body());
-                }
-
-                @Override
-                public void onFailure(Call<List<Ad>> call, Throwable t) {
-                    System.out.println("onFailure Adview" + t.getMessage());
-                }
-            });
-            //Picasso.with(holder.adView.getContext()).load().resize(100, 100).centerCrop().into(holder.adView);
-        }*/
-    // }
-//View other user profile intent
-    /*@Override
-    public void viewQuesUser(String userId) {
-        Intent viewQuesUser = new Intent(this, MyProfile.class);
-        //viewQuesUser.putExtra("OtherUserId",userId);
-        startActivity(viewQuesUser);
-    }*/
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-//        Toast.makeText(this, "this menu item clicked", Toast.LENGTH_SHORT).show();
         switch (item.getItemId()) {
             case R.id.literature_nav_menu:
-//                Toast.makeText(getApplicationContext(), "Coming Soon!", Toast.LENGTH_SHORT).show();
                 Intent catIntent1 = new Intent(this, CategoryActivity.class);
                 catIntent1.putExtra("categoryId", 1);
                 this.startActivity(catIntent1);
                 break;
             case R.id.lifestyle_nav_menu:
-//                Toast.makeText(getApplicationContext(), "Coming Soon!", Toast.LENGTH_SHORT).show();
                 Intent catIntent2 = new Intent(this, CategoryActivity.class);
                 catIntent2.putExtra("categoryId", 2);
                 this.startActivity(catIntent2);
                 break;
             case R.id.technology_nav_menu:
-//                Toast.makeText(getApplicationContext(), "Coming Soon!", Toast.LENGTH_SHORT).show();
                 Intent catIntent3 = new Intent(this, CategoryActivity.class);
                 catIntent3.putExtra("categoryId", 3);
                 this.startActivity(catIntent3);
                 break;
             case R.id.movies_nav_menu:
-//                Toast.makeText(getApplicationContext(), "Coming Soon!", Toast.LENGTH_SHORT).show();
                 Intent catIntent4 = new Intent(this, CategoryActivity.class);
                 catIntent4.putExtra("categoryId", 4);
                 this.startActivity(catIntent4);
                 break;
             case R.id.food_nav_menu:
-//                Toast.makeText(getApplicationContext(), "Coming Soon!", Toast.LENGTH_SHORT).show();
                 Intent catIntent5 = new Intent(this, CategoryActivity.class);
                 catIntent5.putExtra("categoryId", 5);
                 this.startActivity(catIntent5);
                 break;
             case R.id.sports_nav_menu:
-//                Toast.makeText(getApplicationContext(), "Coming Soon!", Toast.LENGTH_SHORT).show();
                 Intent catIntent6 = new Intent(MainActivity.this, MyQuestions.class);
                 catIntent6.putExtra("categoryId", 6);
                 this.startActivity(catIntent6);
@@ -438,6 +288,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     editor.commit();
                     Intent logoutIntent = new Intent(MainActivity.this, LoginMain.class);
                     startActivity(logoutIntent);
+                    finish();
                 } else {
                     Toast.makeText(getApplicationContext(), "LoginFirst", Toast.LENGTH_SHORT).show();
                 }

@@ -1,37 +1,36 @@
 package com.project.quora20.retrofit;
 
 import com.project.quora20.dto.CategoryRequestDTO;
-import com.project.quora20.dto.AccessTokenLoginResponse;
+import com.project.quora20.dto.logindtos.AccessTokenLoginResponse;
 import com.project.quora20.dto.AnswerDTO;
 import com.project.quora20.dto.CategoryResponseDTO;
-import com.project.quora20.dto.CoAuthLoginRequest;
+import com.project.quora20.dto.logindtos.CoAuthLoginRequest;
 import com.project.quora20.dto.CommentDTO;
 import com.project.quora20.dto.CommentListDto;
-import com.project.quora20.dto.DATagsResponse;
-import com.project.quora20.dto.FCMTokenRequest;
-import com.project.quora20.dto.FCMTokenResponse;
+import com.project.quora20.dto.logindtos.TagsDAResponse;
+import com.project.quora20.dto.logindtos.FCMTokenRequest;
+import com.project.quora20.dto.logindtos.FCMTokenResponse;
 import com.project.quora20.dto.IdResponse;
 import com.project.quora20.dto.SearchRequestDTO;
 import com.project.quora20.dto.SearchResponseOrganizationDTO;
 import com.project.quora20.dto.SearchResponseQuestionDTO;
 import com.project.quora20.dto.SearchResponseUserDTO;
-import com.project.quora20.dto.TagsDARequest;
+import com.project.quora20.dto.logindtos.TagsDARequest;
 import com.project.quora20.dto.UserProfileDTO;
 import com.project.quora20.entity.Ad;
 import com.project.quora20.dto.CategoryUpdateRequest;
-import com.project.quora20.dto.CoAuthRegisterRequest;
-import com.project.quora20.dto.JWTGetDetailsRequest;
-import com.project.quora20.dto.JWTGetDetailsResponse;
-import com.project.quora20.dto.RegisterResponse;
+import com.project.quora20.dto.logindtos.CoAuthRegisterRequest;
+import com.project.quora20.dto.logindtos.JWTGetDetailsRequest;
+import com.project.quora20.dto.logindtos.JWTGetDetailsResponse;
+import com.project.quora20.dto.logindtos.RegisterResponse;
 import com.project.quora20.dto.RoleDTO;
 import com.project.quora20.dto.RoleResponseDTO;
-import com.project.quora20.dto.UserDTO;
+import com.project.quora20.dto.logindtos.UserDTO;
 import com.project.quora20.entity.Answer;
 import com.project.quora20.entity.OnClickRequest;
 import com.project.quora20.entity.Organization;
 import com.project.quora20.dto.NewPostRequestDTO;
 import com.project.quora20.entity.Question;
-import com.project.quora20.entity.User;
 import java.util.List;
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -45,24 +44,26 @@ import retrofit2.http.Path;
 public interface QuoraRetrofitService {
 
     @Headers({ "Content-Type: application/json;charset=UTF-8"})
-    @POST("/jwt/getUserDetails")
+    @POST("/authentication/jwt/getUserDetails")
     Call <JWTGetDetailsResponse>getUserDetails(@Header("Authorization") String token,@Body JWTGetDetailsRequest jwtGetDetailsRequest);
 
-    @POST("/auth/signup")
+    @POST("/authentication/auth/signup")
     Call <RegisterResponse> addUser(@Body CoAuthRegisterRequest coAuthRequestDTO);
 
-    @POST("/auth/signin")
+    @POST("/authentication/auth/signin")
     Call<AccessTokenLoginResponse> loginUser(@Body CoAuthLoginRequest coAuthLoginRequest);
+
+    @POST("/authentication/notification/fcmtoken")
+    Call<FCMTokenResponse>sendFCM(@Header("Authorization")String accessToken,@Body FCMTokenRequest fcmTokenRequest);
+
+    @POST("/authentication/role/updateRole")
+    Call<RoleResponseDTO>updateRole(@Header("Authorization") String token, @Body RoleDTO roleDTO);
 
     @POST("/user/addUser")
     Call<String>registerOnQuora(@Body UserDTO userDTO);
 
-    @POST("role/updateRole")
-    Call<RoleResponseDTO>updateRole(@Header("Authorization") String token, @Body RoleDTO roleDTO);
-
     @POST("user/addCategories/{userId}")
     Call<Boolean>categoryUpdate(@Path("userId")String userId, @Body CategoryUpdateRequest categoryUpdateRequest);
-
 
     @GET("/question/getLoginFeed/{userId}")
     Call <List<Question>> getAllQuestions(@Path("userId")String userId);
@@ -72,9 +73,6 @@ public interface QuoraRetrofitService {
 
     @POST("/question/getQuestionsByCategory")
     Call<CategoryResponseDTO>getCategoryResult(@Body CategoryRequestDTO categoryRequestDTO);
-
-    @PUT("/answer/likeanswer/{answerId}")
-    Call<String> likeAnswer(@Path("answerId") String answerId);
 
     @POST("/answer/add")
     Call<IdResponse> addAnswer(@Body AnswerDTO answerDTO);
@@ -119,10 +117,7 @@ public interface QuoraRetrofitService {
     Call<String> adOnClick(@Header("Authorization")String accessToken, @Path("srcId")Long srcId, @Body OnClickRequest onClickRequest);
 
     @POST("/search/register")
-    Call<DATagsResponse>tagsToDA(@Body TagsDARequest tagsDARequest);
-
-    @POST("notification/fcmtoken")
-    Call<FCMTokenResponse>sendFCM(@Header("Authorization")String accessToken,@Body FCMTokenRequest fcmTokenRequest);
+    Call<TagsDAResponse>tagsToDA(@Body TagsDARequest tagsDARequest);
 
     @POST("search/searchUser")
     Call<List<SearchResponseUserDTO>>searchUser(@Body SearchRequestDTO searchRequestDTO);
@@ -138,7 +133,6 @@ public interface QuoraRetrofitService {
 
     @POST("/user/addFollowersToOrganization/{ownId}/{organizationId}")
     Call<Boolean> addOrganizationFollowers(@Path("ownId") String ownId, @Path("organizationId") String organizationId);
-
 
 }
 

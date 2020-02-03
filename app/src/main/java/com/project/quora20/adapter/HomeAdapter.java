@@ -90,7 +90,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder
         return new HomeViewHolder(view);
     }
 
-    //LIKE CHECK
+    //LIKE CHECK on Question
     private boolean LikeCheck(List<String> likedList) {
 
         boolean likedFlag = false;
@@ -100,7 +100,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder
         return likedFlag;
     }
 
-    //DISLIKE CHECK
+    //DISLIKE CHECK on Question
     private boolean DislikeCheck(List<String> dislikedList) {
 
         boolean dislikedFlag = false;
@@ -136,9 +136,9 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder
             holder.questionTimeStamp.setText(date);
 
         System.out.println("OrganizationId:" + questionList.get(position).getOrgId());
+
         if (questionList.get(position).getOrgId() != null) {
             holder.organizationImage.setVisibility(View.VISIBLE);
-
             holder.organizationImage.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -156,13 +156,11 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder
             @Override
             public void onClick(View v) {
                 questionCommunication.viewQuesUser(questionList.get(position).getUserId());
-
             }
         });
 
         likedList = questionList.get(position).getLikeUserList();
         dislikedList = questionList.get(position).getDislikeUserList();
-
 
         if (LikeCheck(likedList)) {
             holder.questionLikeButton.setColorFilter(Color.parseColor("#0000FF"));
@@ -173,7 +171,9 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder
             holder.questionDislikeButton.setColorFilter(Color.parseColor("#FF0000"));
             holder.questionDislikeButton.setClickable(false);
             holder.questionLikeButton.setClickable(false);
-        } else {
+        }
+        else {
+
             holder.questionLikeButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -190,7 +190,6 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder
                             likeNo++;
                             holder.questionLike.setText(String.valueOf(likeNo));
                             holder.questionLikeButton.setColorFilter(Color.parseColor("#0000FF"));
-//                            likedList.add(userId);
                         }
 
                         @Override
@@ -217,7 +216,6 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder
                             dislikeNo++;
                             holder.questionDislike.setText(String.valueOf(dislikeNo));
                             holder.questionDislikeButton.setColorFilter(Color.parseColor("#FF0000"));
-//                            dislikedList.add(userId);
                         }
 
                         @Override
@@ -227,15 +225,12 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder
                     });
                 }
             });
-
-
         }
         holder.adView.getLayoutParams().width = 0;
         holder.adView.getLayoutParams().height = 0;
 
         if (position % 3 == 0 && position != 0) {
             quoraRetrofitService = RetrofitAdInstance.getRetrofitInstance().create(QuoraRetrofitService.class);
-
             Call<List<Ad>> callAdList = quoraRetrofitService.getAds("Bearer " + AccessToken, 2L);
             callAdList.enqueue(new Callback<List<Ad>>() {
                 @Override
@@ -252,13 +247,11 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder
                         holder.adView.getLayoutParams().height = 400;
                         if (adList != null) {
                             Picasso.with(holder.adView.getContext()).load(adList.get(adCounter).getImageUrl()).resize(500, 400).centerCrop().into(holder.adView);
-
                         }
                         holder.adView.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
                                 questionCommunication.viewAds(adCounter, adList);
-
                             }
                         });
                     }
@@ -270,10 +263,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder
                     System.out.println("onFailure Adview" + t.getMessage());
                 }
             });
-
         }
-
-
     }
 
     @Override
@@ -286,12 +276,8 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder
 
     public interface QuestionCommunication {
         void onClick(Question question);
-
         void viewOrganization(String organizationId);
-
         void viewQuesUser(String userId);
         void viewAds(int position, List<Ad> adList);
     }
-
-
 }
