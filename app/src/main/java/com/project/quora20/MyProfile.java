@@ -55,18 +55,10 @@ public class MyProfile extends AppCompatActivity {
 
 
     void viewProfile() {
-        //final User user;
-        quoraRetrofitService = RetrofitUsersInstance.getRetrofitInstance().create(QuoraRetrofitService.class);
         SharedPreferences sharedPreferences = getSharedPreferences("LoginData", MODE_PRIVATE);
         String userId = sharedPreferences.getString("UserId", "");
-
-        //String otherUserId;
-        //Intent otherUser=getIntent();
-        //otherUserId=otherUser.getStringExtra("QuesUserId").toString();
-        //Call<User> callMyProfile = quoraRetrofitService.viewUser(userId);
+        quoraRetrofitService = RetrofitUsersInstance.getRetrofitInstance().create(QuoraRetrofitService.class);
         Call<UserProfileDTO> callMyProfile = quoraRetrofitService.viewUser(userId);
-
-
         callMyProfile.enqueue(new Callback<UserProfileDTO>() {
             @Override
             public void onResponse(Call<UserProfileDTO> call, Response<UserProfileDTO> response) {
@@ -82,9 +74,8 @@ public class MyProfile extends AppCompatActivity {
                 profile_userCategory = findViewById(R.id.profile_userFavCategories);
                 userName.setText(user.getName());
                 userScore.setText(String.valueOf(user.getScore()));
-
                 userEmail.setText(user.getUserEmail());
-                //holder.userPhone.setText();
+
                 if(user.getFollowersCount()!=0) {
                     followers.setText(String.valueOf(user.getFollowersCount()));
                 }
@@ -99,15 +90,6 @@ public class MyProfile extends AppCompatActivity {
                     following.setText("0");
                 }
 
-
-                //List<String> categories=user.getUserCategory();
-
-                //System.out.println(user.getUserCategory());
-               /* for(int i=0;i<user.getUserCategory().size();i++)
-                {
-                    String category=categories.get(i)+"\n";
-                    profile_userCategory.setText(category);
-                }*/
                 System.out.println("Inside ViewProfile OnResponse");
             }
 
@@ -124,9 +106,7 @@ public class MyProfile extends AppCompatActivity {
         quoraRetrofitService = RetrofitAdInstance.getRetrofitInstance().create(QuoraRetrofitService.class);
         SharedPreferences sharedPreferences=getSharedPreferences("LoginData",MODE_PRIVATE);
         final String AccessToken=sharedPreferences.getString("AccessToken","");
-        //final String accessToken = "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIyIiwiaWQiOjIsIm5hbWUiOiJCaHVtaSIsImVtYWlsIjoiYmh1bWkucGF0ZWxAY292aWFtLmNvbSIsImlhdCI6MTU4MDQ2MzEzNSwiZXhwIjoxNTgxMzI3MTM1fQ.Vy-da5MWLd6CsGdGjP6EEwi6vvWSiCt3NfWhQX0I3ckwBINpQb2VPJ8xcMsrRYCHdIxxeSFKTgqc6KvPvfcVPQ";
-//        SharedPreferences sharedPreferences=getSharedPreferences("LoginData",MODE_PRIVATE);
-//        final String accessToken=sharedPreferences.getString("AccessToken","");
+
         Call<List<Ad>> callAdList = quoraRetrofitService.getAds("Bearer " + AccessToken, 2L);
         callAdList.enqueue(new Callback<List<Ad>>() {
             @Override
