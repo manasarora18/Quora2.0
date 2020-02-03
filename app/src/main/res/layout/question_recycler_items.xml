@@ -21,7 +21,9 @@
             android:id="@+id/que_userImage"
             android:layout_width="84dp"
             android:layout_height="match_parent"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:backgroundTint="#00F5F2F2"
+            android:src="@drawable/user" />
 
         <TextView
             android:id="@+id/que_userName"
@@ -48,7 +50,7 @@
         android:layout_marginTop="14dp"
         android:layout_marginEnd="16dp"
         android:text="Questions by Other Users"
-        android:textAlignment="viewStart"
+        android:textAlignment="center"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

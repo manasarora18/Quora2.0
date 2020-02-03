@@ -59,7 +59,13 @@ public class OtherUserProfile extends AppCompatActivity {
                 userLevel = findViewById(R.id.other_userLevel);
                 //profile_adview = findViewById(R.id.other__adview);
                 profile_userCategory = findViewById(R.id.other_userFavCategories);
-                userName.setText(user.getName());
+                if(user.getName()!=null) {
+                    userName.setText(user.getName());
+                }
+                else
+                {
+                    userName.setText("");
+                }
                 userScore.setText(String.valueOf(user.getScore()));
 
                 userEmail.setText(user.getUserEmail());

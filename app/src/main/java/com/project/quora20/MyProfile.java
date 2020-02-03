@@ -60,15 +60,10 @@ public class MyProfile extends AppCompatActivity {
 
 
     void viewProfile() {
-        //final User user;
         quoraRetrofitService = RetrofitUsersInstance.getRetrofitInstance().create(QuoraRetrofitService.class);
         SharedPreferences sharedPreferences = getSharedPreferences("LoginData", MODE_PRIVATE);
         String userId = sharedPreferences.getString("UserId", "");
 
-        //String otherUserId;
-        //Intent otherUser=getIntent();
-        //otherUserId=otherUser.getStringExtra("QuesUserId").toString();
-        //Call<User> callMyProfile = quoraRetrofitService.viewUser(userId);
         Call<UserProfileDTO> callMyProfile = quoraRetrofitService.viewUser(userId);
 
 
@@ -89,7 +84,6 @@ public class MyProfile extends AppCompatActivity {
                 userScore.setText(String.valueOf(user.getScore()));
 
                 userEmail.setText(user.getUserEmail());
-                //holder.userPhone.setText();
                 if(user.getFollowersCount()!=0) {
                     followers.setText(String.valueOf(user.getFollowersCount()));
                 }

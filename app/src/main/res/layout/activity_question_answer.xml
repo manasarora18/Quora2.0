@@ -22,7 +22,9 @@
         <ImageButton
             android:id="@+id/qa_userProfileImage"
             android:layout_width="91dp"
-            android:layout_height="92dp" />
+            android:layout_height="92dp"
+            android:backgroundTint="#00F8F6F6"
+            tools:src="@drawable/user" />
 
         <TextView
             android:id="@+id/qa_questionText"

@@ -2,13 +2,15 @@ package com.project.quora20.entity;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.util.Date;
+
 public class Comment{
 
 	@SerializedName("answerId")
 	private String answerId;
 
 	@SerializedName("date")
-	private String date;
+	private Date date;
 
 	@SerializedName("UserId")
 	private String userId;
@@ -33,11 +35,11 @@ public class Comment{
 		return answerId;
 	}
 
-	public void setDate(String date){
+	public void setDate(Date date){
 		this.date = date;
 	}
 
-	public String getDate(){
+	public Date getDate(){
 		return date;
 	}
 

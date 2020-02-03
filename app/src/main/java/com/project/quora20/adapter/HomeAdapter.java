@@ -4,11 +4,10 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
-import android.net.Uri;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Adapter;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -25,12 +24,12 @@ import com.project.quora20.entity.Question;
 import com.project.quora20.retrofit.QuoraRetrofitService;
 import com.project.quora20.retrofit.RetrofitAdInstance;
 import com.project.quora20.retrofit.RetrofitClientInstance;
-import com.project.quora20.retrofit.RetrofitUsersInstance;
+
 import com.squareup.picasso.Picasso;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -45,7 +44,6 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder
     List<Ad> adList=new ArrayList<>();
     OnClickRequest onClickRequest = new OnClickRequest();
     QuoraRetrofitService quoraRetrofitService;
-    SharedPreferences sharedPreferences;
     String AccessToken;
     int adCounter;
 
@@ -128,7 +126,14 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder
         holder.questionBody.setText(questionList.get(position).getQuestionBody());
         holder.questionLike.setText(String.valueOf(questionList.get(position).getLikeCount()));
         holder.questionDislike.setText(String.valueOf(questionList.get(position).getDislikeCount()));
-        holder.questionTimeStamp.setText(questionList.get(position).getDate());
+
+        //Parsing Date to String
+        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy hh:mm a");
+        String date=formatter.format(questionList.get(position).getDate());
+        System.out.println("Date ="+date);
+
+
+            holder.questionTimeStamp.setText(date);
 
         System.out.println("OrganizationId:" + questionList.get(position).getOrgId());
         if (questionList.get(position).getOrgId() != null) {
@@ -228,7 +233,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder
         holder.adView.getLayoutParams().width = 0;
         holder.adView.getLayoutParams().height = 0;
 
-        if (position % 5 == 0 && position != 0) {
+        if (position % 3 == 0 && position != 0) {
             quoraRetrofitService = RetrofitAdInstance.getRetrofitInstance().create(QuoraRetrofitService.class);
 
             Call<List<Ad>> callAdList = quoraRetrofitService.getAds("Bearer " + AccessToken, 2L);
@@ -265,7 +270,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder
                     System.out.println("onFailure Adview" + t.getMessage());
                 }
             });
-            //Picasso.with(holder.adView.getContext()).load().resize(100, 100).centerCrop().into(holder.adView);
+
         }
 
 

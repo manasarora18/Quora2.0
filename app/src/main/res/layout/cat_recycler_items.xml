@@ -21,7 +21,10 @@
             android:id="@+id/cat_quesUserImage"
             android:layout_width="82dp"
             android:layout_height="match_parent"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:backgroundTint="#00FCFAFA"
+            android:src="@drawable/user"
+            tools:src="@drawable/user" />
 
         <TextView
             android:id="@+id/cat_questionTimeStamp"
@@ -40,7 +43,7 @@
         android:layout_marginTop="12dp"
         android:layout_marginEnd="16dp"
         android:text="Questions by Other Users"
-        android:textAlignment="viewStart"
+        android:textAlignment="center"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.571"
@@ -62,7 +65,7 @@
 
         <TextView
             android:id="@+id/cat_queslikesCount"
-            android:layout_width="wrap_content"
+            android:layout_width="48dp"
             android:layout_height="42dp"
             android:layout_weight="1"
             android:gravity="right|end"
@@ -70,7 +73,7 @@
 
         <ImageButton
             android:id="@+id/cat_queslikeButton"
-            android:layout_width="34dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="2"
             android:backgroundTint="#00FAF8F8"
@@ -79,14 +82,14 @@
         <TextView
             android:id="@+id/cat_quesdislikesCount"
             android:layout_width="wrap_content"
-            android:layout_height="31dp"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             android:text="Dislikes"
             android:textAlignment="textEnd" />
 
         <ImageButton
             android:id="@+id/cat_quesdislikeButton"
-            android:layout_width="34dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="2"
             android:backgroundTint="#00FAF7F7"

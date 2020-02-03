@@ -1,5 +1,6 @@
 package com.project.quora20.entity;
 
+import java.util.Date;
 import java.util.List;
 import com.google.gson.annotations.SerializedName;
 
@@ -9,7 +10,7 @@ public class Question{
 	private List<String> dislikeUserList;
 
 	@SerializedName("date")
-	private String date;
+	private Date date;
 
 	@SerializedName("questionId")
 	private String questionId;
@@ -52,11 +53,11 @@ public class Question{
 		return dislikeUserList;
 	}
 
-	public void setDate(String date){
+	public void setDate(Date date){
 		this.date = date;
 	}
 
-	public String getDate(){
+	public Date getDate(){
 		return date;
 	}
 

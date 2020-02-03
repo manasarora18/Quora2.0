@@ -18,6 +18,7 @@ import com.project.quora20.entity.Answer;
 import com.project.quora20.retrofit.QuoraRetrofitService;
 import com.project.quora20.retrofit.RetrofitClientInstance;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import retrofit2.Call;
@@ -102,7 +103,14 @@ public class MyAnswerAdapter extends RecyclerView.Adapter<MyAnswerAdapter.MyAnsw
         holder.answerBody.setText(answerList.get(position).getAnswerList().get(position).getAnswerBody());
         holder.answerLikeCount.setText(String.valueOf(answerList.get(position).getAnswerList().get(position).getLikeCount()));
         holder.answerDislikeCount.setText(String.valueOf(answerList.get(position).getAnswerList().get(position).getDislikeCount()));
-        holder.answerTimestamp.setText(answerList.get(position).getAnswerList().get(position).getDate());
+
+        //Parse Date to String
+        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy hh:mm a");
+        String date=formatter.format(answerList.get(position).getAnswerList().get(position).getDate());
+        System.out.println("Date ="+date);
+
+
+        holder.answerTimestamp.setText(date);
         holder.organisationImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
