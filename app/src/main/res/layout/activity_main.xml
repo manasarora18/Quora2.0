@@ -39,10 +39,23 @@
                 android:backgroundTint="#FFFFFF"
                 app:srcCompat="@drawable/ic_notifications_active_black_24dp" />
 
-            <SearchView
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:id="@+id/search_view"/>
+                android:orientation="horizontal">
+
+                <SearchView
+                    android:id="@+id/search_view"
+                    android:layout_width="353dp"
+                    android:layout_height="match_parent" />
+
+                <ImageButton
+                    android:id="@+id/home_refresh"
+                    android:layout_width="61dp"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="#FFFFFF"
+                    app:srcCompat="@drawable/ic_refresh_black_24dp" />
+            </LinearLayout>
 
         </com.google.android.material.appbar.AppBarLayout>
 
