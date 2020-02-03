@@ -187,7 +187,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         startActivity(organizationIntent);
     }
 
-
     //ViewAds dyanmically after some interval of content
     @Override
     public void viewAds(int position, List<Ad> adList) {
@@ -225,6 +224,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         });
         startActivity(viewIntent);
     }
+
     @Override
     public void viewQuesUser(String userId) {
         Intent otherUserIntent=new Intent(this,OtherUserProfile.class);

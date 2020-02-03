@@ -12,8 +12,8 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.android.material.snackbar.Snackbar;
-import com.project.quora20.dto.CoAuthRegisterRequest;
-import com.project.quora20.dto.RegisterResponse;
+import com.project.quora20.dto.logindtos.CoAuthRegisterRequest;
+import com.project.quora20.dto.logindtos.RegisterResponse;
 import com.project.quora20.retrofit.QuoraRetrofitService;
 import com.project.quora20.retrofit.RetrofitLoginService;
 

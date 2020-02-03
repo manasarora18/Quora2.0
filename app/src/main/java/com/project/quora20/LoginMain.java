@@ -19,16 +19,14 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.InstanceIdResult;
-import com.project.quora20.dto.AccessTokenLoginResponse;
-import com.project.quora20.dto.CoAuthLoginRequest;
-import com.project.quora20.dto.FCMTokenRequest;
-import com.project.quora20.dto.FCMTokenResponse;
-import com.project.quora20.dto.JWTGetDetailsRequest;
-import com.project.quora20.dto.JWTGetDetailsResponse;
-import com.project.quora20.dto.UserDTO;
-import com.project.quora20.entity.User;
+import com.project.quora20.dto.logindtos.AccessTokenLoginResponse;
+import com.project.quora20.dto.logindtos.CoAuthLoginRequest;
+import com.project.quora20.dto.logindtos.FCMTokenRequest;
+import com.project.quora20.dto.logindtos.FCMTokenResponse;
+import com.project.quora20.dto.logindtos.JWTGetDetailsRequest;
+import com.project.quora20.dto.logindtos.JWTGetDetailsResponse;
+import com.project.quora20.dto.logindtos.UserDTO;
 import com.project.quora20.retrofit.QuoraRetrofitService;
-import com.project.quora20.retrofit.RetrofitClientInstance;
 import com.project.quora20.retrofit.RetrofitLoginService;
 import com.project.quora20.retrofit.RetrofitUsersInstance;
 
@@ -68,11 +66,7 @@ public class LoginMain extends AppCompatActivity {
             loginButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    InputMethodManager inputManager = (InputMethodManager)
-                            getSystemService(Context.INPUT_METHOD_SERVICE);
 
-                    inputManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(),
-                            InputMethodManager.HIDE_NOT_ALWAYS);
                     EditText user = findViewById(R.id.login_userName);
                     EditText pass = findViewById(R.id.login_password);
                     final String user1 = String.valueOf(user.getText());
@@ -80,6 +74,11 @@ public class LoginMain extends AppCompatActivity {
                     if (user1.length() == 0 || pw.length() == 0) {
                         Toast.makeText(getApplicationContext(), "Enter Login Details", Toast.LENGTH_SHORT).show();
                     } else {
+                        InputMethodManager inputManager = (InputMethodManager)
+                                getSystemService(Context.INPUT_METHOD_SERVICE);
+
+                        inputManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(),
+                                InputMethodManager.HIDE_NOT_ALWAYS);
                         coAuthLoginRequest.setEmail(user1);
                         coAuthLoginRequest.setPassword(pw);
                         QuoraRetrofitService quoraRetrofitService = RetrofitLoginService.getRetrofitInstance().create(QuoraRetrofitService.class);
@@ -138,7 +137,6 @@ public class LoginMain extends AppCompatActivity {
                 SharedPreferences.Editor editor = sp.edit();
                 editor.putString("UserId", guestUserId).apply();
                 editor.putString("LoginCheck", "false").apply();
-//                editor.putString("User", "Guest").apply();
                 editor.commit();
                 startActivity(skipSignInIntent);
             }
@@ -169,6 +167,7 @@ public class LoginMain extends AppCompatActivity {
                     userDTO.setUserEmail(jwtGetDetailsResponse.getEmail());
                     System.out.println(jwtGetDetailsResponse.getName() + "ROLE NAME");
                     userDTO.setUserName(jwtGetDetailsResponse.getName());
+                    System.out.println(jwtGetDetailsResponse.getName()+"JWTNAME:");
                     System.out.println(jwtGetDetailsResponse.getRole() + "ROLE");
 
                     if (jwtGetDetailsResponse.getRole() == null) {

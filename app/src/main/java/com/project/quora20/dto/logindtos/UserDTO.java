@@ -1,4 +1,4 @@
-package com.project.quora20.dto;
+package com.project.quora20.dto.logindtos;
 
 import java.util.List;
 import com.google.gson.annotations.SerializedName;
@@ -11,7 +11,7 @@ public class UserDTO{
 	@SerializedName("userFollowingOrganization")
 	private List<String> userFollowingOrganization;
 
-	@SerializedName("following")
+	@SerializedName("userFollowing")
 	private List<String> userFollowing;
 
 	@SerializedName("privateFlag")
@@ -26,10 +26,10 @@ public class UserDTO{
 	@SerializedName("userEmail")
 	private String userEmail;
 
-	@SerializedName("score")
+	@SerializedName("userScore")
 	private int userScore;
 
-	@SerializedName("name")
+	@SerializedName("userName")
 	private String userName;
 
 	@SerializedName("userId")
