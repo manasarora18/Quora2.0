@@ -71,7 +71,7 @@ public class Register extends AppCompatActivity {
                     } else {
                         passwordCheckFail=true;
                         message = "Confirm Password Failed";
-                        Toast.makeText(getApplicationContext(), "Registered!", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(getApplicationContext(), "Registered!", Toast.LENGTH_SHORT).show();
                     }
                 } else {
                     nullFlag=true;
