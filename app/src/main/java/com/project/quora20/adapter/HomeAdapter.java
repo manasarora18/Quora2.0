@@ -150,7 +150,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder
         holder.questionUserImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                questionCommunication.viewQuesUser(questionList.get(position).getUserId());
+                questionCommunication.viewQuesUser(questionList.get(position).getUserId());
             }
         });
 
@@ -269,13 +269,10 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder
         return 0;
     }
 
-
     public interface QuestionCommunication {
         void onClick(Question question);
         void viewOrganization(String organizationId);
-//         void viewQuesUser(String userId);
+        void viewQuesUser(String userId);
         void viewAds(int position, List<Ad> adList);
     }
-
-
 }

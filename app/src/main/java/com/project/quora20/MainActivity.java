@@ -187,7 +187,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         startActivity(organizationIntent);
     }
 
-    //View Ads Intent
+
+    //ViewAds dyanmically after some interval of content
     @Override
     public void viewAds(int position, List<Ad> adList) {
         quoraRetrofitService = RetrofitAdInstance.getRetrofitInstance().create(QuoraRetrofitService.class);
@@ -224,10 +225,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         });
         startActivity(viewIntent);
     }
+    @Override
+    public void viewQuesUser(String userId) {
+        Intent otherUserIntent=new Intent(this,OtherUserProfile.class);
+        otherUserIntent.putExtra("OtherUserId",userId);
+        startActivity(otherUserIntent);
+    }
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-//        Toast.makeText(this, "this menu item clicked", Toast.LENGTH_SHORT).show();
         switch (item.getItemId()) {
             case R.id.literature_nav_menu:
                 Intent catIntent1 = new Intent(this, CategoryActivity.class);

@@ -38,6 +38,8 @@ public class ViewComments extends AppCompatActivity implements CommentsAdapter.I
     String answerId;
     ImageButton sendCommentButton;
     TextView commentText;
+    //ImageButton nestedComments;
+    RecyclerView nestedCommentRecycler;
     CommentDTO commentDTO = new CommentDTO();
 
 
@@ -46,6 +48,8 @@ public class ViewComments extends AppCompatActivity implements CommentsAdapter.I
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_comments);
         recyclerView = findViewById(R.id.commentsRecycler);
+
+
         commentsLayoutManager = new LinearLayoutManager(this);
         //viewComments();
         Intent answerIntent = getIntent();
@@ -74,6 +78,8 @@ public class ViewComments extends AppCompatActivity implements CommentsAdapter.I
 
 
     }
+
+
 
     @Override
     public void viewCommentsByAnswerId() {
@@ -111,7 +117,17 @@ public class ViewComments extends AppCompatActivity implements CommentsAdapter.I
 
 
     }
-
+    @Override
+    public void viewNestedComments(int position) {
+        commentsLayoutManager = new LinearLayoutManager(this);
+        //nestedCommentRecycler=new LinearLayoutManager(this);
+        nestedCommentRecycler=findViewById(R.id.nested_commentList);//NEsted Comments
+        nestedCommentRecycler.setLayoutManager(commentsLayoutManager);
+        nestedCommentRecycler.setHasFixedSize(true);
+        adapter=new CommentsAdapter(commentListDto,ViewComments.this);
+        nestedCommentRecycler.setAdapter(adapter);
+        System.out.println("Nested Comments Outside");
+    }
 
     public void addComments(CommentDTO commentDTO) {
         //CommentDTO commentDTO=new CommentDTO();

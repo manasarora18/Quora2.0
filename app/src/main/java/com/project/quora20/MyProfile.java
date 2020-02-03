@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.project.quora20.adapter.MyProfileAdapter;
 import com.project.quora20.dto.UserDTO;
+import com.project.quora20.dto.UserProfileDTO;
 import com.project.quora20.entity.Ad;
 import com.project.quora20.entity.Category;
 import com.project.quora20.entity.OnClickRequest;
@@ -64,17 +65,17 @@ public class MyProfile extends AppCompatActivity {
         SharedPreferences sharedPreferences = getSharedPreferences("LoginData", MODE_PRIVATE);
         String userId = sharedPreferences.getString("UserId", "");
 
-        String otherUserId;
-        Intent otherUser=getIntent();
+        //String otherUserId;
+        //Intent otherUser=getIntent();
         //otherUserId=otherUser.getStringExtra("QuesUserId").toString();
         //Call<User> callMyProfile = quoraRetrofitService.viewUser(userId);
-        Call<UserDTO> callMyProfile = quoraRetrofitService.viewUser(userId);
+        Call<UserProfileDTO> callMyProfile = quoraRetrofitService.viewUser(userId);
 
 
-        callMyProfile.enqueue(new Callback<UserDTO>() {
+        callMyProfile.enqueue(new Callback<UserProfileDTO>() {
             @Override
-            public void onResponse(Call<UserDTO> call, Response<UserDTO> response) {
-                UserDTO user = response.body();
+            public void onResponse(Call<UserProfileDTO> call, Response<UserProfileDTO> response) {
+                UserProfileDTO user = response.body();
                 userName = findViewById(R.id.profile_userName);
                 userImageView = findViewById(R.id.profile_userProfileImage);
                 userEmail = findViewById(R.id.profile_userEmail);
@@ -84,20 +85,20 @@ public class MyProfile extends AppCompatActivity {
                 userLevel = findViewById(R.id.profile_userLevel);
                 profile_adview = findViewById(R.id.profile_adview);
                 profile_userCategory = findViewById(R.id.profile_userFavCategories);
-                userName.setText(user.getUserName());
-                userScore.setText(String.valueOf(user.getUserScore()));
+                userName.setText(user.getName());
+                userScore.setText(String.valueOf(user.getScore()));
 
                 userEmail.setText(user.getUserEmail());
                 //holder.userPhone.setText();
-                if(user.getUserFollower()!=null) {
-                    followers.setText(String.valueOf(user.getUserFollower().size()));
+                if(user.getFollowersCount()!=0) {
+                    followers.setText(String.valueOf(user.getFollowersCount()));
                 }
                 else
                 {
                     followers.setText("0");
                 }
-                if(user.getUserFollowing()!=null) {
-                    following.setText(String.valueOf(user.getUserFollowing().size()));
+                if(user.getFollowingCount()!=0) {
+                    following.setText(String.valueOf(user.getFollowingCount()));
                 }
                 else{
                     following.setText("0");
@@ -116,7 +117,7 @@ public class MyProfile extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<UserDTO> call, Throwable t) {
+            public void onFailure(Call<UserProfileDTO> call, Throwable t) {
                 System.out.println("Inside ViewProfile OnFailure");
             }
         });
