@@ -32,14 +32,11 @@ public class ViewComments extends AppCompatActivity implements CommentsAdapter.I
     private RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager commentsLayoutManager;
     QuoraRetrofitService quoraRetrofitService;
-    //List<Comment> commentList;
     CommentListDto commentListDto;
     private SharedPreferences sharedPreferences;
     String answerId;
     ImageButton sendCommentButton;
     TextView commentText;
-    //ImageButton nestedComments;
-    RecyclerView nestedCommentRecycler;
     CommentDTO commentDTO = new CommentDTO();
 
 
@@ -51,6 +48,7 @@ public class ViewComments extends AppCompatActivity implements CommentsAdapter.I
 
 
         commentsLayoutManager = new LinearLayoutManager(this);
+
         //viewComments();
         Intent answerIntent = getIntent();
         answerId = answerIntent.getStringExtra("AnswerId");
@@ -80,20 +78,19 @@ public class ViewComments extends AppCompatActivity implements CommentsAdapter.I
     }
 
 
-
     @Override
     public void viewCommentsByAnswerId() {
 
+        TextView answerText = findViewById(R.id.comment_answerText);
+        Intent answerIntent = getIntent();
+        String AnswerBody = answerIntent.getStringExtra("AnswerText");
+        answerText.setText(AnswerBody);
 
         recyclerView.setLayoutManager(commentsLayoutManager);
         recyclerView.setHasFixedSize(true);
 
         sharedPreferences = getSharedPreferences("LoginData", MODE_PRIVATE);
         String userId = sharedPreferences.getString("UserId", "");
-
-        //retrieving answerId from que-ans page
-
-        //System.out.println("AnswerId:"+answerId);
 
         quoraRetrofitService = RetrofitClientInstance.getRetrofitInstance().create(QuoraRetrofitService.class);
         Call<CommentListDto> callCommentList = quoraRetrofitService.viewCommentsByAnswerId(answerId);
@@ -117,20 +114,14 @@ public class ViewComments extends AppCompatActivity implements CommentsAdapter.I
 
 
     }
+
     @Override
     public void viewNestedComments(int position) {
         commentsLayoutManager = new LinearLayoutManager(this);
-        //nestedCommentRecycler=new LinearLayoutManager(this);
-        nestedCommentRecycler=findViewById(R.id.nested_commentList);//NEsted Comments
-        nestedCommentRecycler.setLayoutManager(commentsLayoutManager);
-        nestedCommentRecycler.setHasFixedSize(true);
-        adapter=new CommentsAdapter(commentListDto,ViewComments.this);
-        nestedCommentRecycler.setAdapter(adapter);
-        System.out.println("Nested Comments Outside");
+
     }
 
     public void addComments(CommentDTO commentDTO) {
-        //CommentDTO commentDTO=new CommentDTO();
         sharedPreferences = getSharedPreferences("LoginData", MODE_PRIVATE);
         String userId = sharedPreferences.getString("UserId", "");
         quoraRetrofitService = RetrofitClientInstance.getRetrofitInstance().create(QuoraRetrofitService.class);
@@ -142,8 +133,6 @@ public class ViewComments extends AppCompatActivity implements CommentsAdapter.I
             toast.show();
         } else {
             commentDTO.setCommentBody(commentText.getText().toString());
-
-
             commentDTO.setUserId(userId);
 
             Call<IdResponse> callAddComment = quoraRetrofitService.addComment(commentDTO);

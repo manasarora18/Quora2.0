@@ -84,14 +84,7 @@ public class QuestionAnswer extends AppCompatActivity implements QuestionAnswerA
         });
     }
 
-    @Override
-    public void onClick(Answer answer,String answerId) {
-        Intent commentIntent=new Intent(QuestionAnswer.this,ViewComments.class);
-        commentIntent.putExtra("AnswerId",answerId);
-        //System.out.println("onclick:"+answerId);
-        startActivity(commentIntent);
 
-    }
 
     //view All answers by a particular QuestionId
     void addAnswers(AnswerDTO answerDTO) {
@@ -138,8 +131,6 @@ public class QuestionAnswer extends AppCompatActivity implements QuestionAnswerA
 
     void viewAnswers(String questionId) {
         quoraRetrofitService = RetrofitClientInstance.getRetrofitInstance().create(QuoraRetrofitService.class);
-
-
         Call<Answer> callAnswerList = quoraRetrofitService.getAnswersByQuestionId(questionId);
         callAnswerList.enqueue(new Callback<Answer>() {
             @Override
@@ -150,7 +141,6 @@ public class QuestionAnswer extends AppCompatActivity implements QuestionAnswerA
                 System.out.println("Answer List: "+answerList);
                 adapter = new QuestionAnswerAdapter(answerList, QuestionAnswer.this,userId);
                 recyclerView.setAdapter(adapter);
-
                 System.out.println("OnResponse View Answer By Qid");
             }
 
@@ -159,6 +149,15 @@ public class QuestionAnswer extends AppCompatActivity implements QuestionAnswerA
                 System.out.println("OnFailure View Answer By Qid"+t.getMessage());
             }
         });
+
+    }
+    @Override
+    public void onClick(Answer answer,String answerId,int position) {
+        Intent commentIntent=new Intent(QuestionAnswer.this,ViewComments.class);
+        commentIntent.putExtra("AnswerId",answerId);
+        commentIntent.putExtra("AnswerText",answer.getAnswerList().get(position).getAnswerBody());
+        //System.out.println("onclick:"+answerId);
+        startActivity(commentIntent);
 
     }
 }

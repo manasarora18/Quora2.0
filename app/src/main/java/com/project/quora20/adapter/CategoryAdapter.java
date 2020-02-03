@@ -15,6 +15,8 @@ import com.project.quora20.dto.IdResponse;
 import com.project.quora20.entity.Question;
 import com.project.quora20.retrofit.QuoraRetrofitService;
 import com.project.quora20.retrofit.RetrofitClientInstance;
+
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import retrofit2.Call;
@@ -101,7 +103,12 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
         holder.questionBody.setText(questionList.get(position).getQuestionBody());
         holder.questionLike.setText(String.valueOf(questionList.get(position).getLikeCount()));
         holder.questionDislike.setText(String.valueOf(questionList.get(position).getDislikeCount()));
-        holder.questionTimeStamp.setText(questionList.get(position).getDate());
+
+        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy hh:mm a");
+        String date=formatter.format(questionList.get(position).getDate());
+        System.out.println("Date ="+date);
+
+        holder.questionTimeStamp.setText(date);
 
         likedList = questionList.get(position).getLikeUserList();
         dislikedList = questionList.get(position).getDislikeUserList();

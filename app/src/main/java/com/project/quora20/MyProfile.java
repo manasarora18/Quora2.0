@@ -68,7 +68,7 @@ public class MyProfile extends AppCompatActivity {
                 userName.setText(user.getName());
                 userScore.setText(String.valueOf(user.getScore()));
                 userEmail.setText(user.getUserEmail());
-
+              
                 if(user.getFollowersCount()!=0) {
                     followers.setText(String.valueOf(user.getFollowersCount()));
                 }

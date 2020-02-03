@@ -18,6 +18,7 @@ import com.project.quora20.retrofit.QuoraRetrofitService;
 import com.project.quora20.retrofit.RetrofitClientInstance;
 import com.squareup.picasso.Picasso;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -103,7 +104,7 @@ public class QuestionAnswerAdapter extends RecyclerView.Adapter<QuestionAnswerAd
         holder.viewCommentsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                answerCommunication.onClick(answerList,answerList.getAnswerList().get(position).getAnswerId());
+                answerCommunication.onClick(answerList,answerList.getAnswerList().get(position).getAnswerId(),position);
 
             }
         });
@@ -111,7 +112,13 @@ public class QuestionAnswerAdapter extends RecyclerView.Adapter<QuestionAnswerAd
         holder.answerBody.setText(answerList.getAnswerList().get(position).getAnswerBody());
         holder.answerLike.setText(String.valueOf(answerList.getAnswerList().get(position).getLikeCount()));
         holder.answerDislike.setText(String.valueOf(answerList.getAnswerList().get(position).getDislikeCount()));
-        holder.answerTimeStamp.setText(answerList.getAnswerList().get(position).getDate());
+
+        //Parse Date to String
+        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy hh:mm a");
+        String date=formatter.format(answerList.getAnswerList().get(position).getDate());
+        System.out.println("Date ="+date);
+
+        holder.answerTimeStamp.setText(date);
 
         likedList = answerList.getAnswerList().get(position).getLikeUserList();
         dislikedList = answerList.getAnswerList().get(position).getDislikeUserList();
@@ -190,7 +197,7 @@ public class QuestionAnswerAdapter extends RecyclerView.Adapter<QuestionAnswerAd
     }
 
     public interface AnswerCommunication{
-        void onClick(Answer answer,String answerId);
+        void onClick(Answer answer,String answerId,int position);
     }
 
 

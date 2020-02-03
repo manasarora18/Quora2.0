@@ -10,7 +10,7 @@
     <LinearLayout
         android:id="@+id/linearLayout4"
         android:layout_width="388dp"
-        android:layout_height="73dp"
+        android:layout_height="54dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"
@@ -22,7 +22,7 @@
         <TextView
             android:id="@+id/comment_commentTextView"
             android:layout_width="304dp"
-            android:layout_height="match_parent"
+            android:layout_height="52dp"
             android:layout_gravity="center|fill"
 
             android:layout_marginLeft="2dp"
@@ -33,11 +33,12 @@
 
         <ImageButton
             android:id="@+id/comment_childCommentsButton"
-            android:layout_width="83dp"
-            android:layout_height="match_parent"
+            android:layout_width="79dp"
+            android:layout_height="54dp"
 
             android:backgroundTint="#00FAF8F8"
 
+            android:visibility="invisible"
             app:srcCompat="@drawable/ic_chat_bubble_outline_black_24dp" />
     </LinearLayout>
 
@@ -46,26 +47,11 @@
         android:layout_width="409dp"
         android:layout_height="1dp"
         android:layout_marginStart="1dp"
-        android:layout_marginTop="11dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="1dp"
         android:background="?android:attr/listDivider"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/nested_commentList" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/nested_commentList"
-        android:layout_width="354dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="43dp"
-        android:layout_marginTop="11dp"
-        android:layout_marginEnd="14dp"
-        android:layout_marginBottom="8dp"
-        android:nestedScrollingEnabled="false"
-        android:visibility="visible"
-        app:layout_constraintBottom_toTopOf="@+id/comment_commentsDivider"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout4" />
 
