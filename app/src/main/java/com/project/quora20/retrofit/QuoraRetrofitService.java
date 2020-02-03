@@ -16,6 +16,7 @@ import com.project.quora20.dto.SearchResponseOrganizationDTO;
 import com.project.quora20.dto.SearchResponseQuestionDTO;
 import com.project.quora20.dto.SearchResponseUserDTO;
 import com.project.quora20.dto.TagsDARequest;
+import com.project.quora20.dto.UserProfileDTO;
 import com.project.quora20.entity.Ad;
 import com.project.quora20.dto.CategoryUpdateRequest;
 import com.project.quora20.dto.CoAuthRegisterRequest;
@@ -82,7 +83,7 @@ public interface QuoraRetrofitService {
     Call<Answer> getAnswersByQuestionId(@Path("questionId")String questionId);
 
     @GET("/user/viewUser/{userId}")
-    Call<UserDTO> viewUser(@Path("userId")String userId);
+    Call<UserProfileDTO> viewUser(@Path("userId")String userId);
 
     @GET("organiaztion/viewOrganization/{organizationId}")
     Call<Organization> viewOrganization(@Path("organizationId") String organizationId);

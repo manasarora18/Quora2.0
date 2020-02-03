@@ -114,11 +114,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull final HomeViewHolder holder, final int position) {
-        /*if(position%5==0) {
-            holder.adView.getLayoutParams().width=100;
-            holder.adView.getLayoutParams().height=100;
-            //questionCommunication.viewAds(position);
-        }*/
+
         holder.questionLikeButton.setColorFilter(Color.parseColor("#000000"));
         holder.questionDislikeButton.setColorFilter(Color.parseColor("#000000"));
 
@@ -154,7 +150,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder
         holder.questionUserImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //questionCommunication.viewQuesUser(questionList.get(position).getUserId());
+                questionCommunication.viewQuesUser(questionList.get(position).getUserId());
 
             }
         });
@@ -288,7 +284,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder
 
         void viewOrganization(String organizationId);
 
-        // void viewQuesUser(String userId);
+        void viewQuesUser(String userId);
         void viewAds(int position, List<Ad> adList);
     }
 
