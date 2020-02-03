@@ -169,6 +169,7 @@ public class LoginMain extends AppCompatActivity {
                     userDTO.setUserEmail(jwtGetDetailsResponse.getEmail());
                     System.out.println(jwtGetDetailsResponse.getName() + "ROLE NAME");
                     userDTO.setUserName(jwtGetDetailsResponse.getName());
+                    System.out.println(jwtGetDetailsResponse.getName()+"JWTNAME:");
                     System.out.println(jwtGetDetailsResponse.getRole() + "ROLE");
 
                     if (jwtGetDetailsResponse.getRole() == null) {
