@@ -11,11 +11,10 @@ import android.widget.CheckBox;
 import android.widget.Toast;
 
 import com.project.quora20.dto.CategoryUpdateRequest;
-import com.project.quora20.dto.DATagsResponse;
+import com.project.quora20.dto.logindtos.TagsDAResponse;
 import com.project.quora20.dto.RoleDTO;
 import com.project.quora20.dto.RoleResponseDTO;
-import com.project.quora20.dto.TagsDARequest;
-import com.project.quora20.entity.Category;
+import com.project.quora20.dto.logindtos.TagsDARequest;
 import com.project.quora20.retrofit.QuoraRetrofitService;
 import com.project.quora20.retrofit.RetrofitDAInstance;
 import com.project.quora20.retrofit.RetrofitLoginService;
@@ -189,16 +188,16 @@ public class QuoraRegister extends AppCompatActivity {
         tagsDARequest.setTag(checkedList);
         tagsDARequest.setUserId(userId);
         QuoraRetrofitService quoraRetrofitService= RetrofitDAInstance.getRetrofitInstance().create(QuoraRetrofitService.class);
-        Call<DATagsResponse>call=quoraRetrofitService.tagsToDA(tagsDARequest);
-        call.enqueue(new Callback<DATagsResponse>() {
+        Call<TagsDAResponse>call=quoraRetrofitService.tagsToDA(tagsDARequest);
+        call.enqueue(new Callback<TagsDAResponse>() {
             @Override
-            public void onResponse(Call<DATagsResponse> call, Response<DATagsResponse> response) {
+            public void onResponse(Call<TagsDAResponse> call, Response<TagsDAResponse> response) {
                 System.out.println("OnResponse RegisterDATagsCategory");
                 failDA=false;
             }
 
             @Override
-            public void onFailure(Call<DATagsResponse> call, Throwable t) {
+            public void onFailure(Call<TagsDAResponse> call, Throwable t) {
                 System.out.println("OnFailure RegisterDATagsCategory:"+t.getMessage());
             }
         });

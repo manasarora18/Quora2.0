@@ -11,16 +11,11 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.project.quora20.adapter.MyProfileAdapter;
-import com.project.quora20.dto.UserDTO;
 import com.project.quora20.dto.UserProfileDTO;
 import com.project.quora20.entity.Ad;
-import com.project.quora20.entity.Category;
 import com.project.quora20.entity.OnClickRequest;
-import com.project.quora20.entity.User;
 import com.project.quora20.retrofit.QuoraRetrofitService;
 import com.project.quora20.retrofit.RetrofitAdInstance;
-import com.project.quora20.retrofit.RetrofitClientInstance;
 import com.project.quora20.retrofit.RetrofitUsersInstance;
 import com.squareup.picasso.Picasso;
 

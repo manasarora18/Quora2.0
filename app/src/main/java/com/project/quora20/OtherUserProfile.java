@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.project.quora20.dto.UserDTO;
 import com.project.quora20.dto.UserProfileDTO;
 import com.project.quora20.retrofit.QuoraRetrofitService;
 import com.project.quora20.retrofit.RetrofitUsersInstance;

@@ -1,8 +1,8 @@
-package com.project.quora20.dto;
+package com.project.quora20.dto.logindtos;
 
 import com.google.gson.annotations.SerializedName;
 
-public class FCMTokenResponse{
+public class RegisterResponse{
 
 	@SerializedName("success")
 	private boolean success;
@@ -29,7 +29,7 @@ public class FCMTokenResponse{
 	@Override
  	public String toString(){
 		return 
-			"FCMTokenResponse{" + 
+			"RegisterResponse{" + 
 			"success = '" + success + '\'' + 
 			",message = '" + message + '\'' + 
 			"}";
