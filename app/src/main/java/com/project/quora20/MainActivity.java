@@ -161,8 +161,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         refresh.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(getIntent());
                 finish();
+                overridePendingTransition(0, 0);
+                startActivity(getIntent());
+                overridePendingTransition(0, 0);
             }
         });
 
