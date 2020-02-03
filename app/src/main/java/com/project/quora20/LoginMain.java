@@ -136,7 +136,6 @@ public class LoginMain extends AppCompatActivity {
                 SharedPreferences.Editor editor = sp.edit();
                 editor.putString("UserId", guestUserId).apply();
                 editor.putString("LoginCheck", "false").apply();
-//                editor.putString("User", "Guest").apply();
                 editor.commit();
                 startActivity(skipSignInIntent);
             }

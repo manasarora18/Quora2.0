@@ -126,7 +126,7 @@ public class QuoraRegister extends AppCompatActivity {
                 quoraCategoryUpdate(userId,checkedList);
                 daTagsAPI(checkedList);
 
-                if(failDA||failLogin||failQuora){
+                if(failDA||failQuora){
                     Toast.makeText(getApplicationContext(),"Could not Connect!, Check with DA,Login,Quora",Toast.LENGTH_SHORT).show();
                 }
                 else {
@@ -136,7 +136,6 @@ public class QuoraRegister extends AppCompatActivity {
                 }
             }
         });
-
     }
 
     //Request to Quora to Update CategoryChoice of User
@@ -149,13 +148,14 @@ public class QuoraRegister extends AppCompatActivity {
         call1.enqueue(new Callback<Boolean>() {
             @Override
             public void onResponse(Call<Boolean> call, Response<Boolean> response) {
-                System.out.println("OnResponse Category Update");
+                System.out.println("OnResponse CategoryUpdate");
                 failQuora=false;
 
             }
             @Override
             public void onFailure(Call<Boolean> call, Throwable t) {
                 System.out.println("OnFailure CategoryUpdate"+t.getMessage());
+                Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
     }
@@ -174,6 +174,7 @@ public class QuoraRegister extends AppCompatActivity {
             @Override
             public void onFailure(Call<RoleResponseDTO> call, Throwable t) {
                 System.out.println("OnFailure RoleUpdate"+t.getMessage());
+                Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
     }
@@ -199,6 +200,7 @@ public class QuoraRegister extends AppCompatActivity {
             @Override
             public void onFailure(Call<TagsDAResponse> call, Throwable t) {
                 System.out.println("OnFailure RegisterDATagsCategory:"+t.getMessage());
+                Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
     }

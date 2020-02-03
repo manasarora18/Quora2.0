@@ -31,7 +31,6 @@ import com.project.quora20.entity.OnClickRequest;
 import com.project.quora20.entity.Organization;
 import com.project.quora20.dto.NewPostRequestDTO;
 import com.project.quora20.entity.Question;
-
 import java.util.List;
 import retrofit2.Call;
 import retrofit2.http.Body;
