@@ -36,14 +36,9 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.SearchView
     }
     public class SearchViewHolder extends RecyclerView.ViewHolder{
         TextView questionBody;
-        TextView questionLike;
-        TextView questionDislike;
         ImageView questionUserImage;
-        TextView questionTimeStamp;
-        ImageButton questionLikeButton;
-        ImageButton questionDislikeButton;
         Button viewMoreAnswers;
-        ImageButton organizationImage;
+
 
         public SearchViewHolder(View view){
             super(view);
