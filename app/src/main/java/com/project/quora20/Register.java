@@ -26,7 +26,6 @@ public class Register extends AppCompatActivity {
     private EditText registerEmail;
     private EditText registerPassword;
     private EditText registerConfirmPassword;
-    private EditText registerPhone;
     private CoAuthRegisterRequest coAuthRequestDTO=new CoAuthRegisterRequest();
     String message;
 
@@ -67,7 +66,8 @@ public class Register extends AppCompatActivity {
                         coAuthRequestDTO.setEmail(email);
                         coAuthRequestDTO.setPassword(password);
                         coAuthRequestDTO.setName(userName);
-                        message = "Registered";
+                        message="Registered";
+
                     } else {
                         passwordCheckFail=true;
                         message = "Confirm Password Failed";
@@ -84,6 +84,7 @@ public class Register extends AppCompatActivity {
                     call.enqueue(new Callback<RegisterResponse>() {
                         @Override
                         public void onResponse(Call<RegisterResponse> call, Response<RegisterResponse> response) {
+
                             if (response.code()==400 || response.body().getMessage().equals("Email address already in use.")) {
                                 System.out.println("InRESPONSE:");
                                 Toast.makeText(getApplicationContext(), "Already Registered, Please Login!", Toast.LENGTH_SHORT).show();
@@ -102,10 +103,11 @@ public class Register extends AppCompatActivity {
                                 startActivity(loginNow);
                                 finish();
                             }
+                            System.out.println("OnResponse Register");
                         }
                         @Override
                         public void onFailure(Call<RegisterResponse> call, Throwable t) {
-                            System.out.println("Invalid Backend Response"+t.getMessage());
+                            System.out.println("OnFailure Register"+t.getMessage());
                         }
                     });
                 }

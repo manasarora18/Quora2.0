@@ -34,28 +34,38 @@ public class SearchResults extends AppCompatActivity implements SearchAdapter.Qu
         final SearchRequestDTO searchRequestDTO = new SearchRequestDTO();
         searchRequestDTO.setSearchTerm(query);
 
-        QuoraRetrofitService quoraRetrofitService = RetrofitSearchInstance.getRetrofitInstance().create(QuoraRetrofitService.class);
-        Call<List<SearchResponseUserDTO>> call = quoraRetrofitService.searchUser(searchRequestDTO);
-        call.enqueue(new Callback<List<SearchResponseUserDTO>>() {
+        searchUserAPI(searchRequestDTO);
+        searchQuestionAPI(searchRequestDTO);
+        searchOrganizationAPI(searchRequestDTO);
+    }
+
+    //Search Organisations
+    private void searchOrganizationAPI(SearchRequestDTO searchRequestDTO) {
+
+        QuoraRetrofitService quoraRetrofitService2 = RetrofitSearchInstance.getRetrofitInstance().create(QuoraRetrofitService.class);
+        Call<List<SearchResponseOrganizationDTO>> searchResponseOrganizationDTOCall = quoraRetrofitService2.searchOrganization(searchRequestDTO);
+        searchResponseOrganizationDTOCall.enqueue(new Callback<List<SearchResponseOrganizationDTO>>() {
             @Override
-            public void onResponse(Call<List<SearchResponseUserDTO>> call, Response<List<SearchResponseUserDTO>> response) {
+            public void onResponse(Call<List<SearchResponseOrganizationDTO>> call, Response<List<SearchResponseOrganizationDTO>> response) {
                 if (response.body() != null) {
-                    System.out.println("USERS");
-                    List<SearchResponseUserDTO> userList = response.body();
-                    for (SearchResponseUserDTO s : userList) {
+                    System.out.println("ORGANIZATIONS");
+                    List<SearchResponseOrganizationDTO> organizationList = response.body();
+                    for (SearchResponseOrganizationDTO s : organizationList) {
                         System.out.println(s);
                     }
                 } else {
-                    System.out.println("NULL USER LIST");
+                    System.out.println("NULL ORGANIZATION LIST");
                 }
-                System.out.println("OnResponse SearchUser");
             }
-
             @Override
-            public void onFailure(Call<List<SearchResponseUserDTO>> call, Throwable t) {
-                System.out.println("OnFailure SearchUser" + t.getMessage());
+            public void onFailure(Call<List<SearchResponseOrganizationDTO>> call, Throwable t) {
+                System.out.println("On Failure SearchOrganization" + t.getMessage());
             }
         });
+    }
+
+    //Search Questions
+    private void searchQuestionAPI(SearchRequestDTO searchRequestDTO) {
 
         QuoraRetrofitService quoraRetrofitService1 = RetrofitSearchInstance.getRetrofitInstance().create(QuoraRetrofitService.class);
         Call<List<SearchResponseQuestionDTO>> searchResponseQuestionDTOCall = quoraRetrofitService1.searchQuestion(searchRequestDTO);
@@ -80,30 +90,35 @@ public class SearchResults extends AppCompatActivity implements SearchAdapter.Qu
                 System.out.println("OnFailure SearchQuestion" + t.getMessage());
             }
         });
+    }
 
-        QuoraRetrofitService quoraRetrofitService2 = RetrofitSearchInstance.getRetrofitInstance().create(QuoraRetrofitService.class);
-        Call<List<SearchResponseOrganizationDTO>> searchResponseOrganizationDTOCall = quoraRetrofitService2.searchOrganization(searchRequestDTO);
-        searchResponseOrganizationDTOCall.enqueue(new Callback<List<SearchResponseOrganizationDTO>>() {
+    //Search Users
+    private void searchUserAPI(SearchRequestDTO searchRequestDTO) {
+        QuoraRetrofitService quoraRetrofitService = RetrofitSearchInstance.getRetrofitInstance().create(QuoraRetrofitService.class);
+        Call<List<SearchResponseUserDTO>> call = quoraRetrofitService.searchUser(searchRequestDTO);
+        call.enqueue(new Callback<List<SearchResponseUserDTO>>() {
             @Override
-            public void onResponse(Call<List<SearchResponseOrganizationDTO>> call, Response<List<SearchResponseOrganizationDTO>> response) {
+            public void onResponse(Call<List<SearchResponseUserDTO>> call, Response<List<SearchResponseUserDTO>> response) {
                 if (response.body() != null) {
-                    System.out.println("ORGANIZATIONS");
-                    List<SearchResponseOrganizationDTO> organizationList = response.body();
-                    for (SearchResponseOrganizationDTO s : organizationList) {
+                    System.out.println("USERS");
+                    List<SearchResponseUserDTO> userList = response.body();
+                    for (SearchResponseUserDTO s : userList) {
                         System.out.println(s);
                     }
                 } else {
-                    System.out.println("NULL ORGANIZATION LIST");
+                    System.out.println("NULL USER LIST");
                 }
+                System.out.println("OnResponse SearchUser");
             }
 
             @Override
-            public void onFailure(Call<List<SearchResponseOrganizationDTO>> call, Throwable t) {
-                System.out.println("On Failure SearchOrganization" + t.getMessage());
+            public void onFailure(Call<List<SearchResponseUserDTO>> call, Throwable t) {
+                System.out.println("OnFailure SearchUser" + t.getMessage());
             }
         });
     }
 
+    //RecyclerView Setup for SearchQuestionsListing
     private void generateDataList(List<SearchResponseQuestionDTO> questionList) {
         searchQRecyclerView = findViewById(R.id.searchQuestionRecyclerView);
         sharedPreferences = getSharedPreferences("LoginData", MODE_PRIVATE);
