@@ -44,24 +44,26 @@ import retrofit2.http.Path;
 public interface QuoraRetrofitService {
 
     @Headers({ "Content-Type: application/json;charset=UTF-8"})
-    @POST("/jwt/getUserDetails")
+    @POST("/authentication/jwt/getUserDetails")
     Call <JWTGetDetailsResponse>getUserDetails(@Header("Authorization") String token,@Body JWTGetDetailsRequest jwtGetDetailsRequest);
 
-    @POST("/auth/signup")
+    @POST("/authentication/auth/signup")
     Call <RegisterResponse> addUser(@Body CoAuthRegisterRequest coAuthRequestDTO);
 
-    @POST("/auth/signin")
+    @POST("/authentication/auth/signin")
     Call<AccessTokenLoginResponse> loginUser(@Body CoAuthLoginRequest coAuthLoginRequest);
+
+    @POST("/authentication/notification/fcmtoken")
+    Call<FCMTokenResponse>sendFCM(@Header("Authorization")String accessToken,@Body FCMTokenRequest fcmTokenRequest);
+
+    @POST("/authentication/role/updateRole")
+    Call<RoleResponseDTO>updateRole(@Header("Authorization") String token, @Body RoleDTO roleDTO);
 
     @POST("/user/addUser")
     Call<String>registerOnQuora(@Body UserDTO userDTO);
 
-    @POST("role/updateRole")
-    Call<RoleResponseDTO>updateRole(@Header("Authorization") String token, @Body RoleDTO roleDTO);
-
     @POST("user/addCategories/{userId}")
     Call<Boolean>categoryUpdate(@Path("userId")String userId, @Body CategoryUpdateRequest categoryUpdateRequest);
-
 
     @GET("/question/getLoginFeed/{userId}")
     Call <List<Question>> getAllQuestions(@Path("userId")String userId);
@@ -71,9 +73,6 @@ public interface QuoraRetrofitService {
 
     @POST("/question/getQuestionsByCategory")
     Call<CategoryResponseDTO>getCategoryResult(@Body CategoryRequestDTO categoryRequestDTO);
-
-    @PUT("/answer/likeanswer/{answerId}")
-    Call<String> likeAnswer(@Path("answerId") String answerId);
 
     @POST("/answer/add")
     Call<IdResponse> addAnswer(@Body AnswerDTO answerDTO);
@@ -119,9 +118,6 @@ public interface QuoraRetrofitService {
 
     @POST("/search/register")
     Call<DATagsResponse>tagsToDA(@Body TagsDARequest tagsDARequest);
-
-    @POST("notification/fcmtoken")
-    Call<FCMTokenResponse>sendFCM(@Header("Authorization")String accessToken,@Body FCMTokenRequest fcmTokenRequest);
 
     @POST("search/searchUser")
     Call<List<SearchResponseUserDTO>>searchUser(@Body SearchRequestDTO searchRequestDTO);

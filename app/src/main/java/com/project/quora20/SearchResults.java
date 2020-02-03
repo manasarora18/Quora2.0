@@ -3,11 +3,9 @@ package com.project.quora20;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-
 import com.project.quora20.adapter.SearchAdapter;
 import com.project.quora20.dto.SearchRequestDTO;
 import com.project.quora20.dto.SearchResponseOrganizationDTO;
@@ -16,9 +14,7 @@ import com.project.quora20.dto.SearchResponseUserDTO;
 import com.project.quora20.entity.Question;
 import com.project.quora20.retrofit.QuoraRetrofitService;
 import com.project.quora20.retrofit.RetrofitSearchInstance;
-
 import java.util.List;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -46,6 +42,7 @@ public class SearchResults extends AppCompatActivity implements SearchAdapter.Qu
             @Override
             public void onResponse(Call<List<SearchResponseUserDTO>> call, Response<List<SearchResponseUserDTO>> response) {
                 if(response.body()!=null){
+                    System.out.println("USERS");
                     List<SearchResponseUserDTO>userList=response.body();
                     for(SearchResponseUserDTO s:userList){
                         System.out.println(s);
@@ -110,8 +107,8 @@ public class SearchResults extends AppCompatActivity implements SearchAdapter.Qu
             }
         });
 
-
     }
+
     private void generateDataList(List<SearchResponseQuestionDTO>questionList){
         searchQRecyclerView=findViewById(R.id.searchQuestionRecyclerView);
         sharedPreferences=getSharedPreferences("LoginData",MODE_PRIVATE);
@@ -131,11 +128,6 @@ public class SearchResults extends AppCompatActivity implements SearchAdapter.Qu
         qaIntent.putExtra("BestAns",question.getBestAnswerId());
         qaIntent.putExtra("CategoryId",question.getCategoryId());
         startActivity(qaIntent);
-    }
-
-    @Override
-    public void viewOrganization(String organizationId) {
-
     }
 
     @Override

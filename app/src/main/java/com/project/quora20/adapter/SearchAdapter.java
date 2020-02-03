@@ -48,14 +48,8 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.SearchView
         public SearchViewHolder(View view){
             super(view);
             this.questionBody = view.findViewById(R.id.searchq_userQuestionText);
-            this.questionDislike = view.findViewById(R.id.searchq_quesdislikesCount);
-            this.questionLike = view.findViewById(R.id.searchq_queslikesCount);
             this.questionUserImage = view.findViewById(R.id.searchq_quesUserImage);
-            this.questionTimeStamp = view.findViewById(R.id.searchq_questionTimeStamp);
-            this.questionLikeButton = view.findViewById(R.id.searchq_queslikeButton);
-            this.questionDislikeButton = view.findViewById(R.id.searchq_quesdislikeButton);
             this.viewMoreAnswers = view.findViewById(R.id.searchq_viewMoreAnswersButton);
-//            this.organizationImage = view.findViewById(R.id.searchq_organizationImage);
         }
     }
 
@@ -67,35 +61,38 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.SearchView
         return new SearchViewHolder(view);
     }
 
-    //LIKE CHECK
-    private boolean LikeCheck(List<String> likedList) {
-
-        boolean likedFlag = false;
-        if (likedList != null) {
-            likedFlag = likedList.contains(userId);
-        }
-        return likedFlag;
-    }
-
-    //DISLIKE CHECK
-    private boolean DislikeCheck(List<String> dislikedList) {
-
-        boolean dislikedFlag = false;
-        if (dislikedList != null) {
-            dislikedFlag = dislikedList.contains(userId);
-        }
-        return dislikedFlag;
-    }
+//    //LIKE CHECK
+//    private boolean LikeCheck(List<String> likedList) {
+//
+//        boolean likedFlag = false;
+//        if (likedList != null) {
+//            likedFlag = likedList.contains(userId);
+//        }
+//        return likedFlag;
+//    }
+//
+//    //DISLIKE CHECK
+//    private boolean DislikeCheck(List<String> dislikedList) {
+//
+//        boolean dislikedFlag = false;
+//        if (dislikedList != null) {
+//            dislikedFlag = dislikedList.contains(userId);
+//        }
+//        return dislikedFlag;
+//    }
 
     @Override
     public void onBindViewHolder(@NonNull final SearchViewHolder holder, final int position) {
-        holder.questionLikeButton.setColorFilter(Color.parseColor("#000000"));
-        holder.questionDislikeButton.setColorFilter(Color.parseColor("#000000"));
+//        holder.questionLikeButton.setColorFilter(Color.parseColor("#000000"));
+//        holder.questionDislikeButton.setColorFilter(Color.parseColor("#000000"));
 
         holder.viewMoreAnswers.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                questionCommunication.onClick(questionSearchList.get(position));
+                Question question=new Question();
+                question.setQuestionId(questionSearchList.get(position).getQuestionId());
+                question.setQuestionBody(questionSearchList.get(position).getQuestionBody());
+                questionCommunication.onClick(question);
             }
         });
 
@@ -119,84 +116,80 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.SearchView
 //        } else {
 //            holder.organizationImage.setVisibility(View.INVISIBLE);
 //        }
-        holder.questionUserImage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //questionCommunication.viewQuesUser(questionList.get(position).getUserId());
-
-            }
-        });
+//        holder.questionUserImage.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                //questionCommunication.viewQuesUser(questionList.get(position).getUserId());
+//
+//            }
+//        });
 
 //        likedList = questionSearchList.get(position).getLikeUserList();
 //        dislikedList = questionSearchList.get(position).getDislikeUserList();
 
 
-        if (LikeCheck(likedList)) {
-            holder.questionLikeButton.setColorFilter(Color.parseColor("#0000FF"));
-            holder.questionDislikeButton.setClickable(false);
-            holder.questionLikeButton.setClickable(false);
+//        if (LikeCheck(likedList)) {
+//            holder.questionLikeButton.setColorFilter(Color.parseColor("#0000FF"));
+//            holder.questionDislikeButton.setClickable(false);
+//            holder.questionLikeButton.setClickable(false);
+//
+//        } else if (DislikeCheck(dislikedList)) {
+//            holder.questionDislikeButton.setColorFilter(Color.parseColor("#FF0000"));
+//            holder.questionDislikeButton.setClickable(false);
+//            holder.questionLikeButton.setClickable(false);
+//        }
 
-        } else if (DislikeCheck(dislikedList)) {
-            holder.questionDislikeButton.setColorFilter(Color.parseColor("#FF0000"));
-            holder.questionDislikeButton.setClickable(false);
-            holder.questionLikeButton.setClickable(false);
-        } else {
-            holder.questionLikeButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    QuoraRetrofitService quoraRetrofitService = RetrofitClientInstance.getRetrofitInstance().create(QuoraRetrofitService.class);
-                    Call<IdResponse> call = quoraRetrofitService.doLikeQues(questionSearchList.get(position).getQuestionId(), userId);
-                    call.enqueue(new Callback<IdResponse>() {
-                        @Override
-                        public void onResponse(Call<IdResponse> call, Response<IdResponse> response) {
-                            System.out.println("OnResponse SeachLikeQues");
-                            holder.questionLikeButton.setClickable(false);
-                            holder.questionDislikeButton.setClickable(false);
-                            String likeCount = (String) holder.questionLike.getText();
-                            Integer likeNo = Integer.parseInt(likeCount);
-                            likeNo++;
-                            holder.questionLike.setText(String.valueOf(likeNo));
-                            holder.questionLikeButton.setColorFilter(Color.parseColor("#0000FF"));
-//                            likedList.add(userId);
-                        }
-
-                        @Override
-                        public void onFailure(Call<IdResponse> call, Throwable t) {
-                            System.out.println("OnFailure SearchLikeQues" + t.getMessage());
-                        }
-                    });
-                }
-            });
-
-            holder.questionDislikeButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    QuoraRetrofitService quoraRetrofitService = RetrofitClientInstance.getRetrofitInstance().create(QuoraRetrofitService.class);
-                    Call<IdResponse> call = quoraRetrofitService.doDislikeQues(questionSearchList.get(position).getQuestionId(), userId);
-                    call.enqueue(new Callback<IdResponse>() {
-                        @Override
-                        public void onResponse(Call<IdResponse> call, Response<IdResponse> response) {
-                            System.out.println("OnResponse SearchDislikeQues");
-                            holder.questionLikeButton.setClickable(false);
-                            holder.questionDislikeButton.setClickable(false);
-                            String dislikeCount = (String) holder.questionDislike.getText();
-                            Integer dislikeNo = Integer.parseInt(dislikeCount);
-                            dislikeNo++;
-                            holder.questionDislike.setText(String.valueOf(dislikeNo));
-                            holder.questionDislikeButton.setColorFilter(Color.parseColor("#FF0000"));
-//                            dislikedList.add(userId);
-                        }
-
-                        @Override
-                        public void onFailure(Call<IdResponse> call, Throwable t) {
-                            System.out.println("OnFailure SearchDislikeQues" + t.getMessage());
-                        }
-                    });
-                }
-            });
-
-
-        }
+//            holder.questionLikeButton.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    QuoraRetrofitService quoraRetrofitService = RetrofitClientInstance.getRetrofitInstance().create(QuoraRetrofitService.class);
+//                    Call<IdResponse> call = quoraRetrofitService.doLikeQues(questionSearchList.get(position).getQuestionId(), userId);
+//                    call.enqueue(new Callback<IdResponse>() {
+//                        @Override
+//                        public void onResponse(Call<IdResponse> call, Response<IdResponse> response) {
+//                            System.out.println("OnResponse SeachLikeQues");
+//                            holder.questionLikeButton.setClickable(false);
+//                            holder.questionDislikeButton.setClickable(false);
+//                            String likeCount = (String) holder.questionLike.getText();
+//                            Integer likeNo = Integer.parseInt(likeCount);
+//                            likeNo++;
+//                            holder.questionLike.setText(String.valueOf(likeNo));
+//                            holder.questionLikeButton.setColorFilter(Color.parseColor("#0000FF"));
+//                        }
+//
+//                        @Override
+//                        public void onFailure(Call<IdResponse> call, Throwable t) {
+//                            System.out.println("OnFailure SearchLikeQues" + t.getMessage());
+//                        }
+//                    });
+//                }
+//            });
+//
+//            holder.questionDislikeButton.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    QuoraRetrofitService quoraRetrofitService = RetrofitClientInstance.getRetrofitInstance().create(QuoraRetrofitService.class);
+//                    Call<IdResponse> call = quoraRetrofitService.doDislikeQues(questionSearchList.get(position).getQuestionId(), userId);
+//                    call.enqueue(new Callback<IdResponse>() {
+//                        @Override
+//                        public void onResponse(Call<IdResponse> call, Response<IdResponse> response) {
+//                            System.out.println("OnResponse SearchDislikeQues");
+//                            holder.questionLikeButton.setClickable(false);
+//                            holder.questionDislikeButton.setClickable(false);
+//                            String dislikeCount = (String) holder.questionDislike.getText();
+//                            Integer dislikeNo = Integer.parseInt(dislikeCount);
+//                            dislikeNo++;
+//                            holder.questionDislike.setText(String.valueOf(dislikeNo));
+//                            holder.questionDislikeButton.setColorFilter(Color.parseColor("#FF0000"));
+//                        }
+//
+//                        @Override
+//                        public void onFailure(Call<IdResponse> call, Throwable t) {
+//                            System.out.println("OnFailure SearchDislikeQues" + t.getMessage());
+//                        }
+//                    });
+//                }
+//            });
     }
 
     @Override
@@ -209,6 +202,5 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.SearchView
 
     public interface QuestionCommunication{
         void onClick(Question question);
-        void viewOrganization(String organizationId);
     }
 }
