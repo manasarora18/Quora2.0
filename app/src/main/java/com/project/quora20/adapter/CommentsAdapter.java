@@ -5,6 +5,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -20,13 +21,14 @@ public class CommentsAdapter extends RecyclerView.Adapter<CommentsAdapter.Commen
 
     private CommentListDto commentListDto;
     ICommentCommunication iCommentCommunication;
-
+    boolean nestedCommentFlag;
     public static class CommentsViewHolder extends RecyclerView.ViewHolder {
         public TextView commentText;
         public TextView addCommentText;
         public ImageButton sendCommentButton;
        // public ImageButton childComments;
         public ImageButton viewChildCommentButton;
+        public RecyclerView nestedCommentsRecycler;
 
         public CommentsViewHolder(View view) {
             super(view);
@@ -35,6 +37,7 @@ public class CommentsAdapter extends RecyclerView.Adapter<CommentsAdapter.Commen
             addCommentText=view.findViewById(R.id.comment_addComment);//add new comment text
             sendCommentButton=view.findViewById(R.id.comment_sendCommentButton);
             viewChildCommentButton=view.findViewById(R.id.comment_childCommentsButton);
+            nestedCommentsRecycler=view.findViewById(R.id.nested_commentList);
         }
     }
 
@@ -53,9 +56,10 @@ public class CommentsAdapter extends RecyclerView.Adapter<CommentsAdapter.Commen
     }
 
     @Override
-    public void onBindViewHolder(@NonNull CommentsViewHolder holder, final int position) {
-        //int index = commentListDto.get(position);
-        //holder.textView.setText(String.valueOf(index));
+    public void onBindViewHolder(@NonNull final CommentsViewHolder holder, final int position) {
+        //holder.nestedCommentsRecycler.getLayoutParams().width=0;
+        //holder.nestedCommentsRecycler.getLayoutParams().height=0;
+
         System.out.println(commentListDto.getCommentList().get(position).getCommentBody());
         holder.commentText.setText(commentListDto.getCommentList().get(position).getCommentBody());
         //String answerId=commentListDto.getCommentList().get(position).getAnswerId();
@@ -64,18 +68,29 @@ public class CommentsAdapter extends RecyclerView.Adapter<CommentsAdapter.Commen
         holder.viewChildCommentButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                System.out.println("Inside child comment...");
+                //Toast toast=Toast.makeText()
                 //boolean flag=commentListDto.getCommentList().get(position).isExpanded();
+                if(nestedCommentFlag)
+                {
+                    iCommentCommunication.viewNestedComments(position);
+
+                    //holder.nestedCommentsRecycler.getLayoutParams().width=0;
+                    holder.nestedCommentsRecycler.getLayoutParams().height=0;
+                    nestedCommentFlag=false;
+                }
+                else {
+                    holder.nestedCommentsRecycler.getLayoutParams().height = 400;
+                    holder.nestedCommentsRecycler.getLayoutParams().width = 400;
+                    nestedCommentFlag=true;
+                }
+
+
+
             }
         });
 
 
-
-        holder.viewChildCommentButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
 
     }
 
@@ -91,6 +106,7 @@ public class CommentsAdapter extends RecyclerView.Adapter<CommentsAdapter.Commen
     {
         void viewCommentsByAnswerId();
         //void addComments();
+        void viewNestedComments(int position);
     }
 
 

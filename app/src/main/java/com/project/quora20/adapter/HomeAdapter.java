@@ -231,15 +231,9 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder
         }
         holder.adView.getLayoutParams().width = 0;
         holder.adView.getLayoutParams().height = 0;
-//ads
 
         if (position % 5 == 0 && position != 0) {
-
-            // callAd();
-
-
             quoraRetrofitService = RetrofitAdInstance.getRetrofitInstance().create(QuoraRetrofitService.class);
-
 
             Call<List<Ad>> callAdList = quoraRetrofitService.getAds("Bearer " + AccessToken, 2L);
             callAdList.enqueue(new Callback<List<Ad>>() {
