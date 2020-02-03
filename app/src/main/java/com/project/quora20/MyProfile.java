@@ -2,7 +2,6 @@ package com.project.quora20;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
@@ -10,7 +9,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.project.quora20.dto.UserProfileDTO;
 import com.project.quora20.entity.Ad;
 import com.project.quora20.entity.OnClickRequest;
@@ -18,22 +16,18 @@ import com.project.quora20.retrofit.QuoraRetrofitService;
 import com.project.quora20.retrofit.RetrofitAdInstance;
 import com.project.quora20.retrofit.RetrofitUsersInstance;
 import com.squareup.picasso.Picasso;
-
 import java.util.List;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 public class MyProfile extends AppCompatActivity {
 
-    //List<User> list;
     private RecyclerView.Adapter adapter;
     QuoraRetrofitService quoraRetrofitService;
     public TextView userName;
     public ImageView userImageView;
     public TextView userEmail;
-    public TextView userPhone;
     public TextView followers;
     public TextView following;
     public TextView userScore;
@@ -43,7 +37,6 @@ public class MyProfile extends AppCompatActivity {
     public TextView profile_userCategory;
     List<Ad> adList;
     OnClickRequest onClickRequest = new OnClickRequest();
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -98,8 +91,6 @@ public class MyProfile extends AppCompatActivity {
                 System.out.println("Inside ViewProfile OnFailure");
             }
         });
-
-
     }
 
     void viewAds() {

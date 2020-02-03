@@ -134,7 +134,6 @@ public interface QuoraRetrofitService {
     @POST("/user/addFollowersToOrganization/{ownId}/{organizationId}")
     Call<Boolean> addOrganizationFollowers(@Path("ownId") String ownId, @Path("organizationId") String organizationId);
 
-
 }
 
 //5e3140bb4c951a1723dc3f01
