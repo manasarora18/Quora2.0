@@ -51,18 +51,18 @@
         android:id="@+id/linearLayout2"
         android:layout_width="374dp"
         android:layout_height="47dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="12dp"
-        android:layout_marginEnd="19dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="17dp"
+        android:layout_marginEnd="22dp"
         android:gravity="right"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cat_userQuestionText">
+        app:layout_constraintTop_toBottomOf="@+id/searchq_userQuestionText">
 
         <TextView
             android:id="@+id/searchq_queslikesCount"
-            android:layout_width="wrap_content"
+            android:layout_width="48dp"
             android:layout_height="42dp"
             android:layout_weight="1"
             android:gravity="right|end"
@@ -79,14 +79,14 @@
         <TextView
             android:id="@+id/searchq_quesdislikesCount"
             android:layout_width="wrap_content"
-            android:layout_height="31dp"
+            android:layout_height="34dp"
             android:layout_weight="1"
             android:text="Dislikes"
             android:textAlignment="textEnd" />
 
         <ImageButton
             android:id="@+id/searchq_quesdislikeButton"
-            android:layout_width="34dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="2"
             android:backgroundTint="#00FAF7F7"
@@ -105,7 +105,7 @@
         <ImageButton
             android:id="@+id/searchq_quesReportButton"
             android:layout_width="wrap_content"
-            android:layout_height="41dp"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             android:backgroundTint="#00F8F7F7"
             android:tint="@color/design_default_color_error"
@@ -119,12 +119,12 @@
         android:layout_width="409dp"
         android:layout_height="3dp"
         android:layout_marginStart="1dp"
-        android:layout_marginTop="9dp"
+        android:layout_marginTop="10dp"
         android:layout_marginEnd="1dp"
         android:background="?android:attr/listDivider"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cat_viewMoreAnswersButton" />
+        app:layout_constraintTop_toBottomOf="@+id/searchq_viewMoreAnswersButton" />
 
     <Button
         android:id="@+id/searchq_viewMoreAnswersButton"
