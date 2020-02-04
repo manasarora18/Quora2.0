@@ -60,25 +60,25 @@ public class OtherUserProfile extends AppCompatActivity {
 
         QuoraRetrofitService quoraRetrofitService1=RetrofitUsersInstance.getRetrofitInstance().create(QuoraRetrofitService.class);
         Call<UserProfileDTO>call=quoraRetrofitService1.viewUser(userId);
-        call.enqueue(new Callback<UserProfileDTO>() {
-            @Override
-            public void onResponse(Call<UserProfileDTO> call, Response<UserProfileDTO> response) {
-                if(response.body()!=null){
-                    followinglist=response.body().getFollowing();
-                    for(String u:followinglist){
-                        if(u.equals(othersUserId)){
-                            follow.setClickable(false);
-                            follow.setText("Following");
-                        }
-                    }
-                }
-            }
-
-            @Override
-            public void onFailure(Call<UserProfileDTO> call, Throwable t) {
-
-            }
-        });
+//        call.enqueue(new Callback<UserProfileDTO>() {
+//            @Override
+//            public void onResponse(Call<UserProfileDTO> call, Response<UserProfileDTO> response) {
+//                if(response.body()!=null){
+//                    followinglist=response.body().getFollowing();
+//                    for(String u:followinglist){
+//                        if(u.equals(othersUserId)){
+//                            follow.setClickable(false);
+//                            follow.setText("Following");
+//                        }
+//                    }
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(Call<UserProfileDTO> call, Throwable t) {
+//
+//            }
+//        });
 
 
     }

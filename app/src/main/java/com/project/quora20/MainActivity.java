@@ -22,12 +22,16 @@ import android.widget.TextView;
 import android.widget.Toast;
 import com.google.android.material.navigation.NavigationView;
 import com.project.quora20.adapter.HomeAdapter;
+import com.project.quora20.dto.ActionDARequest;
+import com.project.quora20.dto.ActionDAResponse;
 import com.project.quora20.entity.Question;
 import com.project.quora20.retrofit.QuoraRetrofitService;
 import com.project.quora20.retrofit.RetrofitAdInstance;
 import com.project.quora20.retrofit.RetrofitClientInstance;
 import com.project.quora20.entity.Ad;
 import com.project.quora20.entity.OnClickRequest;
+import com.project.quora20.retrofit.RetrofitDAInstance;
+
 import java.util.List;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -66,7 +70,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         View headerView = navigationView.getHeaderView(0);
 
         SharedPreferences.Editor editor = sharedPreferences.edit();
-//        editor.putString("UserId","5e314d5e83f84b7add06ec38").apply();
         editor.putString("OrgId", "").apply();
         editor.commit();
 
@@ -119,7 +122,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         });
 
         System.out.println("MAIN ACTUserId:" + userId);
-//        userId="5e3140bb4c951a1723dc3f01";
         QuoraRetrofitService quoraRetrofitService = RetrofitClientInstance.getRetrofitInstance().create(QuoraRetrofitService.class);
         Call<List<Question>> call = quoraRetrofitService.getAllQuestions(userId);
         call.enqueue(new Callback<List<Question>>() {
@@ -219,7 +221,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             @Override
             public void onFailure(Call<String> call, Throwable t) {
                 System.out.println("OnFailure Ad on click" + t.getMessage());
-
             }
         });
         startActivity(viewIntent);
@@ -265,20 +266,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 catIntent6.putExtra("categoryId", 6);
                 this.startActivity(catIntent6);
                 break;
-            case R.id.answers_nav_menu:
-                Toast.makeText(getApplicationContext(), "Work In Progress", Toast.LENGTH_SHORT).show();
-                sharedPreferences = getSharedPreferences("LoginData", MODE_PRIVATE);
-                String loginCheckAns = sharedPreferences.getString("LoginCheck", "false");
-                if (loginCheckAns.equals("true")) {
-
-                    Intent ansIntent = new Intent(MainActivity.this, MyAnswers.class);
-                    startActivity(ansIntent);
-                } else {
-                    Toast.makeText(getApplicationContext(), "Login First!", Toast.LENGTH_SHORT).show();
-                }
-                break;
             case R.id.logout:
                 sharedPreferences = getSharedPreferences("LoginData", MODE_PRIVATE);
+                logoutDACall();
                 String loginCheckLogout = sharedPreferences.getString("LoginCheck", "false");
 
                 if (loginCheckLogout.equals("true")) {
@@ -286,6 +276,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     SharedPreferences.Editor editor = preferences.edit();
                     editor.clear();
                     editor.commit();
+
                     Intent logoutIntent = new Intent(MainActivity.this, LoginMain.class);
                     startActivity(logoutIntent);
                     finish();
@@ -308,6 +299,30 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 return super.onOptionsItemSelected(item);
         }
         return true;
+    }
+
+    private void logoutDACall(){
+        SharedPreferences sharedPreferences=getSharedPreferences("LoginData",MODE_PRIVATE);
+        String userId=sharedPreferences.getString("UserId","");
+        System.out.println("DALOGOUT "+userId);
+        ActionDARequest actionDARequest=new ActionDARequest();
+        actionDARequest.setUserId(userId);
+        actionDARequest.setAppId("quora");
+        actionDARequest.setAction("logout");
+        QuoraRetrofitService quoraRetrofitService= RetrofitDAInstance.getRetrofitInstance().create(QuoraRetrofitService.class);
+        Call<ActionDAResponse>call=quoraRetrofitService.actionDA(actionDARequest);
+        call.enqueue(new Callback<ActionDAResponse>() {
+            @Override
+            public void onResponse(Call<ActionDAResponse> call, Response<ActionDAResponse> response) {
+                System.out.println("OnResponse DALogout");
+            }
+
+            @Override
+            public void onFailure(Call<ActionDAResponse> call, Throwable t) {
+                System.out.println("OnFailure DALogout"+t.getMessage());
+            }
+        });
+
     }
 
     @Override

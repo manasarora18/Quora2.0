@@ -126,7 +126,7 @@ public class QuoraRegister extends AppCompatActivity {
                 quoraCategoryUpdate(userId,checkedList);
                 daTagsAPI(checkedList);
 
-                if(failDA||failQuora){
+                if(failDA||failQuora||failLogin){
                     Toast.makeText(getApplicationContext(),"Could not Connect!, Check with DA,Login,Quora",Toast.LENGTH_SHORT).show();
                 }
                 else {

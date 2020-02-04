@@ -1,5 +1,7 @@
 package com.project.quora20.retrofit;
 
+import com.project.quora20.dto.ActionDARequest;
+import com.project.quora20.dto.ActionDAResponse;
 import com.project.quora20.dto.CategoryRequestDTO;
 import com.project.quora20.dto.logindtos.AccessTokenLoginResponse;
 import com.project.quora20.dto.AnswerDTO;
@@ -133,6 +135,9 @@ public interface QuoraRetrofitService {
 
     @POST("/user/addFollowersToOrganization/{ownId}/{organizationId}")
     Call<Boolean> addOrganizationFollowers(@Path("ownId") String ownId, @Path("organizationId") String organizationId);
+
+    @POST("/search/save")
+    Call<ActionDAResponse> actionDA(@Body ActionDARequest actionDARequest);
 
 }
 

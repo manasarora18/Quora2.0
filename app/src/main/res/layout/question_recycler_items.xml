@@ -108,6 +108,7 @@
             android:layout_weight="1"
             android:backgroundTint="#00F5F2F2"
             android:tint="#4CAF50"
+            android:visibility="invisible"
             app:srcCompat="@drawable/ic_check_green_45dp" />
 
         <ImageButton
@@ -117,6 +118,7 @@
             android:layout_weight="1"
             android:backgroundTint="#00F8F7F7"
             android:tint="#00F3EFEF"
+            android:visibility="invisible"
             app:srcCompat="@android:drawable/ic_delete" />
 
 

@@ -17,6 +17,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.project.quora20.R;
+import com.project.quora20.dto.ActionDARequest;
+import com.project.quora20.dto.ActionDAResponse;
 import com.project.quora20.dto.IdResponse;
 import com.project.quora20.entity.Ad;
 import com.project.quora20.entity.OnClickRequest;
@@ -25,6 +27,7 @@ import com.project.quora20.retrofit.QuoraRetrofitService;
 import com.project.quora20.retrofit.RetrofitAdInstance;
 import com.project.quora20.retrofit.RetrofitClientInstance;
 
+import com.project.quora20.retrofit.RetrofitDAInstance;
 import com.squareup.picasso.Picasso;
 
 import java.text.SimpleDateFormat;
@@ -131,8 +134,6 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder
         SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy hh:mm a");
         String date=formatter.format(questionList.get(position).getDate());
         System.out.println("Date ="+date);
-
-
             holder.questionTimeStamp.setText(date);
 
         System.out.println("OrganizationId:" + questionList.get(position).getOrgId());
@@ -190,6 +191,11 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder
                             likeNo++;
                             holder.questionLike.setText(String.valueOf(likeNo));
                             holder.questionLikeButton.setColorFilter(Color.parseColor("#0000FF"));
+                            String likeCatId=questionList.get(position).getCategoryId();
+                            String likeUserId=userId;
+
+                            String likeUser=questionList.get(position).getUserId();
+                            likeDACall(likeCatId,likeUserId,likeUser);
                         }
 
                         @Override
@@ -216,6 +222,12 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder
                             dislikeNo++;
                             holder.questionDislike.setText(String.valueOf(dislikeNo));
                             holder.questionDislikeButton.setColorFilter(Color.parseColor("#FF0000"));
+
+                            String dislikeCatId=questionList.get(position).getCategoryId();
+                            String dislikeUserId=userId;
+
+                            String dislikeUser=questionList.get(position).getUserId();
+                            dislikeDACall(dislikeCatId,dislikeUserId,dislikeUser);
                         }
 
                         @Override
@@ -264,6 +276,54 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder
                 }
             });
         }
+    }
+
+    private void dislikeDACall(String categoryId,String userId,String postUserId){
+        ActionDARequest actionDARequest=new ActionDARequest();
+        actionDARequest.setAction("dislike");
+        actionDARequest.setAppId("quora");
+        actionDARequest.setTag(categoryId);
+        actionDARequest.setUserId(userId);
+        actionDARequest.setTargetId(postUserId);
+        actionDARequest.setTargetEntity("post");
+        QuoraRetrofitService quoraRetrofitService= RetrofitDAInstance.getRetrofitInstance().create(QuoraRetrofitService.class);
+        Call<ActionDAResponse>call=quoraRetrofitService.actionDA(actionDARequest);
+        call.enqueue(new Callback<ActionDAResponse>() {
+            @Override
+            public void onResponse(Call<ActionDAResponse> call, Response<ActionDAResponse> response) {
+                System.out.println("OnResponse dislikeDA");
+            }
+
+            @Override
+            public void onFailure(Call<ActionDAResponse> call, Throwable t) {
+                System.out.println("OnFailure dislikeDA"+t.getMessage());
+
+            }
+        });
+    }
+
+    private void likeDACall(String categoryId,String userId,String postUserId){
+        ActionDARequest actionDARequest=new ActionDARequest();
+        actionDARequest.setAction("like");
+        actionDARequest.setAppId("quora");
+        actionDARequest.setTag(categoryId);
+        actionDARequest.setUserId(userId);
+        actionDARequest.setTargetEntity("post");
+        actionDARequest.setTargetId(postUserId);
+        QuoraRetrofitService quoraRetrofitService= RetrofitDAInstance.getRetrofitInstance().create(QuoraRetrofitService.class);
+        Call<ActionDAResponse>call=quoraRetrofitService.actionDA(actionDARequest);
+        call.enqueue(new Callback<ActionDAResponse>() {
+            @Override
+            public void onResponse(Call<ActionDAResponse> call, Response<ActionDAResponse> response) {
+                System.out.println("OnResponse likeDA");
+            }
+
+            @Override
+            public void onFailure(Call<ActionDAResponse> call, Throwable t) {
+                System.out.println("OnFailure likeDA"+t.getMessage());
+
+            }
+        });
     }
 
     @Override

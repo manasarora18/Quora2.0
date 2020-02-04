@@ -108,6 +108,7 @@ public class Register extends AppCompatActivity {
                         @Override
                         public void onFailure(Call<RegisterResponse> call, Throwable t) {
                             System.out.println("OnFailure Register"+t.getMessage());
+                            Toast.makeText(getApplicationContext(),t.getMessage(),Toast.LENGTH_SHORT).show();
                         }
                     });
                 }
